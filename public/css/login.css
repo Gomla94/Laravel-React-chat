@@ -1,0 +1,103 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.login-wrapper {
+    background: rgb(111, 5, 10);
+    background: linear-gradient(
+        22deg,
+        rgba(111, 5, 10, 1) 0%,
+        rgba(255, 168, 141, 1) 47%,
+        rgba(247, 75, 75, 1) 90%
+    );
+
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 500px;
+    width: 500px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-top {
+    flex: 1;
+    /* background-color: red; */
+}
+
+.login-top-items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.login-top-span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.login-middle {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-label {
+    margin-bottom: 10px;
+}
+
+.form-input {
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: none;
+    font-weight: bold;
+    background-color: rgb(250, 170, 170);
+}
+
+.fa-user {
+    position: absolute;
+    top: 50px;
+    right: 2px;
+    font-size: 20px;
+}
+
+.fa-eye {
+    position: absolute;
+    top: 50px;
+    right: 2px;
+    font-size: 20px;
+}
+
+.form-btn {
+    height: 50px;
+    width: 100%;
+    margin: 30px 0px 30px 0px;
+    background: rgb(4, 64, 1);
+    background: linear-gradient(
+        138deg,
+        rgba(4, 64, 1, 1) 31%,
+        rgba(14, 168, 6, 1) 79%,
+        rgba(120, 247, 127, 1) 100%
+    );
+    border-radius: 3px;
+    border: none;
+}
+
+.link {
+    text-decoration: none;
+    margin-left: 10px;
+}
