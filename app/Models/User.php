@@ -32,7 +32,9 @@ class User extends Authenticatable
         'password',
         'type',
         'status',
-        'image'
+        'image',
+        'phone_number',
+        'interesting_type_id'
     ];
 
     /**
@@ -63,5 +65,10 @@ class User extends Authenticatable
     public function appeals()
     {
         return $this->hasMany(Appeal::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }

@@ -20,4 +20,11 @@ class FrontController extends Controller
             'random_posts' => $random_posts,
         ]);
     }
+
+
+    public function all_users()
+    {
+        $users = User::whereType(User::USER_TYPE)->get();
+        return view('layouts.front.users', ['users' => $users]);
+    }
 }

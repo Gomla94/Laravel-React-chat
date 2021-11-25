@@ -5,10 +5,13 @@ use App\Http\Controllers\AppealsController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\InstagramController;
+use App\Http\Controllers\InterestingTypesController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserAppealsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPostsController;
+use App\Models\InterestingType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,9 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [FrontController::class, 'home']);
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
 
 Auth::routes();
 
@@ -58,7 +59,15 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
     Route::get('my-appeals/{appeal}/edit', [UserAppealsController::class, 'edit'])->name('appeals.edit');
     Route::put('my-appeals/{appeal}/edit', [UserAppealsController::class, 'update'])->name('appeals.update');
     Route::delete('my-appeals/{appeal}/delete', [UserAppealsController::class, 'delete'])->name('appeals.delete');
+
+    /** chat routes */
+    // Route::get('/messages', [MessagesController::class, 'index']);
 });
+
+Route::get('/messages', [MessagesController::class, 'index']);
+Route::post('/messages', [MessagesController::class, 'storeMessage']);
+Route::get('/chat-users', [MessagesController::class, 'all_users']);
+
 
 /** Users */
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function() {
@@ -68,4 +77,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
     Route::put('users/{user}/unblock', [AdminController::class, 'unblock_user'])->name('users.unblock');
     Route::get('/users/create', [AdminController::class, 'create_user'])->name('users.create');
     Route::post('/users', [AdminController::class, 'store_user'])->name('users.store');
+    Route::resource('interesting-types', InterestingTypesController::class);
 });
+
+Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);

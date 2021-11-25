@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="{{asset('css/index.css')}}" />
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
@@ -16,6 +17,14 @@
     />
 
     <script src="{{asset('js/index.js')}}" defer></script>
+    <script>
+      window.Laravel = <?php echo json_encode([
+              'csrfToken' => Csrf_token(),
+              'user' => Auth::check() ? auth()->user() : null,
+          ]);
+      ?>
+  </script>
+
   </head>
   <body>
     <div class="overlay" id="overlay">
@@ -44,82 +53,13 @@
         <li class="list-item">Благотварители</li>
         <li class="list-item">Контакты</li>
       </ul>
+
       <div class="user-section">
-        <i class="far fa-comments"></i>
+        <div id="root"></div>
         <p class="title">Анастасия</p>
         <img src="{{asset('images/avatar.png')}}" class="user-image" alt="" />
         <i class="arrow fas fa-chevron-down"></i>
       </div>
-    </div>
-    <div class="chat-wrapper">
-        <div class="active-users-section">
-            <div class="active-users-top-section">
-                <div class="sound-check-background"></div>
-                <div class="sound-checker"></div>
-                <span class="check-sound">Звук</span>
-            </div>
-            <div class="active-users">
-                <div class="active-users-search-wrapper">
-                    <i class="fas fa-search active-users-search"></i>
-                    <i class="fas fa-window-close"></i>
-                    <input class="active-users-input" placeholder="Поиск по кантактам" type="text"/>
-                </div>
-                <div class="active-users-list-wrapper">
-                    <ul class="active-users-list">
-                        <li class="active-user">
-                            <div class="bell-icon-wrapper" alt=""></div>
-                            <i class="fas fa-bell"></i>
-                            <div class="chat-user-name">Техподдержка</div>
-                        </li>
-                        <li class="active-user">
-                            <div class="bell-icon-wrapper" alt=""></div>
-                            <i class="fas fa-cog"></i>   
-                            <div class="chat-user-name">Техподдержка</div>                         
-                        </li>
-                        <li class="active-user">
-                            <div class="bell-icon-wrapper" alt=""></div>
-                            <i class="fas fa-cog"></i> 
-                            <div class="chat-user-name">Техподдержка</div>                           
-                        </li>
-                        <li class="active-user">
-                            <img src="{{asset('images/Ellipse 14.png')}}" class="active-user-img" alt="">
-                            <div class="chat-user-name">Техподдержка</div>
-                        </li>
-                        <li class="active-user">
-                            <img src="{{asset('images/Ellipse 14.png')}}" class="active-user-img" alt="">
-                            <div class="chat-user-name">Техподдержка</div>
-                        </li>
-                        <li class="active-user">
-                            <img src="{{asset('images/Ellipse 14.png')}}" class="active-user-img" alt="">
-                            <div class="chat-user-name">Техподдержка</div>
-                        </li>
-                        <li class="active-user">
-                            <img src="{{asset('images/Ellipse 14.png')}}" class="active-user-img" alt="">
-                            <div class="chat-user-name">Техподдержка</div>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="messages-section">
-            <div class="messages-section-top"></div>
-            <div class="messages-section-bottom">
-                <div class="attachement-wrapper">
-                    <i class="fas fa-paperclip"></i>
-                </div>
-                <input class="message-input" placeholder="Напишите здесь свой текст ..." type="text">
-                <div class="video-wrapper">
-                    <i class="fas fa-photo-video"></i>
-                </div>
-                <div class="image-wrapper">
-                    <i class="fas fa-images"></i>
-                </div>
-                <div class="send-wrapper">
-                    <i class="fas fa-paper-plane"></i>
-                </div>
-            </div>
-        </div>
     </div>
     @yield('content')
     

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\InterestingType;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -47,13 +49,22 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+     public function showRegistrationForm()
+     {
+        $interesting_types = InterestingType::all();
+        return view('auth.register', ['types' => $interesting_types]);
+     }
+     
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'type' => ['required', 'string', 'in:benefactor']
+            'password' => ['required', 'string', 'min:8'],
+            'type' => ['required', 'string', 'in:benefactor,ordinary_user'],
+            'phone_number' => ['string'],
+            'interesting_type' => ['numeric', Rule::exists('interesting_types', 'id')]
         ]);
     }
 
@@ -70,7 +81,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'type' => $data['type']
+            'type' => $data['type'],
+            'phone_number' => $data['phone_number'],
+            'interesting_type_id' => $data['interesting_type'] ?? null
         ]);
     }
 }

@@ -1,89 +1,102 @@
-@extends('layouts.app')
-
+@extends('layouts.auth')
+@section('title')
+Register
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
-
-                            <div class="col-md-6">
-                                <select name="type" class="form-control" id="type">
-                                    <option value="" selected disabled>Select a type</option>
-                                    <option value="benefactor">Benefactor</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="wrapper">
+  <div class="btns-wrapper">
+    <div class="links-wrapper">
+      <div>
+        <a href="{{ route('login') }}" class="login-btn">Создать аккаунт</a>
+      </div>
+      <div>
+        <a href="{{ route('register') }}" class="signup-btn">Войти в аккаунт</a>
+      </div>
     </div>
+  </div>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <div class="register-top">
+        <div class="login-top-items">
+          <span class="login-top-span">Вход</span>
+          <span class="login-top-span">Регистрация</span>
+        </div>
+      </div>
+      <div class="register-middle">
+        <form action="{{ route('register') }}" method="POST" class="register-form">
+          @csrf
+          <div class="input-group">
+            <label for="name" class="input-label">Имя</label>
+            <input type="text" id="name" class="form-input" name="name" value="{{ old('name') }}" />
+            @error('name')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+          <div class="input-group">
+            <label for="email" class="input-label">Ваш e-mail</label>
+            <input
+              type="email"
+              class="form-input"
+              name="email"
+              placeholder="maks-roma@mail.ru"
+              value="{{ old('email') }}"
+            />
+            @error('email')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+          <div class="input-group">
+            <label for="password" class="input-label">Пароль</label>
+            <input type="password" id="password" class="form-input" name="password" />
+            <i class="fas fa-eye"></i>
+            @error('password')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+          <div class="input-group">
+            <label for="phone_number" class="input-label">Номер телефона</label>
+            <input type="text" id="phone_number" class="form-input" name="phone_number"value="{{ old(
+              'phone_number'
+            ) }}" />
+            @error('phone_number')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+          <div class="input-group">
+            <label for="type" class="input-label">тип</label>
+            <select name="type" class="form-input types-list" id="type">
+              <option value="benefactor">Benefactor</option>
+              <option value="ordinary_user">Ordinary User</option>
+            </select>
+            @error('type')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+          <div class="input-group interestings-list-group-div">
+            <label for="types-list" class="interesting-lists-label" class="input-label">Area Of Interesting</label>
+            {{-- <select name="interesting_type"  class="form-input interestings-list" id="types-list">
+              <option value="" disabled selected>Select Type</option>
+              @foreach($types as $type)
+                <option value="{{ $type->id }}">{{ $type->name }}</option>
+              @endforeach
+            </select> --}}
+            @error('interesting_type')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+          <div class="check-group">
+            <input type="checkbox" class="check-input" />
+            <label for="" class="input-label">Запомнить меня</label>
+            <a href="#" class="link">Забыли пароль?</a>
+          </div>
+          <button class="form-btn">Войти</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+@push('js')
+<script src="{{ asset('js/authentication.js') }}"></script>
+@endpush
 @endsection
