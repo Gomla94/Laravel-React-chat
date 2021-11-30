@@ -2414,7 +2414,7 @@ var ChatWindow = function ChatWindow() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
               className: "fas fa-search active-users-search"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-              className: "fas fa-window-close"
+              className: "fas fa-window-close chat-window-close"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               className: "active-users-input",
               placeholder: "\u041F\u043E\u0438\u0441\u043A \u043F\u043E \u043A\u0430\u043D\u0442\u0430\u043A\u0442\u0430\u043C",
@@ -2461,7 +2461,7 @@ var ChatWindow = function ChatWindow() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "attachement-wrapper",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-                className: "fas fa-paperclip"
+                className: "fas fa-paperclip chat-paperclip"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               className: "message-input",
@@ -2475,7 +2475,7 @@ var ChatWindow = function ChatWindow() {
               className: "send-wrapper",
               onClick: sendMessage,
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-                className: "fas fa-paper-plane"
+                className: "fas fa-paper-plane chat-paper-plane"
               })
             })]
           })

@@ -157,7 +157,7 @@ const ChatWindow = () => {
                     <div className="active-users">
                         <div className="active-users-search-wrapper">
                             <i className="fas fa-search active-users-search"></i>
-                            <i className="fas fa-window-close"></i>
+                            <i className="fas fa-window-close chat-window-close"></i>
                             <input
                                 className="active-users-input"
                                 placeholder="Поиск по кантактам"
@@ -191,7 +191,7 @@ const ChatWindow = () => {
                     <div className="messages-section-bottom">
                         <div className="chat-inputs-container">
                             <div className="attachement-wrapper">
-                                <i className="fas fa-paperclip"></i>
+                                <i className="fas fa-paperclip chat-paperclip"></i>
                             </div>
                             <input
                                 className="message-input"
@@ -207,7 +207,7 @@ const ChatWindow = () => {
                             <i className="fas fa-images"></i>
                         </div> */}
                             <div className="send-wrapper" onClick={sendMessage}>
-                                <i className="fas fa-paper-plane"></i>
+                                <i className="fas fa-paper-plane chat-paper-plane"></i>
                             </div>
                         </div>
                     </div>
