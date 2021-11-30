@@ -3,9 +3,9 @@
 Login
 @endsection
 @section('content')
-<div class="wrapper">
+<div class="login-main-container">
   <div class="btns-wrapper">
-    <div class="links-wrapper">
+    <div class="login-links-wrapper">
       <div>
         <a href="{{ route('login') }}" class="login-btn">{{__('auth.login')}}</a>
       </div>

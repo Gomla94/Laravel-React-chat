@@ -10,7 +10,21 @@ body {
     top: 0;
 }
 
-.wrapper {
+.login-main-container {
+    background-image: url("../images/authentication.png");
+    width: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-direction: row;
+    right: 25%;
+    position: absolute;
+    height: auto;
+    /* margin-top: 50px; */
+    top: 10%;
+}
+
+.register-main-container {
     background-image: url("../images/authentication.png");
     width: 50%;
     background-repeat: no-repeat;
@@ -37,7 +51,19 @@ body {
     /* position: relative; */
 }
 
-.links-wrapper {
+.login-links-wrapper {
+    height: 100px;
+    width: 200px;
+    /* position: absolute; */
+    margin: auto;
+    right: 0;
+    margin-top: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+.register-links-wrapper {
     height: 100px;
     width: 200px;
     /* position: absolute; */
@@ -137,7 +163,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50%;
+    margin-top: 30%;
 }
 
 .register-middle {

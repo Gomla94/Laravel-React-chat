@@ -3,9 +3,9 @@
 Register
 @endsection
 @section('content')
-<div class="wrapper">
+<div class="register-main-container">
   <div class="btns-wrapper">
-    <div class="links-wrapper">
+    <div class="register-links-wrapper">
       <div>
         <a href="{{ route('login') }}" class="login-btn">{{__('auth.login')}}</a>
       </div>
