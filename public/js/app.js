@@ -2235,20 +2235,45 @@ var ChatWindow = function ChatWindow() {
       toUserId = _useState8[0],
       setToUserId = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      chattingWithUser = _useState10[0],
+      setChattingWithUser = _useState10[1];
+
   var authId = window.Laravel.user.id;
   var scrollToEndRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  var envelopes = document.querySelectorAll(".user-envelope");
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     document.querySelector(".messages-section-middle").scrollTop = document.querySelector(".messages-section-middle").scrollHeight;
   }, [messages]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
       if (messages.length === 0) {
-        fetchAllMessagesWithUser(event.message.user.id); // setMessages([...messages, event.message]);
+        fetchAllMessagesWithUser(event.message.user.id);
       } else {
         setMessages([].concat(_toConsumableArray(messages), [event.message]));
       }
     });
+    envelopes.forEach(function (item) {
+      item.addEventListener("click", function () {
+        // fetchAllMessagesWithUser(item.dataset.id);
+        fetchTopUser(item.dataset.id);
+        document.querySelector(".chat-wrapper").classList.toggle("show-chat-wrapper");
+      });
+    });
   }, []);
+
+  var fetchTopUser = function fetchTopUser(userId) {
+    console.log(userId);
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/top-chat-user", {
+      params: {
+        user_id: parseInt(userId)
+      }
+    }).then(function (response) {
+      setUsers(response.data);
+      fetchAllMessagesWithUser(userId);
+    });
+  };
 
   var fetchAllUsers = function fetchAllUsers() {
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/chat-users").then(function (response) {
@@ -2328,8 +2353,6 @@ var ChatWindow = function ChatWindow() {
       message: newMessage
     }).then(function (response) {
       setMessages([].concat(_toConsumableArray(messages), [response.data.message]));
-      console.log(messages);
-      console.log(response.data.message);
     });
   };
 
@@ -2341,7 +2364,9 @@ var ChatWindow = function ChatWindow() {
             case 0:
               setToUserId(toUserId);
               _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/messages?from=".concat(window.Laravel.user.id, "&to=").concat(toUserId)).then(function (response) {
-                setMessages(response.data);
+                setMessages(response.data.messages);
+                setChattingWithUser(response.data.chatting_with_user.name); // fetchAllUsers();
+                // console.log(response.data);
               });
 
             case 2:
@@ -2363,7 +2388,14 @@ var ChatWindow = function ChatWindow() {
       onClick: fetchAllUsers
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "chat-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+        className: "fas fa-caret-up",
+        style: {
+          color: "rgb(239, 235, 241)",
+          fontSize: "50px",
+          marginRight: "125px"
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "active-users-section",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "active-users-top-section",
@@ -2404,14 +2436,14 @@ var ChatWindow = function ChatWindow() {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "messages-section-top",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            "class": "chatting-with-user",
-            children: "Ahmed"
+            className: "chatting-with-user",
+            children: chattingWithUser
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            "class": "chatting-user-status",
+            className: "chatting-user-status",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              "class": "chatting-user-status-icon"
+              className: "chatting-user-status-icon"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              "class": "chat-status-text",
+              className: "chat-status-text",
               children: "online"
             })]
           })]

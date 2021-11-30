@@ -64,7 +64,9 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'type' => ['required', 'string', 'in:benefactor,ordinary_user'],
             'phone_number' => ['string'],
-            'interesting_type' => ['numeric', Rule::exists('interesting_types', 'id')]
+            'interesting_type' => ['numeric', Rule::exists('interesting_types', 'id')],
+            'additional_type' => ['sometimes', 'nullable', 'string', 'in:individual,organisation'],
+            'organisation_description' => ['sometimes', 'nullable', 'string'],
         ]);
     }
 
@@ -76,14 +78,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
             'phone_number' => $data['phone_number'],
-            'interesting_type_id' => $data['interesting_type'] ?? null
+            'interesting_type_id' => $data['interesting_type'] ?? null,
+            'additional_type' => $data['additional_type'] ?? null,
+            'organisation_description' => $data['organisation_description'] ?? null,
         ]);
     }
 }

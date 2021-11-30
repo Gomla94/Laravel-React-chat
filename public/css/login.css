@@ -12,16 +12,21 @@ body {
 
 .wrapper {
     background-image: url("../images/authentication.png");
-    height: 100vh;
+    width: 50%;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     display: flex;
     flex-direction: row;
+    right: 25%;
+    position: absolute;
+    height: auto;
+    margin-top: 50px;
+    /* top: 10px; */
 }
 
 .btns-wrapper {
     flex: 1;
-    position: relative;
+    height: 100%;
 }
 
 .login-wrapper {
@@ -29,19 +34,31 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+    /* position: relative; */
 }
 
 .links-wrapper {
     height: 100px;
     width: 200px;
-    position: absolute;
+    /* position: absolute; */
     margin: auto;
     right: 0;
-    top: 50%;
+    margin-top: 80%;
     display: flex;
     flex-direction: column;
     margin-right: 50px;
+}
+
+.child-types {
+    display: none;
+}
+
+.show-child-types {
+    display: flex;
+}
+
+.show-organisation-description {
+    display: flex;
 }
 
 .login-btn {
@@ -77,7 +94,7 @@ body {
 .login-container {
     /* border: 1px solid black; */
     width: 100%;
-    height: 100%;
+    height: auto;
     border-radius: 20px;
     background: rgb(184, 91, 0);
     background: linear-gradient(
@@ -91,7 +108,7 @@ body {
 .login-top {
     flex: 1;
     margin-bottom: 10px;
-    margin-top: 100px;
+    margin-top: 10px;
     /* background-color: red; */
 }
 
@@ -120,7 +137,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 150px;
+    margin-top: 50%;
 }
 
 .register-middle {
@@ -128,7 +145,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .input-group {
@@ -150,6 +167,14 @@ body {
     border: none;
     font-weight: bold;
     background-color: rgb(253, 218, 135);
+}
+
+.text-area-form-input {
+    background-color: rgb(253, 218, 135);
+    border-radius: 5px;
+    padding-left: 10px;
+    border: none;
+    font-weight: bold;
 }
 
 .fa-user {
@@ -199,10 +224,30 @@ body {
     position: absolute;
 }
 
-.interestings-list {
+.interesting-types {
     display: none;
 }
 
-.show-interestings-list {
+.interesting-types-label {
+    display: none;
+}
+
+.show-element {
     display: flex;
+}
+
+.child-types-label {
+    display: none;
+}
+
+.child-types-select {
+    display: none;
+}
+
+.organisation-label {
+    display: none;
+}
+
+.organisation-input {
+    display: none;
 }

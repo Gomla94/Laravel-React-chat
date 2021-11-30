@@ -1,82 +1,90 @@
 @extends('layouts.front.app')
 @section('content')
-<div class="users-page-wrapper">
-    {{-- @if(Auth::check())
-        <div id="root"></div>
-    @endif --}}
-    <div class="users-page-filter-wrapper"></div>
-    <div class="users-page-list-wrapper">
-        <div class="users-page-list">
-            <div class="users-list-card">
-                <div class="user-list-image-wrapper">
-                    <img class="user-list-image" src="{{ asset('images/avatar.png') }}" alt="">
+<div class="all-users-section">
+    <div class="filter-users-container">
+        <div class="filter-users">
+          <span class="filter-users-text">Фильтр</span>
+          <i class="fas fa-filter"></i>
+        </div>
+    </div>
+    <div class="filters-list">
+        <div class="filter-item">
+          <span class="filter-item-span">По возрасту</span>
+          <i class="fas fa-chevron-right filter-item-arrow"></i>
+          <ul class="sub-filters-list">
+            <li class="sub-filter-item">item one</li>
+            <li class="sub-filter-item">item two</li>
+            <li class="sub-filter-item">item three</li>
+            <li class="sub-filter-item">item four</li>
+            <li class="sub-filter-item">item five</li>
+          </ul>
+        </div>
+        <div class="filter-item">
+          <span class="filter-item-span">По возрасту</span>
+          <i class="fas fa-chevron-right filter-item-arrow"></i>
+          <ul class="sub-filters-list">
+            <li class="sub-filter-item">item six</li>
+            <li class="sub-filter-item">item seven</li>
+            <li class="sub-filter-item">item eight</li>
+            <li class="sub-filter-item">item nine</li>
+            <li class="sub-filter-item">item ten</li>
+          </ul>
+        </div>
+        <div class="filter-item">
+          <span class="filter-item-span">По возрасту</span>
+          <i class="fas fa-chevron-right filter-item-arrow"></i>
+          <ul class="sub-filters-list">
+            <li class="sub-filter-item">item six</li>
+            <li class="sub-filter-item">item seven</li>
+            <li class="sub-filter-item">item eight</li>
+            <li class="sub-filter-item">item nine</li>
+            <li class="sub-filter-item">item ten</li>
+          </ul>
+        </div>
+        <div class="filter-item">
+          <span class="filter-item-span">По возрасту</span>
+          <i class="fas fa-chevron-right filter-item-arrow"></i>
+          <ul class="sub-filters-list">
+            <li class="sub-filter-item">item six</li>
+            <li class="sub-filter-item">item seven</li>
+            <li class="sub-filter-item">item eight</li>
+            <li class="sub-filter-item">item nine</li>
+            <li class="sub-filter-item">item ten</li>
+          </ul>
+        </div>
+        <div class="filter-item">
+          <span class="filter-item-span">По возрасту</span>
+          <i class="fas fa-chevron-right filter-item-arrow"></i>
+          <ul class="sub-filters-list">
+            <li class="sub-filter-item">item six</li>
+            <li class="sub-filter-item">item seven</li>
+            <li class="sub-filter-item">item eight</li>
+            <li class="sub-filter-item">item nine</li>
+            <li class="sub-filter-item">item ten</li>
+          </ul>
+        </div>
+    </div>
+
+    <div class="all-users-list-container">
+        <div class="all-users-list">
+            @foreach($users as $user)
+                <div class="user">
+                    <div class="users-image-wrapper">
+                    <img src="{{ asset($user->image) }}" alt="" />
+                    </div>
+                    <div class="users-social">
+                    <span class="user-social-span">{{ $user->name }}</span>
+                    <span class="user-social-span">{{ $user->email }}</span>
+                    <span class="user-social-span">ID {{ $user->national_id }}</span>
+                    <span class="user-social-span">Открыть полный профиль</span>
+                    </div>
+                    @if(Auth::check())
+                    <div class="user-green-message-box">
+                    <i class="fas fa-envelope user-envelope" data-id={{ $user->id }}></i>
+                    </div>
+                    @endif
                 </div>
-                <div class="user-list-info">
-                    <span class="user-info-span">name</span>
-                    <span class="user-info-span">email</span>
-                    <span class="user-info-span">1123456788</span>
-                    <span class="user-info-span">this is a random text</span>
-                </div>
-                <div class="user-list-start-chat">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-            <div class="users-list-card">
-                <div class="user-list-image-wrapper">
-                    <img class="user-list-image" src="{{ asset('images/avatar.png') }}" alt="">
-                </div>
-                <div class="user-list-info">
-                    <span class="user-info-span">name</span>
-                    <span class="user-info-span">email</span>
-                    <span class="user-info-span">1123456788</span>
-                    <span class="user-info-span">this is a random text</span>
-                </div>
-                <div class="user-list-start-chat">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-            <div class="users-list-card">
-                <div class="user-list-image-wrapper">
-                    <img class="user-list-image" src="{{ asset('images/avatar.png') }}" alt="">
-                </div>
-                <div class="user-list-info">
-                    <span class="user-info-span">name</span>
-                    <span class="user-info-span">email</span>
-                    <span class="user-info-span">1123456788</span>
-                    <span class="user-info-span">this is a random text</span>
-                </div>
-                <div class="user-list-start-chat">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-            <div class="users-list-card">
-                <div class="user-list-image-wrapper">
-                    <img class="user-list-image" src="{{ asset('images/avatar.png') }}" alt="">
-                </div>
-                <div class="user-list-info">
-                    <span class="user-info-span">name</span>
-                    <span class="user-info-span">email</span>
-                    <span class="user-info-span">1123456788</span>
-                    <span class="user-info-span">this is a random text</span>
-                </div>
-                <div class="user-list-start-chat">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-            <div class="users-list-card">
-                <div class="user-list-image-wrapper">
-                    <img class="user-list-image" src="{{ asset('images/avatar.png') }}" alt="">
-                </div>
-                <div class="user-list-info">
-                    <span class="user-info-span">name</span>
-                    <span class="user-info-span">email</span>
-                    <span class="user-info-span">1123456788</span>
-                    <span class="user-info-span">this is a random text</span>
-                </div>
-                <div class="user-list-start-chat">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

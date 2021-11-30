@@ -16,10 +16,21 @@ class MessagesController extends Controller
         $to = request('to');
 
         // return response()->json(['to' => $to, 'from' => $from]);
+        $chatting_with_user = User::find($to);
         $messages = Message::where([['from', $from], ['to', $to]])
                             ->orWhere([['from', $to], ['to', $from]])
                             ->with('user')->get();
-        return $messages;
+        return response()->json(['messages' => $messages, 'chatting_with_user' => $chatting_with_user]);
+    }
+
+    public function top_chat_user()
+    {
+        $user_id = request('user_id');
+
+        $user = User::where('id', $user_id)->get();
+        $users = User::where('id', '!=', $user_id)->get();
+        $merged_users = $user->merge($users);
+        return $merged_users;
     }
 
     public function all_users()

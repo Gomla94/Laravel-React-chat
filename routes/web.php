@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'home']);
 Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
+Route::get('/all-users/{user}',[FrontController::class, 'show_user_page'])->name('user.page');
 
 Auth::routes();
 
@@ -67,6 +68,7 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
 Route::get('/messages', [MessagesController::class, 'index']);
 Route::post('/messages', [MessagesController::class, 'storeMessage']);
 Route::get('/chat-users', [MessagesController::class, 'all_users']);
+Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
 
 
 /** Users */

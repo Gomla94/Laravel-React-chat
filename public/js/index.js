@@ -1,20 +1,73 @@
 const menuBars = document.getElementById("menu-bars");
 const overlay = document.querySelector(".overlay");
-const filterIcon = document.querySelector(".fa-filter");
+const filterIcon = document.querySelector(".rs-filter");
+const userPageFilterIcon = document.querySelector(
+    ".user-page-filter-icon-filter"
+);
 const searchListWrapper = document.querySelector(".search-list-wrapper");
-const envelopeLogo = document.querySelectorAll(".fa-envelope");
-const commentsLogo = document.querySelector(".fa-comments");
+const commentLogo = document.querySelector(".fa-comments");
 const chatWrapper = document.querySelector(".chat-wrapper");
+const body = document.getElementsByTagName("body");
+const userPageGreenButton = document.querySelector(".user-page-green-button");
+const userAdditionalInfo = document.querySelector(".user-additional-info");
+const filterItems = document.querySelectorAll(".filter-item");
+const subFilterLists = document.querySelectorAll(".sub-filters-list");
+const filterUsersIcon = document.querySelector(".filter-users-container");
+const filtersList = document.querySelector(".filters-list");
+const filterArrows = document.querySelectorAll(".filter-item-arrow");
 
-commentsLogo.addEventListener("click", () => {
-    chatWrapper.classList.toggle("show-chat-wrapper");
-});
-
-if (envelopeLogo) {
-    envelopeLogo.forEach((item) => {
-        item.addEventListener("click", () => {
-            chatWrapper.classList.toggle("show-chat-wrapper");
+if (filterUsersIcon) {
+    filterUsersIcon.addEventListener("click", () => {
+        subFilterLists.forEach((list) => {
+            list.style.display = "none";
         });
+        filtersList.classList.toggle("show-filters-list");
+
+        filterArrows.forEach((arrow) => {
+            arrow.classList.remove("active-filter-arrow");
+        });
+    });
+}
+
+const filterItemClickHandler = (e) => {
+    subFilterLists.forEach((list) => {
+        list.style.display = "none";
+    });
+
+    filterArrows.forEach((arrow) => {
+        arrow.classList.remove("active-filter-arrow");
+    });
+
+    const clickedItemList = e.target
+        .closest(".filter-item")
+        .querySelector(".sub-filters-list");
+
+    const filterArrow = e.target
+        .closest(".filter-item")
+        .querySelector(".filter-item-arrow");
+    filterArrow.classList.toggle("active-filter-arrow");
+
+    if (clickedItemList.style.display == "none") {
+        clickedItemList.style.display = "block";
+    } else {
+        clickedItemList.style.display = "none";
+    }
+};
+
+if (filterItems) {
+    filterItems.forEach((item) => {
+        item.addEventListener("click", filterItemClickHandler);
+    });
+}
+
+if (userPageGreenButton) {
+    userPageGreenButton.addEventListener("click", () => {
+        userAdditionalInfo.classList.toggle("show-additional-info");
+    });
+}
+if (commentLogo) {
+    commentLogo.addEventListener("click", () => {
+        chatWrapper.classList.toggle("show-chat-wrapper");
     });
 }
 

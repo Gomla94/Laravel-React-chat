@@ -8,9 +8,12 @@ const ChatWindow = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
     const [toUserId, setToUserId] = useState(null);
+    const [chattingWithUser, setChattingWithUser] = useState("");
     const authId = window.Laravel.user.id;
 
     const scrollToEndRef = useRef(null);
+
+    const envelopes = document.querySelectorAll(".user-envelope");
 
     useEffect(() => {
         document.querySelector(".messages-section-middle").scrollTop =
@@ -23,13 +26,32 @@ const ChatWindow = () => {
             (event) => {
                 if (messages.length === 0) {
                     fetchAllMessagesWithUser(event.message.user.id);
-                    // setMessages([...messages, event.message]);
                 } else {
                     setMessages([...messages, event.message]);
                 }
             }
         );
+
+        envelopes.forEach((item) => {
+            item.addEventListener("click", () => {
+                // fetchAllMessagesWithUser(item.dataset.id);
+                fetchTopUser(item.dataset.id);
+                document
+                    .querySelector(".chat-wrapper")
+                    .classList.toggle("show-chat-wrapper");
+            });
+        });
     }, []);
+
+    const fetchTopUser = (userId) => {
+        console.log(userId);
+        chat.get("/top-chat-user", {
+            params: { user_id: parseInt(userId) },
+        }).then((response) => {
+            setUsers(response.data);
+            fetchAllMessagesWithUser(userId);
+        });
+    };
 
     const fetchAllUsers = () => {
         chat.get("/chat-users").then((response) => {
@@ -100,8 +122,6 @@ const ChatWindow = () => {
             message: newMessage,
         }).then((response) => {
             setMessages([...messages, response.data.message]);
-            console.log(messages);
-            console.log(response.data.message);
         });
     };
 
@@ -110,13 +130,24 @@ const ChatWindow = () => {
         chat.get(
             `/messages?from=${window.Laravel.user.id}&to=${toUserId}`
         ).then((response) => {
-            setMessages(response.data);
+            setMessages(response.data.messages);
+            setChattingWithUser(response.data.chatting_with_user.name);
+            // fetchAllUsers();
+            // console.log(response.data);
         });
     };
     return (
         <div>
             <i className="far fa-comments" onClick={fetchAllUsers}></i>
             <div className="chat-wrapper">
+                <i
+                    className="fas fa-caret-up"
+                    style={{
+                        color: "rgb(239, 235, 241)",
+                        fontSize: "50px",
+                        marginRight: "125px",
+                    }}
+                ></i>
                 <div className="active-users-section">
                     <div className="active-users-top-section">
                         <div className="sound-check-background"></div>
@@ -135,38 +166,6 @@ const ChatWindow = () => {
                         </div>
                         <div className="active-users-list-wrapper">
                             <ul className="chat-left-section">
-                                {/* <div className="chat-settings">
-                                    <li className="active-user">
-                                        <div
-                                            className="bell-icon-wrapper"
-                                            alt=""
-                                        ></div>
-                                        <i className="fas fa-bell"></i>
-                                        <div className="chat-user-name">
-                                            Техподдержка
-                                        </div>
-                                    </li>
-                                    <li className="active-user">
-                                        <div
-                                            className="bell-icon-wrapper"
-                                            alt=""
-                                        ></div>
-                                        <i className="fas fa-cog"></i>
-                                        <div className="chat-user-name">
-                                            Техподдержка
-                                        </div>
-                                    </li>
-                                    <li className="active-user">
-                                        <div
-                                            className="bell-icon-wrapper"
-                                            alt=""
-                                        ></div>
-                                        <i className="fas fa-cog"></i>
-                                        <div className="chat-user-name">
-                                            Техподдержка
-                                        </div>
-                                    </li>
-                                </div> */}
                                 <div className="chat-users-list">
                                     {renderredUsers(users)}
                                 </div>
@@ -176,10 +175,12 @@ const ChatWindow = () => {
                 </div>
                 <div className="messages-section">
                     <div className="messages-section-top">
-                        <div class="chatting-with-user">Ahmed</div>
-                        <div class="chatting-user-status">
-                            <div class="chatting-user-status-icon"></div>
-                            <div class="chat-status-text">online</div>
+                        <div className="chatting-with-user">
+                            {chattingWithUser}
+                        </div>
+                        <div className="chatting-user-status">
+                            <div className="chatting-user-status-icon"></div>
+                            <div className="chat-status-text">online</div>
                         </div>
                     </div>
                     <div className="messages-section-middle">

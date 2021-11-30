@@ -55,7 +55,9 @@
       </ul>
 
       <div class="user-section">
-        <div id="root"></div>
+        @if(Auth::id())
+          <div id="root"></div>
+        @endif
         <p class="title">Анастасия</p>
         <img src="{{asset('images/avatar.png')}}" class="user-image" alt="" />
         <i class="arrow fas fa-chevron-down"></i>

@@ -7,10 +7,10 @@ Register
   <div class="btns-wrapper">
     <div class="links-wrapper">
       <div>
-        <a href="{{ route('login') }}" class="login-btn">Создать аккаунт</a>
+        <a href="{{ route('login') }}" class="login-btn">{{__('auth.login')}}</a>
       </div>
       <div>
-        <a href="{{ route('register') }}" class="signup-btn">Войти в аккаунт</a>
+        <a href="{{ route('register') }}" class="signup-btn">{{__('auth.register')}}</a>
       </div>
     </div>
   </div>
@@ -72,22 +72,32 @@ Register
               <span style="color:red">{{$message}}</span>
             @enderror
           </div>
-          <div class="input-group interestings-list-group-div">
-            <label for="types-list" class="interesting-lists-label" class="input-label">Area Of Interesting</label>
-            {{-- <select name="interesting_type"  class="form-input interestings-list" id="types-list">
+          <div class="input-group interesting-types-group-div">
+            <label for="types-list" class="input-label interesting-types-label">Area Of Interesting</label>
+          </div>
+
+          <div class="input-group">
+            <label for="child-types" class="input-label child-types-label">Additional Type</label>
+            <select name="additional_type" class="form-input child-types-select" id="child-types-list">
               <option value="" disabled selected>Select Type</option>
-              @foreach($types as $type)
-                <option value="{{ $type->id }}">{{ $type->name }}</option>
-              @endforeach
-            </select> --}}
-            @error('interesting_type')
+              <option value="individual">Individual</option>
+              <option value="organisation">Organisation</option>
+            </select>
+            @error('additional_type')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+
+          <div class="input-group">
+            <label for="organisation" class="input-label organisation-label">Organisation Description</label>
+            <textarea name="organisation_description" class="text-area-form-input organisation-input" id="organisation" cols="30" rows="10"></textarea>
+            @error('organisation_description')
               <span style="color:red">{{$message}}</span>
             @enderror
           </div>
           <div class="check-group">
             <input type="checkbox" class="check-input" />
             <label for="" class="input-label">Запомнить меня</label>
-            <a href="#" class="link">Забыли пароль?</a>
           </div>
           <button class="form-btn">Войти</button>
         </form>

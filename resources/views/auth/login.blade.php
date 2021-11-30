@@ -7,10 +7,10 @@ Login
   <div class="btns-wrapper">
     <div class="links-wrapper">
       <div>
-        <a href="{{ route('login') }}" class="login-btn">Создать аккаунт</a>
+        <a href="{{ route('login') }}" class="login-btn">{{__('auth.login')}}</a>
       </div>
       <div>
-        <a href="{{ route('register') }}" class="signup-btn">Войти в аккаунт</a>
+        <a href="{{ route('register') }}" class="signup-btn">{{__('auth.register')}}</a>
       </div>
     </div>
   </div>
@@ -31,18 +31,25 @@ Login
               type="text"
               class="form-input"
               name="email"
+              value="{{ old('email') }}"
               placeholder="maks-roma@mail.ru"
             />
+            @error('email')
+            <span style="color: red">{{$message}}</span>
+            @enderror
           </div>
           <div class="input-group">
             <label for="" class="input-label">Пароль</label>
             <input type="password" name="password" class="form-input" />
             <i class="fas fa-eye"></i>
+            @error('password')
+            <span style="color: red">{{$message}}</span>
+            @enderror
           </div>
           <div class="check-group">
             <input type="checkbox" class="check-input" />
             <label for="" class="input-label">Запомнить меня</label>
-            <a href="#" class="link">Забыли пароль?</a>
+            <a href="{{ route('password.request') }}" class="link">Забыли пароль?</a>
           </div>
 
           <button class="form-btn">Войти</button>

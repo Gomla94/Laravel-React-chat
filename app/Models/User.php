@@ -34,7 +34,11 @@ class User extends Authenticatable
         'status',
         'image',
         'phone_number',
-        'interesting_type_id'
+        'interesting_type_id',
+        'additional_type',
+        'organisation_description',
+        'date_of_birth',
+        'age'
     ];
 
     /**

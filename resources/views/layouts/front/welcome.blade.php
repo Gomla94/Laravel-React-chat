@@ -21,50 +21,7 @@
       </div>
     </div>
   </div>
-<div class="users-section">
-    <div class="left-section">
-        <div class="users-list">
-            @foreach($random_users as $user)
-                <div class="user">
-                    <div class="user-image-wrapper">
-                        <img src="{{asset('images/Ellipse 14.png')}}" alt="">
-                    </div>
-                    <div class="user-social">
-                        <span class="user-name">{{ $user->name }}</span>
-                        <span class="user-email">{{ $user->email }}</span>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <div class="icon">
-          <div class="wrapper">
-              <div class="circle">
-              <i class="fas fa-chevron-up"></i>
-          </div>
-          <div class="name">Скрыть все</div>
-          </div>
-        </div>
-    </div>
-    <div class="right-section">
-      <div class="right-search-input">
-          <input class="right-section-post-search" placeholder="Поиск..." type="text" />
-          <i class="fas fa-search rs-search"></i>
-          <i class="fas fa-filter rs-filter"></i>
-      </div>
-      <div class="search-list-wrapper">
-          <i class="fas fa-caret-up"></i>
-          <div class="search-drop-down">
-              <ul class="search-ul">
-                  <li class="search-item"><a href="#">Фильтровать</a> </li>
-                  <li class="search-item"><a href="#">По имени</a></li>
-                  <li class="search-item"><a href="#">По адресу почты</a></li>
-                  <li class="search-item"><a href="#">По сообщениям</a></li>
-              </ul>
-          </div>
-      </div>
-      
-    </div>
-  </div>
+
 
   <div class="help-section">
     <div class="help-title">Кому нужна помощь прямо сейчас</div>
@@ -100,7 +57,7 @@
         <div class="search-input">
           <i class="fas fa-search post-search-icon"></i>
           <input class="post-search" placeholder="Поиск..." type="text" />
-          <i class="fas fa-microphone"></i>
+          <i class="fas fa-microphone posts-search-microhphone"></i>
         </div>
         <div class="posts-btn-details">
           <button class="posts-button">
@@ -112,7 +69,7 @@
             <div class="post">
                 <div class="user-info">
                 <div class="user-image-wrapper">
-                    <img src="{{asset($user->image)}}" class="post-user-image" />
+                    <img src="{{asset($post->user->image)}}" class="post-user-image" />
                 </div>
                 <div class="user-details">
                     <span class="user-title">{{ $post->user->name }}</span>
