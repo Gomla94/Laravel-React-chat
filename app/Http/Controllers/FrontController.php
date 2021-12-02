@@ -14,7 +14,7 @@ class FrontController extends Controller
     {
         $random_users = User::whereType(User::USER_TYPE)->inRandomOrder()->limit(10)->get();
         $random_appeals = Appeal::with('user')->inRandomOrder()->limit(4)->get();
-        $random_posts = Post::with('user')->inRandomOrder()->limit(4)->get();
+        $random_posts = Post::with('user')->inRandomOrder()->limit(5)->get();
         return view('layouts.front.welcome', [
             'random_users' => $random_users,
             'random_appeals' => $random_appeals,
@@ -32,7 +32,31 @@ class FrontController extends Controller
     public function show_user_page($user)
     {
         $user = User::find($user);
+        $user_posts_count = $user->posts->count();
+        $user_images_count = $user->posts->whereNotNull('image')->count();
+        $user_videos_count = $user->posts->whereNotNull('video')->count();
         $interesting_type = InterestingType::find($user->interesting_type_id);
-        return view('layouts.front.user-details', ['user' => $user, 'interesting_type' => $interesting_type]);
+        return view('layouts.front.user-details', [
+            'user' => $user, 
+            'interesting_type' => $interesting_type,
+            'user_posts_count' => $user_posts_count,
+            'user_images_count' => $user_images_count,
+            'user_videos_count' => $user_videos_count,
+        ]);
+    }
+
+    public function show_videos_page()
+    {
+        $posts_with_videos = Post::whereNotNull('video')->with('user')->get();
+        return view('layouts.front.videos', ['videos' => $posts_with_videos]);
+    }
+
+    public function show_video_page($id)
+    {   $post = Post::whereNotNull('video')->whereId($id)->with('user')->firstOrFail();
+        $other_videos = Post::whereNotNull('video')->where('id', '!=', $id)->with('user')->get();
+        return view('layouts.front.video-details', [
+            'video' => $post,
+            'other_videos' => $other_videos
+        ]);
     }
 }

@@ -46,10 +46,30 @@ class MessagesController extends Controller
         $from = request('from');
         $message = request('message');
 
+        $attributes = validator(request()->all(), [
+            'file' => ['sometimes', 'nullable', 'max:2048', 'mimes:png,jpg,jpeg,mp4,mov,ogg,qt', 'max:2048'],
+        ])->validate();
+        
+        
+        if (request()->file('file')) {
+            $file = $attributes['file'];
+            $extension = $file->getClientOriginalExtension();
+            $image_extensions = ['png', 'jpg', 'jpeg'];
+            if(in_array($extension, $image_extensions)) {
+                $file_type = 'image';
+            } else {
+                $file_type = 'video';
+            }
+            $file_name = uniqid(). '.' .$extension;
+            $file->move('chatmedia/', $file_name);
+        }
+
         $message = Message::create([
             'from' => $from,
             'to' => $to,
-            'message' => $message
+            'message' => $message ?? null,
+            'type' => $file_type ?? null,
+            'media_path' => request('file') ? 'chatmedia/' . $file_name : null
         ]);
 
         broadcast(new NewMessageEvent($message->load('user')))->toOthers();

@@ -68,10 +68,13 @@
     <div class="all-users-list-container">
         <div class="all-users-list">
             @foreach($users as $user)
+            
                 <div class="user">
+                  <a href="{{ route('user.page', $user->id) }}">
                     <div class="users-image-wrapper">
                     <img src="{{ asset($user->image) }}" alt="" />
                     </div>
+                  </a>
                     <div class="users-social">
                     <span class="user-social-span">{{ $user->name }}</span>
                     <span class="user-social-span">{{ $user->email }}</span>

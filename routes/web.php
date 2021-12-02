@@ -26,9 +26,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontController::class, 'home']);
+Route::get('/', [FrontController::class, 'home'])->name('welcome');
 Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
 Route::get('/all-users/{user}',[FrontController::class, 'show_user_page'])->name('user.page');
+Route::get('/all-videos/',[FrontController::class, 'show_videos_page'])->name('all-videos');
+Route::get('/all-videos/{id}',[FrontController::class, 'show_video_page'])->name('show-video');
 
 Auth::routes();
 

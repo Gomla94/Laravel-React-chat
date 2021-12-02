@@ -16,6 +16,22 @@ const filterUsersIcon = document.querySelector(".filter-users-container");
 const filtersList = document.querySelector(".filters-list");
 const filterArrows = document.querySelectorAll(".filter-item-arrow");
 
+const modalWrapper = document.querySelector(".modal-wrapper");
+const postsBtn = document.querySelector(".posts-button");
+const closeModal = document.querySelector(".close-modal");
+
+if (postsBtn) {
+    postsBtn.onclick = function () {
+        modalWrapper.style.display = "block";
+    };
+}
+
+if (closeModal) {
+    closeModal.onclick = function () {
+        modalWrapper.style.display = "none";
+    };
+}
+
 if (filterUsersIcon) {
     filterUsersIcon.addEventListener("click", () => {
         subFilterLists.forEach((list) => {

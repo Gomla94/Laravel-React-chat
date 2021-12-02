@@ -109,8 +109,60 @@
         @endforeach
     </div>
   </div>
+
+  <!-- add post modal -->
+<div class="modal-wrapper">
+
+  <div class="modal-content">
+    <div class="close-modal-container">
+      <span class="close-modal">&times;</span>
+    </div>
+    <form action="{{ route('user.posts.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+      @csrf
+
+      <div class="form-group">
+          <label class="create-post-label" for="title">Title</label>
+          <input type="text" class="form-control" name="title" placeholder="Title">
+          @error('title')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="description">Description</label>
+          <textarea name="description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
+          @error('description')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="image">Image</label>
+          <input type="file" class="form-control" name="image">
+          @error('image')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="video">Video</label>
+          <input type="file" class="form-control" name="video">
+          @error('video')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
+  </form>
+  </div>
+</div>
 @endsection
 
 @push('js')
-
+<script>
+  const modalContent = document.querySelector('.modal-wrapper');
+  @if (count($errors) > 0)
+  modalContent.style.display="block"
+  @endif
+</script>
 @endpush

@@ -12,8 +12,8 @@
             <img class="user-info-image" src="{{ asset($user->image) }}" alt="">
         </div>
         <div class="user-details-container">
-            <span class="user-info-span">Максим Романов</span>
-            <span class="user-info-span">romanov@mail.ru</span>
+            <span class="user-info-span">{{ $user->name }}</span>
+            <span class="user-info-span">{{ $user->email }}</span>
             <span class="user-info-span">ID 0000000000</span>
         </div>
       </div>
@@ -63,17 +63,17 @@
         <div class="media-details">
             <span class="media-span media-title media-images-count-title">Фото</span>
             <i class="fas fa-file-image media-icon media-image-icon"></i>  
-            <span class="meida-count">15</span>
+            <span class="meida-count">{{ $user_images_count }}</span>
         </div>
         <div class="media-details">
             <span class="media-span media-title media-videos-count-title">Видео</span>
             <i class="fas fa-photo-video media-icon media-videos-icon"></i>  
-            <span class="meida-count">3</span>
+            <span class="meida-count">{{ $user_videos_count }}</span>
         </div>
         <div class="media-details">
             <span class="media-span media-title media-posts-count-title">Публикации</span>
             <i class="fas fa-book-open media-icon media-book-icon"></i>  
-            <span class="meida-count">30</span>
+            <span class="meida-count">{{ $user_posts_count }}</span>
         </div>
         <div class="media-details">
             <span class="media-span media-title media-subscribers-count-title">Подписчики</span>
@@ -146,4 +146,61 @@
       
     </div>
   </div>
+
+  
+<!-- add post modal -->
+<div class="modal-wrapper" @if(request('error'))style="display: block"@endif>
+
+  <div class="modal-content">
+    <div class="close-modal-container">
+      <span class="close-modal">&times;</span>
+    </div>
+    <form action="{{ route('user.posts.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+      @csrf
+
+      <div class="form-group">
+          <label class="create-post-label" for="title">Title</label>
+          <input type="text" class="form-control" name="title" placeholder="Title">
+          @error('title')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="description">Description</label>
+          <textarea name="description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
+          @error('description')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="image">Image</label>
+          <input type="file" class="form-control" name="image">
+          @error('image')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="video">Video</label>
+          <input type="file" class="form-control" name="video">
+          @error('video')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
+  </form>
+  </div>
+</div>
+
+@push('js')
+<script>
+  const modalContent = document.querySelector('.modal-wrapper');
+  @if (count($errors) > 0)
+  modalContent.style.display="block"
+  @endif
+</script>
+@endpush
 @endsection

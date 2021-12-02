@@ -22,14 +22,13 @@ class UserPostsController extends Controller
 
     public function store()
     {
-        // dd('a');
         $user = Auth::user();
         
         $attributes = validator(request()->all(), [
-            'title' => ['string'],
+            'title' => ['required', 'string'],
             'description' => ['sometimes', 'nullable', 'string'],
             'image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'video' => ['max:5048'],
+            'video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
         ])->validate();
         
         if (request()->file('image')) {
@@ -65,10 +64,10 @@ class UserPostsController extends Controller
         $user = Auth::user();
         
         $attributes = validator(request()->all(), [
-            'title' => ['string'],
-            'description' => ['string'],
+            'title' => ['required', 'string'],
+            'description' => ['sometimes', 'nullable', 'string'],
             'image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'video' => ['max:5048'],
+            'video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
         ])->validate();
         
         if (request()->file('image')) {

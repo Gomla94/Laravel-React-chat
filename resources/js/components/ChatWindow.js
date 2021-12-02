@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import chat from "../src/chat";
 // import "../../../public/css/index.css";
@@ -72,7 +73,7 @@ const ChatWindow = () => {
                             />
                         </div>
                         <div className="sent-message-info">
-                            <p className="message">{message.message}</p>
+                            {renderMessageType(message)}
                         </div>
                     </div>
                 );
@@ -87,12 +88,32 @@ const ChatWindow = () => {
                             />
                         </div>
                         <div className="received-message-info">
-                            <p className="message">{message.message}</p>
+                            {renderMessageType(message)}
                         </div>
                     </div>
                 );
             }
         });
+    };
+
+    const renderMessageType = (message) => {
+        if (message.type === "image") {
+            return (
+                <img
+                    className="message message-image"
+                    src={`../../../${message.media_path}`}
+                />
+            );
+        } else if (message.type === "video") {
+            return (
+                <video
+                    controls={true}
+                    className="message message-video"
+                    src={`../../../${message.media_path}`}
+                ></video>
+            );
+        }
+        return <p className="message">{message.message}</p>;
     };
 
     const renderredUsers = (users) => {
@@ -105,7 +126,11 @@ const ChatWindow = () => {
                     }}
                     key={user.id}
                 >
-                    <img src={user.image} className="active-user-img" alt="" />
+                    <img
+                        src={user.image ?? `../../../images/avatar.png`}
+                        className="active-user-img"
+                        alt=""
+                    />
                     <div className="chat-user-name">{user.name}</div>
                 </li>
             );
@@ -116,12 +141,32 @@ const ChatWindow = () => {
         if (newMessage === null) {
             return false;
         }
+        document.querySelector(".message-input").value = "";
+
         chat.post("/messages", {
             from: authId,
             to: toUserId,
             message: newMessage,
         }).then((response) => {
             setMessages([...messages, response.data.message]);
+        });
+    };
+
+    const sendMedia = (e) => {
+        let formdata = new FormData();
+        const image = e.target.files[0];
+        formdata.append("file", image);
+        formdata.append("to", toUserId);
+        formdata.append("from", authId);
+        const fileSize = e.target.files[0].size / 1024 / 1024;
+        if (fileSize > 2) {
+            alert("maximum size is 2 MB");
+            return false;
+        }
+
+        chat.post("/messages", formdata).then((response) => {
+            setMessages([...messages, response.data.message]);
+            e.target.value = "";
         });
     };
 
@@ -191,7 +236,15 @@ const ChatWindow = () => {
                     <div className="messages-section-bottom">
                         <div className="chat-inputs-container">
                             <div className="attachement-wrapper">
-                                <i className="fas fa-paperclip chat-paperclip"></i>
+                                <input
+                                    className="fas fa-paperclip chat-paperclip"
+                                    type="file"
+                                    name="file"
+                                    accept="image/*,video/*"
+                                    onChange={(e) => {
+                                        sendMedia(e);
+                                    }}
+                                />
                             </div>
                             <input
                                 className="message-input"

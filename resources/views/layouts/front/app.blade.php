@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
     <link rel="stylesheet" href="{{asset('css/index.css')}}" />
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link
@@ -15,6 +16,8 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    @yield('css')
 
     <script src="{{asset('js/index.js')}}" defer></script>
     <script>
@@ -29,8 +32,8 @@
   <body>
     <div class="overlay" id="overlay">
       <ul class="overlay-list">
-        <li class="overlay-list-item">Видео пользователей</li>
-        <li class="overlay-list-item">Пользователи</li>
+        <a href="{{ route('all-videos') }}"><li class="overlay-list-item">Видео пользователей</li></a>
+          <a href="{{ route('all-users') }}"><li class="overlay-list-item">Пользователи</li></a>
         <li class="overlay-list-item">Благотворительный фонд</li>
         <li class="overlay-list-item">Благотварители</li>
         <li class="overlay-list-item">Контакты</li>
@@ -44,11 +47,11 @@
       </div>
 
       <div class="logo">
-        <img src="{{asset('images/dark-logo.jpeg')}}" class="logo-image" alt="" />
+        <a href="{{ route('welcome') }}"><img src="{{asset('images/dark-logo.jpeg')}}" class="logo-image" alt="" /></a>
       </div>
       <ul class="navbar-list">
-        <li class="list-item">Видео пользователей</li>
-        <li class="list-item">Пользователи</li>
+        <a href="{{ route('all-videos') }}"><li class="list-item">Видео пользователей</li></a>
+        <a href="{{ route('all-users') }}"><li class="list-item">Пользователи</li></a>
         <li class="list-item">Благотворительный фонд</li>
         <li class="list-item">Благотварители</li>
         <li class="list-item">Контакты</li>
