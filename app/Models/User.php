@@ -19,7 +19,7 @@ class User extends Authenticatable
     
     const USER_TYPE = 'user';
     const ADMIN_TYPE = 'admin';
-    const BENEFACTOR_TYPE = 'user';
+    const BENEFACTOR_TYPE = 'benefactor';
 
     /**
      * The attributes that are mass assignable.

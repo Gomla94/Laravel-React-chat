@@ -29,6 +29,12 @@ class FrontController extends Controller
         return view('layouts.front.users', ['users' => $users]);
     }
 
+    public function all_benefactors()
+    {
+        $benefactors = User::whereType(User::BENEFACTOR_TYPE)->paginate(3);
+        return view('layouts.front.benefactors', ['benefactors' => $benefactors]);
+    }
+
     public function show_user_page($user)
     {
         $user = User::find($user);

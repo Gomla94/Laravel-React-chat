@@ -20,6 +20,24 @@ const modalWrapper = document.querySelector(".modal-wrapper");
 const postsBtn = document.querySelector(".posts-button");
 const closeModal = document.querySelector(".close-modal");
 
+const userNavbarArrow = document.querySelector(".user-arrow-down");
+const userNavbarList = document.querySelector(".user-navbar-list");
+
+const logoutAnchor = document.querySelector(".logout");
+const logoutForm = document.querySelector(".logout-form");
+
+if (logoutAnchor) {
+    logoutAnchor.addEventListener("click", () => {
+        logoutForm.submit();
+    });
+}
+
+if (userNavbarArrow) {
+    userNavbarArrow.addEventListener("click", () => {
+        userNavbarList.classList.toggle("show-user-navbar-list");
+    });
+}
+
 if (postsBtn) {
     postsBtn.onclick = function () {
         modalWrapper.style.display = "block";

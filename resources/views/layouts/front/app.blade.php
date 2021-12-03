@@ -34,7 +34,7 @@
       <ul class="overlay-list">
         <a href="{{ route('all-videos') }}"><li class="overlay-list-item">Видео пользователей</li></a>
           <a href="{{ route('all-users') }}"><li class="overlay-list-item">Пользователи</li></a>
-        <li class="overlay-list-item">Благотворительный фонд</li>
+          <a href="{{ route('all-benefactors') }}"><li class="overlay-list-item">Благотворительный фонд</li></a>
         <li class="overlay-list-item">Благотварители</li>
         <li class="overlay-list-item">Контакты</li>
       </ul>
@@ -52,7 +52,7 @@
       <ul class="navbar-list">
         <a href="{{ route('all-videos') }}"><li class="list-item">Видео пользователей</li></a>
         <a href="{{ route('all-users') }}"><li class="list-item">Пользователи</li></a>
-        <li class="list-item">Благотворительный фонд</li>
+        <a href="{{ route('all-benefactors') }}"><li class="list-item">Благотворительный фонд</li></a>
         <li class="list-item">Благотварители</li>
         <li class="list-item">Контакты</li>
       </ul>
@@ -61,10 +61,22 @@
         @if(Auth::id())
           <div id="root"></div>
         @endif
-        <p class="title">Анастасия</p>
+        @if(Auth::check())
+        <p class="title">{{ auth()->user()->name }}</p>
         <img src="{{asset('images/avatar.png')}}" class="user-image" alt="" />
-        <i class="arrow fas fa-chevron-down"></i>
+        <i class="arrow fas fa-chevron-down user-arrow-down"></i>
+        <div class="user-navbar-list">
+          <form action={{ route('logout') }} method="POST" class="logout-form">
+            @csrf
+            <a href="#" class="user-navbar-list-item">User Profile</a>
+          </form>
+          <a href="#" class="user-navbar-list-item logout">Logout</a>
+        </div>
+        @else 
+        <a href="{{ route('login') }}">Login</a>
+        @endif
       </div>
+      
     </div>
     @yield('content')
     
