@@ -3116,4 +3116,26 @@ a {
         font-size: 40px;
         font-weight: 500;
     }
+
+    /* profile page starts here */
+    .profile-container {
+        width: 100%;
+        height: auto;
+        background: linear-gradient(
+            198deg,
+            rgba(184, 91, 0, 1) 12%,
+            rgba(240, 221, 116, 1) 62%,
+            rgba(204, 98, 1, 1) 99%
+        );
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        position: absolute;
+        top: 60%;
+        left: 65%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        border-radius: 15px;
+    }
+    /* end profile page */
 }
