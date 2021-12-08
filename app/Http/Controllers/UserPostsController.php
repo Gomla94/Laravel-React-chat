@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddPostCommentRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class UserPostsController extends Controller
             'title' => ['required', 'string'],
             'description' => ['sometimes', 'nullable', 'string'],
             'image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
+            'video' => ['max:20168', 'mimes:mp4,mov,ogg,qt'],
         ])->validate();
         
         if (request()->file('image')) {
@@ -51,7 +52,7 @@ class UserPostsController extends Controller
             'video' => request()->file('video') ? 'videos/posts/'.$video_name : null,
         ]);
 
-        return redirect()->route('user.my_posts');
+        return back();
     }
 
     public function edit(Post $post)
@@ -67,7 +68,7 @@ class UserPostsController extends Controller
             'title' => ['required', 'string'],
             'description' => ['sometimes', 'nullable', 'string'],
             'image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
+            'video' => ['max:20168', 'mimes:mp4,mov,ogg,qt'],
         ])->validate();
         
         if (request()->file('image')) {
@@ -92,7 +93,7 @@ class UserPostsController extends Controller
             'video' => request()->file('video') ? 'videos/posts/'.$video_name : $post->video,
         ]);
 
-        return redirect()->route('user.my_posts');
+        return back();
     }
 
     public function delete(Post $post)
@@ -101,5 +102,49 @@ class UserPostsController extends Controller
         File::delete(public_path($post->video));
         $post->delete();
         return back();
+    }
+
+    public function add_comment(AddPostCommentRequest $request, Post $post)
+    {
+        try {
+            $comment = $post->comments()->create([
+                'title' => $request->title,
+                'user_id' => Auth::id()
+            ]);
+    
+            return $comment;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+        
+    }
+
+    public function add_like($id)
+    {
+        $post = Post::findOrFail($id);
+        $like = $post->likes()->create(['user_id' => Auth::id()]);
+        return $like;   
+        
+    }
+
+    public function delete_like($id)
+    {
+        $post = Post::findOrFail($id);
+        $like = $post->likes()->where('user_id', Auth::id())->delete();
+        return $like;   
+        
+    }
+
+
+    public function all_comments($id)
+    {
+        try {
+            $post = Post::findOrFail($id);
+            $comments = $post->comments()->with('user')->get();
+            return $comments;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+       
     }
 }

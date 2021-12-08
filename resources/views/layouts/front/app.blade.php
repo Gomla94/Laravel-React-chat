@@ -50,9 +50,9 @@
         <a href="{{ route('welcome') }}"><img src="{{asset('images/dark-logo.jpeg')}}" class="logo-image" alt="" /></a>
       </div>
       <ul class="navbar-list">
-        <a href="{{ route('all-videos') }}"><li class="list-item">Видео пользователей</li></a>
-        <a href="{{ route('all-users') }}"><li class="list-item">Пользователи</li></a>
-        <a href="{{ route('all-benefactors') }}"><li class="list-item">Благотворительный фонд</li></a>
+        <a href="{{ route('all-videos') }}"><li class="{{ Route::currentRouteName() == 'all-videos' ? 'active-list-item' : 'list-item' }}">Видео пользователей</li></a>
+        <a href="{{ route('all-users') }}"><li class="{{ Route::currentRouteName() == 'all-users' ? 'active-list-item' : 'list-item' }}">Пользователи</li></a>
+        <a href="{{ route('all-benefactors') }}"><li class="{{ Route::currentRouteName() == 'all-benefactors' ? 'active-list-item' : 'list-item' }}">Благотворительный фонд</li></a>
         <li class="list-item">Благотварители</li>
         <li class="list-item">Контакты</li>
       </ul>
@@ -66,11 +66,11 @@
         <img src="{{asset('images/avatar.png')}}" class="user-image" alt="" />
         <i class="arrow fas fa-chevron-down user-arrow-down"></i>
         <div class="user-navbar-list">
+          <a href="{{ route('user.profile') }}" class="user-navbar-list-item">User Profile</a>
           <form action={{ route('logout') }} method="POST" class="logout-form">
             @csrf
-            <a href="#" class="user-navbar-list-item">User Profile</a>
-          </form>
-          <a href="#" class="user-navbar-list-item logout">Logout</a>
+            <a href="#" class="user-navbar-list-item logout">Logout</a>
+            </form>
         </div>
         @else 
         <a href="{{ route('login') }}">Login</a>
@@ -78,8 +78,9 @@
       </div>
       
     </div>
+    <div class="main">
     @yield('content')
-    
+    </div>
     
     @stack('js')
   </body>

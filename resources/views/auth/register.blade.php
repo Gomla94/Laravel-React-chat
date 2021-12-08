@@ -10,7 +10,7 @@ Register
         <a href="{{ route('login') }}" class="login-btn">{{__('auth.login')}}</a>
       </div>
       <div>
-        <a href="{{ route('register') }}" class="signup-btn">{{__('auth.register')}}</a>
+        <a href="{{ route('register') }}" class="{{ Request::url('login') ? 'active-auth-button' : 'login-btn' }}">{{__('auth.register')}}</a>
       </div>
     </div>
   </div>
@@ -18,7 +18,6 @@ Register
     <div class="login-container">
       <div class="register-top">
         <div class="login-top-items">
-          <span class="login-top-span">Вход</span>
           <span class="login-top-span">Регистрация</span>
         </div>
       </div>
@@ -48,7 +47,7 @@ Register
           <div class="input-group">
             <label for="password" class="input-label">Пароль</label>
             <input type="password" id="password" class="form-input" name="password" />
-            <i class="fas fa-eye"></i>
+            <i class="fas fa-eye show-password-icon"></i>
             @error('password')
               <span style="color:red">{{$message}}</span>
             @enderror

@@ -7,14 +7,19 @@ use App\Models\InterestingType;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
     public function home()
     {
+        // $post = Post::findOrFail(5);
+        // // dd($post->likes);
+        // dd($post->likes->where('user_id', Auth::id()));
+
         $random_users = User::whereType(User::USER_TYPE)->inRandomOrder()->limit(10)->get();
         $random_appeals = Appeal::with('user')->inRandomOrder()->limit(4)->get();
-        $random_posts = Post::with('user')->inRandomOrder()->limit(5)->get();
+        $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
         return view('layouts.front.welcome', [
             'random_users' => $random_users,
             'random_appeals' => $random_appeals,

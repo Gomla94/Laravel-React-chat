@@ -64,8 +64,16 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
     Route::put('my-appeals/{appeal}/edit', [UserAppealsController::class, 'update'])->name('appeals.update');
     Route::delete('my-appeals/{appeal}/delete', [UserAppealsController::class, 'delete'])->name('appeals.delete');
 
-    /** chat routes */
-    // Route::get('/messages', [MessagesController::class, 'index']);
+    // post comments
+
+    Route::post('posts/{post}/add-comment', [UserPostsController::class, 'add_comment'])->name('post.add-comment');
+    Route::get('posts/{post}/all-comments', [UserPostsController::class, 'all_comments'])->name('post.all-comments');
+    Route::post('posts/{post}/add-like', [UserPostsController::class, 'add_like'])->name('post.add_like');
+    Route::delete('posts/{post}/delete-like', [UserPostsController::class, 'delete_like'])->name('post.delete_like');
+
+    /** profile routes */
+    Route::put('profile', [UserController::class,'update_profile'])->name('update-profile');
+    
 });
 
 Route::get('/messages', [MessagesController::class, 'index']);

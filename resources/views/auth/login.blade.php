@@ -7,7 +7,7 @@ Login
   <div class="btns-wrapper">
     <div class="login-links-wrapper">
       <div>
-        <a href="{{ route('login') }}" class="login-btn">{{__('auth.login')}}</a>
+        <a href="{{ route('login') }}" class="{{ Request::url('login') ? 'active-auth-button' : 'login-btn' }}">{{__('auth.login')}}</a>
       </div>
       <div>
         <a href="{{ route('register') }}" class="signup-btn">{{__('auth.register')}}</a>
@@ -19,7 +19,6 @@ Login
       <div class="login-top">
         <div class="login-top-items">
           <span class="login-top-span">Вход</span>
-          <span class="login-top-span">Регистрация</span>
         </div>
       </div>
       <div class="login-middle">
@@ -41,7 +40,6 @@ Login
           <div class="input-group">
             <label for="" class="input-label">Пароль</label>
             <input type="password" name="password" class="form-input" />
-            <i class="fas fa-eye"></i>
             @error('password')
             <span style="color: red">{{$message}}</span>
             @enderror

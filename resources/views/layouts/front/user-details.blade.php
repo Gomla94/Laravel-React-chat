@@ -9,15 +9,14 @@
       </div>
       <div class="user-page-user-info-container">
         <div class="user-info-image-container">
-            <img class="user-info-image" src="{{ asset($user->image) }}" alt="">
+            <img class="user-info-image" src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="">
         </div>
         <div class="user-details-container">
             <span class="user-info-span">{{ $user->name }}</span>
             <span class="user-info-span">{{ $user->email }}</span>
-            <span class="user-info-span">ID 0000000000</span>
         </div>
       </div>
-      <div class="user-page-green-button">Информация о пользователе</div>
+      <div class="user-page-green-button"><span class="green-button-text">Информация о пользователе</span></div>
       <div class="user-additional-info">
         @if($user->date_of_birth)
         <div class="info">
@@ -56,7 +55,6 @@
         <div class="search-items">
           <input class="right-section-post-search" placeholder="Поиск..." type="text" />
           <i class="fas fa-search user-info-search-icon"></i>
-          <i class="fas fa-microphone user-info-microphone-icon"></i>
         </div>
       </div>
       <div class="user-info-media-container">
@@ -74,6 +72,11 @@
             <span class="media-span media-title media-posts-count-title">Публикации</span>
             <i class="fas fa-book-open media-icon media-book-icon"></i>  
             <span class="meida-count">{{ $user_posts_count }}</span>
+        </div>
+        <div class="media-details">
+            <span class="media-span media-title media-subscribers-count-title">Подписчики</span>
+            <i class="fas fa-user media-icon media-image-icon"></i>  
+            <span class="meida-count">1500</span>
         </div>
         <div class="media-details">
             <span class="media-span media-title media-subscribers-count-title">Подписчики</span>
@@ -149,7 +152,7 @@
 
   
 <!-- add post modal -->
-<div class="modal-wrapper" @if(request('error'))style="display: block"@endif>
+<div class="modal-wrapper">
 
   <div class="modal-content">
     <div class="close-modal-container">
@@ -174,20 +177,25 @@
           @enderror
       </div>
 
-      <div class="form-group">
+      
+      <div class="form-group modal-checker-container">
+        <div class="post-modal-checker">
+          <div class="modal-checker"></div>
+        </div>
+        <label class="create-post-label image-label">Image</label>
+        <label class="create-post-label video-label">Video</label>
+        @error('image')
+          <span style="color:red">{{$message}}</span>
+        @enderror
+        @error('video')
+          <span style="color:red">{{$message}}</span>
+        @enderror
+      </div>
+      
+
+      <div class="form-group modal-image-container">
           <label class="create-post-label" for="image">Image</label>
           <input type="file" class="form-control" name="image">
-          @error('image')
-          <span style="color:red">{{$message}}</span>
-          @enderror
-      </div>
-
-      <div class="form-group">
-          <label class="create-post-label" for="video">Video</label>
-          <input type="file" class="form-control" name="video">
-          @error('video')
-          <span style="color:red">{{$message}}</span>
-          @enderror
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
@@ -202,5 +210,7 @@
   modalContent.style.display="block"
   @endif
 </script>
+
+<script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
 @endpush
 @endsection

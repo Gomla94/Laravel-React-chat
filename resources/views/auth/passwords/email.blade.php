@@ -1,6 +1,45 @@
-@extends('layouts.app')
-
+@extends('layouts.auth')
+@section('title')
+Reset Your Password
+@endsection
 @section('content')
+<div class="reset-password-container">
+  <div class="btns-wrapper"></div>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <div class="register-top">
+        <div class="login-top-items">
+          <span class="login-top-span">восстановите вашу страницу с паролем</span>
+        </div>
+      </div>
+      <div class="register-middle">
+        @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            Мы отправили вашу новую ссылку пароля
+        </div>
+        @endif
+        <form action="{{ route('password.email') }}" method="POST" class="register-form">
+          @csrf
+          <div class="input-group">
+            <label for="name" class="input-label">Ваш e-mail</label>
+            <input type="text" id="name" class="form-input" name="email" value="{{ old('email') }}" />
+            @error('email')
+              <span style="color:red">{{$message}}</span>
+            @enderror
+          </div>
+          
+          <button class="form-btn">отправить электронное письмо для сброса пароля</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+@push('js')
+<script src="{{ asset('js/authentication.js') }}"></script>
+@endpush
+@endsection
+{{-- 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -43,5 +82,5 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</div> --}}
+{{-- @endsection --}}

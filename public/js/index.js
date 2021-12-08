@@ -26,6 +26,12 @@ const userNavbarList = document.querySelector(".user-navbar-list");
 const logoutAnchor = document.querySelector(".logout");
 const logoutForm = document.querySelector(".logout-form");
 
+const mainDiv = document.querySelector(".main");
+
+mainDiv.addEventListener("click", () => {
+    chatWrapper.classList.remove("show-chat-wrapper");
+});
+
 if (logoutAnchor) {
     logoutAnchor.addEventListener("click", () => {
         logoutForm.submit();

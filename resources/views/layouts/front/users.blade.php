@@ -72,7 +72,7 @@
                 <div class="user">
                   <a href="{{ route('user.page', $user->id) }}">
                     <div class="users-image-wrapper">
-                    <img src="{{ asset($user->image) }}" alt="" />
+                    <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="" />
                     </div>
                   </a>
                     <div class="users-social">

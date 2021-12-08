@@ -2258,8 +2258,8 @@ var ChatWindow = function ChatWindow() {
       }
     });
     envelopes.forEach(function (item) {
-      item.addEventListener("click", function () {
-        // fetchAllMessagesWithUser(item.dataset.id);
+      item.addEventListener("click", function (e) {
+        e.stopPropagation();
         fetchTopUser(item.dataset.id);
         document.querySelector(".chat-wrapper").classList.toggle("show-chat-wrapper");
       });
@@ -2342,15 +2342,13 @@ var ChatWindow = function ChatWindow() {
 
   var renderredUsers = function renderredUsers(users) {
     return users.map(function (user) {
-      var _user$image;
-
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
         className: "active-user",
         onClick: function onClick() {
           fetchAllMessagesWithUser(user.id);
         },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-          src: (_user$image = user.image) !== null && _user$image !== void 0 ? _user$image : "../../../images/avatar.png",
+          src: user.image ? "../".concat(user.image) : "../images/avatar.png",
           className: "active-user-img",
           alt: ""
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -2434,19 +2432,9 @@ var ChatWindow = function ChatWindow() {
           fontSize: "50px",
           marginRight: "125px"
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "active-users-section",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          className: "active-users-top-section",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "sound-check-background"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "sound-checker"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-            className: "check-sound",
-            children: "\u0417\u0432\u0443\u043A"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "active-users",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "active-users-search-wrapper",
@@ -2469,7 +2457,7 @@ var ChatWindow = function ChatWindow() {
               })
             })
           })]
-        })]
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "messages-section",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {

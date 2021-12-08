@@ -34,8 +34,8 @@ const ChatWindow = () => {
         );
 
         envelopes.forEach((item) => {
-            item.addEventListener("click", () => {
-                // fetchAllMessagesWithUser(item.dataset.id);
+            item.addEventListener("click", (e) => {
+                e.stopPropagation();
                 fetchTopUser(item.dataset.id);
                 document
                     .querySelector(".chat-wrapper")
@@ -127,7 +127,11 @@ const ChatWindow = () => {
                     key={user.id}
                 >
                     <img
-                        src={user.image ?? `../../../images/avatar.png`}
+                        src={
+                            user.image
+                                ? `../${user.image}`
+                                : `../images/avatar.png`
+                        }
                         className="active-user-img"
                         alt=""
                     />
@@ -194,11 +198,6 @@ const ChatWindow = () => {
                     }}
                 ></i>
                 <div className="active-users-section">
-                    <div className="active-users-top-section">
-                        <div className="sound-check-background"></div>
-                        <div className="sound-checker"></div>
-                        <span className="check-sound">Звук</span>
-                    </div>
                     <div className="active-users">
                         <div className="active-users-search-wrapper">
                             <i className="fas fa-search active-users-search"></i>
