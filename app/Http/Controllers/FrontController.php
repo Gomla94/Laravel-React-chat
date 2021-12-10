@@ -18,7 +18,7 @@ class FrontController extends Controller
         // dd($post->likes->where('user_id', Auth::id()));
 
         $random_users = User::whereType(User::USER_TYPE)->inRandomOrder()->limit(10)->get();
-        $random_appeals = Appeal::with('user')->inRandomOrder()->limit(4)->get();
+        $random_appeals = Appeal::with('user')->inRandomOrder()->limit(12)->get();
         $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
         return view('layouts.front.welcome', [
             'random_users' => $random_users,

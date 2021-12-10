@@ -16,9 +16,12 @@ const filterUsersIcon = document.querySelector(".filter-users-container");
 const filtersList = document.querySelector(".filters-list");
 const filterArrows = document.querySelectorAll(".filter-item-arrow");
 
-const modalWrapper = document.querySelector(".modal-wrapper");
 const postsBtn = document.querySelector(".posts-button");
-const closeModal = document.querySelector(".close-modal");
+const appealsBtn = document.querySelector(".appeals-button");
+const postsModalWrapper = document.querySelector(".posts-modal-wrapper");
+const appealsModalWrapper = document.querySelector(".appeals-modal-wrapper");
+const closePostsModal = document.querySelector(".close-posts-modal");
+const closeAppealsModal = document.querySelector(".close-appeals-modal");
 
 const userNavbarArrow = document.querySelector(".user-arrow-down");
 const userNavbarList = document.querySelector(".user-navbar-list");
@@ -27,6 +30,14 @@ const logoutAnchor = document.querySelector(".logout");
 const logoutForm = document.querySelector(".logout-form");
 
 const mainDiv = document.querySelector(".main");
+
+const showPostsModal = () => {
+    postsModalWrapper.style.display = "block";
+};
+
+const showAppealsModal = () => {
+    appealsModalWrapper.style.display = "block";
+};
 
 mainDiv.addEventListener("click", () => {
     chatWrapper.classList.remove("show-chat-wrapper");
@@ -45,14 +56,26 @@ if (userNavbarArrow) {
 }
 
 if (postsBtn) {
-    postsBtn.onclick = function () {
-        modalWrapper.style.display = "block";
+    postsBtn.onclick = () => {
+        showPostsModal();
     };
 }
 
-if (closeModal) {
-    closeModal.onclick = function () {
-        modalWrapper.style.display = "none";
+if (appealsBtn) {
+    appealsBtn.onclick = function () {
+        showAppealsModal();
+    };
+}
+
+if (closePostsModal) {
+    closePostsModal.onclick = function () {
+        postsModalWrapper.style.display = "none";
+    };
+}
+
+if (closeAppealsModal) {
+    closeAppealsModal.onclick = function () {
+        appealsModalWrapper.style.display = "none";
     };
 }
 
