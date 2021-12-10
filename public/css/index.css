@@ -220,8 +220,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-.posts-modal-wrapper,
-.appeals-modal-wrapper {
+.modal-wrapper {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -256,8 +255,7 @@ body {
     margin-bottom: 30px;
 }
 
-.close-posts-modal,
-.close-appeals-modal {
+.close-modal {
     color: rgb(1, 1, 112);
     float: right;
     font-size: 28px;
@@ -1995,7 +1993,7 @@ a {
     flex-wrap: wrap;
     left: 0;
     margin: 0;
-    /* padding: 50px; */
+    padding: 0;
     /* box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.9); */
 }
 
@@ -2010,113 +2008,34 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 60%;
+    /* width: 100%; */
     padding: 10px 150px;
-    overflow: hidden;
-    position: relative;
-    height: 500px;
-
-    /* position: absolute; */
-    /* top: 30%;
-    left: 10%; */
-    /* width: 80%;
-    height: 500px;
-    overflow: hidden;
-    padding: 20px; */
 }
 
-.inner-appeals-wrapper {
-    /* display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    width: 200%;
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 95%;
-    gap: 5px; */
-    /* background-color: red; */
-    top: 0px;
-    left: 0;
-    height: 95%;
-    width: 200%;
-    position: absolute;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    pointer-events: none;
+.appeals-wrapper > div {
+    flex: 30%;
 }
 
-.swiper {
-    width: 80%;
-    height: 500px;
-    /* margin: auto; */
-    /* background-color: red; */
-}
-
-.swiper-slide {
+.appeal-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid rgb(241, 241, 241); */
+    /* border: 1px solid black; */
     padding: 10px 10px;
     margin-right: 20px;
-    /* width: 25%; */
-    width: 200px;
-    height: 90px;
-
-    /* Center slide text vertically */
+    width: 25%;
+    height: 500px;
 }
 
 .appeal-card-image {
-    flex: 0.4;
-    /* padding: 20px; */
-    /* padding-left: 20px; */
-    /* background-color: red; */
-    width: 95%;
-    height: 50%;
-    /* min-height: 50px; */
+    flex: 1;
 }
-
-.appeal-image {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-}
-
 .appeal-card-info {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    bottom: 0;
-    position: absolute;
-    /* background-color: yellow; */
-    width: 100%;
-    height: 50%;
-}
-
-.appeal-card-title {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.appeal-card-description {
-    text-align: center;
-}
-
-.appeal-card-button {
-    background-color: green;
-    color: white;
-    padding: 12px;
-    border: none;
-}
-
-.appeal-card-links {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    bottom: 0;
-    position: absolute;
+    justify-content: center;
 }
 .card-user-image {
     /* width: 100%; */
@@ -2221,20 +2140,10 @@ a {
     cursor: pointer;
 }
 
-.appeals-button {
-    color: white;
-    background-color: rgb(1, 59, 1);
-    height: 40px;
-    width: 120px;
-    border: none;
-    cursor: pointer;
-    margin-right: 5px;
-}
-
 .fa-plus {
     color: white;
     position: absolute;
-    right: 100px;
+    left: 0.5rem;
     cursor: pointer;
 }
 
@@ -2496,7 +2405,6 @@ a {
         height: auto;
         width: 100vh;
         margin-left: 10px;
-        margin-top: 150px;
     }
 
     .help-title {
@@ -2506,88 +2414,28 @@ a {
     }
 
     .appeals-wrapper {
-        /* display: flex;
-          width: 550px;
-          background-color: rebeccapurple;
-          height: auto;
-          height: auto;
-          flex-wrap: wrap;
-          left: 0;
-          margin: 0;
-          padding: 10px 20px; */
-
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 60%;
-        padding: 10px 150px;
-        overflow: hidden;
-        position: relative;
-        height: 500px;
+        width: 550px;
+        /* background-color: rebeccapurple; */
+        height: auto;
+        height: auto;
+        flex-wrap: wrap;
+        left: 0;
+        margin: 0;
+        padding: 10px 20px;
     }
 
-    /* .appeals-wrapper > div {
-          flex: 40%;
-      } */
-
-    .inner-appeals-wrapper {
-        /* display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          width: 200%;
-          position: relative;
-          top: 0;
-          left: 0;
-          height: 95%;
-          gap: 5px; */
-        /* background-color: red; */
-        top: 0px;
-        left: 0;
-        height: 95%;
-        width: 200%;
-        position: absolute;
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 5px;
-        pointer-events: none;
+    .appeals-wrapper > div {
+        flex: 40%;
     }
 
     .appeal-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid rgb(241, 241, 241);
-        padding: 10px 10px;
-        margin-right: 20px;
-        /* width: 25%; */
-        width: 300px;
-        height: 95%;
+        padding-left: 10px;
+        margin: auto;
+        margin-bottom: 10px;
+        /* border: 1px solid black; */
+        /* display: none; */
     }
-
-    .appeal-card-title {
-        max-width: 150px;
-        overflow: hidden;
-    }
-
-    .appeal-card-info {
-        text-align: center;
-    }
-
-    .appeal-card-description {
-        max-height: 100px;
-        overflow-x: scroll;
-    }
-
-    .swiper {
-        height: 600px;
-    }
-
-    /* .appeal-card {
-          padding-left: 10px;
-          margin: auto;
-          margin-bottom: 10px;
-          border: 1px solid black;
-          display: none;
-      } */
 
     .card-user-image {
         border-radius: 10px;
@@ -2600,7 +2448,7 @@ a {
         /* width: 102vh; */
         padding: 10px 15%;
         width: 100%;
-        /* margin-top: 90vh; */
+        margin-top: 90vh;
     }
 
     .post {
@@ -3019,8 +2867,8 @@ a {
         margin-right: 30px;
         margin-bottom: 10px;
         /* float: left;
-      padding: 50px;
-      margin: 0px 50px 30px 100px; */
+    padding: 50px;
+    margin: 0px 50px 30px 100px; */
         display: flex;
         flex-direction: row;
         align-items: center;
