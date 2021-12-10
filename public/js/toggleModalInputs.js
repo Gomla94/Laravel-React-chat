@@ -19,7 +19,7 @@ const addmodalVideoInput = () => {
     const videoInput = `
     <div class="form-group modal-video-container">
               <label class="create-post-label" for="video">Video</label>
-              <input type="file" class="form-control" name="video">
+              <input type="file" class="form-control" name="post_video">
           </div>
     
     `;
@@ -31,7 +31,7 @@ const addModalImageInput = () => {
     const imageInput = `
     <div class="form-group modal-image-container">
               <label class="create-post-label" for="image">Image</label>
-              <input type="file" class="form-control" name="image">
+              <input type="file" class="form-control" name="post_image">
           </div>
     
     `;

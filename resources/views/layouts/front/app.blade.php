@@ -16,6 +16,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/swiper/swiper-bundle.min.css"
+  />
 
     @yield('css')
 
@@ -35,7 +39,7 @@
         <a href="{{ route('all-videos') }}"><li class="overlay-list-item">Видео пользователей</li></a>
           <a href="{{ route('all-users') }}"><li class="overlay-list-item">Пользователи</li></a>
           <a href="{{ route('all-benefactors') }}"><li class="overlay-list-item">Благотворительный фонд</li></a>
-        <li class="overlay-list-item">Благотварители</li>
+          <a href="{{ route('all-benefactors') }}"><li class="overlay-list-item">Благотварители</li></a>
         <li class="overlay-list-item">Контакты</li>
       </ul>
     </div>
@@ -52,8 +56,8 @@
       <ul class="navbar-list">
         <a href="{{ route('all-videos') }}"><li class="{{ Route::currentRouteName() == 'all-videos' ? 'active-list-item' : 'list-item' }}">Видео пользователей</li></a>
         <a href="{{ route('all-users') }}"><li class="{{ Route::currentRouteName() == 'all-users' ? 'active-list-item' : 'list-item' }}">Пользователи</li></a>
-        <a href="{{ route('all-benefactors') }}"><li class="{{ Route::currentRouteName() == 'all-benefactors' ? 'active-list-item' : 'list-item' }}">Благотворительный фонд</li></a>
-        <li class="list-item">Благотварители</li>
+        <a href="{{ route('all-appeals') }}"><li class="{{ Route::currentRouteName() == 'all-appeals' ? 'active-list-item' : 'list-item' }}">Благотворительный фонд</li></a>
+        <a href="{{ route('all-benefactors') }}"><li class="{{ Route::currentRouteName() == 'all-benefactors' ? 'active-list-item' : 'list-item' }}">Благотварители</li></a>
         <li class="list-item">Контакты</li>
       </ul>
 

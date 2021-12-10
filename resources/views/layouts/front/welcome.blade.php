@@ -29,28 +29,28 @@
 
   <div class="help-section">
     <div class="help-title">Кому нужна помощь прямо сейчас</div>
-    <div class="appeals-wrapper">
+     <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
         @foreach($random_appeals as $appeal)
-            <div class="appeal-card">
-                <div class="appeal-card-image">
-                    @if($appeal->image)
-                    <img
-                    src="{{asset($appeal->image)}}"
-                    class="card-user-image"
-                    />
-                    @endif
-                </div>
-                <div class="appeal-card-info">
-                    <p class="user-name">{{ $appeal->user->name }}</p>
-                    <p class="user-desc">
-                        {{ str_limit($appeal->description, 100) }}
-                    </p>
-                    <button class="user-btn">Хочу помочь</button>
-                    <a href="" class="more-details">Подробнее</a>
-                </div>
-               
+        <div class="swiper-slide">
+          @if($appeal->image)
+          <div class="appeal-card-image">
+            <img class="appeal-image" src="{{ asset($appeal->image) }}" alt="">
+          </div>
+          @endif
+          <div class="appeal-card-info">
+            <p class="appeal-card-title">{{$appeal->title}}</p>
+            <p class="appeal-card-description">
+              {{str_limit($appeal->description, 200)}}
+            </p>
+            <div class="appeal-card-links">
+              <button class="appeals-button">Хочу помочь</button>
+              <a href="#" class="appeal-card-link">Подробнее</a>
             </div>
+          </div>
+        </div>
         @endforeach
+      </div>
     </div>
   </div>
 
@@ -63,19 +63,23 @@
           <input class="post-search" placeholder="Поиск..." type="text" />
           <i class="fas fa-microphone posts-search-microhphone"></i>
         </div>
-        @if(Auth::check())
         <div class="posts-btn-details">
-          <button class="posts-button">
-            <i class="fal fa-plus"></i>Новый пост
+          @if(Auth::check())
+          <button class="appeals-button">
+            запрос о помощи
           </button>
+          <i class="fal fa-plus"></i>
+          <button class="posts-button">
+            Новый пост
+          </button>
+          @endif
         </div>
-        @endif
       </div>
         @foreach($random_posts as $post)
             <div class="post">
                 <div class="user-info">
                 <div class="user-image-wrapper">
-                    <img src="{{asset($post->user->image)}}" class="post-user-image" />
+                    <img src="{{asset($post->user->image ?? 'images/avatar.png')}}" class="post-user-image" />
                 </div>
                 <a href="{{ route('user.page', $post->user->id) }}">
                   <div class="user-details">
@@ -138,27 +142,26 @@
   </div>
 
   <!-- add post modal -->
-  <div class="modal-wrapper">
-
+  <div class="posts-modal-wrapper">
     <div class="modal-content">
       <div class="close-modal-container">
-        <span class="close-modal">&times;</span>
+        <span class="close-posts-modal">&times;</span>
       </div>
       <form action="{{ route('user.posts.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
         @csrf
   
         <div class="form-group">
             <label class="create-post-label" for="title">Title</label>
-            <input type="text" class="form-control" name="title" placeholder="Title">
-            @error('title')
+            <input type="text" class="form-control" name="post_title" placeholder="Title">
+            @error('post_title')
             <span style="color:red">{{$message}}</span>
             @enderror
         </div>
   
         <div class="form-group">
-            <label class="create-post-label" for="description">Description</label>
-            <textarea name="description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
-            @error('description')
+            <label class="create-post-label" for="post_description">Description</label>
+            <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
+            @error('post_description')
             <span style="color:red">{{$message}}</span>
             @enderror
         </div>
@@ -170,10 +173,10 @@
           </div>
           <label class="create-post-label image-label">Image</label>
           <label class="create-post-label video-label">Video</label>
-          @error('image')
+          @error('post_image')
             <span style="color:red">{{$message}}</span>
           @enderror
-          @error('video')
+          @error('post_video')
             <span style="color:red">{{$message}}</span>
           @enderror
         </div>
@@ -188,16 +191,81 @@
     </form>
     </div>
   </div>
+  
+   <!-- add appeal modal -->
+   <div class="appeals-modal-wrapper">
+    <div class="modal-content">
+      <div class="close-modal-container">
+        <span class="close-appeals-modal">&times;</span>
+      </div>
+      <form action="{{ route('user.appeals.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+  
+        <div class="form-group">
+            <label class="create-post-label" for="title">Title</label>
+            <input type="text" class="form-control" name="appeal_title" placeholder="Title">
+            @error('appeal_title')
+            <span style="color:red">{{$message}}</span>
+            @enderror
+        </div>
+  
+        <div class="form-group">
+            <label class="create-post-label" for="description">Description</label>
+            <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
+            @error('appeal_description')
+            <span style="color:red">{{$message}}</span>
+            @enderror
+        </div>
+  
+        <div class="form-group modal-image-container">
+            <label class="create-post-label" for="image">Image</label>
+            <input type="file" class="form-control" name="appeal_image">
+            @error('appeal_image')
+            <span style="color:red">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="form-group modal-image-container">
+          <label class="create-post-label" for="video">Video</label>
+          <input type="file" class="form-control" name="appeal_video">
+          @error('appeal_video')
+            <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+  
+        <button type="submit" class="btn btn-primary create-post-modal-btn">Create Appeal</button>
+    </form>
+    </div>
+  </div>
+  
 @endsection
 
 @push('js')
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ asset('js/addPostComment.js') }}" defer></script>
 <script src="{{ asset('js/addPostLike.js') }}" defer></script>
 <script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
+<script src="{{ asset('js/swiper.js') }}" defer></script>
 <script>
-  const modalContent = document.querySelector('.modal-wrapper');
-  @if (count($errors) > 0)
-  modalContent.style.display="block"
+  const postsModalContent = document.querySelector('.posts-modal-wrapper');
+  const appealsModalContent = document.querySelector('.appeals-modal-wrapper');
+  @if ($errors->count() > 0)
+  const errors = {!! json_encode($errors->toArray()) !!};
+  if(errors['modalType'] == 'postsModal') {
+    postsModalContent.style.display="block"
+  } else {
+    appealsModalContent.style.display="block"
+  }
   @endif
+</script>
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+  });
 </script>
 @endpush
