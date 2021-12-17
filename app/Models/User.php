@@ -81,4 +81,30 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    public function subscribtions()
+    {
+        return $this->hasMany(Subscribtion::class, 'subscriber_id');
+    }
+
+    public function subscribers()
+    {
+        return $this->hasMany(Subscribtion::class, 'user_id');
+    }
+
+    public function subscribed($user_id)
+    {
+        return (bool)$this->subscribtions()->where('user_id', $user_id)->count();
+    }
+
+    public function chat_blocks()
+    {
+        return $this->hasMany(ChatBlock::class, 'blocker_id');
+    }
+
+    public function has_blocked($user_id)
+    {
+        return (bool)$this->chat_blocks()->where('blocker_id', $this->id)
+                                    ->where('user_id', $user_id)->count();
+    }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.front.app')
 @section('content')
 <div class="all-users-section">
-    <div class="filter-users-container">
+    {{-- <div class="filter-users-container">
         <div class="filter-users">
           <span class="filter-users-text">Фильтр</span>
           <i class="fas fa-filter"></i>
@@ -63,49 +63,29 @@
             <li class="sub-filter-item">item ten</li>
           </ul>
         </div>
-    </div>
+    </div> --}}
 
     <div class="all-users-list-container">
         <div class="all-users-list">
-            @foreach($users as $user)
+            @foreach($appeals as $appeal)
             
-                <div class="user">
-                  <a href="{{ route('user.page', $user->id) }}">
+                <div class="appeal-container">
+                  <a href="{{ route('show-appeal', $appeal->id) }}">
                     <div class="users-image-wrapper">
-                    <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="" />
+                    <img src="{{ asset($appeal->user->image ?? 'images/avatar.png') }}" alt="" />
                     </div>
                   </a>
-                    <div class="users-social">
-                    <span class="user-social-span">{{ $user->name }}</span>
-                    <span class="user-social-span">{{ $user->email }}</span>
-                    <span class="user-social-span">ID {{ $user->national_id }}</span>
-                    <span class="user-social-span">Открыть полный профиль</span>
+                    <div class="appeal-info-container">
+                    <span class="appeal-title">{{ $appeal->title }}</span>
+                    <span class="user-social-span">{{ str_limit($appeal->description, 150) }}</span>
                     </div>
-                    @if(Auth::check())
-                    <div class="user-subscription-buttons">
-                      <div class="user-green-message-box">
-                        <i class="fas fa-envelope user-envelope" data-id={{ $user->id }}></i>
-                      </div>
-                      @if(auth()->user()->subscribed($user->id))
-                      <form action="{{ route('unsubscribe', $user->id) }}" method="POST">
-                        @csrf
-                        <button class="user-subscribe">
-                          unsubscribe
-                        </button>
-                      </form>
-                      @else
-                      <form action="{{ route('subscribe', $user->id) }}" method="POST"> 
-                        @csrf
-                        <button class="user-subscribe">
-                          subscribe
-                        </button>
-                      </form>
-                      @endif
-                    </div>
-                    @endif
                 </div>
             @endforeach
+            
+            {{$appeals->links('vendor.pagination.custom')}}
         </div>
     </div>
+
 </div>
+
 @endsection

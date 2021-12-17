@@ -74,14 +74,14 @@
             <span class="meida-count">{{ $user_posts_count }}</span>
         </div>
         <div class="media-details">
-            <span class="media-span media-title media-subscribers-count-title">Подписчики</span>
+            <span class="media-span media-title media-subscribers-count-title">подписчики</span>
             <i class="fas fa-user media-icon media-image-icon"></i>  
-            <span class="meida-count">1500</span>
+            <span class="meida-count">{{ $user->subscribtions->count() }}</span>
         </div>
         <div class="media-details">
-            <span class="media-span media-title media-subscribers-count-title">Подписчики</span>
+            <span class="media-span media-title media-subscribers-count-title">подписки</span>
             <i class="fas fa-users media-icon media-image-icon"></i>  
-            <span class="meida-count">1500</span>
+            <span class="meida-count">{{ $user->subscribers->count() }}</span>
         </div>
       </div>
     </div>

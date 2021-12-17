@@ -40,7 +40,6 @@
           <a href="{{ route('all-users') }}"><li class="overlay-list-item">Пользователи</li></a>
           <a href="{{ route('all-benefactors') }}"><li class="overlay-list-item">Благотворительный фонд</li></a>
           <a href="{{ route('all-benefactors') }}"><li class="overlay-list-item">Благотварители</li></a>
-        <li class="overlay-list-item">Контакты</li>
       </ul>
     </div>
     <div class="navbar">
@@ -58,7 +57,6 @@
         <a href="{{ route('all-users') }}"><li class="{{ Route::currentRouteName() == 'all-users' ? 'active-list-item' : 'list-item' }}">Пользователи</li></a>
         <a href="{{ route('all-appeals') }}"><li class="{{ Route::currentRouteName() == 'all-appeals' ? 'active-list-item' : 'list-item' }}">Благотворительный фонд</li></a>
         <a href="{{ route('all-benefactors') }}"><li class="{{ Route::currentRouteName() == 'all-benefactors' ? 'active-list-item' : 'list-item' }}">Благотварители</li></a>
-        <li class="list-item">Контакты</li>
       </ul>
 
       <div class="user-section">
@@ -67,7 +65,7 @@
         @endif
         @if(Auth::check())
         <p class="title">{{ auth()->user()->name }}</p>
-        <img src="{{asset('images/avatar.png')}}" class="user-image" alt="" />
+        <a href="{{ route('user.page', auth()->user()->id) }}"><img src="{{asset('images/avatar.png')}}" class="user-image" alt="" /></a>
         <i class="arrow fas fa-chevron-down user-arrow-down"></i>
         <div class="user-navbar-list">
           <a href="{{ route('user.profile') }}" class="user-navbar-list-item">User Profile</a>

@@ -1,20 +1,54 @@
-import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Fragment } from "react";
 import chat from "../src/chat";
-// import "../../../public/css/index.css";
 const ChatWindow = () => {
-    console.log("authId");
-
     const [users, setUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
     const [toUserId, setToUserId] = useState(null);
     const [chattingWithUser, setChattingWithUser] = useState("");
+    const [blockedUserId, setBlockedUserId] = useState(null);
     const authId = window.Laravel.user.id;
-
+    const [spinner, setSpinner] = useState(null);
+    const [userIsAlreadyBlocked, setUserIsAlreadyBlocked] = useState(null);
+    const [blockMessage, setBlockMessage] = useState(null);
     const scrollToEndRef = useRef(null);
 
     const envelopes = document.querySelectorAll(".user-envelope");
+    const userBlocker = document.querySelector(".sound-checker");
+    const userBlockerBackground = document.querySelector(
+        ".sound-checker-background"
+    );
+
+    useEffect(() => {
+        fetchAllMessagesWithUser(toUserId);
+    }, [toUserId]);
+
+    useEffect(() => {
+        if (spinner === null) {
+            return false;
+        }
+        showBlockButtons();
+    }, [spinner]);
+
+    useEffect(() => {
+        if (userIsAlreadyBlocked === null) {
+            return;
+        }
+        if (userIsAlreadyBlocked) {
+            addBlockedUserStyle();
+        } else {
+            removeBlockedUserStyle();
+        }
+    }, [userIsAlreadyBlocked]);
+
+    // useEffect(() => {
+    //     if (blockedByMe === null) {
+    //         return;
+    //     }
+    //     if (blockedByMe) {
+    //         addBlockedUserStyle();
+    //     }
+    // }, [blockedByMe]);
 
     useEffect(() => {
         document.querySelector(".messages-section-middle").scrollTop =
@@ -44,8 +78,131 @@ const ChatWindow = () => {
         });
     }, []);
 
+    useEffect(() => {
+        if (toUserId === null) {
+            return false;
+        }
+        window.Echo.private(`blocked-user-channel.${authId}`).listen(
+            "BlockUserEvent",
+            (event) => {
+                if (
+                    authId === event.blockedUser.user_id &&
+                    toUserId === event.blockedUser.blocker_id
+                ) {
+                    // setUserIsAlreadyBlocked(true);
+                    setBlockMessage(`You have been blocked by this user!`);
+                }
+            }
+        );
+
+        window.Echo.private(`unblocked-user-channel.${authId}`).listen(
+            "UnblockUserEvent",
+            (event) => {
+                if (event.if_i_still_blocked_the_user) {
+                    setBlockMessage(
+                        "You cannot send messages to a user you blocked!"
+                    );
+                } else {
+                    setBlockMessage(null);
+                }
+                setUserIsAlreadyBlocked(null);
+            }
+        );
+    }, [toUserId]);
+
+    const blockUserStyle = async () => {
+        if (!chattingWithUser) {
+            return;
+        }
+
+        // return;
+        if (toUserId === blockedUserId) {
+            setBlockedUserId(null);
+            setUserIsAlreadyBlocked(false);
+            setSpinner(true);
+
+            const unBlockResponse = await chat.post("/unblock-user/", {
+                unblockedUser: blockedUserId,
+            });
+            setTimeout(() => {
+                setSpinner(null);
+            }, 5000);
+            if (unBlockResponse.data.stillBlocked) {
+                setBlockMessage(`You were blocked by this user!`);
+            } else {
+                setBlockMessage("");
+            }
+        } else {
+            setBlockedUserId(toUserId);
+            setUserIsAlreadyBlocked(true);
+            setSpinner(true);
+            setBlockMessage(`You cannot send messages to a user you blocked!`);
+
+            await chat.post("/block-user/", {
+                blockedUser: toUserId,
+            });
+
+            setTimeout(() => {
+                setSpinner(false);
+            }, 5000);
+            // setSpinner(false);
+        }
+    };
+
+    const removeBlockedUserStyle = () => {
+        userBlockerBackground.classList.remove(
+            "change-sound-checker-background"
+        );
+        userBlocker.classList.remove("change-sound-checker");
+    };
+
+    const addBlockedUserStyle = () => {
+        userBlockerBackground.classList.add("change-sound-checker-background");
+        userBlocker.classList.add("change-sound-checker");
+    };
+
+    const showBlockButtons = () => {
+        if (spinner) {
+            return <div className="loader"></div>;
+        } else if (spinner === null) {
+            return (
+                <Fragment>
+                    <div className="sound-checker-background"></div>
+                    <div
+                        className="sound-checker"
+                        onClick={(e) => {
+                            blockUserStyle(e);
+                        }}
+                    ></div>
+
+                    <span className="check-sound">Звук</span>
+                </Fragment>
+            );
+        } else if (spinner === false && blockMessage !== "") {
+            return (
+                <Fragment>
+                    <div className="sound-checker-background change-sound-checker-background"></div>
+                    <div
+                        className="sound-checker change-sound-checker"
+                        onClick={(e) => {
+                            blockUserStyle(e);
+                        }}
+                    ></div>
+
+                    <span className="check-sound">Звук</span>
+                </Fragment>
+            );
+        }
+    };
+
+    window.Echo.private(`unblocked-user-channel.${authId}`).listen(
+        "UnblockUserEvent",
+        (event) => {
+            setUserIsAlreadyBlocked(null);
+        }
+    );
+
     const fetchTopUser = (userId) => {
-        console.log(userId);
         chat.get("/top-chat-user", {
             params: { user_id: parseInt(userId) },
         }).then((response) => {
@@ -68,7 +225,11 @@ const ChatWindow = () => {
                         <div className="sent-message-image-wrapper">
                             <img
                                 className="chat-user-image"
-                                src={message.user.image}
+                                src={
+                                    message.user.image
+                                        ? `../${message.user.image}`
+                                        : `../images/avatar.png`
+                                }
                                 alt=""
                             />
                         </div>
@@ -83,7 +244,11 @@ const ChatWindow = () => {
                         <div className="received-message-image-wrapper">
                             <img
                                 className="chat-user-image"
-                                src={message.user.image}
+                                src={
+                                    message.user.image
+                                        ? `../${message.user.image}`
+                                        : `../images/avatar.png`
+                                }
                                 alt=""
                             />
                         </div>
@@ -101,7 +266,7 @@ const ChatWindow = () => {
             return (
                 <img
                     className="message message-image"
-                    src={`../../../${message.media_path}`}
+                    src={`../${message.media_path}`}
                 />
             );
         } else if (message.type === "video") {
@@ -109,7 +274,7 @@ const ChatWindow = () => {
                 <video
                     controls={true}
                     className="message message-video"
-                    src={`../../../${message.media_path}`}
+                    src={`../${message.media_path}`}
                 ></video>
             );
         }
@@ -122,7 +287,7 @@ const ChatWindow = () => {
                 <li
                     className="active-user"
                     onClick={() => {
-                        fetchAllMessagesWithUser(user.id);
+                        setToUserId(user.id);
                     }}
                     key={user.id}
                 >
@@ -174,16 +339,79 @@ const ChatWindow = () => {
         });
     };
 
-    const fetchAllMessagesWithUser = async (toUserId) => {
-        setToUserId(toUserId);
+    const fetchAllMessagesWithUser = (chattingWithUserId) => {
+        if (toUserId === null) {
+            return false;
+        }
+
+        setToUserId(chattingWithUserId);
+        // setBlockedUserId(chattingWithUserId);
+
         chat.get(
-            `/messages?from=${window.Laravel.user.id}&to=${toUserId}`
+            `/messages?from=${window.btoa(authId)}&to=${window.btoa(toUserId)}`
         ).then((response) => {
             setMessages(response.data.messages);
             setChattingWithUser(response.data.chatting_with_user.name);
-            // fetchAllUsers();
-            // console.log(response.data);
+            if (
+                response.data.blocked_this_user &&
+                response.data.blocked_by_this_user
+            ) {
+                setUserIsAlreadyBlocked(true);
+                setBlockedUserId(toUserId);
+                setBlockMessage("You both blocked each other!");
+                addBlockedUserStyle();
+            } else if (response.data.blocked_this_user) {
+                setUserIsAlreadyBlocked(true);
+                setBlockedUserId(toUserId);
+                setBlockMessage(
+                    "You cannot send messages to a user you blocked!"
+                );
+                addBlockedUserStyle();
+            } else if (response.data.blocked_by_this_user) {
+                setBlockMessage("You were blocked by this user!");
+                removeBlockedUserStyle();
+            } else {
+                setBlockMessage(null);
+                removeBlockedUserStyle();
+            }
         });
+    };
+
+    const renderChatButtons = () => {
+        return (
+            <div>
+                <div className="attachement-wrapper">
+                    <input
+                        className="fas fa-paperclip chat-paperclip"
+                        type="file"
+                        name="file"
+                        accept="image/*,video/*"
+                        onChange={(e) => {
+                            sendMedia(e);
+                        }}
+                    />
+                </div>
+
+                <input
+                    className="message-input"
+                    disabled={toUserId ? false : true}
+                    placeholder="Напишите здесь свой текст ..."
+                    type="text"
+                    onChange={(e) => setNewMessage(e.target.value)}
+                />
+                <div className="send-wrapper" onClick={sendMessage}>
+                    <i className="fas fa-paper-plane chat-paper-plane"></i>
+                </div>
+            </div>
+        );
+    };
+
+    const renderBlockedChatMessage = () => {
+        return (
+            <div>
+                <p style={{ textAlign: "center" }}>{blockMessage}</p>
+            </div>
+        );
     };
     return (
         <div>
@@ -198,6 +426,12 @@ const ChatWindow = () => {
                     }}
                 ></i>
                 <div className="active-users-section">
+                    <div className="active-users-top-section">
+                        {/* {!spinner ? showBlockButtons() : ""} */}
+
+                        {/* {spinner ? <div className="loader"></div> : ""} */}
+                        {showBlockButtons()}
+                    </div>
                     <div className="active-users">
                         <div className="active-users-search-wrapper">
                             <i className="fas fa-search active-users-search"></i>
@@ -234,33 +468,9 @@ const ChatWindow = () => {
                     </div>
                     <div className="messages-section-bottom">
                         <div className="chat-inputs-container">
-                            <div className="attachement-wrapper">
-                                <input
-                                    className="fas fa-paperclip chat-paperclip"
-                                    type="file"
-                                    name="file"
-                                    accept="image/*,video/*"
-                                    onChange={(e) => {
-                                        sendMedia(e);
-                                    }}
-                                />
-                            </div>
-                            <input
-                                className="message-input"
-                                disabled={toUserId ? false : true}
-                                placeholder="Напишите здесь свой текст ..."
-                                type="text"
-                                onChange={(e) => setNewMessage(e.target.value)}
-                            />
-                            {/* <div className="video-wrapper">
-                            <i className="fas fa-photo-video"></i>
-                        </div>
-                        <div className="image-wrapper">
-                            <i className="fas fa-images"></i>
-                        </div> */}
-                            <div className="send-wrapper" onClick={sendMessage}>
-                                <i className="fas fa-paper-plane chat-paper-plane"></i>
-                            </div>
+                            {blockMessage
+                                ? renderBlockedChatMessage()
+                                : renderChatButtons()}
                         </div>
                     </div>
                 </div>

@@ -20,3 +20,11 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('messages.{to}', function ($user, $to) {
     return true;
 });
+
+Broadcast::channel('blocked-user-channel.{blockerId}', function () {
+    return true;
+});
+
+Broadcast::channel('unblocked-user-channel.{blockerId}', function () {
+    return true;
+});

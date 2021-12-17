@@ -40,6 +40,18 @@ class FrontController extends Controller
         return view('layouts.front.benefactors', ['benefactors' => $benefactors]);
     }
 
+    public function all_appeals()
+    {
+        $appeals = Appeal::with('user')->paginate(20);
+        return view('layouts.front.appeals', ['appeals' => $appeals]);
+    }
+
+    public function show_appeal(Appeal $appeal)
+    {
+        $appeal = $appeal->with('user')->firstOrFail();
+        return view('layouts.front.show-appeal', ['appeal' => $appeal]);
+    }
+
     public function show_user_page($user)
     {
         $user = User::find($user);
@@ -69,5 +81,18 @@ class FrontController extends Controller
             'video' => $post,
             'other_videos' => $other_videos
         ]);
+    }
+
+    public function subscribe(User $user)
+    {
+        auth()->user()->subscribtions()->create(['user_id' => $user->id]);
+        return back();
+    }
+
+    public function unsubscribe(User $user)
+    {
+        $subscribtion = auth()->user()->subscribtions()->where('user_id', $user->id)->firstOrFail();
+        $subscribtion->delete();
+        return back();
     }
 }

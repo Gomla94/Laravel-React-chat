@@ -245,7 +245,6 @@
 <script src="{{ asset('js/addPostComment.js') }}" defer></script>
 <script src="{{ asset('js/addPostLike.js') }}" defer></script>
 <script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
-<script src="{{ asset('js/swiper.js') }}" defer></script>
 <script>
   const postsModalContent = document.querySelector('.posts-modal-wrapper');
   const appealsModalContent = document.querySelector('.appeals-modal-wrapper');

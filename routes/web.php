@@ -15,24 +15,17 @@ use App\Models\InterestingType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', [FrontController::class, 'home'])->name('welcome');
 Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
 Route::get('/all-benefactors',[FrontController::class, 'all_benefactors'])->name('all-benefactors');
 Route::get('/all-appeals',[FrontController::class, 'all_appeals'])->name('all-appeals');
+Route::get('/all-appeals/{id}',[FrontController::class, 'show_appeal'])->name('show-appeal');
 Route::get('/all-users/{user}',[FrontController::class, 'show_user_page'])->name('user.page');
 Route::get('/all-videos/',[FrontController::class, 'show_videos_page'])->name('all-videos');
 Route::get('/all-videos/{id}',[FrontController::class, 'show_video_page'])->name('show-video');
+Route::post('/subscribe/{user}',[FrontController::class, 'subscribe'])->name('subscribe');
+Route::post('/unsubscribe/{user}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
 
 Auth::routes();
 
@@ -81,6 +74,8 @@ Route::get('/messages', [MessagesController::class, 'index']);
 Route::post('/messages', [MessagesController::class, 'storeMessage']);
 Route::get('/chat-users', [MessagesController::class, 'all_users']);
 Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
+Route::post('/block-user', [MessagesController::class, 'block_user']);
+Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
 
 
 /** Users */
