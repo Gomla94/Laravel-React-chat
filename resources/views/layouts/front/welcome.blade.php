@@ -114,6 +114,7 @@
                     {{ str_limit($post->description, 500) }}
                 </p>
 
+                @if(Auth::check())
                 <div class="post-comment-form-container">
                   <form class="post-comment-form">
                     @csrf
@@ -124,9 +125,14 @@
                     <button type="button" class="post-comment-btn">Add Comment</button>
                   </form>
                 </div>
+                @endif
                 <div class="post-social">
                     <div class="social-icon first">
-                    <i id="{{ $post->id }}" class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }} post-heart-icon"></i><span class="social-count">{{ $post->likes->count() }}</span>
+                      @if(Auth::check())
+                      <i id="{{ $post->id }}" class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }} post-heart-icon"></i><span class="social-count">{{ $post->likes->count() }}</span>
+                      @else
+                      <i id="{{ $post->id }}" class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }}"></i><span class="social-count">{{ $post->likes->count() }}</span>
+                      @endif
                     </div>
                     <div class="social-icon">
                     <i class="icon far fa-comment" id="{{ $post->id }}"></i><span class="social-count">{{ $post->comments->count() }}</span>

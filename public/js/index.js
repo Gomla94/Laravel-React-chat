@@ -39,9 +39,11 @@ const showAppealsModal = () => {
     appealsModalWrapper.style.display = "block";
 };
 
-mainDiv.addEventListener("click", () => {
-    chatWrapper.classList.remove("show-chat-wrapper");
-});
+if (chatWrapper) {
+    mainDiv.addEventListener("click", () => {
+        chatWrapper.classList.remove("show-chat-wrapper");
+    });
+}
 
 if (logoutAnchor) {
     logoutAnchor.addEventListener("click", () => {
