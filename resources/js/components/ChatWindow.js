@@ -5,7 +5,7 @@ const ChatWindow = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
     const [toUserId, setToUserId] = useState(null);
-    const [chattingWithUser, setChattingWithUser] = useState("");
+    const [chattingWithUser, setChattingWithUser] = useState(null);
     const [blockedUserId, setBlockedUserId] = useState(null);
     const authId = window.Laravel.user.id;
     const [spinner, setSpinner] = useState(null);
@@ -41,32 +41,32 @@ const ChatWindow = () => {
         }
     }, [userIsAlreadyBlocked]);
 
-    // useEffect(() => {
-    //     if (blockedByMe === null) {
-    //         return;
-    //     }
-    //     if (blockedByMe) {
-    //         addBlockedUserStyle();
-    //     }
-    // }, [blockedByMe]);
+    useEffect(() => {
+        prevMessages.current = messages;
+    });
 
+    const prevMessages = useRef([]);
     useEffect(() => {
         document.querySelector(".messages-section-middle").scrollTop =
             document.querySelector(".messages-section-middle").scrollHeight;
+        // setMessages(messages);
+        // prevMessages.current = messages;
+        // console.log(prevMessages);
     }, [messages]);
 
     useEffect(() => {
         window.Echo.private(`messages.${authId}`).listen(
             "NewMessageEvent",
             (event) => {
-                if (messages.length === 0) {
-                    fetchAllMessagesWithUser(event.message.user.id);
-                } else {
-                    setMessages([...messages, event.message]);
-                }
+                // console.log(prevMessages.current);
+                prevMessages.current.push(event.message);
+                // console.log(prevMessages.current);
+                setMessages([...prevMessages.current]);
             }
         );
+    }, []);
 
+    useEffect(() => {
         envelopes.forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -76,7 +76,7 @@ const ChatWindow = () => {
                     .classList.toggle("show-chat-wrapper");
             });
         });
-    }, []);
+    }, [toUserId]);
 
     useEffect(() => {
         if (toUserId === null) {
@@ -126,7 +126,8 @@ const ChatWindow = () => {
             });
             setTimeout(() => {
                 setSpinner(null);
-            }, 5000);
+            }, 3000);
+
             if (unBlockResponse.data.stillBlocked) {
                 setBlockMessage(`You were blocked by this user!`);
             } else {
@@ -218,6 +219,9 @@ const ChatWindow = () => {
     };
 
     const renderredMessages = (messages) => {
+        if (messages === null) {
+            return;
+        }
         return messages.map((message, index) => {
             if (message.user.id === authId) {
                 return (
@@ -317,7 +321,7 @@ const ChatWindow = () => {
             to: toUserId,
             message: newMessage,
         }).then((response) => {
-            setMessages([...messages, response.data.message]);
+            setMessages([...messages, response.data.sent_message]);
         });
     };
 
@@ -334,23 +338,29 @@ const ChatWindow = () => {
         }
 
         chat.post("/messages", formdata).then((response) => {
-            setMessages([...messages, response.data.message]);
+            setMessages([...messages, response.data.sent_message]);
+            // console.log(response.data);
             e.target.value = "";
         });
     };
 
-    const fetchAllMessagesWithUser = (chattingWithUserId) => {
+    const fetchAllMessagesWithUser = (toUserId) => {
         if (toUserId === null) {
             return false;
         }
 
-        setToUserId(chattingWithUserId);
-        // setBlockedUserId(chattingWithUserId);
-
         chat.get(
             `/messages?from=${window.btoa(authId)}&to=${window.btoa(toUserId)}`
         ).then((response) => {
-            setMessages(response.data.messages);
+            // return;
+            if (response.data.messages.length === 0) {
+                setMessages(response.data.messages);
+                prevMessages.current = [];
+            } else {
+                setMessages(response.data.messages);
+                prevMessages.current = [];
+            }
+
             setChattingWithUser(response.data.chatting_with_user.name);
             if (
                 response.data.blocked_this_user &&

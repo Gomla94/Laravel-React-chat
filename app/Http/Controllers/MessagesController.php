@@ -84,7 +84,7 @@ class MessagesController extends Controller
             $file->move('chatmedia/', $file_name);
         }
 
-        $message = Message::create([
+        $sent_message = Message::create([
             'from' => $from,
             'to' => $to,
             'message' => $message ?? null,
@@ -92,9 +92,9 @@ class MessagesController extends Controller
             'media_path' => request('file') ? 'chatmedia/' . $file_name : null
         ]);
 
-        broadcast(new NewMessageEvent($message->load('user')))->toOthers();
+        broadcast(new NewMessageEvent($sent_message->load('user')))->toOthers();
 
-        return response()->json(['message' => $message]);
+        return response()->json(['sent_message' => $sent_message]);
     }
 
     public function block_user()

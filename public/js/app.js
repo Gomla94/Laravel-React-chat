@@ -2177,11 +2177,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _src_chat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/chat */ "./resources/js/src/chat.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _src_chat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src/chat */ "./resources/js/src/chat.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2213,75 +2211,69 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var ChatWindow = function ChatWindow() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       users = _useState2[0],
       setUsers = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
       messages = _useState4[0],
       setMessages = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
       newMessage = _useState6[0],
       setNewMessage = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
       toUserId = _useState8[0],
       setToUserId = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(""),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
       chattingWithUser = _useState10[0],
       setChattingWithUser = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
       blockedUserId = _useState12[0],
       setBlockedUserId = _useState12[1];
 
   var authId = window.Laravel.user.id;
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
       spinner = _useState14[0],
       setSpinner = _useState14[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState16 = _slicedToArray(_useState15, 2),
       userIsAlreadyBlocked = _useState16[0],
       setUserIsAlreadyBlocked = _useState16[1];
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState18 = _slicedToArray(_useState17, 2),
       blockMessage = _useState18[0],
       setBlockMessage = _useState18[1];
 
-  var scrollToEndRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
+  var scrollToEndRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   var envelopes = document.querySelectorAll(".user-envelope");
   var userBlocker = document.querySelector(".sound-checker");
   var userBlockerBackground = document.querySelector(".sound-checker-background");
-
-  var test = function test() {
-    console.log("test");
-  };
-
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     fetchAllMessagesWithUser(toUserId);
   }, [toUserId]);
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (spinner === null) {
       return false;
     }
 
     showBlockButtons();
   }, [spinner]);
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (userIsAlreadyBlocked === null) {
       return;
     }
@@ -2291,26 +2283,25 @@ var ChatWindow = function ChatWindow() {
     } else {
       removeBlockedUserStyle();
     }
-  }, [userIsAlreadyBlocked]); // useEffect(() => {
-  //     if (blockedByMe === null) {
-  //         return;
-  //     }
-  //     if (blockedByMe) {
-  //         addBlockedUserStyle();
-  //     }
-  // }, [blockedByMe]);
-
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    document.querySelector(".messages-section-middle").scrollTop = document.querySelector(".messages-section-middle").scrollHeight;
+  }, [userIsAlreadyBlocked]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    prevMessages.current = messages;
+  });
+  var prevMessages = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)([]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    document.querySelector(".messages-section-middle").scrollTop = document.querySelector(".messages-section-middle").scrollHeight; // setMessages(messages);
+    // prevMessages.current = messages;
+    // console.log(prevMessages);
   }, [messages]);
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
-      if (messages.length === 0) {
-        fetchAllMessagesWithUser(event.message.user.id);
-      } else {
-        setMessages([].concat(_toConsumableArray(messages), [event.message]));
-      }
+      // console.log(prevMessages.current);
+      prevMessages.current.push(event.message); // console.log(prevMessages.current);
+
+      setMessages(_toConsumableArray(prevMessages.current));
     });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     envelopes.forEach(function (item) {
       item.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -2318,8 +2309,8 @@ var ChatWindow = function ChatWindow() {
         document.querySelector(".chat-wrapper").classList.toggle("show-chat-wrapper");
       });
     });
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+  }, [toUserId]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (toUserId === null) {
       return false;
     }
@@ -2365,7 +2356,7 @@ var ChatWindow = function ChatWindow() {
               setUserIsAlreadyBlocked(false);
               setSpinner(true);
               _context.next = 8;
-              return _src_chat__WEBPACK_IMPORTED_MODULE_3__["default"].post("/unblock-user/", {
+              return _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/unblock-user/", {
                 unblockedUser: blockedUserId
               });
 
@@ -2373,7 +2364,7 @@ var ChatWindow = function ChatWindow() {
               unBlockResponse = _context.sent;
               setTimeout(function () {
                 setSpinner(null);
-              }, 5000);
+              }, 3000);
 
               if (unBlockResponse.data.stillBlocked) {
                 setBlockMessage("You were blocked by this user!");
@@ -2390,7 +2381,7 @@ var ChatWindow = function ChatWindow() {
               setSpinner(true);
               setBlockMessage("You cannot send messages to a user you blocked!");
               _context.next = 19;
-              return _src_chat__WEBPACK_IMPORTED_MODULE_3__["default"].post("/block-user/", {
+              return _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/block-user/", {
                 blockedUser: toUserId
               });
 
@@ -2424,36 +2415,33 @@ var ChatWindow = function ChatWindow() {
 
   var showBlockButtons = function showBlockButtons() {
     if (spinner) {
-      console.log("spinner is true");
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "loader"
       });
     } else if (spinner === null) {
-      console.log("spinner is null");
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "sound-checker-background"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "sound-checker",
           onClick: function onClick(e) {
             blockUserStyle(e);
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
           className: "check-sound",
           children: "\u0417\u0432\u0443\u043A"
         })]
       });
     } else if (spinner === false && blockMessage !== "") {
-      console.log("spinner is false and block message not rqual empty");
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "sound-checker-background change-sound-checker-background"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "sound-checker change-sound-checker",
           onClick: function onClick(e) {
             blockUserStyle(e);
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
           className: "check-sound",
           children: "\u0417\u0432\u0443\u043A"
         })]
@@ -2466,7 +2454,7 @@ var ChatWindow = function ChatWindow() {
   });
 
   var fetchTopUser = function fetchTopUser(userId) {
-    _src_chat__WEBPACK_IMPORTED_MODULE_3__["default"].get("/top-chat-user", {
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/top-chat-user", {
       params: {
         user_id: parseInt(userId)
       }
@@ -2477,39 +2465,43 @@ var ChatWindow = function ChatWindow() {
   };
 
   var fetchAllUsers = function fetchAllUsers() {
-    _src_chat__WEBPACK_IMPORTED_MODULE_3__["default"].get("/chat-users").then(function (response) {
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/chat-users").then(function (response) {
       setUsers(response.data);
     });
   };
 
   var renderredMessages = function renderredMessages(messages) {
+    if (messages === null) {
+      return;
+    }
+
     return messages.map(function (message, index) {
       if (message.user.id === authId) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "sent-message-wrapper",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "sent-message-image-wrapper",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
               className: "chat-user-image",
               src: message.user.image ? "../".concat(message.user.image) : "../images/avatar.png",
               alt: ""
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "sent-message-info",
             children: renderMessageType(message)
           })]
         }, index);
       } else {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "received-message-wrapper",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "received-message-image-wrapper",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
               className: "chat-user-image",
               src: message.user.image ? "../".concat(message.user.image) : "../images/avatar.png",
               alt: ""
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "received-message-info",
             children: renderMessageType(message)
           })]
@@ -2520,19 +2512,19 @@ var ChatWindow = function ChatWindow() {
 
   var renderMessageType = function renderMessageType(message) {
     if (message.type === "image") {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
         className: "message message-image",
         src: "../".concat(message.media_path)
       });
     } else if (message.type === "video") {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("video", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("video", {
         controls: true,
         className: "message message-video",
         src: "../".concat(message.media_path)
       });
     }
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
       className: "message",
       children: message.message
     });
@@ -2540,16 +2532,16 @@ var ChatWindow = function ChatWindow() {
 
   var renderredUsers = function renderredUsers(users) {
     return users.map(function (user) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
         className: "active-user",
         onClick: function onClick() {
           setToUserId(user.id);
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
           src: user.image ? "../".concat(user.image) : "../images/avatar.png",
           className: "active-user-img",
           alt: ""
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "chat-user-name",
           children: user.name
         })]
@@ -2563,12 +2555,12 @@ var ChatWindow = function ChatWindow() {
     }
 
     document.querySelector(".message-input").value = "";
-    _src_chat__WEBPACK_IMPORTED_MODULE_3__["default"].post("/messages", {
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/messages", {
       from: authId,
       to: toUserId,
       message: newMessage
     }).then(function (response) {
-      setMessages([].concat(_toConsumableArray(messages), [response.data.message]));
+      setMessages([].concat(_toConsumableArray(messages), [response.data.sent_message]));
     });
   };
 
@@ -2585,21 +2577,28 @@ var ChatWindow = function ChatWindow() {
       return false;
     }
 
-    _src_chat__WEBPACK_IMPORTED_MODULE_3__["default"].post("/messages", formdata).then(function (response) {
-      setMessages([].concat(_toConsumableArray(messages), [response.data.message]));
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/messages", formdata).then(function (response) {
+      setMessages([].concat(_toConsumableArray(messages), [response.data.sent_message])); // console.log(response.data);
+
       e.target.value = "";
     });
   };
 
-  var fetchAllMessagesWithUser = function fetchAllMessagesWithUser(chattingWithUserId) {
+  var fetchAllMessagesWithUser = function fetchAllMessagesWithUser(toUserId) {
     if (toUserId === null) {
       return false;
     }
 
-    setToUserId(chattingWithUserId); // setBlockedUserId(chattingWithUserId);
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/messages?from=".concat(window.btoa(authId), "&to=").concat(window.btoa(toUserId))).then(function (response) {
+      // return;
+      if (response.data.messages.length === 0) {
+        setMessages(response.data.messages);
+        prevMessages.current = [];
+      } else {
+        setMessages(response.data.messages);
+        prevMessages.current = [];
+      }
 
-    _src_chat__WEBPACK_IMPORTED_MODULE_3__["default"].get("/messages?from=".concat(window.btoa(authId), "&to=").concat(window.btoa(toUserId))).then(function (response) {
-      setMessages(response.data.messages);
       setChattingWithUser(response.data.chatting_with_user.name);
 
       if (response.data.blocked_this_user && response.data.blocked_by_this_user) {
@@ -2623,10 +2622,10 @@ var ChatWindow = function ChatWindow() {
   };
 
   var renderChatButtons = function renderChatButtons() {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "attachement-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           className: "fas fa-paperclip chat-paperclip",
           type: "file",
           name: "file",
@@ -2635,7 +2634,7 @@ var ChatWindow = function ChatWindow() {
             sendMedia(e);
           }
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
         className: "message-input",
         disabled: toUserId ? false : true,
         placeholder: "\u041D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C \u0441\u0432\u043E\u0439 \u0442\u0435\u043A\u0441\u0442 ...",
@@ -2643,10 +2642,10 @@ var ChatWindow = function ChatWindow() {
         onChange: function onChange(e) {
           return setNewMessage(e.target.value);
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "send-wrapper",
         onClick: sendMessage,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
           className: "fas fa-paper-plane chat-paper-plane"
         })
       })]
@@ -2654,8 +2653,8 @@ var ChatWindow = function ChatWindow() {
   };
 
   var renderBlockedChatMessage = function renderBlockedChatMessage() {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
         style: {
           textAlign: "center"
         },
@@ -2664,74 +2663,74 @@ var ChatWindow = function ChatWindow() {
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
       className: "far fa-comments",
       onClick: fetchAllUsers
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "chat-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
         className: "fas fa-caret-up",
         style: {
           color: "rgb(239, 235, 241)",
           fontSize: "50px",
           marginRight: "125px"
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "active-users-section",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "active-users-top-section",
           children: showBlockButtons()
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "active-users",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "active-users-search-wrapper",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
               className: "fas fa-search active-users-search"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
               className: "fas fa-window-close chat-window-close"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               className: "active-users-input",
               placeholder: "\u041F\u043E\u0438\u0441\u043A \u043F\u043E \u043A\u0430\u043D\u0442\u0430\u043A\u0442\u0430\u043C",
               type: "text"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "active-users-list-wrapper",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
               className: "chat-left-section",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                 className: "chat-users-list",
                 children: renderredUsers(users)
               })
             })
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "messages-section",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "messages-section-top",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "chatting-with-user",
             children: chattingWithUser
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "chatting-user-status",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "chatting-user-status-icon"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "chat-status-text",
               children: "online"
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "messages-section-middle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "scroll",
             ref: scrollToEndRef,
             children: renderredMessages(messages)
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "messages-section-bottom",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "chat-inputs-container",
             children: blockMessage ? renderBlockedChatMessage() : renderChatButtons()
           })
