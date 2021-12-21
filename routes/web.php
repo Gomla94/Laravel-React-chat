@@ -70,12 +70,12 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
 });
 Route::get('posts/{post}/all-comments', [UserPostsController::class, 'all_comments'])->name('post.all-comments');
 
-Route::get('/messages', [MessagesController::class, 'index']);
-Route::post('/messages', [MessagesController::class, 'storeMessage']);
-Route::get('/chat-users', [MessagesController::class, 'all_users']);
-Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
-Route::post('/block-user', [MessagesController::class, 'block_user']);
-Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
+// Route::get('/messages', [MessagesController::class, 'index']);
+// Route::post('/messages', [MessagesController::class, 'storeMessage']);
+// Route::get('/chat-users', [MessagesController::class, 'all_users']);
+// Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
+// Route::post('/block-user', [MessagesController::class, 'block_user']);
+// Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
 
 
 /** Users */
