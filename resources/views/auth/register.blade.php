@@ -98,7 +98,7 @@ Register
             <input type="checkbox" class="check-input" />
             <label for="" class="input-label">Запомнить меня</label>
           </div>
-          <button class="form-btn">Войти</button>
+          <button class="form-btn">Register</button>
         </form>
       </div>
     </div>

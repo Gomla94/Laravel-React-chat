@@ -50,7 +50,7 @@ Login
             <a href="{{ route('password.request') }}" class="link">Забыли пароль?</a>
           </div>
 
-          <button class="form-btn">Войти</button>
+          <button class="form-btn">Login</button>
         </form>
       </div>
     </div>
