@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'], function() {
-    Route::get('/chat-users', [MessagesController::class, 'all_users']);
+    Route::get('chat-users', [MessagesController::class, 'all_users']);
     Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
     Route::get('/messages', [MessagesController::class, 'index']);
     Route::post('/messages', [MessagesController::class, 'storeMessage']);
