@@ -26,10 +26,15 @@ class UserAppealsController extends Controller
         $user = Auth::user();
         
         if (request()->file('appeal_image')) {
-            $file = $request->appeal_image;
-            $extension = $file->getClientOriginalExtension();
-            $image_name = uniqid(). '.' .$extension;
-            $file->move('images/appeals/', $image_name);
+            if (!file_exists(public_path().'/images/posts')) {            
+                if(mkdir(public_path().'/images/posts',0755,true)){   
+                    $file = $request->appeal_image;
+                    $extension = $file->getClientOriginalExtension();
+                    $image_name = uniqid(). '.' .$extension;
+                    $file->move('images/appeals/', $image_name);          
+                  }
+                }
+            
         }
         if (request()->file('appeal_video')) {
             $file = $request->appeal_video;
