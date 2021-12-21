@@ -36,7 +36,7 @@ class FrontController extends Controller
 
     public function all_benefactors()
     {
-        $benefactors = User::whereType(User::BENEFACTOR_TYPE)->paginate(3);
+        $benefactors = User::where('id', '!=', Auth::id())->whereType(User::BENEFACTOR_TYPE)->paginate(3);
         return view('layouts.front.benefactors', ['benefactors' => $benefactors]);
     }
 
