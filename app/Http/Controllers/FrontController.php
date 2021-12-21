@@ -17,8 +17,10 @@ class FrontController extends Controller
         // // dd($post->likes);
         // dd($post->likes->where('user_id', Auth::id()));
 
-        dd(Auth::user());
-        Auth::user()->update(['api_token' => str_random(60)]);
+        $user = Auth::user();
+        if ($user) {
+            $user->update(['api_token' => str_random(60)]);
+        }
         $random_users = User::whereType(User::USER_TYPE)->inRandomOrder()->limit(10)->get();
         $random_appeals = Appeal::with('user')->inRandomOrder()->limit(12)->get();
         $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
