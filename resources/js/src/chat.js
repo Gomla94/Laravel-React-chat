@@ -4,6 +4,6 @@ export default axios.create({
     baseURL: "http://www.magaxat.com/api/",
     headers: {
         "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${window.laravel.user.api_token}`,
+        authorization: `Bearer ${window.Laravel.user.api_token}`,
     },
 });
