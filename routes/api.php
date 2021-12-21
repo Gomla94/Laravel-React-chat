@@ -24,7 +24,7 @@ Route::middleware(['auth'], function() {
     Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
     Route::post('/block-user', [MessagesController::class, 'block_user']);
     Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
-})
+});
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
