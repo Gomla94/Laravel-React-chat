@@ -85,7 +85,7 @@ body {
     margin-top: 80%;
     display: flex;
     flex-direction: column;
-    margin-right: 50px;
+    margin-right: 0px;
 }
 
 .child-types {
