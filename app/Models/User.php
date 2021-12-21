@@ -38,7 +38,8 @@ class User extends Authenticatable
         'additional_type',
         'organisation_description',
         'date_of_birth',
-        'age'
+        'age',
+        'api_token'
     ];
 
     /**

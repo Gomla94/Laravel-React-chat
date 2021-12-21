@@ -67,6 +67,7 @@ class RegisterController extends Controller
             'interesting_type' => ['numeric', Rule::exists('interesting_types', 'id')],
             'additional_type' => ['sometimes', 'nullable', 'string', 'in:individual,organisation'],
             'organisation_description' => ['sometimes', 'nullable', 'string'],
+            'api_token' => ['string']
         ]);
     }
 
@@ -87,6 +88,7 @@ class RegisterController extends Controller
             'interesting_type_id' => $data['interesting_type'] ?? null,
             'additional_type' => $data['additional_type'] ?? null,
             'organisation_description' => $data['organisation_description'] ?? null,
+            'api_token' => str_random(60)
         ]);
     }
 }

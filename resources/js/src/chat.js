@@ -4,6 +4,6 @@ export default axios.create({
     baseURL: "http://www.magaxat.com/api/",
     headers: {
         "Access-Control-Allow-Origin": "*",
-        authentication: `XSRF-TOKEN=eyJpdiI6InA1anc1eDh6V3lpSlVXWHhBSjM2YkE9PSIsInZhbHVlIjoiRHZFMzFDK21UWi9OWGN4NnFMcTdoVk1GcG44QlF2NVRxMXBMcDNKVmtoL1Jralp2dDV1cEV1YlF0T1B4QTZFUHJEaGc4OU9NVGdEQ3VuUDk0dUZFenlvNDlTWUJiV2ZFYjdUdS9SYVoxZ3VSS0VpU2srdWxxa01ONmdwV3JOVEQiLCJtYWMiOiI5MmQxOTI1YjZkODM0YmUxYTJmODhiNDY1YWUyMzg3MjdiMDQ0YjgyMWNjZGI5YTk1ZmQzODM4YjNmYTQzOGQ3IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IktFRU0wSTFWdEJGc0txaTJQbTN0aGc9PSIsInZhbHVlIjoibGxvK0VURmVBNTlza1BmQ2k2TE4rVitJbzFPeXdTNnpjbEFVV1JzWEVYNXR0NEhlL25jUUN5WWpvV1FPVENJdk5UUDJlUndIUkIvMW5MRFEzbkp3UEQ0Yk5zMFNqdGgydVFZNUlRT3BMVFV5clJxK0x5TFZsUWZPNmpYcUdlak0iLCJtYWMiOiIzNGY3NTgzOTc0MDNlOTY2NGIyZjRhM2VkOGRlZDVmN2I2Y2QxMDQ5Y2NlZDkxZGJiN2Q3NTNiYWNlMTNjZTc0IiwidGFnIjoiIn0%3D`,
+        authorization: `Bearer ${window.laravel.user.api_token}`,
     },
 });
