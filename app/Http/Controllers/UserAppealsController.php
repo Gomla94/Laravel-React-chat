@@ -28,6 +28,7 @@ class UserAppealsController extends Controller
         if (request()->file('appeal_image')) {
             if (!file_exists(public_path().'/images/appeals')) {            
                 if(mkdir(public_path().'/images/appeals',0755,true)){   
+                    dd('a');
                     $file = $request->appeal_image;
                     $extension = $file->getClientOriginalExtension();
                     $image_name = uniqid(). '.' .$extension;

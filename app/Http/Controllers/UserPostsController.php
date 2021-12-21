@@ -28,14 +28,12 @@ class UserPostsController extends Controller
         $user = Auth::user();
         
         if (request()->file('post_image')) {
-            if (!file_exists(public_path().'/images/posts')) {            
-                if(mkdir(public_path().'/images/posts',0755,true)){   
+            if (file_exists(public_path().'/images/posts')) {            
                     $file = $request->post_image;
                     $extension = $file->getClientOriginalExtension();
                     $image_name = uniqid(). '.' .$extension;
                     $file->move('images/posts/', $image_name);             
                   }
-                }
         }
         if (request()->file('post_video')) {
             $file = $request->post_video;
