@@ -72,13 +72,12 @@
                 <div class="user">
                   <a href="{{ route('user.page', $benefactor->id) }}">
                     <div class="users-image-wrapper">
-                    <img src="{{ asset($benefactor->image) }}" alt="" />
+                    <img src="{{ asset($benefactor->image ?? 'images/avatar.png') }}" alt="" />
                     </div>
                   </a>
                     <div class="users-social">
                     <span class="user-social-span">{{ $benefactor->name }}</span>
                     <span class="user-social-span">{{ $benefactor->email }}</span>
-                    <span class="user-social-span">ID {{ $benefactor->national_id }}</span>
                     <span class="user-social-span">Открыть полный профиль</span>
                     </div>
                     @if(Auth::check())

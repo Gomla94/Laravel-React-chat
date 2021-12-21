@@ -17,11 +17,11 @@
         и ассоциативно распределены по отраслям.
       </div>
       <div class="icons">
-        <a href="tel:+7 (000) 00 00 000">
+        {{-- <a href="tel:+7 (000) 00 00 000">
         <i class="fas fa-phone-alt"></i>
-        <span class="phone-span">+7 (000) 00 00 000</span></a>
+        <span class="phone-span">+7 (000) 00 00 000</span></a> --}}
         <i class="fas fa-envelope"></i>
-        <span><a href="mailto:magaxat@info.com">magaxat@info.com</a></span>
+        <span class="mail-span"><a href="mailto:info@magaxat.com">info@magaxat.com</a></span>
       </div>
     </div>
   </div>

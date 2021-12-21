@@ -2044,11 +2044,18 @@ a {
 .icons {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    bottom: 200px;
+    font-size: 20px;
+    font-weight: 600;
+
+    /* bottom: 200px;
     position: absolute;
     width: 50%;
-    padding: 0px 40px;
+    padding: 0px 40px; */
+}
+
+.mail-span {
+    margin-top: 10px;
+    padding-right: 10px;
 }
 
 .help-section {
