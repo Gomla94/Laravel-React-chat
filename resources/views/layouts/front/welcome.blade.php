@@ -44,7 +44,7 @@
               {{str_limit($appeal->description, 200)}}
             </p>
             <div class="appeal-card-links">
-              <button class="appeals-button">Хочу помочь</button>
+              <button class="appeals-card-button">Хочу помочь</button>
               <a href="#" class="appeal-card-link">Подробнее</a>
             </div>
           </div>
@@ -65,7 +65,7 @@
         </div>
         <div class="posts-btn-details">
           @if(Auth::check())
-          <button class="appeals-button">
+          <button class="add-appeals-button">
             запрос о помощи
           </button>
           <i class="fal fa-plus"></i>
@@ -153,7 +153,7 @@
       <div class="close-modal-container">
         <span class="close-posts-modal">&times;</span>
       </div>
-      <form action="{{ route('user.posts.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('user.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
   
         <div class="form-group">
@@ -188,9 +188,9 @@
         </div>
         
   
-        <div class="form-group modal-image-container">
+        <div class="form-group post-modal-image-container">
             <label class="create-post-label" for="image">Image</label>
-            <input type="file" class="form-control" name="image">
+            <input type="file" class="form-control" name="post_image">
         </div>
   
         <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>

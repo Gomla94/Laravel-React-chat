@@ -2379,7 +2379,17 @@ a {
     cursor: pointer;
 }
 
-.appeals-button {
+.add-appeals-button {
+    color: white;
+    background-color: rgb(1, 59, 1);
+    height: 40px;
+    width: 120px;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.appeals-card-button {
     color: white;
     background-color: rgb(1, 59, 1);
     height: 40px;

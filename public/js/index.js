@@ -17,7 +17,7 @@ const filtersList = document.querySelector(".filters-list");
 const filterArrows = document.querySelectorAll(".filter-item-arrow");
 
 const postsBtn = document.querySelector(".posts-button");
-const appealsBtn = document.querySelector(".appeals-button");
+const appealsBtn = document.querySelector(".add-appeals-button");
 const postsModalWrapper = document.querySelector(".posts-modal-wrapper");
 const appealsModalWrapper = document.querySelector(".appeals-modal-wrapper");
 const closePostsModal = document.querySelector(".close-posts-modal");

@@ -28,7 +28,7 @@ class UserPostsController extends Controller
         $user = Auth::user();
         
         if (request()->file('post_image')) {
-            $file = $$request->post_image;
+            $file = $request->post_image;
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
             $file->move('images/posts/', $image_name);
