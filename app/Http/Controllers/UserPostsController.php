@@ -29,8 +29,8 @@ class UserPostsController extends Controller
         
         if (request()->file('post_image')) {
            
-            if (!file_exists(public_path().'images/posts')) {            
-                if(mkdir(public_path().'images/posts',0755,true)){   
+            if (!file_exists(public_path().'/images/posts')) {            
+                if(mkdir(public_path().'/images/posts',0755,true)){   
                     $file = $request->post_image;
                     $extension = $file->getClientOriginalExtension();
                     $image_name = uniqid(). '.' .$extension;
