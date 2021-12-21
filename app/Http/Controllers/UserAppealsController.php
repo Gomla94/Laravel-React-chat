@@ -26,8 +26,8 @@ class UserAppealsController extends Controller
         $user = Auth::user();
         
         if (request()->file('appeal_image')) {
-            if (!file_exists(public_path().'/images/posts')) {            
-                if(mkdir(public_path().'/images/posts',0755,true)){   
+            if (!file_exists(public_path().'/images/appeals')) {            
+                if(mkdir(public_path().'/images/appeals',0755,true)){   
                     $file = $request->appeal_image;
                     $extension = $file->getClientOriginalExtension();
                     $image_name = uniqid(). '.' .$extension;
