@@ -47,7 +47,7 @@ class UserController extends Controller
             'image' => request('image') ? 'images/users/'.$image_name : null,
             'age' => $attributes['age'],
             'date_of_birth' => $attributes['date_of_birth'],
-            'area_of_interest' => $attributes['area_of_interest']
+            'area_of_interest' => request('area_of_interest') ? $attributes['area_of_interest'] : null
         ]);
 
         return redirect()->route('user.profile');
