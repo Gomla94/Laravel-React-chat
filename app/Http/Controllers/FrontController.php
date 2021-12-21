@@ -30,7 +30,7 @@ class FrontController extends Controller
 
     public function all_users()
     {
-        $users = User::whereType(User::USER_TYPE)->get();
+        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
         return view('layouts.front.users', ['users' => $users]);
     }
 
