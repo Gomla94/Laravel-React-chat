@@ -28,10 +28,15 @@ class UserPostsController extends Controller
         $user = Auth::user();
         
         if (request()->file('post_image')) {
-            $file = $request->post_image;
-            $extension = $file->getClientOriginalExtension();
-            $image_name = uniqid(). '.' .$extension;
-            $file->move('images/posts/', $image_name);
+           
+            if (!file_exists(public_path().'images/posts')) {            
+                if(File::makeDirectory(public_path().'images/posts',0777,true)){   
+                    $file = $request->post_image;
+                    $extension = $file->getClientOriginalExtension();
+                    $image_name = uniqid(). '.' .$extension;
+                    $file->move('images/posts/', $image_name);             
+                  }
+                }
         }
         if (request()->file('post_video')) {
             $file = $request->post_video;
@@ -65,6 +70,8 @@ class UserPostsController extends Controller
             'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
             'post_video' => ['max:20168', 'mimes:mp4,mov,ogg,qt'],
         ])->validate();
+
+        
         
         if (request()->file('post_image')) {
             File::delete(public_path($post->image));
