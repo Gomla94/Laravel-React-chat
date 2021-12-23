@@ -2263,9 +2263,34 @@ var ChatWindow = function ChatWindow() {
   var envelopes = document.querySelectorAll(".user-envelope");
   var userBlocker = document.querySelector(".sound-checker");
   var userBlockerBackground = document.querySelector(".sound-checker-background");
+
+  var changeToUserId = function changeToUserId(e, userId) {
+    var activeUsersClass = document.querySelectorAll(".current-active-user");
+    activeUsersClass.forEach(function (item) {
+      return item.classList.remove("current-active-user");
+    });
+
+    if (e === null) {
+      console.log("aaa");
+      console.log(document.querySelector(".chat-users-list").children[0].classList.add("current-active-user"));
+    } else {
+      var parentElement = e.target.closest(".active-user");
+      parentElement.classList.toggle("current-active-user");
+    }
+
+    setToUserId(userId);
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     fetchAllMessagesWithUser(toUserId);
   }, [toUserId]);
+
+  var onKeyUp = function onKeyUp(e) {
+    if (e.code === "Enter") {
+      sendMessage();
+    }
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (spinner === null) {
       return false;
@@ -2289,9 +2314,7 @@ var ChatWindow = function ChatWindow() {
   });
   var prevMessages = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    document.querySelector(".messages-section-middle").scrollTop = document.querySelector(".messages-section-middle").scrollHeight; // setMessages(messages);
-    // prevMessages.current = messages;
-    // console.log(prevMessages);
+    document.querySelector(".messages-section-middle").scrollTop = document.querySelector(".messages-section-middle").scrollHeight;
   }, [messages]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
@@ -2309,7 +2332,7 @@ var ChatWindow = function ChatWindow() {
         document.querySelector(".chat-wrapper").classList.toggle("show-chat-wrapper");
       });
     });
-  }, [toUserId]);
+  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (toUserId === null) {
       return false;
@@ -2404,8 +2427,10 @@ var ChatWindow = function ChatWindow() {
   }();
 
   var removeBlockedUserStyle = function removeBlockedUserStyle() {
-    userBlockerBackground.classList.remove("change-sound-checker-background");
-    userBlocker.classList.remove("change-sound-checker");
+    if (userBlockerBackground && userBlockerBackground) {
+      userBlockerBackground.classList.remove("change-sound-checker-background");
+      userBlocker.classList.remove("change-sound-checker");
+    }
   };
 
   var addBlockedUserStyle = function addBlockedUserStyle() {
@@ -2429,7 +2454,7 @@ var ChatWindow = function ChatWindow() {
           }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
           className: "check-sound",
-          children: "\u0417\u0432\u0443\u043A"
+          children: "\u0431\u043B\u043E\u043A"
         })]
       });
     } else if (spinner === false && blockMessage !== "") {
@@ -2460,7 +2485,7 @@ var ChatWindow = function ChatWindow() {
       }
     }).then(function (response) {
       setUsers(response.data);
-      fetchAllMessagesWithUser(userId);
+      changeToUserId(null, userId); // setToUserId(userId);
     });
   };
 
@@ -2512,9 +2537,13 @@ var ChatWindow = function ChatWindow() {
 
   var renderMessageType = function renderMessageType(message) {
     if (message.type === "image") {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-        className: "message message-image",
-        src: "../".concat(message.media_path)
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+        download: "image",
+        href: message.media_path,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          className: "message message-image",
+          src: "../".concat(message.media_path)
+        })
       });
     } else if (message.type === "video") {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("video", {
@@ -2534,8 +2563,8 @@ var ChatWindow = function ChatWindow() {
     return users.map(function (user) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
         className: "active-user",
-        onClick: function onClick() {
-          setToUserId(user.id);
+        onClick: function onClick(e) {
+          changeToUserId(e, user.id);
         },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
           src: user.image ? "../".concat(user.image) : "../images/avatar.png",
@@ -2549,12 +2578,11 @@ var ChatWindow = function ChatWindow() {
     });
   };
 
-  var sendMessage = function sendMessage() {
+  var sendMessage = function sendMessage(e) {
     if (newMessage === null) {
       return false;
     }
 
-    document.querySelector(".message-input").value = "";
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/messages", {
       from: authId,
       to: toUserId,
@@ -2562,6 +2590,7 @@ var ChatWindow = function ChatWindow() {
     }).then(function (response) {
       setMessages([].concat(_toConsumableArray(messages), [response.data.sent_message]));
     });
+    document.querySelector(".message-input").value = "";
   };
 
   var sendMedia = function sendMedia(e) {
@@ -2641,6 +2670,9 @@ var ChatWindow = function ChatWindow() {
         type: "text",
         onChange: function onChange(e) {
           return setNewMessage(e.target.value);
+        },
+        onKeyPress: function onKeyPress(e) {
+          onKeyUp(e);
         }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "send-wrapper",
@@ -2779,9 +2811,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "http://www.magaxat.com",
+  baseURL: "https://seriousapp.test/api/",
   headers: {
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
+    authorization: "Bearer ".concat(window.Laravel.user.api_token)
   }
 }));
 

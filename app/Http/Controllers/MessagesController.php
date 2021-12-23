@@ -48,16 +48,20 @@ class MessagesController extends Controller
         $user_id = request('user_id');
 
         $user = User::where('id', $user_id)->get();
-        $users = User::where('id', '!=', $user_id)->get();
-        $merged_users = $user->merge($users);
+        $user_subscriptions_ids = Auth::user()->subscribtions()->get()->pluck('user_id');
+        $user_subscriptions = User::where('id', '!=', $user_id)
+        ->whereIn('id', $user_subscriptions_ids)->get();
+           
+        $merged_users = $user->merge($user_subscriptions);
         return $merged_users;
     }
 
     public function all_users()
     {
-        $users = User::where('status', User::ACTIVE_STATUS)
-                        ->where('id', '!=', Auth::id())->get();
-        return $users;
+        $user = Auth::user();
+        $user_subscriptions_ids = $user->subscribtions()->get()->pluck('user_id');
+        $user_subscriptions = User::whereIn('id', $user_subscriptions_ids)->get();
+        return $user_subscriptions;
     }
 
     public function storeMessage()

@@ -78,7 +78,7 @@
                     <div class="users-social">
                     <span class="user-social-span">{{ $user->name }}</span>
                     <span class="user-social-span">{{ $user->email }}</span>
-                    <span class="user-social-span">ID {{ $user->national_id }}</span>
+                    {{-- <span class="user-social-span">ID {{ $user->national_id }}</span> --}}
                     <span class="user-social-span">Открыть полный профиль</span>
                     </div>
                     @if(Auth::check())

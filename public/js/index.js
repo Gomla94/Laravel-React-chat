@@ -31,6 +31,8 @@ const logoutForm = document.querySelector(".logout-form");
 
 const mainDiv = document.querySelector(".main");
 
+const profileImageInput = document.querySelector(".profile-image-input");
+
 const showPostsModal = () => {
     postsModalWrapper.style.display = "block";
 };
@@ -38,6 +40,14 @@ const showPostsModal = () => {
 const showAppealsModal = () => {
     appealsModalWrapper.style.display = "block";
 };
+
+if (profileImageInput) {
+    profileImageInput.addEventListener("change", () => {
+        const profileImage = document.querySelector(".profile-image");
+        profileImage.src = URL.createObjectURL(profileImageInput.files[0]);
+        console.log("clicked");
+    });
+}
 
 if (chatWrapper) {
     mainDiv.addEventListener("click", () => {

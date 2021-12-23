@@ -6,6 +6,11 @@ const showCommentSection = async (e) => {
     const commentsSection =
         clickedCommentIcon.closest(".post-social").nextElementSibling;
 
+    const addCommentSection =
+        clickedCommentIcon.closest(".post-social").previousElementSibling;
+
+    addCommentSection.classList.toggle("show-add-comment-section");
+
     const shownCommentsSection = commentsSection.querySelectorAll(".comment");
 
     if (shownCommentsSection.length > 0) {

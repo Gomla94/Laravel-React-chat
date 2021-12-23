@@ -19,9 +19,38 @@ const ChatWindow = () => {
         ".sound-checker-background"
     );
 
+    const changeToUserId = (e, userId) => {
+        const activeUsersClass = document.querySelectorAll(
+            ".current-active-user"
+        );
+        activeUsersClass.forEach((item) =>
+            item.classList.remove("current-active-user")
+        );
+
+        if (e === null) {
+            console.log("aaa");
+            console.log(
+                document
+                    .querySelector(".chat-users-list")
+                    .children[0].classList.add("current-active-user")
+            );
+        } else {
+            const parentElement = e.target.closest(".active-user");
+            parentElement.classList.toggle("current-active-user");
+        }
+
+        setToUserId(userId);
+    };
+
     useEffect(() => {
         fetchAllMessagesWithUser(toUserId);
     }, [toUserId]);
+
+    const onKeyUp = (e) => {
+        if (e.code === "Enter") {
+            sendMessage();
+        }
+    };
 
     useEffect(() => {
         if (spinner === null) {
@@ -49,9 +78,6 @@ const ChatWindow = () => {
     useEffect(() => {
         document.querySelector(".messages-section-middle").scrollTop =
             document.querySelector(".messages-section-middle").scrollHeight;
-        // setMessages(messages);
-        // prevMessages.current = messages;
-        // console.log(prevMessages);
     }, [messages]);
 
     useEffect(() => {
@@ -76,7 +102,7 @@ const ChatWindow = () => {
                     .classList.toggle("show-chat-wrapper");
             });
         });
-    }, [toUserId]);
+    }, []);
 
     useEffect(() => {
         if (toUserId === null) {
@@ -151,10 +177,12 @@ const ChatWindow = () => {
     };
 
     const removeBlockedUserStyle = () => {
-        userBlockerBackground.classList.remove(
-            "change-sound-checker-background"
-        );
-        userBlocker.classList.remove("change-sound-checker");
+        if (userBlockerBackground && userBlockerBackground) {
+            userBlockerBackground.classList.remove(
+                "change-sound-checker-background"
+            );
+            userBlocker.classList.remove("change-sound-checker");
+        }
     };
 
     const addBlockedUserStyle = () => {
@@ -176,7 +204,7 @@ const ChatWindow = () => {
                         }}
                     ></div>
 
-                    <span className="check-sound">Звук</span>
+                    <span className="check-sound">блок</span>
                 </Fragment>
             );
         } else if (spinner === false && blockMessage !== "") {
@@ -208,7 +236,8 @@ const ChatWindow = () => {
             params: { user_id: parseInt(userId) },
         }).then((response) => {
             setUsers(response.data);
-            fetchAllMessagesWithUser(userId);
+            changeToUserId(null, userId);
+            // setToUserId(userId);
         });
     };
 
@@ -268,10 +297,12 @@ const ChatWindow = () => {
     const renderMessageType = (message) => {
         if (message.type === "image") {
             return (
-                <img
-                    className="message message-image"
-                    src={`../${message.media_path}`}
-                />
+                <a download={"image"} href={message.media_path}>
+                    <img
+                        className="message message-image"
+                        src={`../${message.media_path}`}
+                    />
+                </a>
             );
         } else if (message.type === "video") {
             return (
@@ -290,8 +321,8 @@ const ChatWindow = () => {
             return (
                 <li
                     className="active-user"
-                    onClick={() => {
-                        setToUserId(user.id);
+                    onClick={(e) => {
+                        changeToUserId(e, user.id);
                     }}
                     key={user.id}
                 >
@@ -310,12 +341,10 @@ const ChatWindow = () => {
         });
     };
 
-    const sendMessage = () => {
+    const sendMessage = (e) => {
         if (newMessage === null) {
             return false;
         }
-        document.querySelector(".message-input").value = "";
-
         chat.post("/messages", {
             from: authId,
             to: toUserId,
@@ -323,6 +352,7 @@ const ChatWindow = () => {
         }).then((response) => {
             setMessages([...messages, response.data.sent_message]);
         });
+        document.querySelector(".message-input").value = "";
     };
 
     const sendMedia = (e) => {
@@ -408,6 +438,9 @@ const ChatWindow = () => {
                     placeholder="Напишите здесь свой текст ..."
                     type="text"
                     onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyPress={(e) => {
+                        onKeyUp(e);
+                    }}
                 />
                 <div className="send-wrapper" onClick={sendMessage}>
                     <i className="fas fa-paper-plane chat-paper-plane"></i>

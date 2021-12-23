@@ -9,18 +9,12 @@
             @method('PUT')
             <div class="profile-form-group">
                 <label class="create-post-label" for="image">Image</label>
-                <input type="file" class="form-control" name="image">
+                <input type="file" class="form-control profile-image-input" name="image">
             </div>
             @error('image')
             <span class="error-span">{{$message}}</span>
             @enderror
-            <div class="profile-form-group">
-                <label class="create-post-label" for="age">Age</label>
-                <input type="number" min="0" class="form-control" value="{{ $user->age }}" name="age">
-            </div>
-            @error('age')
-            <span class="error-span">{{$message}}</span>
-            @enderror
+            
             <div class="profile-form-group">
                 <label class="create-post-label" for="date_of_birth">Date Of Birth</label>
                 <input type="date" class="form-control" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}" name="date_of_birth">
