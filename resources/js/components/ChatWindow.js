@@ -93,6 +93,8 @@ const ChatWindow = () => {
     }, []);
 
     useEffect(() => {
+        console.log("envelope");
+        console.log(envelopes);
         envelopes.forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -232,6 +234,7 @@ const ChatWindow = () => {
     );
 
     const fetchTopUser = (userId) => {
+        console.log(userId);
         chat.get("/top-chat-user", {
             params: { user_id: parseInt(userId) },
         }).then((response) => {

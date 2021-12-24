@@ -65,7 +65,7 @@
       <div class="user-section">
         @if(Auth::id())
           <div id="root"></div>
-          <script src="{{ asset('js/app.js') }}"></script>
+          <script src="{{ asset('js/app.js') }}" defer></script>
 
         @endif
         @if(Auth::check())

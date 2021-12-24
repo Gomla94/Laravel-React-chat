@@ -2325,6 +2325,8 @@ var ChatWindow = function ChatWindow() {
     });
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    console.log("envelope");
+    console.log(envelopes);
     envelopes.forEach(function (item) {
       item.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -2479,6 +2481,7 @@ var ChatWindow = function ChatWindow() {
   });
 
   var fetchTopUser = function fetchTopUser(userId) {
+    console.log(userId);
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/top-chat-user", {
       params: {
         user_id: parseInt(userId)
