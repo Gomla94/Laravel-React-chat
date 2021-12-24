@@ -27,12 +27,12 @@ class UserPostsController extends Controller
     {
         $user = Auth::user();
 
-        $attributes = validator(request()->all(), [
-            'post_title' => ['required', 'string'],
-            'post_description' => ['sometimes', 'nullable', 'string'],
-            'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'post_video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
-        ])->validate();
+        // $attributes = validator(request()->all(), [
+        //     'post_title' => ['required', 'string'],
+        //     'post_description' => ['sometimes', 'nullable', 'string'],
+        //     'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
+        //     'post_video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
+        // ])->validate();
         
         if (request()->file('post_image')) {   
             $file = $request->post_image;
@@ -49,8 +49,8 @@ class UserPostsController extends Controller
         }
 
         $user->posts()->create([
-            'title' => $attributes['post_title'],
-            'description' => $attributes['post_description'],
+            'title' => $request->post_title,
+            'description' => $request->post_description,
             'image' => request()->file('post_image') ? 'images/posts/'.$image_name : null,
             'video' => request()->file('post_video') ? 'videos/posts/'.$video_name : null,
         ]);

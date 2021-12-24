@@ -106,7 +106,7 @@
       <div class="post">
         <div class="user-info">
         <div class="user-image-wrapper">
-            <img src="{{asset($post->user->image)}}" class="post-user-image" />
+            <img src="{{asset($post->user->image ?? 'images/avatar.png')}}" class="post-user-image" />
         </div>
         <div class="user-details">
             <span class="user-title">{{ $post->user->name }}</span>
@@ -133,14 +133,14 @@
         <p class="post-desc">
             {{ str_limit($post->description, 500) }}
         </p>
-        <div class="post-social">
+        {{-- <div class="post-social">
             <div class="social-icon first">
             <i class="icon far fa-heart"></i>1.6k
             </div>
             <div class="social-icon">
             <i class="icon far fa-comment"></i>2.3k
             </div>
-        </div>
+        </div> --}}
         </div>
     </div>
       @endforeach
@@ -152,27 +152,26 @@
 
   
 <!-- add post modal -->
-<div class="modal-wrapper">
-
+<div class="posts-modal-wrapper">
   <div class="modal-content">
     <div class="close-modal-container">
-      <span class="close-modal">&times;</span>
+      <span class="close-posts-modal">&times;</span>
     </div>
-    <form action="{{ route('user.posts.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user.posts.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
 
       <div class="form-group">
           <label class="create-post-label" for="title">Title</label>
-          <input type="text" class="form-control" name="title" placeholder="Title">
-          @error('title')
+          <input type="text" class="form-control" name="post_title" placeholder="Title" value="{{ old('post_title') }}">
+          @error('post_title')
           <span style="color:red">{{$message}}</span>
           @enderror
       </div>
 
       <div class="form-group">
-          <label class="create-post-label" for="description">Description</label>
-          <textarea name="description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
-          @error('description')
+          <label class="create-post-label" for="post_description">Description</label>
+          <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('post_title') }}</textarea>
+          @error('post_description')
           <span style="color:red">{{$message}}</span>
           @enderror
       </div>
@@ -184,18 +183,18 @@
         </div>
         <label class="create-post-label image-label">Image</label>
         <label class="create-post-label video-label">Video</label>
-        @error('image')
+        @error('post_image')
           <span style="color:red">{{$message}}</span>
         @enderror
-        @error('video')
+        @error('post_video')
           <span style="color:red">{{$message}}</span>
         @enderror
       </div>
       
 
-      <div class="form-group modal-image-container">
+      <div class="form-group post-modal-image-container">
           <label class="create-post-label" for="image">Image</label>
-          <input type="file" class="form-control" name="image">
+          <input type="file" class="form-control" name="post_image">
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
@@ -205,7 +204,7 @@
 
 @push('js')
 <script>
-  const modalContent = document.querySelector('.modal-wrapper');
+  const modalContent = document.querySelector('.posts-modal-wrapper');
   @if (count($errors) > 0)
   modalContent.style.display="block"
   @endif
