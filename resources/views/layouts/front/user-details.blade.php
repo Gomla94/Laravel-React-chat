@@ -170,7 +170,7 @@
 
       <div class="form-group">
           <label class="create-post-label" for="post_description">Description</label>
-          <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('post_title') }}</textarea>
+          <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('post_description') }}</textarea>
           @error('post_description')
           <span style="color:red">{{$message}}</span>
           @enderror
