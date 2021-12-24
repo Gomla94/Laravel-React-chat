@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    
+    <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
+<title>
+      Magaxat
+    </title>
 
     <link rel="stylesheet" href="{{asset('css/index.css')}}" />
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
@@ -62,6 +65,8 @@
       <div class="user-section">
         @if(Auth::id())
           <div id="root"></div>
+          <script src="{{ asset('js/app.js') }}"></script>
+
         @endif
         @if(Auth::check())
         <p class="title">{{ auth()->user()->name }}</p>
@@ -85,5 +90,6 @@
     </div>
     
     @stack('js')
+
   </body>
 </html>

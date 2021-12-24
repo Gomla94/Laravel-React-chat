@@ -26,15 +26,21 @@ class UserPostsController extends Controller
     public function store(AddPostRequest $request)
     {
         $user = Auth::user();
+
+        $attributes = validator(request()->all(), [
+            'post_title' => ['required', 'string'],
+            'post_description' => ['sometimes', 'nullable', 'string'],
+            'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
+            'post_video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
+        ])->validate();
         
-        if (request()->file('post_image')) {
-            if (file_exists(public_path().'/images/posts')) {            
-                    $file = $request->post_image;
-                    $extension = $file->getClientOriginalExtension();
-                    $image_name = uniqid(). '.' .$extension;
-                    $file->move('images/posts/', $image_name);             
-                  }
+        if (request()->file('post_image')) {   
+            $file = $request->post_image;
+            $extension = $file->getClientOriginalExtension();
+            $image_name = uniqid(). '.' .$extension;
+            $file->move('images/posts/', $image_name);             
         }
+
         if (request()->file('post_video')) {
             $file = $request->post_video;
             $extension = $file->getClientOriginalExtension();
@@ -43,8 +49,8 @@ class UserPostsController extends Controller
         }
 
         $user->posts()->create([
-            'title' => $request->post_title,
-            'description' => $request->post_description,
+            'title' => $attributes['post_title'],
+            'description' => $attributes['post_description'],
             'image' => request()->file('post_image') ? 'images/posts/'.$image_name : null,
             'video' => request()->file('post_video') ? 'videos/posts/'.$video_name : null,
         ]);
@@ -65,11 +71,9 @@ class UserPostsController extends Controller
             'post_title' => ['required', 'string'],
             'post_description' => ['sometimes', 'nullable', 'string'],
             'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'post_video' => ['max:20168', 'mimes:mp4,mov,ogg,qt'],
+            'post_video' => ['max:max:7168', 'mimes:mp4,mov,ogg,qt'],
         ])->validate();
 
-        
-        
         if (request()->file('post_image')) {
             File::delete(public_path($post->image));
             $file = $attributes['post_image'];

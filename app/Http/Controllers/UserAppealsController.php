@@ -25,6 +25,13 @@ class UserAppealsController extends Controller
     {
         $user = Auth::user();
         
+        $attributes = validator(request()->all(), [
+            'post_title' => ['required', 'string'],
+            'post_description' => ['sometimes', 'nullable', 'string'],
+            'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
+            'post_video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
+        ])->validate();
+
         if (request()->file('appeal_image')) {
             $file = $request->appeal_image;
             $extension = $file->getClientOriginalExtension();
@@ -39,8 +46,8 @@ class UserAppealsController extends Controller
         }
 
         $user->appeals()->create([
-            'title' => $request->appeal_title,
-            'description' => $request->appeal_description,
+            'title' => $attributes['post_title'],
+            'description' => $attributes['post_description'],
             'image' => request()->file('appeal_image') ? 'images/appeals/'.$image_name : null,
             'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : null,
         ]);

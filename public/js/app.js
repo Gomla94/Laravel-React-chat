@@ -2131,7 +2131,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
   key: "f3410ab18dff50208018",
   cluster: "mt1",
-  forceTLS: true
+  forceTLS: false
 });
 
 /***/ }),
@@ -2811,10 +2811,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "https://seriousapp.test/api/",
+  baseURL: "http://www.magaxat.com/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
-    authorization: "Bearer ".concat(window.Laravel.user.api_token)
+    authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)
   }
 }));
 

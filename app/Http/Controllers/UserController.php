@@ -27,7 +27,6 @@ class UserController extends Controller
     {
         $attributes = validator(request()->all(), [
             'image' => ['sometimes','nullable','max:2048', 'mimes:png,jpg,jpeg'],
-            'age' => ['sometimes','nullable','integer'],
             'date_of_birth' => ['sometimes','nullable','date'],
             'area_of_interest' => ['sometimes','nullable','integer', Rule::exists('interesting_types', 'id')]
         ])->validate();
@@ -37,7 +36,6 @@ class UserController extends Controller
         if (request()->file('image')) {
             File::delete(public_path($user->image));
             $file = $attributes['image'];
-            // dd($file);
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
             $file->move('images/users/', $image_name);
@@ -45,7 +43,6 @@ class UserController extends Controller
 
         $user->update([
             'image' => request('image') ? 'images/users/'.$image_name : null,
-            'age' => $attributes['age'],
             'date_of_birth' => $attributes['date_of_birth'],
             'area_of_interest' => request('area_of_interest') ? $attributes['area_of_interest'] : null
         ]);
