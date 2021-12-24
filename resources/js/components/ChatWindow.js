@@ -29,11 +29,7 @@ const ChatWindow = () => {
 
         if (e === null) {
             const chatUsersList = document.querySelector(".chat-users-list");
-            console.log(
-                chatUsersList.children[0].classList.toggle(
-                    "current-active-user"
-                )
-            );
+            chatUsersList.children[0].classList.toggle("current-active-user");
         } else {
             const parentElement = e.target.closest(".active-user");
             parentElement.classList.toggle("current-active-user");
