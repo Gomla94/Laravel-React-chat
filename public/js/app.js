@@ -2271,8 +2271,8 @@ var ChatWindow = function ChatWindow() {
     });
 
     if (e === null) {
-      console.log("aaa");
-      console.log(document.querySelector(".chat-users-list").children[0].classList.add("current-active-user"));
+      var chatUsersList = document.querySelector(".chat-users-list");
+      console.log(chatUsersList.children[0].classList.toggle("current-active-user"));
     } else {
       var parentElement = e.target.closest(".active-user");
       parentElement.classList.toggle("current-active-user");
@@ -2318,15 +2318,11 @@ var ChatWindow = function ChatWindow() {
   }, [messages]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
-      // console.log(prevMessages.current);
-      prevMessages.current.push(event.message); // console.log(prevMessages.current);
-
+      prevMessages.current.push(event.message);
       setMessages(_toConsumableArray(prevMessages.current));
     });
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log("envelope");
-    console.log(envelopes);
     envelopes.forEach(function (item) {
       item.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -2481,7 +2477,6 @@ var ChatWindow = function ChatWindow() {
   });
 
   var fetchTopUser = function fetchTopUser(userId) {
-    console.log(userId);
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/top-chat-user", {
       params: {
         user_id: parseInt(userId)
@@ -2610,8 +2605,7 @@ var ChatWindow = function ChatWindow() {
     }
 
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/messages", formdata).then(function (response) {
-      setMessages([].concat(_toConsumableArray(messages), [response.data.sent_message])); // console.log(response.data);
-
+      setMessages([].concat(_toConsumableArray(messages), [response.data.sent_message]));
       e.target.value = "";
     });
   };

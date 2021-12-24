@@ -25,6 +25,9 @@
   />
 
     @yield('css')
+    @if(Auth::check())
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    @endif
 
     <script src="{{asset('js/index.js')}}" defer></script>
     <script>
@@ -65,8 +68,6 @@
       <div class="user-section">
         @if(Auth::id())
           <div id="root"></div>
-          <script src="{{ asset('js/app.js') }}" defer></script>
-
         @endif
         @if(Auth::check())
         <p class="title">{{ auth()->user()->name }}</p>

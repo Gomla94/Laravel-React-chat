@@ -28,11 +28,11 @@ const ChatWindow = () => {
         );
 
         if (e === null) {
-            console.log("aaa");
+            const chatUsersList = document.querySelector(".chat-users-list");
             console.log(
-                document
-                    .querySelector(".chat-users-list")
-                    .children[0].classList.add("current-active-user")
+                chatUsersList.children[0].classList.toggle(
+                    "current-active-user"
+                )
             );
         } else {
             const parentElement = e.target.closest(".active-user");
@@ -84,17 +84,13 @@ const ChatWindow = () => {
         window.Echo.private(`messages.${authId}`).listen(
             "NewMessageEvent",
             (event) => {
-                // console.log(prevMessages.current);
                 prevMessages.current.push(event.message);
-                // console.log(prevMessages.current);
                 setMessages([...prevMessages.current]);
             }
         );
     }, []);
 
     useEffect(() => {
-        console.log("envelope");
-        console.log(envelopes);
         envelopes.forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -234,7 +230,6 @@ const ChatWindow = () => {
     );
 
     const fetchTopUser = (userId) => {
-        console.log(userId);
         chat.get("/top-chat-user", {
             params: { user_id: parseInt(userId) },
         }).then((response) => {
@@ -372,7 +367,6 @@ const ChatWindow = () => {
 
         chat.post("/messages", formdata).then((response) => {
             setMessages([...messages, response.data.sent_message]);
-            // console.log(response.data);
             e.target.value = "";
         });
     };

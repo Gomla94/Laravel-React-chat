@@ -142,6 +142,7 @@ if (userPageGreenButton) {
 }
 if (commentLogo) {
     commentLogo.addEventListener("click", () => {
+        console.log("chat wrapper");
         chatWrapper.classList.toggle("show-chat-wrapper");
     });
 }
