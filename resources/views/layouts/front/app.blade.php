@@ -30,6 +30,8 @@
     @endif
 
     <script src="{{asset('js/index.js')}}" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script>
       window.Laravel = <?php echo json_encode([
               'csrfToken' => Csrf_token(),
