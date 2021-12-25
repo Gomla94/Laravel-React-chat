@@ -126,6 +126,7 @@
                   </form>
                 </div>
                 @endif
+                @if(Auth::check())
                 <div class="post-social">
                     <div class="social-icon first">
                       @if(Auth::check())
@@ -138,6 +139,7 @@
                     <i class="icon far fa-comment" id="{{ $post->id }}"></i><span class="social-count">{{ $post->comments->count() }}</span>
                     </div>
                 </div>
+                @endif
                 <div class="post-comments-container">
                   
                 </div>
