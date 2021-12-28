@@ -37,20 +37,33 @@ class FrontController extends Controller
     public function all_users()
     {
         $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
-
-        $filter_keys = array_keys(request()->all());
-        // switch ($filter_keys) {
-        //     case 'interesting-in-type':
-        //         $interesting_type = InterestingType::where('name', request('interesting-in-type'))->firstOrFail();
-        //         $users = $users->where('interesting_type_id', $interesting_type->id);
-        //         break;
-            
-        //     default:
-        //         # code...
-        //         break;
-        // }
-
         // dd($users);
+        $filter_keys = array_keys(request()->query());
+
+        // dd($filter_keys);
+        foreach($filter_keys as $key) {
+            switch ($key) {
+                case 'interesting-in-type':
+                    $interesting_type = InterestingType::where('name', request('interesting-in-type'))->firstOrFail();
+                    $users = $users->where('interesting_type_id', $interesting_type->id);
+                    break;
+
+                case 'country':
+                    $country = Country::where('name', 'like',request('country'))->firstOrFail();
+                    $users = $users->where('country_id', $country->id);
+                    break;
+
+                case 'gender':
+                    $users = $users->where('gender', request('gender'));
+                    break;
+                
+                default:
+                    return $users;
+                    break;
+            }
+        }
+        
+
         $interesting_types = InterestingType::all();
         $countries = Country::all();
 
