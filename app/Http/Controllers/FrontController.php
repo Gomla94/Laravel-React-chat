@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appeal;
+use App\Models\Country;
 use App\Models\InterestingType;
 use App\Models\Post;
 use App\Models\User;
@@ -36,7 +37,28 @@ class FrontController extends Controller
     public function all_users()
     {
         $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
-        return view('layouts.front.users', ['users' => $users]);
+
+        $filter_keys = array_keys(request()->all());
+        // switch ($filter_keys) {
+        //     case 'interesting-in-type':
+        //         $interesting_type = InterestingType::where('name', request('interesting-in-type'))->firstOrFail();
+        //         $users = $users->where('interesting_type_id', $interesting_type->id);
+        //         break;
+            
+        //     default:
+        //         # code...
+        //         break;
+        // }
+
+        // dd($users);
+        $interesting_types = InterestingType::all();
+        $countries = Country::all();
+
+        return view('layouts.front.users', [
+            'users' => $users,
+            'interesting_types' => $interesting_types,
+            'countries' => $countries,
+        ]);
     }
 
     public function all_benefactors()

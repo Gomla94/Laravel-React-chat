@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppealsController;
+use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\InstagramController;
@@ -78,7 +79,6 @@ Route::get('posts/{post}/all-comments', [UserPostsController::class, 'all_commen
 // Route::post('/block-user', [MessagesController::class, 'block_user']);
 // Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
 
-
 /** Users */
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function() {
     Route::get('users', [AdminController::class, 'users'])->name('users');
@@ -88,6 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
     Route::get('/users/create', [AdminController::class, 'create_user'])->name('users.create');
     Route::post('/users', [AdminController::class, 'store_user'])->name('users.store');
     Route::resource('interesting-types', InterestingTypesController::class);
+    Route::resource('countries', CountriesController::class);
 });
 
 Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);

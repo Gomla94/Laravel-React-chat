@@ -1348,6 +1348,11 @@ html {
     padding: 0px;
 }
 
+.sub-filters-list a {
+    text-decoration: none;
+    color: white;
+}
+
 .sub-filter-item:hover {
     background-color: rgb(9, 61, 9);
     color: white;

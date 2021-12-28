@@ -1,11 +1,11 @@
 @extends('layouts.front.app')
 @section('content')
-<div class="main-video-details-wrapper">
-    <div class="main-video-details-container">
-         <div class="main-video-wrapper">
+<div class="container-fluid view-video-wrapper">
+    <div class="view-main-video-wrapper">
+         <div class="view-main-video-container">
              <video controls src="{{ asset($video->video) }}" class="main-video"></video>
          </div>
-         <div class="main-video-details">
+         <div class="view-main-video-details-container">
              <div class="main-video-user-image-wrapper">
                  <img src="{{ asset($video->user->image ?? 'images/avatar.png') }}" class="main-video-user-image" />
              </div>
@@ -23,10 +23,10 @@
              
          </div>
     </div>
-    <div class="other-videos-list-container">
+    <div class="view-other-videos-wrapper">
         @foreach($other_videos as $other_video)
-         <div class="other-video-container">
-             <div class="other-video-wrapper">
+         <div class="other-video-wrapper">
+             <div class="other-video-container">
                <a href="{{ route('show-video', $other_video->id) }}"><video src="{{ asset($other_video->video) }}"></video></a>
              </div>
              <div class="other-video-info-wrapper">

@@ -68,6 +68,8 @@
           <p class="profile-info"><i class="fa fa-phone profile-info-icon"></i> {{ auth()->user()->phone_number }}</p>
           <p class="profile-info"><i class="fa fa-envelope profile-info-icon"></i> {{ auth()->user()->email }}</p>
           <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ auth()->user()->date_of_birth->format('Y-m-d') }}</p>
+          <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ auth()->user()->gender }}</p>
+          <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional(auth()->user()->country)->name }}</p>
           <p class="profile-info"> interested in type: {{ auth()->user()->interesting_type->name ?? '' }}</p>
           <p class="profile-info">additional type {{ auth()->user()->additional_type }}</p>
           {{-- <div class="user-bio">
@@ -144,6 +146,33 @@
                         <label class="create-post-label" for="phone_number">Phone Number</label>
                         <input type="text" class="form-control" value="{{ $user->phone_number }}" name="phone_number">
                         @error('phone_number')
+                        <span class="profile-error-span">{{$message}}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row profile-row">
+                    <div class=" col-md-4">
+                        <label class="create-post-label" for="gender">Gender</label>
+                        <select class="select form-control" name="gender" id="gender">
+                            <option selected disabled>Select A Gender</option>
+                            <option value="male" {{ $user->gender === 'male' ? 'selected' : '' }}>Male</option>
+                            <option value="female" {{ $user->gender === 'female' ? 'selected' : '' }}>Female</option>
+                        </select>
+                        @error('gender')
+                        <span class="profile-error-span">{{$message}}</span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="create-post-label" for="date_of_birth">Country</label>
+                        <select class="select form-control" name="country_id" id="country">
+                            <option selected disabled>Select A country</option>
+                            @foreach($countries as $country)
+                            <option value="{{ $country->id }}" {{ $user->country_id === $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('country')
                         <span class="profile-error-span">{{$message}}</span>
                         @enderror
                     </div>

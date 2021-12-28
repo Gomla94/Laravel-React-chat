@@ -9,58 +9,29 @@
   </div>
   <div class="filters-list">
     <div class="filter-item">
-      <span class="filter-item-span">По возрасту</span>
+      <span class="filter-item-span">интересы</span>
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
-        <li class="sub-filter-item">item one</li>
-        <li class="sub-filter-item">item two</li>
-        <li class="sub-filter-item">item three</li>
-        <li class="sub-filter-item">item four</li>
-        <li class="sub-filter-item">item five</li>
+        @foreach($interesting_types as $type)
+        <a href="{{ route('all-users', array_merge(request()->query(), ['interesting-in-type' => $type->name])) }}"><li class="sub-filter-item">{{ $type->name }}</li></a>
+        @endforeach
       </ul>
     </div>
     <div class="filter-item">
-      <span class="filter-item-span">По возрасту</span>
+      <span class="filter-item-span">страна</span>
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
-        <li class="sub-filter-item">item six</li>
-        <li class="sub-filter-item">item seven</li>
-        <li class="sub-filter-item">item eight</li>
-        <li class="sub-filter-item">item nine</li>
-        <li class="sub-filter-item">item ten</li>
+        @foreach($countries as $country)
+        <a href="{{ route('all-users', array_merge(request()->query(), ['country' => $country->name])) }}"><li class="sub-filter-item">{{ $country->name }}</li></a>
+        @endforeach
       </ul>
     </div>
     <div class="filter-item">
-      <span class="filter-item-span">По возрасту</span>
+      <span class="filter-item-span">пол</span>
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
-        <li class="sub-filter-item">item six</li>
-        <li class="sub-filter-item">item seven</li>
-        <li class="sub-filter-item">item eight</li>
-        <li class="sub-filter-item">item nine</li>
-        <li class="sub-filter-item">item ten</li>
-      </ul>
-    </div>
-    <div class="filter-item">
-      <span class="filter-item-span">По возрасту</span>
-      <i class="fas fa-chevron-right filter-item-arrow"></i>
-      <ul class="sub-filters-list">
-        <li class="sub-filter-item">item six</li>
-        <li class="sub-filter-item">item seven</li>
-        <li class="sub-filter-item">item eight</li>
-        <li class="sub-filter-item">item nine</li>
-        <li class="sub-filter-item">item ten</li>
-      </ul>
-    </div>
-    <div class="filter-item">
-      <span class="filter-item-span">По возрасту</span>
-      <i class="fas fa-chevron-right filter-item-arrow"></i>
-      <ul class="sub-filters-list">
-        <li class="sub-filter-item">item six</li>
-        <li class="sub-filter-item">item seven</li>
-        <li class="sub-filter-item">item eight</li>
-        <li class="sub-filter-item">item nine</li>
-        <li class="sub-filter-item">item ten</li>
+        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}"><li class="sub-filter-item">мужчина</li></a>
+        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}"><li class="sub-filter-item">женщина</li></a>
       </ul>
     </div>
   </div>
@@ -79,11 +50,10 @@
       </div>
       @if(Auth::check())
         <div class="user-subscription-button">
-          <div class="user-green-message-box">
+          <div class="user-green-message-box" data-id={{ $user->id }}>
             <i class="fas fa-envelope user-envelope" data-id={{ $user->id }}></i>
           </div>
           @if(auth()->user()->subscribed($user->id))
-          {{-- <i class="fas fa-check checkmark-icon"></i> --}}
           <form action="{{ route('unsubscribe', $user->id) }}" method="POST">
             @csrf
             <button class="fas fa-check checkmark-icon"></button>

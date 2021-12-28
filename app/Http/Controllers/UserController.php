@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\InterestingType;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -16,10 +17,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user = $user->load('interesting_type');
+        $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
+        $countries = Country::all();
+        
         return view('profile', [
             'user' => $user,
-            'areas_of_interesting' => $areas_of_interesting
+            'areas_of_interesting' => $areas_of_interesting,
+            'countries' => $countries,
         ]);
     }
 
@@ -30,7 +35,9 @@ class UserController extends Controller
             'image' => ['sometimes','nullable','max:2048', 'mimes:png,jpg,jpeg'],
             'date_of_birth' => ['sometimes','nullable','date'],
             'phone_number' => ['sometimes','nullable','numeric'],
-            'area_of_interest' => ['sometimes','nullable','integer', Rule::exists('interesting_types', 'id')]
+            'area_of_interest' => ['sometimes','nullable','integer', Rule::exists('interesting_types', 'id')],
+            'country_id' => ['sometimes','nullable','integer', Rule::exists('countries', 'id')],
+            'gender' => ['sometimes','nullable','string', Rule::in('male', 'female')]
         ])->validate();
 
         $user = Auth::user();
@@ -43,12 +50,12 @@ class UserController extends Controller
             $file->move('images/users/', $image_name);
         }
 
-        // dd(request()->all());
-
         $user->update([
             'image' => request('image') ? 'images/users/'.$image_name : null,
             'date_of_birth' => $attributes['date_of_birth'],
             'phone_number' => $attributes['phone_number'],
+            'gender' => $attributes['gender'] ?? null,
+            'country_id' => $attributes['country_id'] ?? null,
             'interesting_type_id' => request('area_of_interest') ? $attributes['area_of_interest'] : null
         ]);
 

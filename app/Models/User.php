@@ -39,7 +39,9 @@ class User extends Authenticatable
         'organisation_description',
         'date_of_birth',
         'age',
-        'api_token'
+        'api_token',
+        'gender',
+        'country_id'
     ];
 
     /**
@@ -66,6 +68,11 @@ class User extends Authenticatable
     public function interesting_type()
     {
         return $this->belongsTo(InterestingType::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 
     public function posts()
