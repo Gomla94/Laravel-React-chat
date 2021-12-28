@@ -13,7 +13,7 @@ const ChatWindow = () => {
     const [blockMessage, setBlockMessage] = useState(null);
     const scrollToEndRef = useRef(null);
 
-    const envelopes = document.querySelectorAll(".user-envelope");
+    const envelopes = document.querySelectorAll(".user-green-message-box");
     const userBlocker = document.querySelector(".sound-checker");
     const userBlockerBackground = document.querySelector(
         ".sound-checker-background"
@@ -31,7 +31,7 @@ const ChatWindow = () => {
             const chatUsersList = document.querySelector(".chat-users-list");
             chatUsersList.children[0].classList.toggle("current-active-user");
         } else {
-            const parentElement = e.target.closest(".active-user");
+            const parentElement = e.target.closest(".chat-user-wrapper");
             parentElement.classList.toggle("current-active-user");
         }
 
@@ -72,8 +72,8 @@ const ChatWindow = () => {
 
     const prevMessages = useRef([]);
     useEffect(() => {
-        document.querySelector(".messages-section-middle").scrollTop =
-            document.querySelector(".messages-section-middle").scrollHeight;
+        document.querySelector(".messages-middle-section").scrollTop =
+            document.querySelector(".messages-middle-section").scrollHeight;
     }, [messages]);
 
     useEffect(() => {
@@ -94,6 +94,10 @@ const ChatWindow = () => {
                 document
                     .querySelector(".chat-wrapper")
                     .classList.toggle("show-chat-wrapper");
+
+                document
+                    .querySelector(".chat-arrow")
+                    .classList.toggle("show-chat-arrow");
             });
         });
     }, []);
@@ -249,15 +253,15 @@ const ChatWindow = () => {
             if (message.user.id === authId) {
                 return (
                     <div className="sent-message-wrapper" key={index}>
-                        <div className="sent-message-image-wrapper">
+                        <div className="sent-message-user-image-wrapper">
                             <img
-                                className="chat-user-image"
                                 src={
                                     message.user.image
                                         ? `../${message.user.image}`
                                         : `../images/avatar.png`
                                 }
-                                alt=""
+                                alt="user-image"
+                                className="chat-user-image"
                             />
                         </div>
                         <div className="sent-message-info">
@@ -268,15 +272,15 @@ const ChatWindow = () => {
             } else {
                 return (
                     <div className="received-message-wrapper" key={index}>
-                        <div className="received-message-image-wrapper">
+                        <div className="received-message-user-image-wrapper">
                             <img
-                                className="chat-user-image"
                                 src={
                                     message.user.image
                                         ? `../${message.user.image}`
                                         : `../images/avatar.png`
                                 }
-                                alt=""
+                                alt="user-image"
+                                className="chat-user-image"
                             />
                         </div>
                         <div className="received-message-info">
@@ -293,7 +297,7 @@ const ChatWindow = () => {
             return (
                 <a download={"image"} href={message.media_path}>
                     <img
-                        className="message message-image"
+                        className="message-image"
                         src={`../${message.media_path}`}
                     />
                 </a>
@@ -302,7 +306,7 @@ const ChatWindow = () => {
             return (
                 <video
                     controls={true}
-                    className="message message-video"
+                    className="message-video"
                     src={`../${message.media_path}`}
                 ></video>
             );
@@ -313,24 +317,26 @@ const ChatWindow = () => {
     const renderredUsers = (users) => {
         return users.map((user) => {
             return (
-                <li
-                    className="active-user"
+                <div
+                    className="chat-user-wrapper"
                     onClick={(e) => {
                         changeToUserId(e, user.id);
                     }}
                     key={user.id}
                 >
-                    <img
-                        src={
-                            user.image
-                                ? `../${user.image}`
-                                : `../images/avatar.png`
-                        }
-                        className="active-user-img"
-                        alt=""
-                    />
+                    <div className="chat-user-image-wrapper">
+                        <img
+                            src={
+                                user.image
+                                    ? `../${user.image}`
+                                    : `../images/avatar.png`
+                            }
+                            className="chat-user-image"
+                            alt=""
+                        />
+                    </div>
                     <div className="chat-user-name">{user.name}</div>
-                </li>
+                </div>
             );
         });
     };
@@ -346,7 +352,7 @@ const ChatWindow = () => {
         }).then((response) => {
             setMessages([...messages, response.data.sent_message]);
         });
-        document.querySelector(".message-input").value = "";
+        document.querySelector(".chat-message-input").value = "";
     };
 
     const sendMedia = (e) => {
@@ -413,7 +419,7 @@ const ChatWindow = () => {
     const renderChatButtons = () => {
         return (
             <div>
-                <div className="attachement-wrapper">
+                <div className="chat-attachement-wrapper">
                     <input
                         className="fas fa-paperclip chat-paperclip"
                         type="file"
@@ -426,7 +432,7 @@ const ChatWindow = () => {
                 </div>
 
                 <input
-                    className="message-input"
+                    className="chat-message-input"
                     disabled={toUserId ? false : true}
                     placeholder="Напишите здесь свой текст ..."
                     type="text"
@@ -435,8 +441,11 @@ const ChatWindow = () => {
                         onKeyUp(e);
                     }}
                 />
-                <div className="send-wrapper" onClick={sendMessage}>
-                    <i className="fas fa-paper-plane chat-paper-plane"></i>
+                <div className="chat-send-wrapper">
+                    <i
+                        className="fas fa-paper-plane chat-paper-plane"
+                        onClick={sendMessage}
+                    ></i>
                 </div>
             </div>
         );
@@ -449,47 +458,39 @@ const ChatWindow = () => {
             </div>
         );
     };
+
     return (
         <div>
-            <i className="far fa-comments" onClick={fetchAllUsers}></i>
+            <i
+                className="far fa-comments navbar-user-comment"
+                onClick={fetchAllUsers}
+            ></i>
+            <i className="fas fa-caret-up chat-arrow"></i>
+
             <div className="chat-wrapper">
-                <i
-                    className="fas fa-caret-up"
-                    style={{
-                        color: "rgb(239, 235, 241)",
-                        fontSize: "50px",
-                        marginRight: "125px",
-                    }}
-                ></i>
                 <div className="active-users-section">
                     <div className="active-users-top-section">
-                        {/* {!spinner ? showBlockButtons() : ""} */}
-
-                        {/* {spinner ? <div className="loader"></div> : ""} */}
                         {showBlockButtons()}
                     </div>
                     <div className="active-users">
                         <div className="active-users-search-wrapper">
                             <i className="fas fa-search active-users-search"></i>
-                            <i className="fas fa-window-close chat-window-close"></i>
+                            <i className="fas fa-window-close active-users-close"></i>
                             <input
                                 className="active-users-input"
                                 placeholder="Поиск по кантактам"
                                 type="text"
                             />
                         </div>
-                        <div className="active-users-list-wrapper">
-                            <ul className="chat-left-section">
-                                <div className="chat-users-list">
-                                    {renderredUsers(users)}
-                                </div>
-                            </ul>
+                        <div className="chat-users-list">
+                            {renderredUsers(users)}
                         </div>
                     </div>
                 </div>
                 <div className="messages-section">
-                    <div className="messages-section-top">
+                    <div className="messages-top-section">
                         <div className="chatting-with-user">
+                            {" "}
                             {chattingWithUser}
                         </div>
                         <div className="chatting-user-status">
@@ -497,13 +498,13 @@ const ChatWindow = () => {
                             <div className="chat-status-text">online</div>
                         </div>
                     </div>
-                    <div className="messages-section-middle">
+                    <div className="messages-middle-section">
                         <div className="scroll" ref={scrollToEndRef}>
                             {renderredMessages(messages)}
                         </div>
                     </div>
-                    <div className="messages-section-bottom">
-                        <div className="chat-inputs-container">
+                    <div className="messages-bottom-section">
+                        <div className="chat-inputs-wrapper">
                             {blockMessage
                                 ? renderBlockedChatMessage()
                                 : renderChatButtons()}

@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
 
     // post comments
 
+    Route::get('posts/{post}/get-last-comment', [UserPostsController::class, 'get_last_comment']);
     Route::post('posts/{post}/add-comment', [UserPostsController::class, 'add_comment'])->name('post.add-comment');
     Route::post('posts/{post}/add-like', [UserPostsController::class, 'add_like'])->name('post.add_like');
     Route::delete('posts/{post}/delete-like', [UserPostsController::class, 'delete_like'])->name('post.delete_like');

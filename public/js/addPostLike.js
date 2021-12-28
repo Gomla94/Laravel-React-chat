@@ -7,9 +7,10 @@ const likePost = async (e) => {
         const response = await axios.post(`posts/${postId}/add-like`, {
             postId,
         });
+        console.log(response);
         if (response.data) {
-            heartIcon.nextElementSibling.innerText = parseInt(
-                heartIcon.nextElementSibling.innerText + 1
+            heartIcon.previousElementSibling.innerText = parseInt(
+                heartIcon.previousElementSibling.innerText + 1
             );
             heartIcon.classList.toggle("liked-post-heart-icon");
         }
@@ -26,8 +27,8 @@ const dislikePost = async (e) => {
             postId,
         });
         if (response.data == 1) {
-            heartIcon.nextElementSibling.innerText = parseInt(
-                heartIcon.nextElementSibling.innerText - 1
+            heartIcon.previousElementSibling.innerText = parseInt(
+                heartIcon.previousElementSibling.innerText - 1
             );
             heartIcon.classList.toggle("liked-post-heart-icon");
         }

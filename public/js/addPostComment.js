@@ -1,20 +1,21 @@
-const addCommentBtn = document.querySelectorAll(".post-comment-btn");
-const commentIcon = document.querySelectorAll(".fa-comment");
-
+const addCommentBtn = document.querySelectorAll(".main-post-comment-button");
+const commentIcon = document.querySelectorAll(".main-post-comments-icon");
 const showCommentSection = async (e) => {
     const clickedCommentIcon = e.target;
-    const commentsSection =
-        clickedCommentIcon.closest(".post-social").nextElementSibling;
-
     const addCommentSection =
-        clickedCommentIcon.closest(".post-social").previousElementSibling;
+        clickedCommentIcon.closest(".main-post-socials").previousElementSibling;
 
-    addCommentSection.classList.toggle("show-add-comment-section");
+    addCommentSection.classList.toggle("show-main-post-comment-form-wrapper");
+
+    const commentsSection =
+        clickedCommentIcon.closest(".main-post-socials").nextElementSibling;
+
+    commentsSection.classList.toggle("show-add-comment-section");
 
     const shownCommentsSection = commentsSection.querySelectorAll(".comment");
 
     if (shownCommentsSection.length > 0) {
-        commentsSection.classList.toggle("show-post-comments-container");
+        commentsSection.classList.toggle("show-main-post-comments-section");
 
         shownCommentsSection.forEach((section) => {
             section.remove();
@@ -39,11 +40,11 @@ const showCommentSection = async (e) => {
       </div>
         `;
         clickedCommentIcon.closest(
-            ".post-social"
+            ".main-post-socials"
         ).nextElementSibling.innerHTML += commentDiv;
     });
 
-    commentsSection.classList.toggle("show-post-comments-container");
+    commentsSection.classList.toggle("show-main-post-comments-section");
 };
 
 if (commentIcon) {
@@ -61,8 +62,8 @@ const addComment = async (e) => {
     e.preventDefault();
     const addCommentBtn = e.target;
     const commentInput = e.target
-        .closest(".post-comment-form")
-        .querySelector(".post-comment-input");
+        .closest(".main-post-comment-form")
+        .querySelector(".main-post-form-textarea");
 
     const errorLabel = e.target.previousElementSibling;
     if (commentInput.value === "") {
@@ -76,15 +77,32 @@ const addComment = async (e) => {
             }
         );
 
+        const newComment = response.data;
+
         commentInput.value = "";
-        const commentFormParent =
-            addCommentBtn.closest(".post-comment-form").parentElement;
-        const commentsCount =
-            commentFormParent.nextElementSibling.querySelector(
-                ".fa-comment"
-            ).nextElementSibling;
+        const commentForm = addCommentBtn.closest(
+            ".main-post-comment-form-wrapper"
+        );
+        const commentsCount = commentForm.nextElementSibling
+            .querySelector(".main-post-comments")
+            .querySelector(".comments-count-span");
+
         commentsCount.innerText = parseInt(commentsCount.innerText) + 1;
         errorLabel.classList.remove("show-comment-error-div");
+
+        const newcommentDiv = `<div id="comment" class="comment">
+        <div class="comment-date">
+        <span class="comment-user-name">${newComment.user.name}</span>
+        <span class="comment-date">${new Date(
+            newComment.created_at
+        ).toDateString()}</span>
+        </div>
+        <p class="comment-body">${newComment.title}</p>
+      </div>
+        `;
+        const commentsSection =
+            commentForm.nextElementSibling.nextElementSibling;
+        commentsSection.innerHTML += newcommentDiv;
     }
 };
 

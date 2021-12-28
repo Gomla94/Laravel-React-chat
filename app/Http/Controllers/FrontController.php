@@ -60,6 +60,7 @@ class FrontController extends Controller
     public function show_user_page($user)
     {
         $user = User::find($user);
+        $user_posts = $user->posts()->get();
         $user_posts_count = $user->posts->count();
         $user_images_count = $user->posts->whereNotNull('image')->count();
         $user_videos_count = $user->posts->whereNotNull('video')->count();
@@ -70,6 +71,7 @@ class FrontController extends Controller
             'user_posts_count' => $user_posts_count,
             'user_images_count' => $user_images_count,
             'user_videos_count' => $user_videos_count,
+            'user_posts' => $user_posts,
         ]);
     }
 

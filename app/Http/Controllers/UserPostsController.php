@@ -115,12 +115,14 @@ class UserPostsController extends Controller
                 'user_id' => Auth::id()
             ]);
     
+            $comment = $comment->load('user');
             return $comment;
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
         
     }
+
 
     public function add_like($id)
     {
