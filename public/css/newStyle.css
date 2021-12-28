@@ -434,6 +434,9 @@ html {
     font-size: 20px;
     font-weight: 600;
     margin-top: 20px;
+    overflow-x: hidden;
+    min-height: 100px;
+    max-height: 100px;
 }
 
 .appeal-card-description {
@@ -441,11 +444,13 @@ html {
     font-size: 18px;
     font-weight: 400;
     margin-top: 10px;
-    max-height: 50%;
-    overflow: scroll;
     overflow-x: hidden;
+    min-height: 200px;
+    max-height: 200px;
+    /* max-height: 50%;
+    overflow: scroll;
     min-height: 150px;
-    overflow-y: hidden;
+    overflow-y: hidden; */
 }
 
 .appeal-card-button {
@@ -2590,6 +2595,10 @@ html {
     }
 
     .user-info-search-wrapper {
+        display: none;
+    }
+
+    .post-date {
         display: none;
     }
 }

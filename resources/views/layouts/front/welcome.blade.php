@@ -328,9 +328,11 @@
             <img src="{{ asset($appeal->image) }}" alt="appeal-image" class="appeal-card-image" />
             @endif
           </div>
-          <div class="appeal-card-title">{{$appeal->title}}</div>
+          <div class="appeal-card-title">
+            <p>{{$appeal->title}}</p>
+            </div>
           <div class="appeal-card-description">
-            {{str_limit($appeal->description, 200)}}
+            <p>{{str_limit($appeal->description, 200)}}</p>
           </div>
           <button class="appeal-card-button">Хочу помочь</button>
         </div>
