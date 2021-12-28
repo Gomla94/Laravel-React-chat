@@ -445,12 +445,9 @@ html {
     font-weight: 400;
     margin-top: 10px;
     overflow-x: hidden;
+    overflow-y: scroll;
     min-height: 200px;
     max-height: 200px;
-    /* max-height: 50%;
-    overflow: scroll;
-    min-height: 150px;
-    overflow-y: hidden; */
 }
 
 .appeal-card-button {
@@ -2441,6 +2438,11 @@ html {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         padding: 10px;
+    }
+
+    .appeal-card-description {
+        min-height: 100px;
+        max-height: 100px;
     }
 
     .main-appeal-video {
