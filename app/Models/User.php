@@ -63,6 +63,11 @@ class User extends Authenticatable
         'date_of_birth' => 'date'
     ];
 
+    public function interesting_type()
+    {
+        return $this->belongsTo(InterestingType::class);
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);

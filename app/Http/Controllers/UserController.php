@@ -15,6 +15,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
+        $user = $user->load('interesting_type');
         $areas_of_interesting = InterestingType::all();
         return view('profile', [
             'user' => $user,
@@ -28,6 +29,7 @@ class UserController extends Controller
         $attributes = validator(request()->all(), [
             'image' => ['sometimes','nullable','max:2048', 'mimes:png,jpg,jpeg'],
             'date_of_birth' => ['sometimes','nullable','date'],
+            'phone_number' => ['sometimes','nullable','numeric'],
             'area_of_interest' => ['sometimes','nullable','integer', Rule::exists('interesting_types', 'id')]
         ])->validate();
 
@@ -41,10 +43,13 @@ class UserController extends Controller
             $file->move('images/users/', $image_name);
         }
 
+        // dd(request()->all());
+
         $user->update([
             'image' => request('image') ? 'images/users/'.$image_name : null,
             'date_of_birth' => $attributes['date_of_birth'],
-            'area_of_interest' => request('area_of_interest') ? $attributes['area_of_interest'] : null
+            'phone_number' => $attributes['phone_number'],
+            'interesting_type_id' => request('area_of_interest') ? $attributes['area_of_interest'] : null
         ]);
 
         return redirect()->route('user.profile');
