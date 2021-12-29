@@ -240,6 +240,16 @@
                 class="user-navbar-list-item"
                 >User Profile</a
               >
+              <a
+                href="{{ route('user.my_appeals') }}"
+                class="user-navbar-list-item"
+                >My Appeals</a
+              >
+              <a
+                href="{{ route('user.my_posts') }}"
+                class="user-navbar-list-item"
+                >My Posts</a
+              >
               <form action={{ route('logout') }} method="POST" class="logout-form">
                 @csrf
                 <a href="#" class="user-navbar-list-item logout">Logout</a>

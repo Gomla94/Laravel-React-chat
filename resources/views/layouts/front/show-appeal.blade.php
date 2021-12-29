@@ -17,58 +17,27 @@
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
       <!-- Slides -->
+      @foreach($appeal_images as $image)
       <div class="swiper-slide">
         <div class="appeal-card">
           <div class="appeal-card-image-wrapper">
-            <img src="{{ asset('placeholder.png') }}" alt="" class="appeal-card-image" />
+            <img src="{{ asset($image->image) }}" alt="" class="appeal-card-image" />
           </div>
         </div>
       </div>
-      <div class="swiper-slide">
-        <div class="appeal-card">
-          <div class="appeal-card-image-wrapper">
-            <img src="{{ asset('placeholder.png') }}" alt="" class="appeal-card-image" />
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="appeal-card">
-          <div class="appeal-card-image-wrapper">
-            <img src="{{ asset('placeholder.png') }}" alt="" class="appeal-card-image" />
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="appeal-card">
-          <div class="appeal-card-image-wrapper">
-            <img src="{{ asset('placeholder.png') }}" alt="" class="appeal-card-image" />
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="appeal-card">
-          <div class="appeal-card-image-wrapper">
-            <img src="{{ asset('placeholder.png') }}" alt="" class="appeal-card-image" />
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="appeal-card">
-          <div class="appeal-card-image-wrapper">
-            <img src="{{ asset('placeholder.png') }}" alt="" class="appeal-card-image" />
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
   </div>
 
+  @if($appeal->video)
   <div class="main-appeal-video-container">
     <video
       class="main-appeal-video"
       controls
-      src="videos/video1.mp4"
+      src="{{ asset($appeal->video) }}"
     ></video>
   </div>
+  @endif
 </div>
 
 

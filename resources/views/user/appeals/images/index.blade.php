@@ -5,22 +5,23 @@
         <div class="card">
             <div class="card-header">All Appeals</div>
             <div class="card-body">
-                <a href="{{ route('user.appeals.create') }}" class="btn btn-success mb-3">Add New Appeal</a>
+                <a href="{{ route('user.appeal-images.create', $appeal->id) }}" class="btn btn-success mb-3">Add New Image</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <td>Title</td>
+                            <td>title</td>
+                            <td>image</td>
                             <td>Actions</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($my_appeals as $appeal)
+                        @foreach ($appeal_images as $image)
                             <tr>
-                                <td>{{ $appeal->title }}</td>
+                                <td>{{ $image->title }}</td>
+                                <td><img src="{{ asset($image->image) }}" width="150px" height="100px"></td>
                                 <td style="display:flex;">
-                                    <a href="{{ route('user.appeals.edit', $appeal->id) }}" class="btn btn-warning mr-3">Edit</a>
-                                    <a href="{{ route('user.appeal.images', $appeal->id) }}" class="btn btn-primary mr-3">Images</a>
-                                    <form action="{{ route('user.appeals.delete', $appeal->id) }}" method="POST">
+                                    <a href="{{ route('user.appeal-images.edit', [$appeal->id, $image->id]) }}" class="btn btn-warning mr-3">Edit</a>
+                                    <form action="{{ route('user.appeal-images.delete', [$appeal->id, $image->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">Delete</button>

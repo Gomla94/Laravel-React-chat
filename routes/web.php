@@ -27,12 +27,15 @@ Route::get('/all-videos/',[FrontController::class, 'show_videos_page'])->name('a
 Route::get('/all-videos/{id}',[FrontController::class, 'show_video_page'])->name('show-video');
 Route::post('/subscribe/{user}',[FrontController::class, 'subscribe'])->name('subscribe');
 Route::post('/unsubscribe/{user}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
-
-Auth::routes();
-
+Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
 Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
+
+
+Auth::routes();
+
+
 
 /* Facebook Login Routes**/
 Route::get('/auth/facebook/', [FacebookController::class, 'FacebookLogin'])->name('facebook.login');
@@ -58,6 +61,12 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
     Route::get('my-appeals/{appeal}/edit', [UserAppealsController::class, 'edit'])->name('appeals.edit');
     Route::put('my-appeals/{appeal}/edit', [UserAppealsController::class, 'update'])->name('appeals.update');
     Route::delete('my-appeals/{appeal}/delete', [UserAppealsController::class, 'delete'])->name('appeals.delete');
+    Route::get('my-appeals/{appeal}/images', [UserAppealsController::class, 'appeal_images'])->name('appeal.images');
+    Route::get('my-appeals/{appeal}/images/create', [UserAppealsController::class, 'add_appeal_image'])->name('appeal-images.create');
+    Route::post('my-appeals/{appeal}/images/create', [UserAppealsController::class, 'store_appeal_image'])->name('appeal-images.store');
+    Route::get('my-appeals/{appeal}/images/{image}/edit', [UserAppealsController::class, 'edit_appeal_image'])->name('appeal-images.edit');
+    Route::put('my-appeals/{appeal}/images/{image}/update', [UserAppealsController::class, 'update_appeal_image'])->name('appeal-images.update');
+    Route::delete('my-appeals/{appeal}/images/{image}', [UserAppealsController::class, 'delete_appeal_image'])->name('appeal-images.delete');
 
     // post comments
 
@@ -72,12 +81,6 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
 });
 Route::get('posts/{post}/all-comments', [UserPostsController::class, 'all_comments'])->name('post.all-comments');
 
-// Route::get('/messages', [MessagesController::class, 'index']);
-// Route::post('/messages', [MessagesController::class, 'storeMessage']);
-// Route::get('/chat-users', [MessagesController::class, 'all_users']);
-// Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
-// Route::post('/block-user', [MessagesController::class, 'block_user']);
-// Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
 
 /** Users */
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function() {
@@ -91,4 +94,3 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
     Route::resource('countries', CountriesController::class);
 });
 
-Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);

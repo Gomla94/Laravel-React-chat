@@ -10,7 +10,7 @@
 
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" placeholder="Title">
+                        <input type="text" class="form-control" name="appeal_title" placeholder="Title">
                         @error('title')
                         <span style="color:red">{{$message}}</span>
                         @enderror
@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+                        <textarea name="appeal_description" class="form-control" id="description" cols="30" rows="10"></textarea>
                         @error('description')
                         <span style="color:red">{{$message}}</span>
                         @enderror
@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         <label for="image">Image</label>
-                        <input type="file" class="form-control" name="image">
+                        <input type="file" class="form-control" name="appeal_image">
                         @error('image')
                         <span style="color:red">{{$message}}</span>
                         @enderror
@@ -34,7 +34,7 @@
 
                     <div class="form-group">
                         <label for="video">Video</label>
-                        <input type="file" class="form-control" name="video">
+                        <input type="file" class="form-control" name="appeal_video">
                         @error('video')
                         <span style="color:red">{{$message}}</span>
                         @enderror

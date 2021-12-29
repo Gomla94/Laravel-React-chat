@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddAppealsRequest;
+use App\Http\Requests\StoreImageRequest;
 use App\Models\Appeal;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -26,10 +28,10 @@ class UserAppealsController extends Controller
         $user = Auth::user();
         
         $attributes = validator(request()->all(), [
-            'post_title' => ['required', 'string'],
-            'post_description' => ['sometimes', 'nullable', 'string'],
-            'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'post_video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
+            'appeal_title' => ['required', 'string'],
+            'appeal_description' => ['sometimes', 'nullable', 'string'],
+            'appeal_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
+            'appeal_video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
         ])->validate();
 
         if (request()->file('appeal_image')) {
@@ -46,8 +48,8 @@ class UserAppealsController extends Controller
         }
 
         $user->appeals()->create([
-            'title' => $attributes['post_title'],
-            'description' => $attributes['post_description'],
+            'title' => $attributes['appeal_title'],
+            'description' => $attributes['appeal_description'],
             'image' => request()->file('appeal_image') ? 'images/appeals/'.$image_name : null,
             'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : null,
         ]);
@@ -62,8 +64,7 @@ class UserAppealsController extends Controller
 
     public function update(Appeal $appeal)
     {
-        $user = Auth::user();
-        
+
         $attributes = validator(request()->all(), [
             'appeal_title' => ['string'],
             'appeal_description' => ['string'],
@@ -101,6 +102,72 @@ class UserAppealsController extends Controller
         File::delete(public_path($appeal->image));
         File::delete(public_path($appeal->video));
         $appeal->delete();
+        return back();
+    }
+
+    public function appeal_images(Appeal $appeal)
+    {
+        $appeal_images = $appeal->images()->get();
+        return view('user.appeals.images.index', [
+            'appeal_images' => $appeal_images,
+            'appeal' => $appeal,
+        ]);
+    }
+
+    public function add_appeal_image(Appeal $appeal)
+    {
+        return view('user.appeals.images.create', [
+            'appeal' => $appeal,
+        ]);
+    }
+
+    public function store_appeal_image(StoreImageRequest $request, Appeal $appeal)
+    {
+        if (request()->file('image')) {
+            $file = $request->image;
+            $extension = $file->getClientOriginalExtension();
+            $image_name = uniqid(). '.' .$extension;
+            $file->move('images/appeals/appeal_images', $image_name);          
+        }
+
+        $appeal->images()->create([
+            'title' => $request->title,
+            'image' => request()->file('image') ? 'images/appeals/appeal_images/'.$image_name : null,
+        ]);
+
+        return redirect()->route('user.appeal.images', $appeal->id);
+    }
+
+    public function edit_appeal_image(Appeal $appeal, Image $image)
+    {
+        return view('user.appeals.images.edit', [
+            'appeal' => $appeal,
+            'image' => $image,
+        ]);
+    }
+
+    public function update_appeal_image(StoreImageRequest $request, Appeal $appeal, Image $image)
+    {
+        if (request()->file('image')) {
+            File::delete(public_path($image->image));
+            $file = $request->image;
+            $extension = $file->getClientOriginalExtension();
+            $image_name = uniqid(). '.' .$extension;
+            $file->move('images/appeals/appeal_images', $image_name);          
+        }
+
+        $image->update([
+            'title' => $request->title,
+            'image' => request()->file('image') ? 'images/appeals/appeal_images/'.$image_name : null,
+        ]);
+
+        return redirect()->route('user.appeal.images', $appeal->id);
+    }
+
+    public function delete_appeal_image(Appeal $appeal, Image $image)
+    {
+        File::delete(public_path($image->image));
+        $image->delete();
         return back();
     }
 }

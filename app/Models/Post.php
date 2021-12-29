@@ -25,4 +25,9 @@ class Post extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }

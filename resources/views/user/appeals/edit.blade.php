@@ -10,7 +10,7 @@
                     @method('PUT')
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" placeholder="Title" value="{{ $appeal->title }}">
+                        <input type="text" class="form-control" name="appeal_title" placeholder="Title" value="{{ $appeal->title }}">
                         @error('title')
                         <span style="color:red">{{$message}}</span>
                         @enderror
@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="description" cols="30" rows="10">{{ $appeal->description }}</textarea>
+                        <textarea name="appeal_description" class="form-control" id="description" cols="30" rows="10">{{ $appeal->description }}</textarea>
                         @error('description')
                         <span style="color:red">{{$message}}</span>
                         @enderror
@@ -29,7 +29,7 @@
                         <div>
                             <img src="{{ asset($appeal->image) }}" class="mb-3" alt="" width="200px" height="100px">
                         </div>
-                        <input type="file" class="form-control" name="image">
+                        <input type="file" class="form-control" name="appeal_image">
                         @error('image')
                         <span style="color:red">{{$message}}</span>
                         @enderror
@@ -40,7 +40,7 @@
                         <div>
                             <video src="{{ asset($appeal->video) }}" controls class="mb-3" width="200px" height="100px"></video>
                         </div>
-                        <input type="file" class="form-control" name="video">
+                        <input type="file" class="form-control" name="appeal_video">
                         @error('video')
                         <span style="color:red">{{$message}}</span>
                         @enderror

@@ -2474,6 +2474,11 @@ html {
         display: flex;
         flex-direction: column;
     }
+
+    .main-appeal-image-container {
+        flex: none;
+        height: 400px;
+    }
 }
 
 @media screen and (max-width: 780px) {
