@@ -42,16 +42,16 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-        if (request()->file('image')) {
-            File::delete(public_path($user->image));
-            $file = $attributes['image'];
-            $extension = $file->getClientOriginalExtension();
-            $image_name = uniqid(). '.' .$extension;
-            $file->move('images/users/', $image_name);
-        }
+        // if (request()->file('image')) {
+        //     File::delete(public_path($user->image));
+        //     $file = $attributes['image'];
+        //     $extension = $file->getClientOriginalExtension();
+        //     $image_name = uniqid(). '.' .$extension;
+        //     $file->move('images/users/', $image_name);
+        // }
 
         $user->update([
-            'image' => request('image') ? 'images/users/'.$image_name : null,
+            // 'image' => request('image') ? 'images/users/'.$image_name : null,
             'date_of_birth' => $attributes['date_of_birth'],
             'phone_number' => $attributes['phone_number'],
             'gender' => $attributes['gender'] ?? null,
@@ -60,6 +60,19 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('user.profile');
+    }
+
+    public function update_profile_image()
+    {
+        $cropped_image = request('croppedImage');
+        $image_array = explode(";", $cropped_image);
+        $image_array_2 = explode(",", $image_array[1]);
+        $data = base64_decode($image_array_2[1]);
+        File::delete(auth()->user()->image);
+        $image_name = 'images/users/'.time(). '.' .'png';
+        
+        file_put_contents(public_path($image_name), $data);
+        auth()->user()->update(['image' => $image_name]);
     }
 
 }

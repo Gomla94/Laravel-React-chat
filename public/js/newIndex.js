@@ -38,13 +38,13 @@ if (chatWrapper) {
     });
 }
 
-if (profileImageInput) {
-    profileImageInput.addEventListener("change", () => {
-        const profileImage = document.querySelector(".profile-image");
-        profileImage.src = URL.createObjectURL(profileImageInput.files[0]);
-        console.log("clicked");
-    });
-}
+// if (profileImageInput) {
+//     profileImageInput.addEventListener("change", () => {
+//         const profileImage = document.querySelector(".profile-image");
+//         profileImage.src = URL.createObjectURL(profileImageInput.files[0]);
+//         console.log("clicked");
+//     });
+// }
 
 if (logoutAnchor) {
     logoutAnchor.addEventListener("click", () => {

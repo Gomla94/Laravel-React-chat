@@ -1,4 +1,10 @@
 @extends('layouts.front.app')
+@section('css')
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
+/>
+@endsection
 @section('content')
 {{-- <div class="profile-container">
     <div class="profile-image-wrapper">
@@ -42,24 +48,16 @@
 </div> --}}
 
 <div class="container">
+  
     <div class="profile-header">
       <div class="profile-img">
         <img class="profile-image" src="{{ asset(auth()->user()->image ?? 'images/avatar.png') }}" width="200" alt="Profile Image">
+        <div class="image-demo"></div>
+
       </div>
       <div class="profile-nav-info">
         <h3 class="user-name">{{ auth()->user()->name }}</h3>
-        {{-- <div class="address">
-          <p id="state" class="state">New York,</p>
-          <span id="country" class="country">USA.</span>
-        </div> --}}
-  
       </div>
-      {{-- <div class="profile-option">
-        <div class="notification">
-          <i class="fa fa-bell"></i>
-          <span class="alert-message">3</span>
-        </div>
-      </div> --}}
     </div>
   
     <div class="main-bd">
@@ -72,32 +70,7 @@
           <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional(auth()->user()->country)->name }}</p>
           <p class="profile-info"> interested in type: {{ auth()->user()->interesting_type->name ?? '' }}</p>
           <p class="profile-info">additional type {{ auth()->user()->additional_type }}</p>
-          {{-- <div class="user-bio">
-            <h3>Bio</h3>
-            <p class="bio">
-              Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!
-            </p>
-          </div> --}}
-          {{-- <div class="profile-btn">
-            <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i> Chat</button>
-            <button class="createbtn" id="Create-post"><i class="fa fa-plus"></i> Create</button>
-          </div>
-          <div class="user-rating">
-            <h3 class="rating">4.5</h3>
-            <div class="rate">
-              <div class="star-outer">
-                <div class="star-inner">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-              <span class="no-of-user-rate"><span>123</span>&nbsp;&nbsp;reviews</span>
-            </div>
-  
-          </div> --}}
+          
         </div>
   
       </div>
@@ -109,18 +82,7 @@
           </ul>
         </div>
         <div class="profile-body">
-          {{-- <div class="profile-posts tab">
-            <h1>Your Post</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed
-              magni eius magnam repellendus. Quidem inventore repudiandae sunt odit. Aliquid facilis fugiat earum ex officia eveniet, nisi, similique ad ullam repudiandae molestias aspernatur qui autem, nam? Cupiditate ut quasi iste, eos perspiciatis maiores
-              molestiae.</p>
-          </div>
-          <div class="profile-reviews tab">
-            <h1>User reviews</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam pariatur officia, aperiam quidem quasi, tenetur molestiae. Architecto mollitia laborum possimus iste esse. Perferendis tempora consectetur, quae qui nihil voluptas. Maiores debitis
-              repellendus excepturi quisquam temporibus quam nobis voluptatem, reiciendis distinctio deserunt vitae! Maxime provident, distinctio animi commodi nemo, eveniet fugit porro quos nesciunt quidem a, corporis nisi dolorum minus sit eaque error
-              sequi ullam. Quidem ut fugiat, praesentium velit aliquam!</p>
-          </div> --}}
+         
           <div class="profile-settings tab">
               <form class="profile-form" action="{{ route('user.update-profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -201,5 +163,51 @@
 
   @push('js')
     <script src="{{ asset('js/profilePage.js') }}" defer></script>
+    
+    <script defer>
+      $(".profile-image-input").on("change", function () {
+        
+        $('.left-side').css('margin-top', '80px');
+        $('.profile-image').remove()
+        $image_crop = $(".image-demo").croppie({
+          enableExif: true,
+          viewport: {
+            height: 200,
+            width: 200,
+            type: "circle",
+          },
+          boundary: {
+            height: 300,
+            width: 300,
+          },
+        });
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          $image_crop
+            .croppie("bind", {
+              url: event.target.result,
+            })
+            
+        };
+        reader.readAsDataURL(this.files[0]);
+      });
+      
+      $(".update-profile-button").on("click", function (event) {
+          if ($('.profile-image-input').val()) {
+            event.preventDefault();
+            $image_crop
+              .croppie("result", {
+                type: "canvas",
+                size: "viewport",
+              })
+              .then(function (response) {
+                axios.put('/update-profile-image', {
+                  croppedImage: response
+                }).then((response) => {$('.profile-form').submit()})
+              });
+        }
+      });
+      
+    </script>
   @endpush
 @endsection

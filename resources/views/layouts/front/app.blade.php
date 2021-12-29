@@ -125,6 +125,8 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
 
     @yield('css')
 
@@ -266,6 +268,7 @@
     <div class="main">
         @yield('content')
     </div>
+
 
     @stack('js')
 
