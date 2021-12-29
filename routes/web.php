@@ -21,7 +21,7 @@ Route::get('/', [FrontController::class, 'home'])->name('welcome');
 Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
 Route::get('/all-benefactors',[FrontController::class, 'all_benefactors'])->name('all-benefactors');
 Route::get('/all-appeals',[FrontController::class, 'all_appeals'])->name('all-appeals');
-Route::get('/all-appeals/{id}',[FrontController::class, 'show_appeal'])->name('show-appeal');
+Route::get('/all-appeals/{appeal}',[FrontController::class, 'show_appeal'])->name('show-appeal');
 Route::get('/all-users/{user}',[FrontController::class, 'show_user_page'])->name('user.page');
 Route::get('/all-videos/',[FrontController::class, 'show_videos_page'])->name('all-videos');
 Route::get('/all-videos/{id}',[FrontController::class, 'show_video_page'])->name('show-video');
