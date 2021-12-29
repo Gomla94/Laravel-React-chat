@@ -88,7 +88,6 @@ class FrontController extends Controller
 
     public function show_appeal(Appeal $appeal)
     {
-        $appeal = $appeal->with('user')->firstOrFail();
         $appeal_images = $appeal->images()->get();
         return view('layouts.front.show-appeal', [
             'appeal' => $appeal,
