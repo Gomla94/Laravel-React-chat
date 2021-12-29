@@ -88,6 +88,7 @@ class FrontController extends Controller
 
     public function show_appeal(Appeal $appeal)
     {
+        dd($appeal);
         $appeal_images = $appeal->images()->get();
         return view('layouts.front.show-appeal', [
             'appeal' => $appeal,
