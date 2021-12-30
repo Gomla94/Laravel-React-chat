@@ -1226,14 +1226,14 @@ html {
 
 .chat-paperclip {
     font-size: 23px;
-    padding: 0px 10px;
+    /* padding: 0px 10px; */
     cursor: pointer;
     height: 100%;
     position: absolute;
     top: 20%;
     left: 6px;
     color: rgb(13, 119, 180);
-    width: 90%;
+    width: 65%;
 }
 
 .chat-message-input {
