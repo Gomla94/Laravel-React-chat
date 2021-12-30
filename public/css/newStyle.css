@@ -702,7 +702,7 @@ html {
 .show-main-post-comments-section {
     border-top: 1px solid grey;
     height: 150px;
-    /* overflow-x: scroll; */
+    overflow-y: scroll;
 }
 
 .comment {
@@ -2129,6 +2129,7 @@ html {
 
     .chat-wrapper {
         top: 65px;
+        left: -400%;
     }
 
     .chat-send-wrapper {
@@ -2520,6 +2521,27 @@ html {
     .filters-list {
         display: none;
     }
+
+    .chat-wrapper {
+        min-width: 400px;
+        left: -280%;
+    }
+
+    .chat-paperclip {
+        width: 32px;
+    }
+
+    .messages-section {
+        min-width: 70%;
+    }
+
+    .message {
+        word-break: break-word;
+    }
+
+    .sent-message-info {
+        right: 20%;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -2544,17 +2566,8 @@ html {
         margin-top: 50px;
     }
 
-    .chat-wrapper {
-        display: none;
-    }
-
     .user-chat-icon-wrapper {
         display: none;
-    }
-
-    .chat-arrow {
-        display: none;
-        visibility: hidden;
     }
 
     .filter-users-wrapper {
@@ -2637,6 +2650,22 @@ html {
 
     .post-date {
         display: none;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .chat-arrow {
+        display: none;
+        visibility: hidden;
+    }
+
+    .chat-wrapper {
+        display: none;
+    }
+
+    .navbar-user-comment {
+        display: none;
+        visibility: hidden;
     }
 }
 
