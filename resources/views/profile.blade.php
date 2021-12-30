@@ -65,7 +65,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
         <div class="profile-side">
           <p class="profile-info"><i class="fa fa-phone profile-info-icon"></i> {{ auth()->user()->phone_number }}</p>
           <p class="profile-info"><i class="fa fa-envelope profile-info-icon"></i> {{ auth()->user()->email }}</p>
-          <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ auth()->user()->date_of_birth->format('Y-m-d') }}</p>
+          <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ optional(auth()->user()->date_of_birth)->format('Y-m-d') }}</p>
           <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ auth()->user()->gender }}</p>
           <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional(auth()->user()->country)->name }}</p>
           <p class="profile-info"> interested in type: {{ auth()->user()->interesting_type->name ?? '' }}</p>
