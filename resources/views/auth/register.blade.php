@@ -6,10 +6,10 @@ Register
 <div class="register-main-container">
   <div class="btns-wrapper">
     <div class="register-links-wrapper">
-      <div>
+      <div class="loginbtn-div">
         <a href="{{ route('login') }}" class="login-btn">{{__('auth.login')}}</a>
       </div>
-      <div>
+      <div class="signupbtn-div">
         <a href="{{ route('register') }}" class="{{ Request::url('login') ? 'active-auth-button' : 'login-btn' }}">{{__('auth.register')}}</a>
       </div>
     </div>

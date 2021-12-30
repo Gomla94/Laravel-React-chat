@@ -6,10 +6,10 @@ Login
 <div class="login-main-container">
   <div class="btns-wrapper">
     <div class="login-links-wrapper">
-      <div>
+      <div class="loginbtn-div">
         <a href="{{ route('login') }}" class="{{ Request::url('login') ? 'active-auth-button' : 'login-btn' }}">{{__('auth.login')}}</a>
       </div>
-      <div>
+      <div class="signupbtn-div">
         <a href="{{ route('register') }}" class="signup-btn">{{__('auth.register')}}</a>
       </div>
     </div>
@@ -31,7 +31,6 @@ Login
               class="form-input"
               name="email"
               value="{{ old('email') }}"
-              placeholder="maks-roma@mail.ru"
             />
             @error('email')
             <span style="color: red">{{$message}}</span>

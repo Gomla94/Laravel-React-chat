@@ -25,21 +25,16 @@ class UserAppealsController extends Controller
 
     public function store(AddAppealsRequest $request)
     {
-        $user = Auth::user();
         
-        $attributes = validator(request()->all(), [
-            'appeal_title' => ['required', 'string'],
-            'appeal_description' => ['sometimes', 'nullable', 'string'],
-            'appeal_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'appeal_video' => ['max:7168', 'mimes:mp4,mov,ogg,qt'],
-        ])->validate();
+        $user = Auth::user();
 
         if (request()->file('appeal_image')) {
-            $file = $request->appeal_image;
+            $file = $request->appeal_image[0];
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
             $file->move('images/appeals/', $image_name);          
         }
+
         if (request()->file('appeal_video')) {
             $file = $request->appeal_video;
             $extension = $file->getClientOriginalExtension();
@@ -47,12 +42,26 @@ class UserAppealsController extends Controller
             $file->move('videos/appeals/', $video_name);
         }
 
-        $user->appeals()->create([
-            'title' => $attributes['appeal_title'],
-            'description' => $attributes['appeal_description'],
+        $appeal = $user->appeals()->create([
+            'title' => $request->appeal_title,
+            'description' => $request->appeal_description,
             'image' => request()->file('appeal_image') ? 'images/appeals/'.$image_name : null,
             'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : null,
         ]);
+
+        $other_images = array_except($request->appeal_image, 0);
+
+        foreach($other_images as $image) {
+            $file = $image;
+            $extension = $file->getClientOriginalExtension();
+            $other_image_name = uniqid(). '.' .$extension;
+            $file->move('images/appeals/appeal_images', $other_image_name); 
+            
+            $appeal->images()->create([
+                'title' => $request->title ?? null,
+                'image' => 'images/appeals/appeal_images/'.$other_image_name,
+            ]);
+        }
 
         return redirect()->route('user.my_appeals');
     }

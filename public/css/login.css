@@ -116,6 +116,10 @@ body {
     margin-right: 10px;
 }
 
+.login-btn:hover {
+    color: white;
+}
+
 .active-auth-button {
     background-color: #2141b5;
     color: white;
@@ -132,6 +136,10 @@ body {
     margin-right: 10px;
 }
 
+.active-auth-button:hover {
+    color: white;
+}
+
 .signup-btn {
     background-color: rgb(0, 90, 0);
     color: white;
@@ -144,6 +152,10 @@ body {
     align-items: center;
     text-decoration: none;
     padding: 0px 10px 0px 35px;
+}
+
+.signup-btn:hover {
+    color: white;
 }
 
 .login-container {

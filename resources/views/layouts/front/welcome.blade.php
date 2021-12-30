@@ -494,7 +494,7 @@
 
       <div class="form-group post-modal-image-container">
           <label class="create-post-label" for="image">Image</label>
-          <input type="file" class="form-control" name="post_image">
+          <input type="file" accept="image/*" class="form-control" name="post_image">
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
@@ -529,7 +529,7 @@
 
       <div class="form-group modal-image-container">
           <label class="create-post-label" for="image">Image</label>
-          <input type="file" class="form-control" name="appeal_image">
+          <input type="file" accept="image/*" multiple class="form-control" name="appeal_image[]">
           @error('appeal_image')
           <span style="color:red">{{$message}}</span>
           @enderror
@@ -537,7 +537,7 @@
 
       <div class="form-group modal-image-container">
         <label class="create-post-label" for="video">Video</label>
-        <input type="file" class="form-control" name="appeal_video">
+        <input type="file" accept="video/*" class="form-control" name="appeal_video">
         @error('appeal_video')
           <span style="color:red">{{$message}}</span>
         @enderror

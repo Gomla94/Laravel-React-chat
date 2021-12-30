@@ -102,7 +102,9 @@ const addComment = async (e) => {
         `;
         const commentsSection =
             commentForm.nextElementSibling.nextElementSibling;
+        commentsSection.classList.add("show-main-post-comments-section");
         commentsSection.innerHTML += newcommentDiv;
+        commentsSection.scrollTop = commentsSection.scrollHeight;
     }
 };
 

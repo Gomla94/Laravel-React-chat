@@ -9,9 +9,8 @@ const likePost = async (e) => {
         });
         console.log(response);
         if (response.data) {
-            heartIcon.previousElementSibling.innerText = parseInt(
-                heartIcon.previousElementSibling.innerText + 1
-            );
+            heartIcon.previousElementSibling.innerText =
+                parseInt(heartIcon.previousElementSibling.innerText) + 1;
             heartIcon.classList.toggle("liked-post-heart-icon");
         }
     } catch (error) {
