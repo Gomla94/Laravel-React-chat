@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\InterestingType;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -20,11 +21,31 @@ class UserController extends Controller
         $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
         $countries = Country::all();
+        $my_posts = $user->posts()->get();
+        $my_posts_images = $user->posts()->whereNull('video')->whereNotNull('image')->get();
+        $my_posts_videos = $user->posts()->whereNull('image')->whereNotNull('video')->get();
+        $my_subscribtions = $user->subscribtions()->pluck('user_id');
+        $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
+        $my_subscribers = $user->subscribers()->pluck('subscriber_id');
+        $my_subscribers_users = User::whereIn('id', $my_subscribers)->get();
+        // $user_images_count = $user->posts->whereNotNull('image')->count();
+        // $user_videos_count = $user->posts->whereNotNull('video')->count();
+        $user_subscribers_count = $user->subscribers()->count();
+        $user_subscribtions_count = $user->subscribtions()->count();
         
         return view('profile', [
             'user' => $user,
             'areas_of_interesting' => $areas_of_interesting,
             'countries' => $countries,
+            'my_posts' => $my_posts,
+            'my_posts_images' => $my_posts_images,
+            'my_posts_videos' => $my_posts_videos,
+            'my_subscribtions_users' => $my_subscribtions_users,
+            'my_subscribers_users' => $my_subscribers_users,
+            'my_subscribers' => $my_subscribers_users,
+            // 'user_videos_count' => $user_videos_count,
+            'user_subscribers_count' => $user_subscribers_count,
+            'user_subscribtions_count' => $user_subscribtions_count,
         ]);
     }
 

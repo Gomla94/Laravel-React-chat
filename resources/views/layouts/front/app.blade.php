@@ -226,7 +226,7 @@
             @if(Auth::check())
             <div class="navbar-user-name">{{ auth()->user()->name }}</div>
             <div class="navbar-user-image-container">
-              <a href="{{ route('user.page', auth()->user()->id) }}"
+              <a href="{{ route('user.profile') }}"
                 ><img
                   src="{{asset(auth()->user()->image ?? 'images/avatar.png')}}"
                   alt="user-image"

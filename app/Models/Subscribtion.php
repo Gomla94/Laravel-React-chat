@@ -14,4 +14,5 @@ class Subscribtion extends Model
     {
         return $this->belongsTo(User::class, 'subscriber_id', 'user_id');
     }
+
 }

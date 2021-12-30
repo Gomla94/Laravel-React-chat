@@ -482,6 +482,12 @@ html {
     margin: auto;
 }
 
+.user-posts-wrapper {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
 .main-posts-buttons-container {
     height: auto;
     width: 50%;
@@ -2168,6 +2174,10 @@ html {
         margin-top: 10px;
         padding: 10px 10px 0px 5px;
     }
+
+    .one-user-social-info-wrapper {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
 
 @media screen and (max-width: 1150px) {
@@ -2242,6 +2252,10 @@ html {
         padding-top: 20px;
         display: flex;
         flex-direction: column;
+    }
+
+    .one-user-social-info-wrapper {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
@@ -2478,6 +2492,10 @@ html {
         flex: none;
         height: 400px;
     }
+
+    .one-user-social-info-wrapper {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 @media screen and (max-width: 780px) {
@@ -2618,6 +2636,12 @@ html {
     }
 
     .posts-wrapper {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+    }
+
+    .user-posts-wrapper {
         height: 100%;
         width: 100%;
         margin: auto;
@@ -2883,7 +2907,7 @@ button.createbtn i {
 
 .nav ul li {
     padding: 10px;
-    width: 100%;
+    width: fit-content;
     cursor: pointer;
     text-align: center;
     transition: all 0.2s ease-in-out;
@@ -2907,6 +2931,10 @@ button.createbtn i {
     padding: 20px;
     width: 100%;
     text-align: center;
+}
+
+.profile-posts {
+    background-color: rgb(250, 225, 193);
 }
 
 @media (max-width: 1100px) {

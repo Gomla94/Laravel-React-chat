@@ -78,11 +78,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
   
         <div class="nav">
           <ul>
-            <li onclick="tabs(0)" class="profile-item user-setting"> Settings</li>
+            <li onclick="tabs(0)" class="user-post active profile-item user-setting">Settings</li>
+            <li onclick="tabs(1)" class="user-review profile-item">Posts</li>
+            <li onclick="tabs(2)" class="user-images profile-item">Images</li>
+            <li onclick="tabs(3)" class="user-videos profile-item">Videos</li>
+            <li onclick="tabs(4)" class="user-videos profile-item">Subscribtions</li>
+            <li onclick="tabs(5)" class="user-setting profile-item"> Subscribers</li>
           </ul>
         </div>
         <div class="profile-body">
-         
           <div class="profile-settings tab">
               <form class="profile-form" action="{{ route('user.update-profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -156,6 +160,218 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <button type="submit" class="btn btn-primary update-profile-button">Update Profile</button>
             </form>
           </div>
+          <div class="profile-posts tab">
+            <h1>My Posts</h1>
+            <div class="user-posts-wrapper">
+              @foreach($my_posts as $post)
+              <div class="main-post">
+                <div class="main-post-user-info-wrapper">
+                  <div class="main-post-user-image-wrapper">
+                    <a href="{{ route('user.page', $post->user->id) }}">
+                    <img
+                      src="{{asset($post->user->image ?? 'images/avatar.png')}}"
+                      alt=""
+                      class="main-post-user-image"
+                    />
+                    </a>
+                  </div>
+                  <a href="{{ route('user.page', $post->user->id) }}"></a>
+                  <div class="main-post-user-names-wrapper">
+                    <span class="main-post-user-name">{{ $post->user->name }}</span>
+                    <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
+                  </div>
+                  <span class="post-date">{{ $post->created_at->format('Y-m-d h:i A') }}</span>
+                </div>
+                <p class="main-post-title">@if($post->title) {{ $post->title }} @endif</p>
+                <p class="main-post-description">
+                  @if($post->description) {{ str_limit($post->description, 500) }} @endif
+                </p>
+          
+                @if($post->image)
+                <div class="main-post-image-wrapper">
+                  <img src="{{ asset($post->image) }}" alt="main-post-image" class="main-post-image" />
+                </div>
+                @endif @if($post->video)
+                <div class="main-post-video-wrapper">
+                  <video
+                    controls
+                    src="{{ asset($post->video) }}"
+                    alt="main-post-video"
+                    class="main-post-video"
+                  ></video>
+                </div>
+                @endif
+                @if(Auth::check())
+                <div class="main-post-comment-form-wrapper">
+                  <form class="main-post-comment-form">
+                    <div class="form-group">
+                      <textarea
+                        name="title"
+                        class="form-control main-post-form-textarea"
+                        id="{{ $post->id }}"
+                        cols="30"
+                        rows="10"
+                      ></textarea>
+                    </div>
+                    <div class="comment-error-div">
+                      <span class="comment-error-span"></span>
+                    </div>
+                    <button type="button" class="main-post-comment-button">
+                      Add Comment
+                    </button>
+                  </form>
+                </div>
+                @endif
+                <div class="main-post-socials">
+                  <div class="main-post-likes">
+                    <span>{{ $post->likes->count() }}</span>
+                    @if(Auth::check())
+                    <i
+                      id="{{ $post->id }}"
+                      class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }} post-heart-icon"
+                    ></i>
+                    @else
+                    <i
+                      id="{{ $post->id }}"
+                      class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }}"
+                    ></i>
+                    @endif
+                  </div>
+                  <div class="main-post-comments">
+                    <span class="comments-count-span">{{ $post->comments->count() }}</span>
+                    <i
+                      class="far fa-comments main-post-comments-icon"
+                      id="{{ $post->id }}"
+                    ></i>
+                  </div>
+                </div>
+                <div class="main-post-comments-section"></div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+          <div class="profile-posts-images tab">
+            <h1>My Images</h1>
+            <div class="user-posts-wrapper">
+              @foreach($my_posts_images as $image)
+              <div class="main-post">
+                <div class="main-post-user-info-wrapper">
+                  <div class="main-post-user-image-wrapper">
+                    <a href="{{ route('user.page', $image->user->id) }}">
+                    <img
+                      src="{{asset($image->user->image ?? 'images/avatar.png')}}"
+                      alt=""
+                      class="main-post-user-image"
+                    />
+                    </a>
+                  </div>
+                  <a href="{{ route('user.page', $image->user->id) }}"></a>
+                  <div class="main-post-user-names-wrapper">
+                    <span class="main-post-user-name">{{ $image->user->name }}</span>
+                    <span class="main-post-user-email">{{'@'. $image->user->name }}</span>
+                  </div>
+                  <span class="post-date">{{ $image->created_at->format('Y-m-d h:i A') }}</span>
+                </div>
+                <div class="main-post-image-wrapper">
+                  <img src="{{ asset($image->image) }}" alt="main-post-image" class="main-post-image" />
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+          <div class="profile-posts-videos tab">
+            <h1>Videos</h1>
+            <div class="user-posts-wrapper">
+              @foreach($my_posts_videos as $video)
+              <div class="main-post">
+                <div class="main-post-user-info-wrapper">
+                  <div class="main-post-user-image-wrapper">
+                    <a href="{{ route('user.page', $video->user->id) }}">
+                    <img
+                      src="{{asset($video->user->image ?? 'images/avatar.png')}}"
+                      alt=""
+                      class="main-post-user-image"
+                    />
+                    </a>
+                  </div>
+                  <a href="{{ route('user.page', $video->user->id) }}"></a>
+                  <div class="main-post-user-names-wrapper">
+                    <span class="main-post-user-name">{{ $video->user->name }}</span>
+                    <span class="main-post-user-email">{{'@'. $video->user->name }}</span>
+                  </div>
+                  <span class="post-date">{{ $video->created_at->format('Y-m-d h:i A') }}</span>
+                </div>
+                <div class="main-post-video-wrapper">
+                  <video
+                    controls
+                    src="{{ asset($post->video) }}"
+                    alt="main-post-video"
+                    class="main-post-video"
+                  ></video>
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+          <div class="profile-posts-subscibtions tab">
+            <h1>Subscribtions</h1>
+            <div class="container all-users-list">
+              @foreach($my_subscribtions_users as $user)
+              <div class="user">
+                <a href="{{ route('user.page', $user->id) }}">
+                  <div class="user-image-wrapper">
+                    <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="user-image" />
+                  </div>
+                </a>
+                <div class="users-social">
+                  <span class="user-social-span">{{ $user->name }}</span>
+                  <span class="user-social-span">{{ $user->email }}</span>
+                  <span class="user-social-span">Открыть полный профиль</span>
+                </div>
+                {{-- @if(Auth::check())
+                  <div class="user-subscription-button">
+                    <div class="user-green-message-box" data-id={{ $user->id }}>
+                      <i class="fas fa-envelope user-envelope" data-id={{ $user->id }}></i>
+                    </div>
+                    @if(auth()->user()->subscribed($user->id))
+                    <form action="{{ route('unsubscribe', $user->id) }}" method="POST">
+                      @csrf
+                      <button class="fas fa-check checkmark-icon"></button>
+                    </form>
+                    @else
+                    <form action="{{ route('subscribe', $user->id) }}" method="POST"> 
+                      @csrf
+                      <button class="user-subscribe">
+                        subscribe
+                      </button>
+                    </form>
+                    @endif
+                  </div>
+                @endif --}}
+              </div>
+              @endforeach
+            </div>
+          </div>
+          <div class="profile-posts-subscribers tab">
+            <h1>Subscribers</h1>
+            <div class="container all-users-list">
+              @foreach($my_subscribers as $user)
+              <div class="user">
+                <a href="{{ route('user.page', $user->id) }}">
+                  <div class="user-image-wrapper">
+                    <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="user-image" />
+                  </div>
+                </a>
+                <div class="users-social">
+                  <span class="user-social-span">{{ $user->name }}</span>
+                  <span class="user-social-span">{{ $user->email }}</span>
+                  <span class="user-social-span">Открыть полный профиль</span>
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+         
         </div>
       </div>
     </div>
@@ -163,7 +379,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
   @push('js')
   <script src="{{ asset('js/profilePage.js') }}" defer></script>
-  
   <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
+  <script src="{{ asset('js/addPostComment.js') }}" defer></script>
+  <script src="{{ asset('js/addPostLike.js') }}" defer></script>
   @endpush
 @endsection
