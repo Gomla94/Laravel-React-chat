@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://seriousapp.test/api/",
+    baseURL: "http://www.magaxat.com/api/",
     headers: {
         "Access-Control-Allow-Origin": "*",
         authorization: `Bearer ${
