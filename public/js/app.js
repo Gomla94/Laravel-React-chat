@@ -2130,6 +2130,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
   key: "f3410ab18dff50208018",
   cluster: "mt1",
+  // wsHost: window.location.hostname,
   forceTLS: false,
   disableStats: true,
   wsPort: 6001,
@@ -2721,7 +2722,7 @@ var ChatWindow = function ChatWindow() {
               className: "fas fa-window-close active-users-close"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               className: "active-users-input",
-              placeholder: "\u041F\u043E\u0438\u0441\u043A \u043F\u043E \u043A\u0430\u043D\u0442\u0430\u043A\u0442\u0430\u043C",
+              placeholder: "\u041F\u043E\u0438\u0441\u043A",
               type: "text"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {

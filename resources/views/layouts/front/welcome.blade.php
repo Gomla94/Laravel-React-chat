@@ -380,7 +380,7 @@
           <span class="main-post-user-name">{{ $post->user->name }}</span>
           <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
         </div>
-        <span class="post-date">{{ $post->created_at->format('Y-m-d') }}</span>
+        <span class="post-date">{{ $post->created_at->format('Y-m-d h:i A') }}</span>
       </div>
       <p class="main-post-title">@if($post->title) {{ $post->title }} @endif</p>
       <p class="main-post-description">

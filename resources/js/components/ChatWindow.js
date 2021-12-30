@@ -478,7 +478,7 @@ const ChatWindow = () => {
                             <i className="fas fa-window-close active-users-close"></i>
                             <input
                                 className="active-users-input"
-                                placeholder="Поиск по кантактам"
+                                placeholder="Поиск"
                                 type="text"
                             />
                         </div>
