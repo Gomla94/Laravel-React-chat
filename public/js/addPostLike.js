@@ -1,6 +1,6 @@
 const postHeartIcon = document.querySelectorAll(".post-heart-icon");
 
-const likePost = async (e) => {
+export const likePost = async (e) => {
     const heartIcon = e.target;
     const postId = heartIcon.id;
     try {
@@ -18,7 +18,7 @@ const likePost = async (e) => {
     }
 };
 
-const dislikePost = async (e) => {
+export const dislikePost = async (e) => {
     const heartIcon = e.target;
     const postId = heartIcon.id;
     try {
@@ -36,7 +36,7 @@ const dislikePost = async (e) => {
     }
 };
 
-const likePostClickHandler = async (e) => {
+export const likePostClickHandler = async (e) => {
     if (e.target.classList.contains("liked-post-heart-icon")) {
         dislikePost(e);
     } else {

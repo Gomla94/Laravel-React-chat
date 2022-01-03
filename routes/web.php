@@ -31,6 +31,7 @@ Route::get('interesting-types', [InterestingTypesController::class, 'all_types']
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
 Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
+Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
 
 
 Auth::routes();

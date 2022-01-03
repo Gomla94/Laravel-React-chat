@@ -364,7 +364,7 @@
   </div>
   <div class="posts-wrapper">
     @foreach($random_posts as $post)
-    <div class="main-post">
+    <div class="main-post" data-id="{{ $post->id }}">
       <div class="main-post-user-info-wrapper">
         <div class="main-post-user-image-wrapper">
           <a href="{{ route('user.page', $post->user->id) }}">
@@ -551,9 +551,10 @@
 @endsection
 @push('js')
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="{{ asset('js/addPostComment.js') }}" defer></script>
-<script src="{{ asset('js/addPostLike.js') }}" defer></script>
+<script src="{{ asset('js/addPostComment.js') }}" defer type="module"></script>
+<script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
 <script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
+<script src="{{ asset('js/loadPosts.js') }}" defer type="module"></script>
 <script>
   const postsModalContent = document.querySelector('.posts-modal-wrapper');
   const appealsModalContent = document.querySelector('.appeals-modal-wrapper');

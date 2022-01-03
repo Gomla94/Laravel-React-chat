@@ -53,12 +53,12 @@ if (commentIcon) {
     });
 }
 
-const fetchAllComments = async (postId) => {
+export const fetchAllComments = async (postId) => {
     const response = await axios.get(`/posts/${postId}/all-comments`);
     return response.data;
 };
 
-const addComment = async (e) => {
+export const addComment = async (e) => {
     e.preventDefault();
     const addCommentBtn = e.target;
     const commentInput = e.target

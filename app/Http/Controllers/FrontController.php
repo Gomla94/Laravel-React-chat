@@ -14,11 +14,8 @@ class FrontController extends Controller
 {
     public function home()
     {
-        // $post = Post::findOrFail(5);
-        // // dd($post->likes);
-        // dd($post->likes->where('user_id', Auth::id()));
-
         $user = Auth::user();
+
         if ($user) {
             $user->update(['api_token' => str_random(60)]);
         }
@@ -31,6 +28,13 @@ class FrontController extends Controller
             'random_appeals' => $random_appeals,
             'random_posts' => $random_posts,
         ]);
+    }
+
+    public function load_more_posts()
+    {
+        $requested_ids = request('ids');
+        $more_posts = Post::with(['user', 'comments', 'likes'])->whereNotIn('id', $requested_ids)->limit(5)->get();
+        return $more_posts;
     }
 
 
