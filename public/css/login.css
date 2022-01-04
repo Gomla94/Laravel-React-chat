@@ -356,6 +356,7 @@ body {
 @media screen and (max-width: 1200px) {
     .wrapper {
         height: 100%;
+        width: 90% !important;
         display: flex;
         flex-direction: column;
     }
@@ -376,6 +377,7 @@ body {
         display: flex;
         flex-direction: column;
         background-size: auto;
+        width: 90% !important;
     }
 
     .btns-wrapper {
