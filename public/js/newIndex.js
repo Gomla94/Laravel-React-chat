@@ -35,6 +35,9 @@ const mainDiv = document.querySelector(".main");
 if (chatWrapper) {
     mainDiv.addEventListener("click", () => {
         chatWrapper.classList.remove("show-chat-wrapper");
+        document
+            .querySelector(".chat-arrow")
+            .classList.toggle("show-chat-arrow");
     });
 }
 

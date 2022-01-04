@@ -99,21 +99,35 @@ class FrontController extends Controller
         ]);
     }
 
-    public function show_user_page($user)
+    public function show_user_page($id)
     {
-        $user = User::find($user);
-        $user_posts = $user->posts()->get();
-        $user_posts_count = $user->posts->count();
-        $user_images_count = $user->posts->whereNotNull('image')->count();
-        $user_videos_count = $user->posts->whereNotNull('video')->count();
-        $interesting_type = InterestingType::find($user->interesting_type_id);
-        return view('layouts.front.user-details', [
-            'user' => $user, 
-            'interesting_type' => $interesting_type,
-            'user_posts_count' => $user_posts_count,
-            'user_images_count' => $user_images_count,
-            'user_videos_count' => $user_videos_count,
-            'user_posts' => $user_posts,
+        $user = User::find($id);
+        $user = $user->load('interesting_type');
+        $user = $user->load('country');
+        $areas_of_interesting = InterestingType::all();
+        $countries = Country::all();
+        $my_posts = $user->posts()->get();
+        $my_posts_images = $user->posts()->whereNull('video')->whereNotNull('image')->get();
+        $my_posts_videos = $user->posts()->whereNull('image')->whereNotNull('video')->get();
+        $my_subscribtions = $user->subscribtions()->pluck('user_id');
+        $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
+        $my_subscribers = $user->subscribers()->pluck('subscriber_id');
+        $my_subscribers_users = User::whereIn('id', $my_subscribers)->get();
+        $user_subscribers_count = $user->subscribers()->count();
+        $user_subscribtions_count = $user->subscribtions()->count();
+        
+        return view('profile', [
+            'user' => $user,
+            'areas_of_interesting' => $areas_of_interesting,
+            'countries' => $countries,
+            'my_posts' => $my_posts,
+            'my_posts_images' => $my_posts_images,
+            'my_posts_videos' => $my_posts_videos,
+            'my_subscribtions_users' => $my_subscribtions_users,
+            'my_subscribers_users' => $my_subscribers_users,
+            'my_subscribers' => $my_subscribers_users,
+            'user_subscribers_count' => $user_subscribers_count,
+            'user_subscribtions_count' => $user_subscribtions_count,
         ]);
     }
 

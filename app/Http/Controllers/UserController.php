@@ -28,8 +28,6 @@ class UserController extends Controller
         $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
         $my_subscribers = $user->subscribers()->pluck('subscriber_id');
         $my_subscribers_users = User::whereIn('id', $my_subscribers)->get();
-        // $user_images_count = $user->posts->whereNotNull('image')->count();
-        // $user_videos_count = $user->posts->whereNotNull('video')->count();
         $user_subscribers_count = $user->subscribers()->count();
         $user_subscribtions_count = $user->subscribtions()->count();
         
@@ -43,7 +41,6 @@ class UserController extends Controller
             'my_subscribtions_users' => $my_subscribtions_users,
             'my_subscribers_users' => $my_subscribers_users,
             'my_subscribers' => $my_subscribers_users,
-            // 'user_videos_count' => $user_videos_count,
             'user_subscribers_count' => $user_subscribers_count,
             'user_subscribtions_count' => $user_subscribtions_count,
         ]);

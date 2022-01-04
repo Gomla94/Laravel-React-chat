@@ -32,9 +32,9 @@ const showCommentSection = async (e) => {
         const commentDiv = `<div id="comment" class="comment">
         <div class="comment-date">
         <span class="comment-user-name">${comment.user.name}</span>
-        <span class="comment-date">${new Date(
-            comment.created_at
-        ).toDateString()}</span>
+        <span class="comment-date">${new Date(comment.created_at)
+            .toLocaleString()
+            .replace(",", "")}</span>
         </div>
         <p class="comment-body">${comment.title}</p>
       </div>
@@ -93,9 +93,9 @@ export const addComment = async (e) => {
         const newcommentDiv = `<div id="comment" class="comment">
         <div class="comment-date">
         <span class="comment-user-name">${newComment.user.name}</span>
-        <span class="comment-date">${new Date(
-            newComment.created_at
-        ).toDateString()}</span>
+        <span class="comment-date">${new Date(newComment.created_at)
+            .toLocaleString()
+            .replace(",", "")}</span>
         </div>
         <p class="comment-body">${newComment.title}</p>
       </div>

@@ -51,25 +51,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
   
     <div class="profile-header">
       <div class="profile-img">
-        <img class="profile-image" src="{{ asset(auth()->user()->image ?? 'images/avatar.png') }}" width="200" alt="Profile Image">
+        <img class="profile-image" src="{{ asset( $user->image ?? 'images/avatar.png') }}" width="200" alt="Profile Image">
         <div class="image-demo"></div>
 
       </div>
       <div class="profile-nav-info">
-        <h3 class="user-name">{{ auth()->user()->name }}</h3>
+        <h3 class="user-name">{{ $user->name }}</h3>
       </div>
     </div>
   
     <div class="main-bd">
       <div class="left-side">
         <div class="profile-side">
-          <p class="profile-info"><i class="fa fa-phone profile-info-icon"></i> {{ auth()->user()->phone_number }}</p>
-          <p class="profile-info"><i class="fa fa-envelope profile-info-icon"></i> {{ auth()->user()->email }}</p>
-          <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ optional(auth()->user()->date_of_birth)->format('Y-m-d') }}</p>
-          <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ auth()->user()->gender }}</p>
-          <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional(auth()->user()->country)->name }}</p>
-          <p class="profile-info"> interested in type: {{ auth()->user()->interesting_type->name ?? '' }}</p>
-          <p class="profile-info">additional type {{ auth()->user()->additional_type }}</p>
+          <p class="profile-info"><i class="fa fa-phone profile-info-icon"></i> {{ $user->phone_number }}</p>
+          <p class="profile-info"><i class="fa fa-envelope profile-info-icon"></i> {{ $user->email }}</p>
+          <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ optional($user->date_of_birth)->format('Y-m-d') }}</p>
+          <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ $user->gender }}</p>
+          <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional($user->country)->name }}</p>
+          <p class="profile-info"> interested in type: {{ $user->interesting_type->name ?? '' }}</p>
+          <p class="profile-info">additional type {{ $user->additional_type }}</p>
           
         </div>
   
@@ -78,7 +78,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
   
         <div class="nav">
           <ul>
-            <li onclick="tabs(0)" class="user-post active profile-item user-setting">Settings</li>
+            @if(Auth::check())
+              @if($user->id === auth()->user()->id)
+              <li onclick="tabs(0)" class="user-post active profile-item user-setting">Settings</li>
+              @endif
+            @endif
             <li onclick="tabs(1)" class="user-review profile-item">Posts</li>
             <li onclick="tabs(2)" class="user-images profile-item">Images</li>
             <li onclick="tabs(3)" class="user-videos profile-item">Videos</li>
@@ -94,7 +98,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <div class="row profile-row">
                     <div class=" col-md-4">
                         <label class="create-post-label" for="image">Image</label>
-                        <input type="file" class="form-control profile-image-input" name="image">
+                        <input type="file" accept="image/*" class="form-control profile-image-input" name="image">
                         @error('image')
                         <span class="profile-error-span">{{$message}}</span>
                         @enderror
@@ -333,7 +337,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <div class="user-green-message-box" data-id={{ $user->id }}>
                       <i class="fas fa-envelope user-envelope" data-id={{ $user->id }}></i>
                     </div>
-                    @if(auth()->user()->subscribed($user->id))
+                    @if($user->subscribed($user->id))
                     <form action="{{ route('unsubscribe', $user->id) }}" method="POST">
                       @csrf
                       <button class="fas fa-check checkmark-icon"></button>
@@ -380,7 +384,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
   @push('js')
   <script src="{{ asset('js/profilePage.js') }}" defer></script>
   <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
-  <script src="{{ asset('js/addPostComment.js') }}" defer></script>
-  <script src="{{ asset('js/addPostLike.js') }}" defer></script>
+  <script src="{{ asset('js/addPostComment.js') }}" defer type="module"></script>
+  <script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
   @endpush
 @endsection

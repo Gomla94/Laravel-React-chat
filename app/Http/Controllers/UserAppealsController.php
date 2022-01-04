@@ -63,7 +63,7 @@ class UserAppealsController extends Controller
             ]);
         }
 
-        return redirect()->route('user.my_appeals');
+        return redirect()->route('all-appeals');
     }
 
     public function edit(Appeal $appeal)
@@ -103,7 +103,7 @@ class UserAppealsController extends Controller
             'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : $appeal->video,
         ]);
 
-        return redirect()->route('user.my_appeals');
+        return redirect()->route('all-ppeals');
     }
 
     public function delete(Appeal $appeal)

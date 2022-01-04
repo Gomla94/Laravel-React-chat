@@ -1,15 +1,18 @@
-const typesList = document.querySelector(".types-list");
+const typesList = document.querySelectorAll(".user-type");
 const interestingsList = document.querySelector(".interesting-types");
 const registerForm = document.querySelector(".register-form");
 const interestingListLabel = document.querySelector(".interesting-types-label");
 const childTypesLabel = document.querySelector(".child-types-label");
 const childTypesSelect = document.querySelector(".child-types-select");
+const additionalTypes = document.querySelector(".additional-types");
 const organisationDescriptionLabel = document.querySelector(
     ".organisation-label"
 );
 const organisationDescriptionInput = document.querySelector(
     ".organisation-input"
 );
+
+const organisationDiv = document.querySelector(".organisation-div");
 const showPasswordIcon = document.querySelector(".show-password-icon");
 
 if (showPasswordIcon) {
@@ -26,54 +29,53 @@ if (showPasswordIcon) {
 if (childTypesSelect) {
     childTypesSelect.addEventListener("change", (e) => {
         if (e.target.value === "organisation") {
-            organisationDescriptionLabel.classList.remove("organisation-label");
-            organisationDescriptionInput.classList.remove("organisation-input");
+            console.log(organisationDiv);
+            organisationDiv.classList.add("show-organisation");
         } else {
-            organisationDescriptionLabel.classList.add("organisation-label");
-            organisationDescriptionInput.classList.add("organisation-input");
+            organisationDiv.classList.remove("show-organisation");
         }
     });
 }
 
-if (typesList) {
-    typesList.addEventListener("change", (e) => {
+typesList.forEach((item) => {
+    item.addEventListener("change", (e) => {
         let selectedValue = e.target.value;
-        if (selectedValue === "ordinary_user") {
+        if (selectedValue === "user") {
             fetchAllInterstingTypes();
-            interestingListLabel.classList.remove("show-element");
-            childTypesLabel.classList.remove("child-types-label");
-            childTypesSelect.classList.remove("child-types-select");
-
-            // organisationDescriptionDiv.
+            interestingListLabel.classList.add("show-interestings-list");
+            additionalTypes.classList.add("show-additional-types");
         } else {
-            // interestingsList.classList.remove("show-interesting-types");
-            childTypesLabel.classList.add("child-types-label");
-            childTypesSelect.classList.add("child-types-select");
-            organisationDescriptionLabel.classList.add("organisation-label");
-            organisationDescriptionInput.classList.add("organisation-input");
-            interestingListLabel.classList.remove("show-interesting-types");
-            document.querySelector(".interestings-list-ddl").remove();
+            interestingListLabel.classList.remove("show-interestings-list");
+            organisationDiv.classList.remove("show-organisation");
+            additionalTypes.classList.remove("show-additional-types");
+            const interestingListsSelect = document.querySelector(
+                ".interestings-list-ddl"
+            );
+            if (interestingListsSelect) interestingListsSelect.remove();
         }
     });
-}
+});
 
 const insertAfter = (referenceNode, newNode) => {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 };
 
 const createSelectInput = (interestingTypes = null) => {
+    const selectWrapper = document.createElement("div");
+    selectWrapper.classList.add("form-group");
     const selectInput = document.createElement("select");
+    selectInput.classList.add("form-control");
     selectInput.classList.add("form-input");
     selectInput.classList.add("interestings-list-ddl");
     selectInput.setAttribute("name", "interesting_type");
-    selectInput.addEventListener("change", onChildTypeChange);
     interestingTypes.forEach((type) => {
         const option = document.createElement("option");
         option.value = type.id;
         option.textContent = type.name;
         selectInput.appendChild(option);
     });
-    insertAfter(interestingListLabel, selectInput);
+    selectWrapper.appendChild(selectInput);
+    insertAfter(interestingListLabel, selectWrapper);
     document
         .querySelector(".interesting-types-group-div")
         .classList.add("show-interesting-types");
@@ -86,8 +88,4 @@ const fetchAllInterstingTypes = () => {
         }
         createSelectInput(response.data);
     });
-};
-
-const onChildTypeChange = (e) => {
-    console.log(e.target);
 };
