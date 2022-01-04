@@ -448,6 +448,7 @@
       <div class="main-post-comments-section"></div>
     </div>
     @endforeach
+    {{-- <div class="more-posts-loader"></div> --}}
   </div>
 </div>
 

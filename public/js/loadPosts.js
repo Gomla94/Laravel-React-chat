@@ -10,7 +10,6 @@ postDivs.forEach((item) => {
 });
 
 const fetchPosts = async () => {
-    console.log(currentPostsIds);
     const posts = await axios.get("/loadposts", {
         params: {
             ids: currentPostsIds,
@@ -24,31 +23,47 @@ const fetchPosts = async () => {
     return posts.data;
 };
 
-const loadPosts = async () => {
+const loadMorePostsAndAddEventListeners = async () => {
+    const loadedPosts = await fetchPosts();
+    loadedPosts.forEach((post) => {
+        postsWrapper.innerHTML += createPost(post);
+    });
+
+    document.querySelectorAll(".main-post-comments-icon").forEach((item) => {
+        item.addEventListener("click", showPostCommentSection);
+    });
+
+    document.querySelectorAll(".main-post-comment-button").forEach((item) => {
+        item.addEventListener("click", addComment);
+    });
+
+    document.querySelectorAll(".post-heart-icon").forEach((item) => {
+        item.addEventListener("click", likePostClickHandler);
+    });
+
+    window.addEventListener("scroll", loadPosts);
+};
+
+const loadSpinner = document.querySelector(".more-posts-loader");
+
+const loadPosts = () => {
     if (
         window.scrollY + document.body.offsetHeight >=
         document.body.scrollHeight
     ) {
-        const loadedPosts = await fetchPosts();
-        loadedPosts.forEach((post) => {
-            postsWrapper.innerHTML += createPost(post);
-        });
-        document
-            .querySelectorAll(".main-post-comments-icon")
-            .forEach((item) => {
-                item.addEventListener("click", showPostCommentSection);
-            });
-
-        document
-            .querySelectorAll(".main-post-comment-button")
-            .forEach((item) => {
-                item.addEventListener("click", addComment);
-            });
-
-        document.querySelectorAll(".post-heart-icon").forEach((item) => {
-            item.addEventListener("click", likePostClickHandler);
-        });
+        postsWrapper.appendChild(createSpinner());
+        window.removeEventListener("scroll", loadPosts);
+        setTimeout(() => {
+            postsWrapper.querySelector(".more-posts-loader").remove();
+            loadMorePostsAndAddEventListeners();
+        }, 2000);
     }
+};
+
+const createSpinner = () => {
+    const spinner = document.createElement("div");
+    spinner.classList.add("more-posts-loader");
+    return spinner;
 };
 
 const createPost = (post) => {
@@ -201,11 +216,13 @@ const showPostCommentSection = async (e) => {
 };
 
 function checkIfAuthUserLikedPost(post) {
-    let liked = false;
-    console.log(post.likes);
-    post.likes.forEach((item) => {
-        item.user_id === window.Laravel.user.id ? (liked = true) : null;
-    });
-
-    return liked;
+    if (window.Laravel.user !== null) {
+        let liked = false;
+        post.likes.forEach((item) => {
+            item.user_id === window.Laravel.user.id ? (liked = true) : null;
+        });
+        return liked;
+    } else {
+        return false;
+    }
 }
