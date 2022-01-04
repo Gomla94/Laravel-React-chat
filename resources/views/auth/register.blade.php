@@ -4,7 +4,7 @@ Register
 @endsection
 @section('content')
   <div class="register-wrapper">
-    <div class="btns-wrapper">
+    <div class="register-btns-wrapper">
       <div class="links-wrapper">
         <div class="login-button">
           <a href="{{ route('login') }}" class="{{ Request::url('login') ? 'active-auth-button' : '' }}">{{__('auth.login')}}</a>
@@ -14,7 +14,7 @@ Register
         </div>
       </div>
     </div>
-    <div class="login-wrapper">
+    <div class="register-form-wrapper">
       <div class="login-top">
         <div class="login-top-items">
           <span class="login-top-span">Регистрация</span>

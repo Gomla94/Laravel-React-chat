@@ -55,6 +55,13 @@ body {
     justify-content: flex-end;
 }
 
+.register-btns-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .login-form {
     width: 100%;
     height: 100px;
@@ -124,6 +131,21 @@ body {
 }
 
 .login-wrapper {
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background: rgb(184, 91, 0);
+    background: linear-gradient(
+        198deg,
+        rgba(184, 91, 0, 1) 12%,
+        rgba(240, 221, 116, 1) 62%,
+        rgba(204, 98, 1, 1) 99%
+    );
+}
+
+.register-form-wrapper {
     /* border: 1px solid black; */
     width: 100%;
     height: 100%;
@@ -297,13 +319,18 @@ body {
 
     .btns-wrapper {
         justify-content: center;
-        /* flex: 1; */
     }
 
-    .login-wrapper {
+    .register-btns-wrapper {
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .register-form-wrapper {
         border-top-right-radius: 0px;
         border-bottom-left-radius: 30px;
-        /* flex: 2; */
+        height: auto;
+        margin-top: 100px;
     }
 
     .links-wrapper {
