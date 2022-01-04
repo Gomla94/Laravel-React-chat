@@ -65,7 +65,6 @@ body {
     width: 100%;
     /* height: auto; */
     padding: 10px;
-    /* background-color: red; */
 }
 
 .links-wrapper {
@@ -291,28 +290,28 @@ body {
     }
 
     .register-wrapper {
-        /* display: flex;
-        flex-direction: column; */
+        display: flex;
+        flex-direction: column;
         background-size: auto;
     }
 
     .btns-wrapper {
-        /* justify-content: center; */
+        justify-content: center;
         /* flex: 1; */
     }
 
     .login-wrapper {
-        border-top-right-radius: 30px;
+        border-top-right-radius: 0px;
         border-bottom-left-radius: 30px;
         /* flex: 2; */
     }
 
     .links-wrapper {
-        /* height: 40%; */
+        height: 40%;
         width: 50%;
-        /* display: flex;
+        display: flex;
         flex-direction: column;
-        justify-content: space-between; */
+        justify-content: space-between;
     }
 
     .login-button {
