@@ -37,7 +37,7 @@ if (chatWrapper) {
         chatWrapper.classList.remove("show-chat-wrapper");
         document
             .querySelector(".chat-arrow")
-            .classList.toggle("show-chat-arrow");
+            .classList.remove("show-chat-arrow");
     });
 }
 
