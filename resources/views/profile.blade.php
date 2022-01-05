@@ -195,7 +195,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <div class="main-post-image-wrapper">
                   <img src="{{ asset($post->image) }}" alt="main-post-image" class="main-post-image" />
                 </div>
-                @endif @if($post->video)
+                @endif
+                @if($post->video)
                 <div class="main-post-video-wrapper">
                   <video
                     controls
@@ -308,7 +309,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <div class="main-post-video-wrapper">
                   <video
                     controls
-                    src="{{ asset($post->video) }}"
+                    src="{{ asset($video->video) }}"
                     alt="main-post-video"
                     class="main-post-video"
                   ></video>
@@ -330,7 +331,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <div class="users-social">
                   <span class="user-social-span">{{ $user->name }}</span>
                   <span class="user-social-span">{{ $user->email }}</span>
-                  <span class="user-social-span">Открыть полный профиль</span>
+                  {{-- <span class="user-social-span">Открыть полный профиль</span> --}}
                 </div>
                 {{-- @if(Auth::check())
                   <div class="user-subscription-button">
@@ -369,7 +370,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <div class="users-social">
                   <span class="user-social-span">{{ $user->name }}</span>
                   <span class="user-social-span">{{ $user->email }}</span>
-                  <span class="user-social-span">Открыть полный профиль</span>
+                  {{-- <span class="user-social-span">Открыть полный профиль</span> --}}
                 </div>
               </div>
               @endforeach

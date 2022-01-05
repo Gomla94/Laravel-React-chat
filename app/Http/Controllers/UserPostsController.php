@@ -49,7 +49,7 @@ class UserPostsController extends Controller
             'video' => request()->file('post_video') ? 'videos/posts/'.$video_name : null,
         ]);
 
-        return redirect()->route('all-posts');
+        return redirect()->route('home');
     }
 
     public function edit(Post $post)
@@ -90,7 +90,7 @@ class UserPostsController extends Controller
             'video' => request()->file('post_video') ? 'videos/posts/'.$video_name : $post->video,
         ]);
 
-        return redirect()->route('all-posts');
+        return redirect()->route('home');
     }
 
     public function delete(Post $post)
