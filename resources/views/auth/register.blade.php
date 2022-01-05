@@ -60,7 +60,7 @@ Register
             @enderror
           </div>
           <div class="form-group">
-            <label for="type" class="form-control form-input">тип</label>
+            <label for="type">тип</label>
             <div class="type-wrapper">
             <input class="user-type" type="radio" name="type" value="benefactor"/> Benefactor
             </div>

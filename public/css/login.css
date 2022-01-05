@@ -22,9 +22,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url("../images/authentication.png");
     background-repeat: no-repeat;
-    /* background-size: 100%; */
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -33,16 +31,12 @@ body {
 .register-wrapper {
     width: 50% !important;
     height: 100%;
-    /* margin: auto; */
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url("../images/authentication.png");
-    background-repeat: no-repeat;
-    background-size: auto 100%;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -51,8 +45,12 @@ body {
 .btns-wrapper {
     height: 100%;
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: flex-end;
+    background-image: url("../images/authentication.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
 }
 
 .register-btns-wrapper {
@@ -60,6 +58,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    background-image: url("../images/authentication.png");
+    background-size: auto 100%;
+    background-repeat: repeat-y;
 }
 
 .login-form {
@@ -70,7 +71,6 @@ body {
 
 .register-form {
     width: 100%;
-    /* height: auto; */
     padding: 10px;
 }
 
@@ -180,7 +180,6 @@ body {
 }
 
 .login-wrapper {
-    /* border: 1px solid black; */
     width: 100%;
     height: 100%;
     border-top-right-radius: 30px;
@@ -195,7 +194,6 @@ body {
 }
 
 .register-form-wrapper {
-    /* border: 1px solid black; */
     width: 100%;
     height: 100%;
     border-top-right-radius: 30px;
@@ -238,6 +236,7 @@ body {
 }
 
 .login-middle {
+    flex: 2;
     flex-direction: column;
     align-items: center;
 }
@@ -253,7 +252,6 @@ body {
 .input-group {
     display: flex;
     flex-direction: column;
-    /* position: relative; */
     margin-bottom: 30px;
 }
 
@@ -362,13 +360,11 @@ body {
     }
 
     .login-wrapper {
-        /* height: auto; */
         border-top-right-radius: 0px;
         border-bottom-left-radius: 30px;
     }
 
     .register-form-wrapper {
-        /* height: auto; */
         border-top-right-radius: 0px;
         border-bottom-left-radius: 30px;
     }
@@ -383,6 +379,13 @@ body {
     .btns-wrapper {
         justify-content: center;
         height: 70%;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        background-image: url("../images/authentication.png");
+        background-size: 150% 100%;
+        background-repeat: no-repeat;
+        border-top-right-radius: 30px;
     }
 
     .r-login-button {
@@ -395,15 +398,19 @@ body {
 
     .register-btns-wrapper {
         justify-content: center;
-        align-items: flex-end;
         height: 30%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-size: 150% 100%;
+        object-fit: contain;
+        border-top-right-radius: 30px;
     }
 
     .register-form-wrapper {
         border-top-right-radius: 0px;
         border-bottom-left-radius: 30px;
         height: auto;
-        margin-top: 100px;
     }
 
     .links-wrapper {
