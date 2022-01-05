@@ -25,14 +25,14 @@ Login
           @csrf
           <div class="form-group">
             <label for="email">Ваш e-mail</label>
-            <input class="form-control form-input" type="text" />
+            <input class="form-control form-input" name="email" type="text" />
           </div>
           @error('email')
               <span style="color:red">{{$message}}</span>
           @enderror
           <div class="form-group">
             <label for="password">Пароль</label>
-            <input class="form-control form-input" type="password" />
+            <input class="form-control form-input" name="password" type="password" />
           </div>
           @error('password')
               <span style="color:red">{{$message}}</span>
