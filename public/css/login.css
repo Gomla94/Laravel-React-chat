@@ -351,6 +351,10 @@ body {
     display: flex;
 }
 
+.active-auth-button {
+    background-color: rgb(0, 90, 0);
+}
+
 @media screen and (max-width: 1200px) {
     .wrapper {
         height: 100%;
