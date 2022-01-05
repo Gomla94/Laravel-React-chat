@@ -69,7 +69,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ $user->gender }}</p>
           <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional($user->country)->name }}</p>
           <p class="profile-info"> interested in type: {{ $user->interesting_type->name ?? '' }}</p>
-          <p class="profile-info">additional type {{ $user->additional_type }}</p>
+          <p class="profile-info">additional type: {{ $user->additional_type }}</p>
           
         </div>
   
