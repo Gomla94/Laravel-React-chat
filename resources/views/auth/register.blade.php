@@ -6,11 +6,11 @@ Register
   <div class="register-wrapper">
     <div class="register-btns-wrapper">
       <div class="links-wrapper">
-        <div class="r-login-button">
-          <a href="{{ route('login') }}" class="{{ Request::url('login') ? 'active-auth-button' : '' }}">{{__('auth.login')}}</a>
+        <div class="r-login-button {{ Request::url('login') ? 'active-auth-button' : '' }}">
+          <a href="{{ route('login') }}">{{__('auth.login')}}</a>
         </div>
-        <div class="r-signup-button">
-          <a href="{{ route('register') }}" class="{{ Request::url('register') ? 'active-auth-button' : '' }}">{{__('auth.register')}}</a>
+        <div class="r-signup-button {{ Request::url('login') ? 'active-auth-button' : '' }}">
+          <a href="{{ route('register') }}">{{__('auth.register')}}</a>
         </div>
       </div>
     </div>
