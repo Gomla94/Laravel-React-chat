@@ -6,10 +6,10 @@ Login
   <div class="wrapper">
     <div class="btns-wrapper">
       <div class="links-wrapper">
-        <div class="r-login-button {{ Request::url('login') ? 'active-auth-button' : '' }}">
+        <div class="login-button {{ Route::currentRouteName() === "login" ? 'active-auth-button' : '' }}">
           <a href="{{ route('login') }}">{{__('auth.login')}}</a>
         </div>
-        <div class="r-signup-button {{ Request::url('register') ? 'active-auth-button' : '' }}">
+        <div class="signup-button {{ Route::currentRouteName() === "register" ? 'active-auth-button' : '' }}">
           <a href="{{ route('register') }}">{{__('auth.register')}}</a>
         </div>
       </div>
