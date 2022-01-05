@@ -9,7 +9,7 @@ Register
         <div class="r-login-button {{ Request::url('login') ? 'active-auth-button' : '' }}">
           <a href="{{ route('login') }}">{{__('auth.login')}}</a>
         </div>
-        <div class="r-signup-button {{ Request::url('login') ? 'active-auth-button' : '' }}">
+        <div class="r-signup-button {{ Request::url('register') ? 'active-auth-button' : '' }}">
           <a href="{{ route('register') }}">{{__('auth.register')}}</a>
         </div>
       </div>
