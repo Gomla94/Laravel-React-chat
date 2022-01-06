@@ -21,5 +21,13 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('admin'),
             'type' => 'admin'
         ]);
+
+        User::create([
+            'name' => 'adminApp',
+            'email' => 'adminApp@example.com',
+            'password' => Hash::make('password'),
+            'type' => 'admin',
+            'country_id' => 2
+        ]);
     }
 }

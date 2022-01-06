@@ -4,16 +4,6 @@ use App\Http\Controllers\MessagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('chat-users', [MessagesController::class, 'all_users']);
@@ -26,7 +16,26 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
 });
 
+// Application API routes
+Route::prefix("v1")->middleware('json.response')->group(function () {
+    Route::post("/login",[\App\Http\Controllers\Api\V1\Auth\LoginController::class,'login']);
+    Route::post("/register",[\App\Http\Controllers\Api\V1\Auth\RegisterController::class,'register']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+    // Authenticated routes
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/me',function (){
+            return \App\Http\Resources\User\UserResource::make(auth()->user())->hide([
+                'updated_at','created_at'
+            ]);
+        });
+
+        Route::post('/logout',[\App\Http\Controllers\Api\V1\Auth\LogoutController::class,'logout']);
+
+        Route::prefix('posts')->group(function () {
+            Route::get('/',[\App\Http\Controllers\Api\V1\Post\PostController::class,'index']);
+            Route::post('/',[\App\Http\Controllers\Api\V1\Post\PostController::class,'store']);
+        });
+    });
 });
+
