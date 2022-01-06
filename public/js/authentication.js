@@ -4,7 +4,7 @@ const registerForm = document.querySelector(".register-form");
 const interestingListLabel = document.querySelector(".interesting-types-label");
 const childTypesLabel = document.querySelector(".child-types-label");
 const childTypesSelect = document.querySelector(".child-types-select");
-const additionalTypes = document.querySelector(".additional-types");
+const additionalTypes = document.querySelector(".additionals-group");
 const organisationDescriptionLabel = document.querySelector(
     ".organisation-label"
 );
@@ -61,11 +61,8 @@ const insertAfter = (referenceNode, newNode) => {
 };
 
 const createSelectInput = (interestingTypes = null) => {
-    const selectWrapper = document.createElement("div");
-    selectWrapper.classList.add("form-group");
+    // selectWrapper.classList.add("input-div");
     const selectInput = document.createElement("select");
-    selectInput.classList.add("form-control");
-    selectInput.classList.add("form-input");
     selectInput.classList.add("interestings-list-ddl");
     selectInput.setAttribute("name", "interesting_type");
     interestingTypes.forEach((type) => {
@@ -74,8 +71,7 @@ const createSelectInput = (interestingTypes = null) => {
         option.textContent = type.name;
         selectInput.appendChild(option);
     });
-    selectWrapper.appendChild(selectInput);
-    insertAfter(interestingListLabel, selectWrapper);
+    insertAfter(interestingListLabel, selectInput);
     document
         .querySelector(".interesting-types-group-div")
         .classList.add("show-interesting-types");
