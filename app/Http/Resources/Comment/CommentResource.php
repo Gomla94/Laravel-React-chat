@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Resources\Post;
+namespace App\Http\Resources\Comment;
 
 use App\Http\Resources\BaseResource;
-use App\Http\Resources\Comment\CommentCollection;
-use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 
-class PostResource extends BaseResource
+class CommentResource extends BaseResource
 {
     public static function collection($resource)
     {
-        return tap(new PostCollection($resource), function ($collection) {
+        return tap(new CommentCollection($resource), function ($collection) {
             $collection->collects = __CLASS__;
         });
     }
@@ -28,14 +26,11 @@ class PostResource extends BaseResource
         return $this->filterFields([
             'id' => $this->id,
             'title' => $this->title,
-            'description' => $this->description,
-            'image' => $this->image,
-            'video' => $this->video,
-            'comments' => CommentResource::collection($this->whenLoaded('comments'))->hide([
-                'updated_at'
-            ]),
-            'user' => UserResource::make($this->whenLoaded('user'))->hide([
+            'user' => UserResource::make($this->user)->hide([
                 'phone_number',
+                'email',
+                'status',
+                'country',
                 'type',
                 'age',
                 'gender',

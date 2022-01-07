@@ -120,4 +120,9 @@ class User extends Authenticatable
         return (bool)$this->chat_blocks()->where('blocker_id', $this->id)
                                     ->where('user_id', $user_id)->count();
     }
+
+    public function isAdmin():bool
+    {
+        return $this->type === "admin";
+    }
 }

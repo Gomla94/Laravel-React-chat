@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 class UserResource extends BaseResource
 {
+    public static function collection($resource)
+    {
+        return tap(new UserCollection($resource), function ($collection) {
+            $collection->collects = __CLASS__;
+        });
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -33,7 +40,10 @@ class UserResource extends BaseResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             "additional_type" => $this->additional_type,
-            "country" => CountryResource::make($this->country)->hide(['created_at','updated_at']),
+            "country" => CountryResource::make($this->whenLoaded('country'))->hide([
+                'created_at',
+                'updated_at'
+            ]),
 
             // TODO
             // implement relational loading after changing many to many

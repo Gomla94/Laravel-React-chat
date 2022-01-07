@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\LoginController;
+use App\Http\Controllers\Api\V1\Auth\LogoutController;
+use App\Http\Controllers\Api\V1\Auth\RegisterController;
+use App\Http\Controllers\Api\V1\Post\PostController;
+use App\Http\Controllers\Api\V1\Users\UsersController;
 use App\Http\Controllers\MessagesController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,8 +22,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 // Application API routes
 Route::prefix("v1")->middleware('json.response')->group(function () {
-    Route::post("/login",[\App\Http\Controllers\Api\V1\Auth\LoginController::class,'login']);
-    Route::post("/register",[\App\Http\Controllers\Api\V1\Auth\RegisterController::class,'register']);
+    Route::post("/login",[LoginController::class,'login']);
+    Route::post("/register",[RegisterController::class,'register']);
 
 
     // Authenticated routes
@@ -30,12 +34,18 @@ Route::prefix("v1")->middleware('json.response')->group(function () {
             ]);
         });
 
-        Route::post('/logout',[\App\Http\Controllers\Api\V1\Auth\LogoutController::class,'logout']);
+        Route::post('/logout',[LogoutController::class,'logout']);
 
         Route::prefix('posts')->group(function () {
-            Route::get('/',[\App\Http\Controllers\Api\V1\Post\PostController::class,'index']);
-            Route::post('/',[\App\Http\Controllers\Api\V1\Post\PostController::class,'store']);
+            Route::get('/',[PostController::class,'index']);
+            Route::post('/',[PostController::class,'store']);
+            Route::get('/{post}',[PostController::class,'find']);
+            Route::patch('/{post}',[PostController::class,'update']);
+            Route::delete('/{post}',[PostController::class,'remove']);
         });
+
+        Route::apiResource('users', UsersController::class)->except(['store','update']);
+        Route::post('users/changeStatus/{user}', [UsersController::class,'changeStatus']);
     });
 });
 
