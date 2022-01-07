@@ -17,7 +17,7 @@ class User extends Authenticatable
 
     const STATUSES = [1 => 'active', 0 => 'blocked'];
     
-    const USER_TYPE = 'ordinary_user';
+    const USER_TYPE = 'user';
     const ADMIN_TYPE = 'admin';
     const BENEFACTOR_TYPE = 'benefactor';
 

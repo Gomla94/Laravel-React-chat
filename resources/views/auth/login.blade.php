@@ -85,7 +85,7 @@ Login
           @csrf
           <div class="input-div">
             <label for="email"></label>
-            <input type="email" name="email" id="email" placeholder="E-mail" />
+            <input type="email" name="email" value="{{ old('email') }}" id="email" placeholder="E-mail" />
           </div>
           @error('email')
             <span style="color:red">{{$message}}</span>

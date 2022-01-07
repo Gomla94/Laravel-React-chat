@@ -7,7 +7,6 @@ use App\Models\Country;
 use App\Models\InterestingType;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
@@ -41,28 +40,38 @@ class FrontController extends Controller
     public function all_users()
     {
         $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
-        // dd($users);
         $filter_keys = array_keys(request()->query());
+        $filtered_users = [];
 
-        // dd($filter_keys);
         foreach($filter_keys as $key) {
             switch ($key) {
                 case 'interesting-in-type':
-                    $interesting_type = InterestingType::where('name', request('interesting-in-type'))->firstOrFail();
-                    $users = $users->where('interesting_type_id', $interesting_type->id);
+                    $interesting_type = InterestingType::where('name', request('interesting-in-type'))->pluck('id')->firstOrFail();
+                    foreach($users as $user) {
+                        $user_interesting_types_ids = json_decode($user->interesting_type_id);
+                        if (in_array($interesting_type, $user_interesting_types_ids)) {
+                            array_push($filtered_users, $user);
+                        }
+                    }
                     break;
 
                 case 'country':
                     $country = Country::where('name', 'like',request('country'))->firstOrFail();
                     $users = $users->where('country_id', $country->id);
+                    foreach($users as $user) {
+                        $filtered_users[] = $user;
+                    }
                     break;
 
                 case 'gender':
                     $users = $users->where('gender', request('gender'));
+                    foreach($users as $user) {
+                        $filtered_users[] = $user;
+                    }
                     break;
                 
                 default:
-                    return $users;
+                    return $filtered_users;
                     break;
             }
         }
@@ -70,9 +79,8 @@ class FrontController extends Controller
 
         $interesting_types = InterestingType::all();
         $countries = Country::all();
-
         return view('layouts.front.users', [
-            'users' => $users,
+            'users' => count($filtered_users) !== 0 ? $filtered_users : $users,
             'interesting_types' => $interesting_types,
             'countries' => $countries,
         ]);

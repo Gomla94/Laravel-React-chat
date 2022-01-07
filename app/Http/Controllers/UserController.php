@@ -59,17 +59,7 @@ class UserController extends Controller
         ])->validate();
 
         $user = Auth::user();
-
-        // if (request()->file('image')) {
-        //     File::delete(public_path($user->image));
-        //     $file = $attributes['image'];
-        //     $extension = $file->getClientOriginalExtension();
-        //     $image_name = uniqid(). '.' .$extension;
-        //     $file->move('images/users/', $image_name);
-        // }
-
         $user->update([
-            // 'image' => request('image') ? 'images/users/'.$image_name : null,
             'date_of_birth' => $attributes['date_of_birth'],
             'phone_number' => $attributes['phone_number'],
             'gender' => $attributes['gender'] ?? null,

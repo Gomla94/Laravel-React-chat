@@ -48,9 +48,8 @@ typesList.forEach((item) => {
             interestingListLabel.classList.remove("show-interestings-list");
             organisationDiv.classList.remove("show-organisation");
             additionalTypes.classList.remove("show-additional-types");
-            const interestingListsSelect = document.querySelector(
-                ".interestings-list-ddl"
-            );
+            const interestingListsSelect =
+                document.querySelector(".interesting-types");
             if (interestingListsSelect) interestingListsSelect.remove();
         }
     });
@@ -61,17 +60,23 @@ const insertAfter = (referenceNode, newNode) => {
 };
 
 const createSelectInput = (interestingTypes = null) => {
-    // selectWrapper.classList.add("input-div");
-    const selectInput = document.createElement("select");
-    selectInput.classList.add("interestings-list-ddl");
-    selectInput.setAttribute("name", "interesting_type");
+    const interestingTypesWrapper = document.createElement("div");
+    interestingTypesWrapper.classList.add("interesting-types");
     interestingTypes.forEach((type) => {
-        const option = document.createElement("option");
-        option.value = type.id;
-        option.textContent = type.name;
-        selectInput.appendChild(option);
+        const checkboxWrapper = document.createElement("div");
+        checkboxWrapper.classList.add("checkbox-wrapper");
+        const label = document.createElement("label");
+        label.textContent = type.name;
+        const option = document.createElement("input");
+        option.setAttribute("type", "checkbox");
+        option.classList.add("type-checkbox");
+        option.setAttribute("name", "interesting_type[]");
+        option.setAttribute("value", type.id);
+        checkboxWrapper.appendChild(label);
+        checkboxWrapper.appendChild(option);
+        interestingTypesWrapper.appendChild(checkboxWrapper);
+        insertAfter(interestingListLabel, interestingTypesWrapper);
     });
-    insertAfter(interestingListLabel, selectInput);
     document
         .querySelector(".interesting-types-group-div")
         .classList.add("show-interesting-types");

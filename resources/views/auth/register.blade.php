@@ -120,27 +120,20 @@ Register
       <div class="title-container">
         <h1>Create an account</h1>
       </div>
-      <!-- <div class="buttons-login">
-        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-        <a href="#"><i class="fab fa-google fa-2x"></i></a>
-        <a href="#"><i class="fab fa-twitter-square fa-2x"></i></a>
-      </div> -->
-      {{-- <div class="container-p">
-        <p class="request-data">or us an e-mail for registration</p>
-      </div> --}}
+
       <div class="form">
         <form action="{{ route('register') }}" method="POST">
           @csrf
           <div class="input-div">
             <label for="name"></label>
-            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Name" />
           </div>
           @error('name')
             <span style="color:red">{{$message}}</span>
           @enderror
           <div class="input-div">
             <label for="email"></label>
-            <input type="email" name="email" id="" placeholder="E-mail" />
+            <input type="email" name="email" value="{{ old('email') }}" id="email" placeholder="E-mail" />
           </div>
           @error('email')
             <span style="color:red">{{$message}}</span>
@@ -164,6 +157,7 @@ Register
               id="phone_number"
               type="text"
               name="phone_number"
+              value="{{ old('phone_number') }}"
               placeholder="phone number"
             />
           </div>
@@ -208,6 +202,7 @@ Register
             <label for="child-types" class="input-label child-types-label"
               >Additional Type</label
             >
+            
             <select
               name="additional_type"
               class="child-types-select"
@@ -229,7 +224,7 @@ Register
             @enderror
           </div>
           <div class="button">
-            <input class="button2" type="button" value="Sign up" />
+            <button class="button2">Sign up</button>
           </div>
         </form>
       </div>
