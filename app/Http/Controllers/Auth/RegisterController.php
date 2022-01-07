@@ -65,7 +65,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'type' => ['required', 'string', 'in:benefactor,user'],
             'phone_number' => ['sometimes', 'nullable', 'numeric'],
-            'interesting_type' => ['array'],
+            'interesting_type' => ['sometimes', 'nullable', 'array'],
             'interesting_type.*' => ['numeric', Rule::exists('interesting_types', 'id')],
             'additional_type' => ['sometimes', 'nullable', 'string', 'in:individual,organisation'],
             'organisation_description' => ['sometimes', 'nullable', 'string'],
@@ -86,7 +86,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
             'phone_number' => $data['phone_number'],
-            'interesting_type_id' => json_encode($data['interesting_type'])?? null,
+            'interesting_type_id' => $data['interesting_type'] ? json_encode($data['interesting_type']) : null,
             'additional_type' => $data['additional_type'] ?? null,
             'organisation_description' => $data['organisation_description'] ?? null,
             'api_token' => str_random(60)

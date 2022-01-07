@@ -1,4 +1,5 @@
 import { addComment } from "../js/addPostComment.js";
+import { showCommentSection } from "../js/addPostComment.js";
 import { fetchAllComments } from "../js/addPostComment.js";
 import { likePostClickHandler } from "../js/addPostLike.js";
 
@@ -30,7 +31,8 @@ const loadMorePostsAndAddEventListeners = async () => {
     });
 
     document.querySelectorAll(".main-post-comments-icon").forEach((item) => {
-        item.addEventListener("click", showPostCommentSection);
+        item.removeEventListener("click", showCommentSection);
+        item.addEventListener("click", showCommentSection);
     });
 
     document.querySelectorAll(".main-post-comment-button").forEach((item) => {

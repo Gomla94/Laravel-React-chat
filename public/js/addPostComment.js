@@ -1,6 +1,6 @@
 const addCommentBtn = document.querySelectorAll(".main-post-comment-button");
 const commentIcon = document.querySelectorAll(".main-post-comments-icon");
-const showCommentSection = async (e) => {
+export const showCommentSection = async (e) => {
     const clickedCommentIcon = e.target;
     const addCommentSection =
         clickedCommentIcon.closest(".main-post-socials").previousElementSibling;
