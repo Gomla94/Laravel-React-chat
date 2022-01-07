@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 <div class="container">
     <div class="col-md-10">
@@ -17,8 +17,8 @@
                         @foreach ($countries as $country)
                             <tr>
                                 <td>{{ $country->name }}</td>
-                                <td style="display:flex;">
-                                    <a class="btn btn-warning mr-3" href="{{ route('admin.countries.edit', $country->id) }}">Edit</a>
+                                <td style="display:flex">
+                                    <a class="btn btn-warning" style="margin-right:10px" href="{{ route('admin.countries.edit', $country->id) }}">Edit</a>
                                     <form action="{{ route('admin.countries.destroy', $country->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

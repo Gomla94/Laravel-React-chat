@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 <div class="container">
     <div class="col-md-10">
@@ -23,8 +23,8 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user::STATUSES[$user->status] }}</td>
                                 <td>{{ $user->type }}</td>
-                                <td style="display:flex;justify-content:space-between">
-                                    <form action="{{ $user->status === 1 ? route('admin.users.block', $user->id) : route('admin.users.unblock', $user->id) }}" method="POST">
+                                <td style="display:flex">
+                                    <form style="margin-right:10px" action="{{ $user->status === 1 ? route('admin.users.block', $user->id) : route('admin.users.unblock', $user->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-warning">{{$user->status === 1 ? 'Block' : 'Unblock'}}</button>

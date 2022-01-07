@@ -17,6 +17,10 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
+        // dd($user->interesting_type_id);
+        $user_interesting_types_ids = $user->interesting_type_id !== "null" ? json_decode($user->interesting_type_id) : [];
+        // dd($user_interesting_types_ids);
+        $my_interesting_types = $user_interesting_types_ids !== null ? InterestingType::whereIn('id', $user_interesting_types_ids)->get() : null;
         $user = $user->load('interesting_type');
         $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
@@ -30,11 +34,12 @@ class UserController extends Controller
         $my_subscribers_users = User::whereIn('id', $my_subscribers)->get();
         $user_subscribers_count = $user->subscribers()->count();
         $user_subscribtions_count = $user->subscribtions()->count();
-        
+
         return view('profile', [
             'user' => $user,
-            'areas_of_interesting' => $areas_of_interesting,
+            'my_interesting_types' => $my_interesting_types,
             'countries' => $countries,
+            'areas_of_interesting' => $areas_of_interesting,
             'my_posts' => $my_posts,
             'my_posts_images' => $my_posts_images,
             'my_posts_videos' => $my_posts_videos,
@@ -43,6 +48,7 @@ class UserController extends Controller
             'my_subscribers' => $my_subscribers_users,
             'user_subscribers_count' => $user_subscribers_count,
             'user_subscribtions_count' => $user_subscribtions_count,
+            'user_interesting_types_ids' => $user_interesting_types_ids
         ]);
     }
 
@@ -53,7 +59,8 @@ class UserController extends Controller
             'image' => ['sometimes','nullable','max:2048', 'mimes:png,jpg,jpeg'],
             'date_of_birth' => ['sometimes','nullable','date'],
             'phone_number' => ['sometimes','nullable','numeric'],
-            'area_of_interest' => ['sometimes','nullable','integer', Rule::exists('interesting_types', 'id')],
+            'interesting_type' => ['sometimes', 'nullable', 'array'],
+            'interesting_type.*' => ['numeric', Rule::exists('interesting_types', 'id')],
             'country_id' => ['sometimes','nullable','integer', Rule::exists('countries', 'id')],
             'gender' => ['sometimes','nullable','string', Rule::in('male', 'female')]
         ])->validate();
@@ -64,7 +71,7 @@ class UserController extends Controller
             'phone_number' => $attributes['phone_number'],
             'gender' => $attributes['gender'] ?? null,
             'country_id' => $attributes['country_id'] ?? null,
-            'interesting_type_id' => request('area_of_interest') ? $attributes['area_of_interest'] : null
+            'interesting_type_id' => json_encode(request('interesting_type'))?? null,
         ]);
 
         return redirect()->route('user.profile');

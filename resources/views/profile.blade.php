@@ -68,7 +68,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ optional($user->date_of_birth)->format('Y-m-d') }}</p>
           <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ $user->gender }}</p>
           <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional($user->country)->name }}</p>
-          <p class="profile-info"> interested in type: {{ $user->interesting_type->name ?? '' }}</p>
+          <p class="profile-info"> interested in type: 
+            {{ $my_interesting_types !== null ? implode(', ', $my_interesting_types->pluck('name')->toArray()) : '' }}
+          </p>
           <p class="profile-info">additional type: {{ $user->additional_type }}</p>
           
         </div>
@@ -149,13 +151,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
               
                 <div class="col-md-12" >
-                    <label class="create-post-label" for="area_of_interest">Area Of Interesting</label>
-                    <select class="select form-control" name="area_of_interest" id="area_of_interest">
+                    <label class="create-post-label interesting-types-label" for="area_of_interest">Area Of Interesting</label>
+                    <div class="interesting-types">
+                      @foreach($areas_of_interesting as $area)
+                      <div class="checkbox-wrapper">
+                        <label for="{{ $area->name }}">{{ $area->name }}</label>
+                        <input id="{{ $area->name }}" name="interesting_type[]" type="checkbox" value="{{ $area->id }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }}/>
+                      </div>
+                    @endforeach
+                    </div>
+                    
+                    {{-- <select class="select form-control" name="area_of_interest" id="area_of_interest">
                         <option selected disabled>Select A Type</option>
-                        @foreach($areas_of_interesting as $area)
-                        <option value="{{ $area->id }}" {{ $user->interesting_type_id === $area->id ? 'selected' : '' }}>{{ $area->name }}</option>
-                        @endforeach
-                    </select>
+                        
+                    </select> --}}
                     @error('area_of_interest')
                     <span class="profile-error-span">{{$message}}</span>
                     @enderror

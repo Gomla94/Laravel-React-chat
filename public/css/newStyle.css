@@ -141,7 +141,7 @@ html {
 }
 
 .active-list-item {
-    padding: 0px 50px;
+    /* padding: 0px 50px; */
     padding-left: 0px;
     position: relative;
     cursor: pointer;
@@ -151,7 +151,7 @@ html {
     content: "";
     background-color: rgb(1, 149, 1);
     height: 3px;
-    width: 75%;
+    width: 100%;
     position: absolute;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -165,7 +165,7 @@ html {
     content: "";
     background-color: rgb(1, 149, 1);
     height: 3px;
-    width: 75%;
+    width: 100%;
     position: absolute;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -220,7 +220,7 @@ html {
     width: 90%;
     height: 3px;
     position: absolute;
-    left: 2px;
+    left: 3%;
     top: -5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -2033,6 +2033,18 @@ html {
 /* one appeal page ends here */
 
 /* profile page starts here */
+
+.interesting-types {
+    max-height: 150px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.interesting-types-label {
+    display: flex;
+}
 
 .profile-container {
     height: auto;
