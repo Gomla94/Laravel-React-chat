@@ -156,7 +156,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                       @foreach($areas_of_interesting as $area)
                       <div class="checkbox-wrapper">
                         <label for="{{ $area->name }}">{{ $area->name }}</label>
+                        @if($user_interesting_types_ids !== null)
                         <input id="{{ $area->name }}" name="interesting_type[]" type="checkbox" value="{{ $area->id }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }}/>
+                        @else
+                        <input id="{{ $area->name }}" name="interesting_type[]" type="checkbox" value="{{ $area->id }}"/>
+                        @endif
                       </div>
                     @endforeach
                     </div>
