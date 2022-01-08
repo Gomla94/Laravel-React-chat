@@ -14,9 +14,9 @@ trait ApiResponser
      * @param int|null $status
      * @return JsonResponse
      */
-    protected function successResponse($response = [], $status = 200):JsonResponse
+    protected function successResponse(array $response = [], ?int $status = 200):JsonResponse
 	{
-		return response()->json(array_merge($response,['success' => true]), $status);
+		return response()->json(array_merge(['success' => true],$response), $status);
 	}
 
 
@@ -27,7 +27,7 @@ trait ApiResponser
      * @param int $status
      * @return JsonResponse
      */
-	protected function errorResponse($errorMessage = 'labels.api.notFound', $status = 404):JsonResponse
+	protected function errorResponse(string $errorMessage = 'labels.api.notFound', int $status = 404):JsonResponse
 	{
 		return response()->json(
             __($errorMessage),

@@ -37,8 +37,8 @@ class UserResource extends BaseResource
             "organisation_description" => $this->organisation_description,
             'image' => $this->image ? Storage::disk('public')->url($this->image) : null,
             'email_verified' => $this->email_verified_at ? true : false,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->format('d/m/Y'),
+            'updated_at' => $this->updated_at->format('d/m/Y'),
             "additional_type" => $this->additional_type,
             "country" => CountryResource::make($this->whenLoaded('country'))->hide([
                 'created_at',

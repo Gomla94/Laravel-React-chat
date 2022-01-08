@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Post\PostController;
+use App\Http\Controllers\Api\V1\Profile\ProfileController;
 use App\Http\Controllers\Api\V1\Users\UsersController;
 use App\Http\Controllers\MessagesController;
 use Illuminate\Support\Facades\Route;
@@ -28,14 +29,15 @@ Route::prefix("v1")->middleware('json.response')->group(function () {
 
     // Authenticated routes
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/me',function (){
-            return \App\Http\Resources\User\UserResource::make(auth()->user())->hide([
-                'updated_at','created_at'
-            ]);
-        });
-
         Route::post('/logout',[LogoutController::class,'logout']);
 
+        // Profile routes
+        Route::prefix('profile')->group(function () {
+            Route::get('/me',[ProfileController::class,'me']);
+            Route::patch('/update',[ProfileController::class,'update']);
+        });
+
+        // Post routes
         Route::prefix('posts')->group(function () {
             Route::get('/',[PostController::class,'index']);
             Route::post('/',[PostController::class,'store']);
@@ -44,6 +46,7 @@ Route::prefix("v1")->middleware('json.response')->group(function () {
             Route::delete('/{post}',[PostController::class,'remove']);
         });
 
+        // Users routes
         Route::apiResource('users', UsersController::class)->except(['store','update']);
         Route::post('users/changeStatus/{user}', [UsersController::class,'changeStatus']);
     });
