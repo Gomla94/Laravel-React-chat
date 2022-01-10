@@ -79,14 +79,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
+        // dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
             'phone_number' => $data['phone_number'],
-            'interesting_type_id' => $data['interesting_type'] ? json_encode($data['interesting_type']) : null,
+            'interesting_type_id' => request('interesting_type') ? json_encode($data['interesting_type']) : null,
             'additional_type' => $data['additional_type'] ?? null,
             'organisation_description' => $data['organisation_description'] ?? null,
             'api_token' => str_random(60)

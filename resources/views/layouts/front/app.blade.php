@@ -215,10 +215,36 @@
                 >Благотварители</a
               >
             </div>
+
+          
+
           </div>
         </div>
+        
         <div class="col-md-2 col-sm-2 col-xs-2">
           <div class="navbar-user-container">
+            <div class="navbar-language-item">
+              <div class="language">
+                <span class="lang-name">UK</span>
+                <div class="lang-image-wrapper">
+                  <img class="lang-image" src="{{ asset('images/uk.png') }}" />
+                </div>  
+              </div>
+              <div class="language-list">
+                <div class="language">
+                  <span class="lang-name">RUS</span>
+                  <div class="lang-image-wrapper">
+                    <img class="lang-image" src="{{ asset('images/russia.png') }}" />
+                  </div>  
+                </div>
+                <div class="language">
+                  <span class="lang-name">ARM</span>
+                  <div class="lang-image-wrapper">
+                    <img class="lang-image" src="{{ asset('images/armenia.png') }}" />
+                  </div>  
+                </div>
+              </div>
+            </div>
             @if(Auth::id())
             <div id="root"></div>
             @endif

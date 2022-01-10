@@ -13,6 +13,9 @@ const appealsModalWrapper = document.querySelector(".appeals-modal-wrapper");
 const closePostsModal = document.querySelector(".close-posts-modal");
 const closeAppealsModal = document.querySelector(".close-appeals-modal");
 
+const navbarLangIcon = document.querySelector(".navbar-language-item");
+const languagesList = document.querySelector(".language-list");
+
 // const addCommentBtn = document.querySelectorAll(".post-comment-btn");
 // const commentIcon = document.querySelectorAll(".main-post-comments-icon");
 
@@ -31,6 +34,10 @@ const logoutForm = document.querySelector(".logout-form");
 const profileImageInput = document.querySelector(".profile-image-input");
 
 const mainDiv = document.querySelector(".main");
+
+navbarLangIcon.addEventListener("click", () => {
+    languagesList.classList.toggle("show-language-list");
+});
 
 if (chatWrapper) {
     mainDiv.addEventListener("click", () => {

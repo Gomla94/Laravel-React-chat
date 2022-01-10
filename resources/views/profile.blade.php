@@ -88,8 +88,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <li onclick="tabs(1)" class="user-review profile-item">Posts</li>
             <li onclick="tabs(2)" class="user-images profile-item">Images</li>
             <li onclick="tabs(3)" class="user-videos profile-item">Videos</li>
-            <li onclick="tabs(4)" class="user-videos profile-item">Subscribtions</li>
-            <li onclick="tabs(5)" class="user-setting profile-item"> Subscribers</li>
+            <li onclick="tabs(4)" class="user-videos profile-item">Appeals</li>
+            <li onclick="tabs(5)" class="user-videos profile-item">Subscribtions</li>
+            <li onclick="tabs(6)" class="user-setting profile-item"> Subscribers</li>
           </ul>
         </div>
         <div class="profile-body">
@@ -124,7 +125,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
 
                 <div class="row profile-row">
-                    <div class=" col-md-4">
+                    <div class="col-md-4">
                         <label class="create-post-label" for="gender">Gender</label>
                         <select class="select form-control" name="gender" id="gender">
                             <option selected disabled>Select A Gender</option>
@@ -164,11 +165,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                       </div>
                     @endforeach
                     </div>
-                    
-                    {{-- <select class="select form-control" name="area_of_interest" id="area_of_interest">
-                        <option selected disabled>Select A Type</option>
-                        
-                    </select> --}}
                     @error('area_of_interest')
                     <span class="profile-error-span">{{$message}}</span>
                     @enderror
@@ -179,6 +175,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           </div>
           <div class="profile-posts tab">
             <h1>My Posts</h1>
+            <button class="main-posts-add-post-button profile-add-post-button">
+              <i class="fal fa-plus"></i>
+              Новый пост
+            </button>
             <div class="user-posts-wrapper">
               @foreach($my_posts as $post)
               <div class="main-post">
@@ -331,6 +331,53 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               @endforeach
             </div>
           </div>
+          <div class="profile-appeals tab">
+            <h1>My Appeals</h1>
+            <button class="main-posts-add-appeal-button profile-add-post-button">запрос о помощи</button>
+            <div class="user-posts-wrapper">
+              @foreach($my_appeals as $appeal)
+              <div class="main-post">
+                <div class="main-post-user-info-wrapper">
+                  <div class="main-post-user-image-wrapper">
+                    <a href="{{ route('user.page', $appeal->user->id) }}">
+                    <img
+                      src="{{asset($appeal->user->image ?? 'images/avatar.png')}}"
+                      alt=""
+                      class="main-post-user-image"
+                    />
+                    </a>
+                  </div>
+                  <a href="{{ route('user.page', $appeal->user->id) }}"></a>
+                  <div class="main-post-user-names-wrapper">
+                    <span class="main-post-user-name">{{ $appeal->user->name }}</span>
+                    <span class="main-post-user-email">{{'@'. $appeal->user->name }}</span>
+                  </div>
+                  <span class="post-date">{{ $appeal->created_at->format('Y-m-d h:i A') }}</span>
+                </div>
+                <p class="main-post-title">@if($appeal->title) {{ $appeal->title }} @endif</p>
+                <p class="main-post-description">
+                  @if($appeal->description) {{ str_limit($appeal->description, 500) }} @endif
+                </p>
+          
+                @if($appeal->image)
+                <div class="main-post-image-wrapper">
+                  <img src="{{ asset($appeal->image) }}" alt="main-post-image" class="main-post-image" />
+                </div>
+                @endif
+                @if($appeal->video)
+                <div class="main-post-video-wrapper">
+                  <video
+                    controls
+                    src="{{ asset($appeal->video) }}"
+                    alt="main-post-video"
+                    class="main-post-video"
+                  ></video>
+                </div>
+                @endif
+              </div>
+              @endforeach
+            </div>
+          </div>
           <div class="profile-posts-subscibtions tab">
             <h1>Subscribtions</h1>
             <div class="container all-users-list">
@@ -389,11 +436,113 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               @endforeach
             </div>
           </div>
-         
         </div>
       </div>
     </div>
   </div>
+
+
+  <!-- add post modal -->
+<div class="posts-modal-wrapper">
+  <div class="modal-content">
+    <div class="close-modal-container">
+      <span class="close-posts-modal">&times;</span>
+    </div>
+    <form action="{{ route('user.posts.store') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+
+      <div class="form-group">
+          <label class="create-post-label" for="title">Title</label>
+          <input type="text" class="form-control" name="post_title" placeholder="Title">
+          @error('post_title')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="post_description">Description</label>
+          <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
+          @error('post_description')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      
+      <div class="form-group modal-checker-container">
+        <div class="post-modal-checker">
+          <div class="modal-checker"></div>
+        </div>
+        <label class="create-post-label image-label">Image</label>
+        <label class="create-post-label video-label">Video</label>
+        @error('post_image')
+          <span style="color:red">{{$message}}</span>
+        @enderror
+        @error('post_video')
+          <span style="color:red">{{$message}}</span>
+        @enderror
+      </div>
+      
+
+      <div class="form-group post-modal-image-container">
+          <label class="create-post-label" for="image">Image</label>
+          <input type="file" accept="image/*" class="form-control" name="post_image">
+      </div>
+
+      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
+  </form>
+  </div>
+</div>
+
+
+ <!-- add appeal modal -->
+ <div class="appeals-modal-wrapper">
+  <div class="modal-content">
+    <div class="close-modal-container">
+      <span class="close-appeals-modal">&times;</span>
+    </div>
+    <form action="{{ route('user.appeals.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+      @csrf
+
+      <div class="form-group">
+          <label class="create-post-label" for="title">Title</label>
+          <input type="text" class="form-control" name="appeal_title" value="{{ old('appeal_title') }}" placeholder="Title">
+          @error('appeal_title')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group">
+          <label class="create-post-label" for="description">Description</label>
+          <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('appeal_description') }}</textarea>
+          @error('appeal_description')
+          <span style="color:red">{{$message}}</span>
+          @enderror
+      </div>
+
+      <div class="form-group modal-image-container">
+          <label class="create-post-label" for="image">Image</label>
+          <input type="file" accept="image/*" multiple class="form-control" name="appeal_image[]">
+          @if($errors->has('appeal_image.*'))
+            @foreach($errors->get('appeal_image.*') as $error)
+            @foreach($error as $err)
+              <p style="color:red">{{$err}}</p>
+            @endforeach
+            @endforeach
+          @endif
+      </div>
+
+      <div class="form-group modal-image-container">
+        <label class="create-post-label" for="video">Video</label>
+        <input type="file" accept="video/*" class="form-control" name="appeal_video">
+        @error('appeal_video')
+          <span style="color:red">{{$message}}</span>
+        @enderror
+    </div>
+
+      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Appeal</button>
+  </form>
+  </div>
+</div>
 
   @push('js')
   <script src="{{ asset('js/profilePage.js') }}" defer></script>
