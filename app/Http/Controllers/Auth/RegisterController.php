@@ -58,14 +58,13 @@ class RegisterController extends Controller
      
     protected function validator(array $data)
     {
-        // dd();
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'type' => ['required', 'string', 'in:benefactor,user'],
             'phone_number' => ['sometimes', 'nullable', 'numeric'],
-            'interesting_type' => ['sometimes', 'nullable', 'array'],
+            'interesting_type' => ['required_if:type,user','array'],
             'interesting_type.*' => ['numeric', Rule::exists('interesting_types', 'id')],
             'additional_type' => ['sometimes', 'nullable', 'string', 'in:individual,organisation'],
             'organisation_description' => ['sometimes', 'nullable', 'string'],
@@ -80,6 +79,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
