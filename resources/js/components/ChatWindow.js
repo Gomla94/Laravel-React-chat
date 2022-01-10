@@ -12,6 +12,7 @@ const ChatWindow = () => {
     const [userIsAlreadyBlocked, setUserIsAlreadyBlocked] = useState(null);
     const [blockMessage, setBlockMessage] = useState(null);
     const scrollToEndRef = useRef(null);
+    const [showAlertMessages, setShowAlertMessages] = useState(true);
 
     const envelopes = document.querySelectorAll(".user-green-message-box");
     const userBlocker = document.querySelector(".sound-checker");
@@ -76,15 +77,51 @@ const ChatWindow = () => {
             document.querySelector(".messages-middle-section").scrollHeight;
     }, [messages]);
 
+    const createAlertMessage = () => {
+        const messagesCount = document.querySelector(".messages-count");
+        if (!messagesCount) {
+            const chat = document.querySelector(".chat");
+            const alertMessageWrapper = document.createElement("div");
+            alertMessageWrapper.classList.add("alert-message-wrapper");
+            const alertMessage = document.createElement("div");
+            alertMessage.classList.add("alert-new-message");
+            const messageCountSpan = document.createElement("span");
+            messageCountSpan.classList.add("messages-count");
+            messageCountSpan.textContent = 1;
+            alertMessageWrapper.appendChild(alertMessage);
+            alertMessageWrapper.appendChild(messageCountSpan);
+            chat.prepend(alertMessageWrapper);
+        } else {
+            messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
+        }
+    };
+
     useEffect(() => {
-        window.Echo.private(`messages.${authId}`).listen(
-            "NewMessageEvent",
-            (event) => {
-                prevMessages.current.push(event.message);
-                setMessages([...prevMessages.current]);
+        if (showAlertMessages === true) {
+            window.Echo.private(`messages.${authId}`).listen(
+                "NewMessageEvent",
+                (event) => {
+                    const messagesCount =
+                        document.querySelector(".messages-count");
+                    if (!messagesCount) {
+                        console.log(".messages-count");
+                        createAlertMessage();
+                    } else {
+                        messagesCount.textContent =
+                            parseInt(messagesCount.textContent) + 1;
+                    }
+                }
+            );
+        } else {
+            window.Echo.leave(`messages.${authId}`);
+            const alertMessages = document.querySelector(
+                ".alert-message-wrapper"
+            );
+            if (alertMessages) {
+                alertMessages.remove();
             }
-        );
-    }, []);
+        }
+    }, [showAlertMessages]);
 
     useEffect(() => {
         envelopes.forEach((item) => {
@@ -235,11 +272,12 @@ const ChatWindow = () => {
         }).then((response) => {
             setUsers(response.data);
             changeToUserId(null, userId);
-            // setToUserId(userId);
         });
     };
 
     const fetchAllUsers = () => {
+        setShowAlertMessages(false);
+
         chat.get("/chat-users").then((response) => {
             setUsers(response.data);
         });
@@ -378,6 +416,14 @@ const ChatWindow = () => {
             return false;
         }
 
+        window.Echo.private(`messages.${toUserId}.${authId}`).listen(
+            "NewMessageEvent",
+            (event) => {
+                prevMessages.current.push(event.message);
+                setMessages([...prevMessages.current]);
+            }
+        );
+
         chat.get(
             `/messages?from=${window.btoa(authId)}&to=${window.btoa(toUserId)}`
         ).then((response) => {
@@ -460,7 +506,7 @@ const ChatWindow = () => {
     };
 
     return (
-        <div>
+        <div className="chat">
             <i
                 className="far fa-comments navbar-user-comment"
                 onClick={fetchAllUsers}

@@ -21,6 +21,10 @@ Broadcast::channel('messages.{to}', function ($user, $to) {
     return true;
 });
 
+Broadcast::channel('messages.{from}.{to}', function ($user, $from, $to) {
+    return true;
+});
+
 Broadcast::channel('blocked-user-channel.{blockerId}', function () {
     return true;
 });

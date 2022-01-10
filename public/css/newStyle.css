@@ -992,6 +992,30 @@ html {
     }
 }
 
+.alert-message-wrapper {
+    display: block;
+}
+
+.alert-new-message {
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    position: relative;
+    left: 60%;
+    /* top: 2px; */
+    border-radius: 10px;
+}
+
+.show-alert-message-wrapper {
+    display: block;
+}
+
+.messages-count {
+    position: absolute;
+    top: 2%;
+    right: 4%;
+}
+
 .chat-wrapper {
     background-color: rgb(239, 235, 241);
     position: absolute;
@@ -1032,7 +1056,6 @@ html {
     background-color: white;
     border-right: 2px solid black;
     border-top-left-radius: 5px;
-    /* background-color: rgb(117, 215, 253); */
 }
 
 .active-users-top-section {
@@ -1063,7 +1086,6 @@ html {
     left: 40px;
     cursor: pointer;
     transition: all 0.5s;
-    /* margin: 10px 10px; */
 }
 
 .change-sound-checker {
@@ -1091,7 +1113,6 @@ html {
     border: none;
     border-radius: 3px;
     position: relative;
-    /* padding-top: 10px; */
     padding-left: 40px;
     border: 1px solid white;
 }
@@ -1117,17 +1138,14 @@ html {
 
 .chat-users-list {
     margin-top: 20px;
-    /* padding-left: 15px; */
     max-height: 450px;
     overflow-y: scroll;
-    /* background-color: rgb(117, 215, 253); */
 }
 
 .chat-user-wrapper {
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
-    /* margin-right: 20px; */
     overflow: hidden;
     cursor: pointer;
 }
@@ -1225,7 +1243,6 @@ html {
     background-color: rgb(212, 220, 248);
     color: black;
     margin-left: 60px;
-    /* max-width: 250px; */
     inline-size: 250px;
     border-radius: 4px;
     padding: 10px;
@@ -1295,7 +1312,6 @@ html {
 .message-image {
     height: 100px;
     width: 100%;
-    /* object-fit: contain; */
 }
 
 .message-video {
@@ -1320,14 +1336,13 @@ html {
 
 .chat-paperclip {
     font-size: 23px;
-    /* padding: 0px 10px; */
     cursor: pointer;
     height: 100%;
     position: absolute;
     top: 20%;
-    left: 6px;
+    left: 15px;
     color: rgb(13, 119, 180);
-    width: 65%;
+    width: 60%;
 }
 
 .chat-message-input {
