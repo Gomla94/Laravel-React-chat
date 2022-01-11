@@ -72,6 +72,7 @@ const ChatWindow = () => {
     });
 
     const prevMessages = useRef([]);
+
     useEffect(() => {
         document.querySelector(".messages-middle-section").scrollTop =
             document.querySelector(".messages-middle-section").scrollHeight;
@@ -97,30 +98,42 @@ const ChatWindow = () => {
     };
 
     useEffect(() => {
-        if (showAlertMessages === true) {
-            window.Echo.private(`messages.${authId}`).listen(
-                "NewMessageEvent",
-                (event) => {
-                    const messagesCount =
-                        document.querySelector(".messages-count");
-                    if (!messagesCount) {
-                        console.log(".messages-count");
-                        createAlertMessage();
-                    } else {
-                        messagesCount.textContent =
-                            parseInt(messagesCount.textContent) + 1;
-                    }
+        window.Echo.private(`messages.${authId}`).listen(
+            "NewMessageEvent",
+            (event) => {
+                const messagesCount = document.querySelector(".messages-count");
+                if (!messagesCount) {
+                    createAlertMessage();
+                } else {
+                    messagesCount.textContent =
+                        parseInt(messagesCount.textContent) + 1;
                 }
-            );
-        } else {
-            window.Echo.leave(`messages.${authId}`);
-            const alertMessages = document.querySelector(
-                ".alert-message-wrapper"
-            );
-            if (alertMessages) {
-                alertMessages.remove();
             }
+        );
+    }, []);
+
+    useEffect(() => {
+        const alertMessages = document.querySelector(".alert-message-wrapper");
+        if (alertMessages) {
+            alertMessages.remove();
         }
+
+        window.Echo.leave(`messages.${authId}`);
+
+        window.Echo.private(`messages.${authId}`).listen(
+            "NewMessageEvent",
+            (event) => {
+                if (
+                    document
+                        .querySelector(".chat-wrapper")
+                        .classList.contains("show-chat-wrapper") === false
+                ) {
+                    createAlertMessage();
+                } else {
+                    return false;
+                }
+            }
+        );
     }, [showAlertMessages]);
 
     useEffect(() => {
@@ -276,7 +289,12 @@ const ChatWindow = () => {
     };
 
     const fetchAllUsers = () => {
-        setShowAlertMessages(false);
+        // if (showAlertMessages === true) {
+        //     setShowAlertMessages(false);
+        // } else {
+        //     setShowAlertMessages(true);
+        // }
+        setShowAlertMessages(!showAlertMessages);
 
         chat.get("/chat-users").then((response) => {
             setUsers(response.data);

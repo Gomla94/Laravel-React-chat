@@ -2357,25 +2357,31 @@ var ChatWindow = function ChatWindow() {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (showAlertMessages === true) {
-      window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
-        var messagesCount = document.querySelector(".messages-count");
+    window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
+      var messagesCount = document.querySelector(".messages-count");
 
-        if (!messagesCount) {
-          console.log(".messages-count");
-          createAlertMessage();
-        } else {
-          messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
-        }
-      });
-    } else {
-      window.Echo.leave("messages.".concat(authId));
-      var alertMessages = document.querySelector(".alert-message-wrapper");
-
-      if (alertMessages) {
-        alertMessages.remove();
+      if (!messagesCount) {
+        createAlertMessage();
+      } else {
+        messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
       }
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var alertMessages = document.querySelector(".alert-message-wrapper");
+
+    if (alertMessages) {
+      alertMessages.remove();
     }
+
+    window.Echo.leave("messages.".concat(authId));
+    window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
+      if (document.querySelector(".chat-wrapper").classList.contains("show-chat-wrapper") === false) {
+        createAlertMessage();
+      } else {
+        return false;
+      }
+    });
   }, [showAlertMessages]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     envelopes.forEach(function (item) {
@@ -2544,7 +2550,12 @@ var ChatWindow = function ChatWindow() {
   };
 
   var fetchAllUsers = function fetchAllUsers() {
-    setShowAlertMessages(false);
+    // if (showAlertMessages === true) {
+    //     setShowAlertMessages(false);
+    // } else {
+    //     setShowAlertMessages(true);
+    // }
+    setShowAlertMessages(!showAlertMessages);
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/chat-users").then(function (response) {
       setUsers(response.data);
     });
