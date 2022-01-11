@@ -110,11 +110,13 @@ class FrontController extends Controller
     public function show_user_page($id)
     {
         $user = User::find($id);
-        $user = $user->load('interesting_type');
+        $user_interesting_types_ids = $user->interesting_type_id !== "null" ? json_decode($user->interesting_type_id) : [];
+        $my_interesting_types = $user_interesting_types_ids !== null ? InterestingType::whereIn('id', $user_interesting_types_ids)->get() : null;
         $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
         $countries = Country::all();
         $my_posts = $user->posts()->get();
+        $my_appeals = $user->appeals()->get();
         $my_posts_images = $user->posts()->whereNull('video')->whereNotNull('image')->get();
         $my_posts_videos = $user->posts()->whereNull('image')->whereNotNull('video')->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
@@ -129,6 +131,7 @@ class FrontController extends Controller
             'areas_of_interesting' => $areas_of_interesting,
             'countries' => $countries,
             'my_posts' => $my_posts,
+            'my_appeals' => $my_appeals,
             'my_posts_images' => $my_posts_images,
             'my_posts_videos' => $my_posts_videos,
             'my_subscribtions_users' => $my_subscribtions_users,
@@ -136,6 +139,8 @@ class FrontController extends Controller
             'my_subscribers' => $my_subscribers_users,
             'user_subscribers_count' => $user_subscribers_count,
             'user_subscribtions_count' => $user_subscribtions_count,
+            'my_interesting_types' => $my_interesting_types,
+            'user_interesting_types_ids' => $user_interesting_types_ids,
         ]);
     }
 

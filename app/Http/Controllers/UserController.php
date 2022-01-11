@@ -19,7 +19,6 @@ class UserController extends Controller
         $user = Auth::user();
         $user_interesting_types_ids = $user->interesting_type_id !== "null" ? json_decode($user->interesting_type_id) : [];
         $my_interesting_types = $user_interesting_types_ids !== null ? InterestingType::whereIn('id', $user_interesting_types_ids)->get() : null;
-        $user = $user->load('interesting_type');
         $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
         $countries = Country::all();
