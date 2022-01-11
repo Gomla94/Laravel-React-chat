@@ -119,7 +119,6 @@ const ChatWindow = () => {
         }
 
         window.Echo.leave(`messages.${authId}`);
-
         window.Echo.private(`messages.${authId}`).listen(
             "NewMessageEvent",
             (event) => {
