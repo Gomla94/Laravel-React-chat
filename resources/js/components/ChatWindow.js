@@ -3,13 +3,6 @@ import chat from "../src/chat";
 import InputEmoji from "react-input-emoji";
 
 const ChatWindow = () => {
-    const [text, setText] = useState("");
-
-    function handleOnEnter(e, text) {
-        console.log(e, text);
-        // console.log("enter", text);
-    }
-
     const [users, setUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
@@ -502,19 +495,7 @@ const ChatWindow = () => {
                     />
                 </div>
 
-                {/* <input
-                    className="chat-message-input"
-                    disabled={toUserId ? false : true}
-                    placeholder="Напишите здесь свой текст ..."
-                    type="text"
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyPress={(e) => {
-                        onKeyUp(e);
-                    }}
-                /> */}
-
                 <InputEmoji
-                    value={text}
                     onChange={setNewMessage}
                     cleanOnEnter
                     onEnter={(e) => {

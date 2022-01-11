@@ -2225,68 +2225,59 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var ChatWindow = function ChatWindow() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      text = _useState2[0],
-      setText = _useState2[1];
-
-  function handleOnEnter(e, text) {
-    console.log(e, text); // console.log("enter", text);
-  }
+      users = _useState2[0],
+      setUsers = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      users = _useState4[0],
-      setUsers = _useState4[1];
+      messages = _useState4[0],
+      setMessages = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      messages = _useState6[0],
-      setMessages = _useState6[1];
+      newMessage = _useState6[0],
+      setNewMessage = _useState6[1];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      newMessage = _useState8[0],
-      setNewMessage = _useState8[1];
+      toUserId = _useState8[0],
+      setToUserId = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      toUserId = _useState10[0],
-      setToUserId = _useState10[1];
+      chattingWithUser = _useState10[0],
+      setChattingWithUser = _useState10[1];
 
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      chattingWithUser = _useState12[0],
-      setChattingWithUser = _useState12[1];
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState14 = _slicedToArray(_useState13, 2),
-      blockedUserId = _useState14[0],
-      setBlockedUserId = _useState14[1];
+      blockedUserId = _useState12[0],
+      setBlockedUserId = _useState12[1];
 
   var authId = window.Laravel.user.id;
 
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      spinner = _useState14[0],
+      setSpinner = _useState14[1];
+
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState16 = _slicedToArray(_useState15, 2),
-      spinner = _useState16[0],
-      setSpinner = _useState16[1];
+      userIsAlreadyBlocked = _useState16[0],
+      setUserIsAlreadyBlocked = _useState16[1];
 
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState18 = _slicedToArray(_useState17, 2),
-      userIsAlreadyBlocked = _useState18[0],
-      setUserIsAlreadyBlocked = _useState18[1];
-
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState20 = _slicedToArray(_useState19, 2),
-      blockMessage = _useState20[0],
-      setBlockMessage = _useState20[1];
+      blockMessage = _useState18[0],
+      setBlockMessage = _useState18[1];
 
   var scrollToEndRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
-      _useState22 = _slicedToArray(_useState21, 2),
-      showAlertMessages = _useState22[0],
-      setShowAlertMessages = _useState22[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+      _useState20 = _slicedToArray(_useState19, 2),
+      showAlertMessages = _useState20[0],
+      setShowAlertMessages = _useState20[1];
 
   var envelopes = document.querySelectorAll(".user-green-message-box");
   var userBlocker = document.querySelector(".sound-checker");
@@ -2745,7 +2736,6 @@ var ChatWindow = function ChatWindow() {
           }
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_input_emoji__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        value: text,
         onChange: setNewMessage,
         cleanOnEnter: true,
         onEnter: function onEnter(e) {
