@@ -27,14 +27,14 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8','max:18','confirmed'],
-            'password_confirmation' => ['string','min:8','max:18'],
+            'password' => ['required', 'string', 'min:8','max:18'],
             'type' => ['string', 'in:benefactor,user'],
-            'phone_number' => ['numeric'],
+            'phone' => ['string'],
             'interesting_type' => ['numeric', Rule::exists('interesting_types', 'id')],
             'additional_type' => ['sometimes', 'nullable', 'string', 'in:individual,organisation'],
             'organisation_description' => ['sometimes', 'nullable', 'string'],
-            'api_token' => ['string']
+            'api_token' => ['string'],
+            'country' => ['numeric']
         ];
     }
 

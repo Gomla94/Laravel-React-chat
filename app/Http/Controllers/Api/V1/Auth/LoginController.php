@@ -27,7 +27,7 @@ class LoginController extends Controller
         $token = $user->createToken($user->name)->plainTextToken;
         return $this->successResponse([
             'token' => $token,
-            'user' => UserResource::make($user)->only(['name','email','type','image'])
+            'data' => UserResource::make($user)->only(['name','email','type','image'])
         ]);
     }
 }

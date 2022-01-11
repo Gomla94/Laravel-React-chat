@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
+use App\Http\Controllers\Api\V1\Country\CountryController;
 use App\Http\Controllers\Api\V1\Post\PostController;
 use App\Http\Controllers\Api\V1\Profile\ProfileController;
 use App\Http\Controllers\Api\V1\Users\UsersController;
@@ -25,6 +26,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 Route::prefix("v1")->middleware('json.response')->group(function () {
     Route::post("/login",[LoginController::class,'login']);
     Route::post("/register",[RegisterController::class,'register']);
+
+
+    // Getter routes
+    Route::apiResource('/countries',CountryController::class)->only(['index']);
 
 
     // Authenticated routes

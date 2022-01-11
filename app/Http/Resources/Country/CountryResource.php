@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CountryResource extends BaseResource
 {
+    public static function collection($resource)
+    {
+        return tap(new CountryCollection($resource), function ($collection) {
+            $collection->collects = __CLASS__;
+        });
+    }
+
     /**
      * Transform the resource into an array.
      *

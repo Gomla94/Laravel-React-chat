@@ -25,11 +25,12 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => $request->type ?? 'user',
-            'phone_number' => $request->phone_number,
+            'phone_number' => $request->phone,
             'interesting_type_id' => $request->interesting_type ?? null,
             'additional_type' => $request->additional_type ?? null,
             'organisation_description' => $request->organisation_description ?? null,
-            'api_token' => str_random(60)
+            'api_token' => str_random(60),
+            'country_id' => $request->country
         ]);
 
         $token = $user->createToken($user->name)->plainTextToken;
