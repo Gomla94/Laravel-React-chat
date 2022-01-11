@@ -1355,14 +1355,25 @@ html {
     background-color: rgb(215, 221, 251);
 }
 
+.react-emoji {
+    display: flex !important;
+    position: relative !important;
+    width: 80% !important;
+    left: 12% !important;
+}
+
+.react-input-emoji--wrapper {
+    background-color: rgb(215, 221, 251);
+}
+
 .chat-send-wrapper {
     font-size: 20px;
-    cursor: pointer;
     height: 100%;
     width: 10%;
     position: absolute;
     right: 1%;
     cursor: pointer;
+    top: 10%;
 }
 
 .chat-paper-plane {
@@ -2227,7 +2238,7 @@ html {
     }
 
     .navbar-user-container {
-        width: 100px;
+        width: 150px;
         height: 50px;
         display: flex;
         flex-direction: row;
@@ -2271,6 +2282,10 @@ html {
         cursor: pointer;
     }
 
+    .react-emoji {
+        width: 75% !important;
+    }
+
     .chat-paper-plane {
         font-size: 23px;
         padding: 0px 10px;
@@ -2278,10 +2293,6 @@ html {
         height: 100%;
         position: absolute;
         color: rgb(13, 119, 180);
-    }
-
-    .video-wrapper {
-        /* height: fit-content; */
     }
 
     .video-container {
@@ -2470,7 +2481,7 @@ html {
         height: 100%;
         width: 10%;
         position: absolute;
-        right: 10%;
+        right: 5%;
         cursor: pointer;
     }
 
@@ -2534,7 +2545,7 @@ html {
     }
 
     .navbar-user-container {
-        width: 100px;
+        width: 150px;
         height: 50px;
         display: flex;
         flex-direction: row;

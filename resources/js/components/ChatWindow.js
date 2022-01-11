@@ -1,6 +1,15 @@
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import chat from "../src/chat";
+import InputEmoji from "react-input-emoji";
+
 const ChatWindow = () => {
+    const [text, setText] = useState("");
+
+    function handleOnEnter(e, text) {
+        console.log(e, text);
+        // console.log("enter", text);
+    }
+
     const [users, setUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
@@ -44,9 +53,13 @@ const ChatWindow = () => {
     }, [toUserId]);
 
     const onKeyUp = (e) => {
-        if (e.code === "Enter") {
-            sendMessage();
+        if (toUserId === null) {
+            return false;
         }
+        sendMessage();
+        // if (e.code === "Enter") {
+        //     sendMessage();
+        // }
     };
 
     useEffect(() => {
@@ -288,11 +301,6 @@ const ChatWindow = () => {
     };
 
     const fetchAllUsers = () => {
-        // if (showAlertMessages === true) {
-        //     setShowAlertMessages(false);
-        // } else {
-        //     setShowAlertMessages(true);
-        // }
         setShowAlertMessages(!showAlertMessages);
 
         chat.get("/chat-users").then((response) => {
@@ -397,7 +405,7 @@ const ChatWindow = () => {
     };
 
     const sendMessage = (e) => {
-        if (newMessage === null) {
+        if (newMessage === null || newMessage === "") {
             return false;
         }
         chat.post("/messages", {
@@ -407,7 +415,7 @@ const ChatWindow = () => {
         }).then((response) => {
             setMessages([...messages, response.data.sent_message]);
         });
-        document.querySelector(".chat-message-input").value = "";
+        // document.querySelector(".chat-message-input").value = "";
     };
 
     const sendMedia = (e) => {
@@ -494,7 +502,7 @@ const ChatWindow = () => {
                     />
                 </div>
 
-                <input
+                {/* <input
                     className="chat-message-input"
                     disabled={toUserId ? false : true}
                     placeholder="Напишите здесь свой текст ..."
@@ -503,6 +511,16 @@ const ChatWindow = () => {
                     onKeyPress={(e) => {
                         onKeyUp(e);
                     }}
+                /> */}
+
+                <InputEmoji
+                    value={text}
+                    onChange={setNewMessage}
+                    cleanOnEnter
+                    onEnter={(e) => {
+                        onKeyUp(e);
+                    }}
+                    placeholder="Напишите ..."
                 />
                 <div className="chat-send-wrapper">
                     <i
