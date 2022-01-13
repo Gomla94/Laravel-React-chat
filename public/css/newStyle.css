@@ -953,7 +953,133 @@ html {
 
 /* posts modal ends here */
 
+/* notifications start here */
+
+.bell-icon {
+    /* margin-left: 2px; */
+    /* margin-right: 2px; */
+    cursor: pointer;
+    font-size: 18px;
+    /* position: relative; */
+}
+
+.count {
+    position: absolute;
+    top: -12%;
+    right: -27%;
+    background-color: red;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 70%;
+    color: white;
+    padding: 6px;
+    padding-top: 5%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.notifications-wrapper {
+    height: 80%;
+    width: 100%;
+    background-color: grey;
+    position: fixed;
+    left: 0%;
+    top: 10%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notifications-container {
+    height: 90%;
+    width: 60%;
+    background-color: rgb(223, 222, 222);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1% 0% 0% 1.5%;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.notification {
+    background-color: white;
+    width: 95%;
+    height: fit-content;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.notification-main {
+    font-size: 18px;
+    font-weight: 800;
+    margin-right: 5px;
+    /* margin-top: -20px; */
+}
+
+.notification-info {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.notification-user-image {
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.notification-user-image img {
+    height: 100%;
+    width: 100%;
+    /* object-fit: contain; */
+}
+
+.notification-actions-wrapper {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.accept-notify {
+    color: green;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.deny-notify {
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* notifications end here */
+
 /* chat section starts here */
+
+.welcome-message {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.welcome-message > span {
+    color: red;
+    font-size: 20px;
+    font-weight: 600;
+}
 
 .change-sound-checker-background {
     background-color: rgb(159, 162, 170);
@@ -2263,6 +2389,17 @@ html {
         left: 15%;
     }
 
+    .messages-count {
+        position: absolute;
+        top: 2%;
+        left: 60%;
+    }
+
+    .count {
+        top: -10%;
+        right: 15%;
+    }
+
     .chat-arrow {
         position: absolute;
         top: 35px;
@@ -2273,7 +2410,7 @@ html {
 
     .chat-wrapper {
         top: 65px;
-        left: -400%;
+        /* left: -400%; */
     }
 
     .chat-send-wrapper {
@@ -2638,6 +2775,10 @@ html {
     .one-user-social-info-wrapper {
         grid-template-columns: 1fr 1fr 1fr;
     }
+
+    .notifications-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (max-width: 780px) {
@@ -2685,7 +2826,7 @@ html {
 
     .chat-wrapper {
         min-width: 400px;
-        left: -280%;
+        /* left: -280%; */
     }
 
     .chat-paperclip {

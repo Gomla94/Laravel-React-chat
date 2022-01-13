@@ -65,6 +65,11 @@ class User extends Authenticatable
         'date_of_birth' => 'date'
     ];
 
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'user_notifications.'.$this->id;
+    }
+
     public function interesting_type()
     {
         return $this->belongsTo(InterestingType::class);

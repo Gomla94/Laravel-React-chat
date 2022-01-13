@@ -89,4 +89,28 @@ class UserController extends Controller
         auth()->user()->update(['image' => $image_name]);
     }
 
+    public function my_notifications()
+    {
+        $user = Auth::user();
+        $my_notifications = $user->notifications()->where('type', 'App\Notifications\NewSubscribtion')
+                            ->where('read_at', null)->get();
+        return $my_notifications;
+    }
+
+    public function check_notification()
+    {
+        try {
+            $notification_id = request('nid');
+            $status = request('status');
+            $user_notification = auth()->user()->notifications()->where('id', $notification_id)->firstOrFail();
+            if ($status === 'accept') {
+                $user = User::where('email', $user_notification->data['user_email'])->first();
+                auth()->user()->subscribtions()->create(['user_id' => $user->id]);
+            }
+            $user_notification->update(['read_at' => now()]);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()]);
+        }
+    }
+
 }

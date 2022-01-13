@@ -397,6 +397,20 @@ const ChatWindow = () => {
         });
     };
 
+    const renderWelcomeMessage = () => {
+        if (toUserId === null) {
+            return (
+                <p className="welcome-message">
+                    <span>Note: </span> You need to subscribe to a user to be
+                    able to chat with him, also if a user is not subscribed to
+                    you he will not be able to receive your messages
+                </p>
+            );
+        }
+
+        return "";
+    };
+
     const sendMessage = (e) => {
         if (newMessage === null || newMessage === "") {
             return false;
@@ -408,10 +422,12 @@ const ChatWindow = () => {
         }).then((response) => {
             setMessages([...messages, response.data.sent_message]);
         });
-        // document.querySelector(".chat-message-input").value = "";
     };
 
     const sendMedia = (e) => {
+        if (toUserId == null || toUserId == "") {
+            return false;
+        }
         let formdata = new FormData();
         const image = e.target.files[0];
         formdata.append("file", image);
@@ -563,6 +579,7 @@ const ChatWindow = () => {
                     <div className="messages-middle-section">
                         <div className="scroll" ref={scrollToEndRef}>
                             {renderredMessages(messages)}
+                            {renderWelcomeMessage()}
                         </div>
                     </div>
                     <div className="messages-bottom-section">

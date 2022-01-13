@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewSubscribtionEvent;
 use App\Models\Appeal;
 use App\Models\Country;
 use App\Models\InterestingType;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\NewSubscribtion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class FrontController extends Controller
 {
@@ -162,6 +165,7 @@ class FrontController extends Controller
     public function subscribe(User $user)
     {
         auth()->user()->subscribtions()->create(['user_id' => $user->id]);
+        broadcast(new NewSubscribtionEvent($user, Auth::user()))->toOthers();
         return back();
     }
 

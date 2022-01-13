@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
     Route::post('/block-user', [MessagesController::class, 'block_user']);
     Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
+
+     /** notifications */
+     Route::get('my_notifications', [UserController::class, 'my_notifications']);
+     Route::post('check-notification', [UserController::class, 'check_notification']);
 });
 
 

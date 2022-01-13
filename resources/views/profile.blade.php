@@ -95,11 +95,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
         </div>
         <div class="profile-body">
           <div class="profile-settings tab">
+            @if(Auth::id() === $user->id)
               <form class="profile-form" action="{{ route('user.update-profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row profile-row">
-                    <div class=" col-md-4">
+                    <div class="col-md-6 mb-5">
                         <label class="create-post-label" for="image">Image</label>
                         <input type="file" accept="image/*" class="form-control profile-image-input" name="image">
                         @error('image')
@@ -107,7 +108,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                         @enderror
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6 mb-5">
                         <label class="create-post-label" for="date_of_birth">Date Of Birth</label>
                         <input type="date" class="form-control" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}" name="date_of_birth">
                         @error('date_of_birth')
@@ -115,7 +116,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                         @enderror
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6 mb-5">
                         <label class="create-post-label" for="phone_number">Phone Number</label>
                         <input type="text" class="form-control" value="{{ $user->phone_number }}" name="phone_number">
                         @error('phone_number')
@@ -125,9 +126,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
 
                 <div class="row profile-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label class="create-post-label" for="gender">Gender</label>
-                        <select class="select form-control" name="gender" id="gender">
+                        <select class="form-control" name="gender" id="gender">
                             <option selected disabled>Select A Gender</option>
                             <option value="male" {{ $user->gender === 'male' ? 'selected' : '' }}>Male</option>
                             <option value="female" {{ $user->gender === 'female' ? 'selected' : '' }}>Female</option>
@@ -137,7 +138,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                         @enderror
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label class="create-post-label" for="date_of_birth">Country</label>
                         <select class="select form-control" name="country_id" id="country">
                             <option selected disabled>Select A country</option>
@@ -172,13 +173,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 
                 <button type="submit" class="btn btn-primary update-profile-button">Update Profile</button>
             </form>
+          @endif
+
           </div>
           <div class="profile-posts tab">
-            <h1>My Posts</h1>
-            <button class="main-posts-add-post-button profile-add-post-button">
-              <i class="fal fa-plus"></i>
-              Новый пост
-            </button>
+            <h1>Posts</h1>
+            @if(Auth::id() === $user->id)
+              <button class="main-posts-add-post-button profile-add-post-button">
+                <i class="fal fa-plus"></i>
+                Новый пост
+              </button>
+            @endif
             <div class="user-posts-wrapper">
               @foreach($my_posts as $post)
               <div class="main-post">
@@ -332,8 +337,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             </div>
           </div>
           <div class="profile-appeals tab">
-            <h1>My Appeals</h1>
-            <button class="main-posts-add-appeal-button profile-add-post-button">запрос о помощи</button>
+            <h1>Appeals</h1>
+            @if(Auth::id() === $user->id)
+              <button class="main-posts-add-appeal-button profile-add-post-button">запрос о помощи</button>
+            @endif
             <div class="user-posts-wrapper">
               @foreach($my_appeals as $appeal)
               <div class="main-post">
@@ -381,38 +388,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           <div class="profile-posts-subscibtions tab">
             <h1>Subscribtions</h1>
             <div class="container all-users-list">
-              @foreach($my_subscribtions_users as $user)
+              @foreach($my_subscribtions_users as $subscribtion_user)
               <div class="user">
-                <a href="{{ route('user.page', $user->id) }}">
+                <a href="{{ route('user.page', $subscribtion_user->id) }}">
                   <div class="user-image-wrapper">
-                    <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="user-image" />
+                    <img src="{{ asset($subscribtion_user->image ?? 'images/avatar.png') }}" alt="user-image" />
                   </div>
                 </a>
                 <div class="users-social">
-                  <span class="user-social-span">{{ $user->name }}</span>
-                  <span class="user-social-span">{{ $user->email }}</span>
+                  <span class="user-social-span">{{ $subscribtion_user->name }}</span>
+                  <span class="user-social-span">{{ $subscribtion_user->email }}</span>
                   {{-- <span class="user-social-span">Открыть полный профиль</span> --}}
                 </div>
-                {{-- @if(Auth::check())
+                @if(Auth::check() && auth()->user()->id !== $subscribtion_user->id)
                   <div class="user-subscription-button">
-                    <div class="user-green-message-box" data-id={{ $user->id }}>
-                      <i class="fas fa-envelope user-envelope" data-id={{ $user->id }}></i>
+                    <div class="user-green-message-box" data-id={{ $subscribtion_user->id }}>
+                      <i class="fas fa-envelope user-envelope" data-id={{ $subscribtion_user->id }}></i>
                     </div>
-                    @if($user->subscribed($user->id))
-                    <form action="{{ route('unsubscribe', $user->id) }}" method="POST">
-                      @csrf
-                      <button class="fas fa-check checkmark-icon"></button>
-                    </form>
-                    @else
-                    <form action="{{ route('subscribe', $user->id) }}" method="POST"> 
-                      @csrf
-                      <button class="user-subscribe">
-                        subscribe
-                      </button>
-                    </form>
-                    @endif
                   </div>
-                @endif --}}
+                @endif
               </div>
               @endforeach
             </div>
@@ -420,18 +414,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           <div class="profile-posts-subscribers tab">
             <h1>Subscribers</h1>
             <div class="container all-users-list">
-              @foreach($my_subscribers as $user)
+              @foreach($my_subscribers as $subscriber_user)
               <div class="user">
-                <a href="{{ route('user.page', $user->id) }}">
+                <a href="{{ route('user.page', $subscriber_user->id) }}">
                   <div class="user-image-wrapper">
-                    <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="user-image" />
+                    <img src="{{ asset($subscriber_user->image ?? 'images/avatar.png') }}" alt="user-image" />
                   </div>
                 </a>
                 <div class="users-social">
-                  <span class="user-social-span">{{ $user->name }}</span>
-                  <span class="user-social-span">{{ $user->email }}</span>
-                  {{-- <span class="user-social-span">Открыть полный профиль</span> --}}
+                  <span class="user-social-span">{{ $subscriber_user->name }}</span>
+                  <span class="user-social-span">{{ $subscriber_user->email }}</span>
                 </div>
+                @if(Auth::check() && auth()->user()->id !== $subscriber_user->id)
+                  <div class="user-subscription-button">
+                    <div class="user-green-message-box" data-id={{ $subscriber_user->id }}>
+                      <i class="fas fa-envelope user-envelope" data-id={{ $subscriber_user->id }}></i>
+                    </div>
+                  </div>
+                @endif
               </div>
               @endforeach
             </div>

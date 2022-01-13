@@ -248,6 +248,10 @@
             @if(Auth::id())
             <div id="root"></div>
             @endif
+
+            @if(Auth::id())
+            <div id="root-notifications"></div>
+            @endif
             
             @if(Auth::check())
             <div class="navbar-user-name">{{ auth()->user()->name }}</div>
