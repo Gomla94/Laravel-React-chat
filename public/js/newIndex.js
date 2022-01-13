@@ -42,19 +42,16 @@ navbarLangIcon.addEventListener("click", () => {
 if (chatWrapper) {
     mainDiv.addEventListener("click", () => {
         chatWrapper.classList.remove("show-chat-wrapper");
+        if (overlay.classList.contains("menu-slide-right")) {
+            menuBars.classList.toggle("menu-active");
+            overlay.classList.toggle("menu-slide-right");
+            overlay.classList.toggle("menu-slide-left");
+        }
         document
             .querySelector(".chat-arrow")
             .classList.remove("show-chat-arrow");
     });
 }
-
-// if (profileImageInput) {
-//     profileImageInput.addEventListener("change", () => {
-//         const profileImage = document.querySelector(".profile-image");
-//         profileImage.src = URL.createObjectURL(profileImageInput.files[0]);
-//         console.log("clicked");
-//     });
-// }
 
 if (logoutAnchor) {
     logoutAnchor.addEventListener("click", () => {
@@ -151,12 +148,6 @@ if (navbarChatIcon) {
     });
 }
 
-// if (commentIcon) {
-//     commentIcon.forEach((icon) => {
-//         icon.addEventListener("click", showCommentSection);
-//     });
-// }
-
 menuBars.addEventListener("click", toggleMenu);
 function toggleMenu() {
     menuBars.classList.toggle("menu-active");
@@ -174,43 +165,3 @@ if (userNavbarArrow) {
         userNavbarList.classList.toggle("show-user-navbar-list");
     });
 }
-
-// async function showCommentSection(e) {
-//     const clickedCommentIcon = e.target;
-//     const commentsSection =
-//         clickedCommentIcon.closest(".main-post-socials").nextElementSibling;
-
-//     commentsSection.classList.toggle("show-main-post-comments-section");
-//     const shownCommentsSection = commentsSection.querySelectorAll(".comment");
-
-//     // if (shownCommentsSection.length > 0) {
-//     //   commentsSection.classList.toggle("show-post-comments-container");
-
-//     //   shownCommentsSection.forEach((section) => {
-//     //     section.remove();
-//     //   });
-//     //   return false;
-//     // }
-
-//     // const comments = await fetchAllComments(clickedCommentIcon.id);
-//     // if (comments.length === 0) {
-//     //   return false;
-//     // }
-
-//     // comments.forEach((comment) => {
-//     //   const commentDiv = `<div id="comment" class="comment">
-//     //     <div class="comment-date">
-//     //     <span class="comment-user-name">${comment.user.name}</span>
-//     //     <span class="comment-date">${new Date(
-//     //       comment.created_at
-//     //     ).toDateString()}</span>
-//     //     </div>
-//     //     <p class="comment-body">${comment.title}</p>
-//     //   </div>
-//     //     `;
-//     //   clickedCommentIcon.closest(".post-social").nextElementSibling.innerHTML +=
-//     //     commentDiv;
-//     // });
-
-//     // commentsSection.classList.toggle("show-post-comments-container");
-// }
