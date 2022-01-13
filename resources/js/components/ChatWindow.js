@@ -397,19 +397,19 @@ const ChatWindow = () => {
         });
     };
 
-    const renderWelcomeMessage = () => {
-        if (toUserId === null) {
-            return (
-                <p className="welcome-message">
-                    <span>Note: </span> You need to subscribe to a user to be
-                    able to chat with him, also if a user is not subscribed to
-                    you he will not be able to receive your messages
-                </p>
-            );
-        }
+    // const renderWelcomeMessage = () => {
+    //     if (toUserId === null) {
+    //         return (
+    //             <p className="welcome-message">
+    //                 <span>Note: </span> You need to subscribe to a user to be
+    //                 able to chat with him, also if a user is not subscribed to
+    //                 you he will not be able to receive your messages
+    //             </p>
+    //         );
+    //     }
 
-        return "";
-    };
+    //     return "";
+    // };
 
     const sendMessage = (e) => {
         if (newMessage === null || newMessage === "") {
@@ -579,7 +579,7 @@ const ChatWindow = () => {
                     <div className="messages-middle-section">
                         <div className="scroll" ref={scrollToEndRef}>
                             {renderredMessages(messages)}
-                            {renderWelcomeMessage()}
+                            {/* {renderWelcomeMessage()} */}
                         </div>
                     </div>
                     <div className="messages-bottom-section">
