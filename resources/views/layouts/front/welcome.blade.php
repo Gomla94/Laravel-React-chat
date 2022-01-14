@@ -367,7 +367,7 @@
     <div class="main-post" data-id="{{ $post->id }}">
       <div class="main-post-user-info-wrapper">
         <div class="main-post-user-image-wrapper">
-          <a href="{{ route('user.page', $post->user->id) }}">
+          <a href="{{ route('user.page', $post->user->unique_id) }}">
           <img
             src="{{asset($post->user->image ?? 'images/avatar.png')}}"
             alt=""

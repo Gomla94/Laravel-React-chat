@@ -195,7 +195,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $post->user->id) }}">
+                    <a href="{{ route('user.page', $post->user->unique_id) }}">
                     <img
                       src="{{asset($post->user->image ?? 'images/avatar.png')}}"
                       alt=""
@@ -203,7 +203,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     />
                     </a>
                   </div>
-                  <a href="{{ route('user.page', $post->user->id) }}"></a>
                   <div class="main-post-user-names-wrapper">
                     <span class="main-post-user-name">{{ $post->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
@@ -286,15 +285,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               <div class="main-post">
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $image->user->id) }}">
-                    <img
+                    <a href="{{ route('user.page', $image->user->unique_id) }}">
+                      <img
                       src="{{asset($image->user->image ?? 'images/avatar.png')}}"
                       alt=""
                       class="main-post-user-image"
                     />
                     </a>
                   </div>
-                  <a href="{{ route('user.page', $image->user->id) }}"></a>
                   <div class="main-post-user-names-wrapper">
                     <span class="main-post-user-name">{{ $image->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $image->user->name }}</span>
@@ -315,7 +313,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               <div class="main-post">
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $video->user->id) }}">
+                    <a href="{{ route('user.page', $video->user->unique_id) }}">
                     <img
                       src="{{asset($video->user->image ?? 'images/avatar.png')}}"
                       alt=""
@@ -323,7 +321,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     />
                     </a>
                   </div>
-                  <a href="{{ route('user.page', $video->user->id) }}"></a>
                   <div class="main-post-user-names-wrapper">
                     <span class="main-post-user-name">{{ $video->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $video->user->name }}</span>
@@ -359,7 +356,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $appeal->user->id) }}">
+                    <a href="{{ route('user.page', $appeal->user->unique_id) }}">
                     <img
                       src="{{asset($appeal->user->image ?? 'images/avatar.png')}}"
                       alt=""
@@ -367,7 +364,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     />
                     </a>
                   </div>
-                  <a href="{{ route('user.page', $appeal->user->id) }}"></a>
+                  <a href="{{ route('user.page', $appeal->user->unique_id) }}"></a>
                   <div class="main-post-user-names-wrapper">
                     <span class="main-post-user-name">{{ $appeal->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $appeal->user->name }}</span>
