@@ -172,9 +172,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
                 
                 <button type="submit" class="btn btn-primary update-profile-button">Update Profile</button>
-            </form>
-          @endif
-
+              </form>
+            @endif
           </div>
           <div class="profile-posts tab">
             <h1>Posts</h1>
@@ -187,6 +186,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <div class="user-posts-wrapper">
               @foreach($my_posts as $post)
               <div class="main-post">
+                <div class="delete-post-wrapper">
+                  <form action="{{ route('user.posts.delete', $post->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="fas fa-close"></button>
+                  </form>
+                </div>
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
                     <a href="{{ route('user.page', $post->user->id) }}">
@@ -202,7 +208,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <span class="main-post-user-name">{{ $post->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
                   </div>
-                  <span class="post-date">{{ $post->created_at->format('Y-m-d h:i A') }}</span>
+                  <span class="post-date">{{ $post->created_at->format('Y-m-d h:iA') }}</spabutton>
                 </div>
                 <p class="main-post-title">@if($post->title) {{ $post->title }} @endif</p>
                 <p class="main-post-description">
@@ -344,6 +350,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <div class="user-posts-wrapper">
               @foreach($my_appeals as $appeal)
               <div class="main-post">
+                <div class="delete-post-wrapper">
+                  <form action="{{ route('user.appeals.delete', $appeal->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="fas fa-close"></button>
+                  </form>
+                </div>
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
                     <a href="{{ route('user.page', $appeal->user->id) }}">

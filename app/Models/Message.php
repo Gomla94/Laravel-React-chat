@@ -12,6 +12,6 @@ class Message extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'from', 'id');
+        return $this->belongsTo(User::class, 'from', 'unique_id');
     }
 }

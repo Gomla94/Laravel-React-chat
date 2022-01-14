@@ -89,7 +89,8 @@ class RegisterController extends Controller
             'interesting_type_id' => request('interesting_type') ? json_encode($data['interesting_type']) : null,
             'additional_type' => $data['additional_type'] ?? null,
             'organisation_description' => $data['organisation_description'] ?? null,
-            'api_token' => str_random(60)
+            'api_token' => str_random(60),
+            'unique_id' => str_random(60)
         ]);
     }
 }

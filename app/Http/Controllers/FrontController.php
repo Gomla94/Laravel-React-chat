@@ -112,7 +112,7 @@ class FrontController extends Controller
 
     public function show_user_page($id)
     {
-        $user = User::find($id);
+        $user = User::where('unique_id', $id)->firstOrFail();
         $user_interesting_types_ids = $user->interesting_type_id !== "null" ? json_decode($user->interesting_type_id) : [];
         $my_interesting_types = $user_interesting_types_ids !== null ? InterestingType::whereIn('id', $user_interesting_types_ids)->get() : null;
         $user = $user->load('country');

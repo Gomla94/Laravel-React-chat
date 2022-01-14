@@ -34,15 +34,11 @@ body {
 }
 
 .r-god-container {
-    /* background-color: #886227; */
     background-color: white;
     border: 3px solid #886227;
     display: flex;
     margin: auto;
-    padding: 0.3%;
     border-radius: 20%;
-    /* width: auto; */
-    /* height: 50%; */
     position: absolute;
     left: 50%;
     top: 50%;

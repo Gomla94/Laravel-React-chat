@@ -17,6 +17,10 @@ html {
 .main {
     height: 100% !important;
 }
+
+a {
+    text-decoration: none;
+}
 /* navbar starts here */
 .main-navbar {
     height: 50px;
@@ -25,7 +29,6 @@ html {
     flex-direction: row;
     position: relative;
     padding-top: 10px;
-    margin-bottom: 50px;
 }
 
 .overlay {
@@ -515,6 +518,7 @@ html {
     border-radius: 3px;
     margin-top: 30px;
     margin-bottom: 20px;
+    text-decoration: none;
 }
 
 /* appeal card ends here */
@@ -959,7 +963,7 @@ html {
     background-color: grey;
     position: fixed;
     left: 0%;
-    top: 10%;
+    top: 15%;
     z-index: 10;
     display: flex;
     align-items: center;
@@ -2978,6 +2982,25 @@ html {
     transition: all 0.5s ease-in-out;
     outline: none;
     background: #e40046;
+}
+
+.profile-add-post-button {
+    margin-bottom: 5px;
+}
+
+.delete-post-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.delete-post-wrapper button {
+    /* font-size: 20px; */
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .profile-option:hover {

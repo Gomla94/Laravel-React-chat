@@ -9,7 +9,7 @@ const ChatWindow = () => {
     const [toUserId, setToUserId] = useState(null);
     const [chattingWithUser, setChattingWithUser] = useState(null);
     const [blockedUserId, setBlockedUserId] = useState(null);
-    const authId = window.Laravel.user.id;
+    const authId = window.Laravel.user.unique_id;
     const [spinner, setSpinner] = useState(null);
     const [userIsAlreadyBlocked, setUserIsAlreadyBlocked] = useState(null);
     const [blockMessage, setBlockMessage] = useState(null);
@@ -145,7 +145,7 @@ const ChatWindow = () => {
         envelopes.forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.stopPropagation();
-                fetchTopUser(item.dataset.id);
+                fetchTopUser(item.dataset.nid);
                 document
                     .querySelector(".chat-wrapper")
                     .classList.toggle("show-chat-wrapper");
@@ -306,7 +306,7 @@ const ChatWindow = () => {
             return;
         }
         return messages.map((message, index) => {
-            if (message.user.id === authId) {
+            if (message.user.unique_id === authId) {
                 return (
                     <div className="sent-message-wrapper" key={index}>
                         <div className="sent-message-user-image-wrapper">
@@ -376,7 +376,7 @@ const ChatWindow = () => {
                 <div
                     className="chat-user-wrapper"
                     onClick={(e) => {
-                        changeToUserId(e, user.id);
+                        changeToUserId(e, user.unique_id);
                     }}
                     key={user.id}
                 >
@@ -397,26 +397,26 @@ const ChatWindow = () => {
         });
     };
 
-    // const renderWelcomeMessage = () => {
-    //     if (toUserId === null) {
-    //         return (
-    //             <p className="welcome-message">
-    //                 <span>Note: </span> You need to subscribe to a user to be
-    //                 able to chat with him, also if a user is not subscribed to
-    //                 you he will not be able to receive your messages
-    //             </p>
-    //         );
-    //     }
+    const renderWelcomeMessage = () => {
+        if (toUserId === null) {
+            return (
+                <p className="welcome-message">
+                    <span>Note: </span> You need to subscribe to a user to be
+                    able to chat with him, also if a user is not subscribed to
+                    you he will not be able to receive your messages
+                </p>
+            );
+        }
 
-    //     return "";
-    // };
+        return "";
+    };
 
     const sendMessage = (e) => {
         if (newMessage === null || newMessage === "") {
             return false;
         }
+
         chat.post("/messages", {
-            from: authId,
             to: toUserId,
             message: newMessage,
         }).then((response) => {
@@ -432,7 +432,6 @@ const ChatWindow = () => {
         const image = e.target.files[0];
         formdata.append("file", image);
         formdata.append("to", toUserId);
-        formdata.append("from", authId);
         const fileSize = e.target.files[0].size / 1024 / 1024;
         if (fileSize > 2) {
             alert("maximum size is 2 MB");
@@ -579,7 +578,7 @@ const ChatWindow = () => {
                     <div className="messages-middle-section">
                         <div className="scroll" ref={scrollToEndRef}>
                             {renderredMessages(messages)}
-                            {/* {renderWelcomeMessage()} */}
+                            {renderWelcomeMessage()}
                         </div>
                     </div>
                     <div className="messages-bottom-section">

@@ -38,9 +38,15 @@
   <div class="container all-users-list">
     @foreach($users as $user)
     <div class="user">
-      <a href="{{ route('user.page', $user->id) }}">
+      <a href="{{ route('user.page', $user->unique_id) }}">
         <div class="user-image-wrapper">
-          <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="user-image" />
+          @if ($user->image === null && $user->gender === 'female')
+            <img src="{{ asset($user->image ?? 'images/female-avatar.png') }}" alt="user-image" />
+          @elseif($user->image === null && $user->gender === 'male')
+            <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="user-image" />
+          @else
+            <img src="{{ asset($user->image ?? 'images/avatar.png') }}" alt="user-image" />
+          @endif
         </div>
       </a>
       <div class="users-social">
@@ -50,8 +56,8 @@
       </div>
       @if(Auth::check())
         <div class="user-subscription-button">
-          <div class="user-green-message-box" data-id={{ $user->id }}>
-            <i class="fas fa-envelope user-envelope" data-id={{ $user->id }}></i>
+          <div class="user-green-message-box" data-nid={{ $user->unique_id }}>
+            <i class="fas fa-envelope user-envelope"></i>
           </div>
           @if(auth()->user()->subscribed($user->id))
           <form action="{{ route('unsubscribe', $user->id) }}" method="POST">

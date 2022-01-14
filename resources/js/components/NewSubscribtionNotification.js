@@ -8,6 +8,13 @@ const NewSubscribtionNotification = () => {
     const [notifications, setNotifications] = useState(null);
 
     useEffect(() => {
+        const mainDiv = document.querySelector(".main");
+        mainDiv.addEventListener("click", () => {
+            setShowNotifications(false);
+        });
+    }, []);
+
+    useEffect(() => {
         if (notifications !== null) {
             return false;
         }
@@ -26,6 +33,14 @@ const NewSubscribtionNotification = () => {
         }
     });
 
+    const renderNotificationsCount = () => {
+        if (notifications === null || notifications.length === 0) {
+            return "";
+        }
+
+        return <span className="count">{notifications.length}</span>;
+    };
+
     const loadNotifications = async () => {
         const response = await notify.get("/my_notifications");
         const loadedNotifications = response.data;
@@ -41,9 +56,7 @@ const NewSubscribtionNotification = () => {
                     setShowNotifications(!showNotifications);
                 }}
             >
-                <span className="count">
-                    {notifications !== null ? notifications.length : ""}
-                </span>
+                {renderNotificationsCount()}
             </i>
             {showNotifications ? (
                 <Notifications

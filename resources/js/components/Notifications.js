@@ -2,13 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import notify from "../src/notify";
 
-const Notifications = ({
-    showNotifications,
-    notifications,
-    setNotifications,
-}) => {
-    // const [loadedNotifications = setLoadedNotifications] = useState(null);
-
+const Notifications = ({ notifications, setNotifications }) => {
     useEffect(() => {
         renderNotifications(notifications);
     }, [notifications]);
@@ -43,12 +37,14 @@ const Notifications = ({
                     <div className="notification-title">New Subscribtion</div>
                     <div className="notification-info">
                         <div className="notification-user-image">
-                            <img
-                                src={
-                                    item.data.user_image ??
-                                    `../../images/avatar.png`
-                                }
-                            />
+                            <a href={`all-users/${item.data.user_uniqueid}`}>
+                                <img
+                                    src={
+                                        item.data.user_image ??
+                                        `../../images/avatar.png`
+                                    }
+                                />
+                            </a>
                         </div>
                         <p>
                             <span className="notification-main">

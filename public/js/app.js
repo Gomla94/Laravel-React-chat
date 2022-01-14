@@ -2255,7 +2255,7 @@ var ChatWindow = function ChatWindow() {
       blockedUserId = _useState12[0],
       setBlockedUserId = _useState12[1];
 
-  var authId = window.Laravel.user.id;
+  var authId = window.Laravel.user.unique_id;
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
@@ -2393,7 +2393,7 @@ var ChatWindow = function ChatWindow() {
     envelopes.forEach(function (item) {
       item.addEventListener("click", function (e) {
         e.stopPropagation();
-        fetchTopUser(item.dataset.id);
+        fetchTopUser(item.dataset.nid);
         document.querySelector(".chat-wrapper").classList.toggle("show-chat-wrapper");
         document.querySelector(".chat-arrow").classList.toggle("show-chat-arrow");
       });
@@ -2568,7 +2568,7 @@ var ChatWindow = function ChatWindow() {
     }
 
     return messages.map(function (message, index) {
-      if (message.user.id === authId) {
+      if (message.user.unique_id === authId) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "sent-message-wrapper",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -2631,7 +2631,7 @@ var ChatWindow = function ChatWindow() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "chat-user-wrapper",
         onClick: function onClick(e) {
-          changeToUserId(e, user.id);
+          changeToUserId(e, user.unique_id);
         },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "chat-user-image-wrapper",
@@ -2667,7 +2667,6 @@ var ChatWindow = function ChatWindow() {
     }
 
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/messages", {
-      from: authId,
       to: toUserId,
       message: newMessage
     }).then(function (response) {
@@ -2684,7 +2683,6 @@ var ChatWindow = function ChatWindow() {
     var image = e.target.files[0];
     formdata.append("file", image);
     formdata.append("to", toUserId);
-    formdata.append("from", authId);
     var fileSize = e.target.files[0].size / 1024 / 1024;
 
     if (fileSize > 2) {
@@ -2914,6 +2912,12 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
       setNotifications = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var mainDiv = document.querySelector(".main");
+    mainDiv.addEventListener("click", function () {
+      setShowNotifications(false);
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (notifications !== null) {
       return false;
     }
@@ -2928,6 +2932,17 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
       });
     }
   });
+
+  var renderNotificationsCount = function renderNotificationsCount() {
+    if (notifications === null || notifications.length === 0) {
+      return "";
+    }
+
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+      className: "count",
+      children: notifications.length
+    });
+  };
 
   var loadNotifications = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2963,10 +2978,7 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
       onClick: function onClick() {
         setShowNotifications(!showNotifications);
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-        className: "count",
-        children: notifications !== null ? notifications.length : ""
-      })
+      children: renderNotificationsCount()
     }), showNotifications ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Notifications__WEBPACK_IMPORTED_MODULE_2__["default"], {
       notifications: notifications,
       setNotifications: setNotifications,
@@ -3010,10 +3022,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var Notifications = function Notifications(_ref) {
-  var showNotifications = _ref.showNotifications,
-      notifications = _ref.notifications,
+  var notifications = _ref.notifications,
       setNotifications = _ref.setNotifications;
-  // const [loadedNotifications = setLoadedNotifications] = useState(null);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     renderNotifications(notifications);
   }, [notifications]);
@@ -3025,31 +3035,29 @@ var Notifications = function Notifications(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(e.target.dataset.nid);
-              console.log(notifications);
               filteredNotifications = notifications.filter(function (item) {
                 return item.id !== e.target.dataset.nid;
               });
-              _context.next = 5;
+              _context.next = 3;
               return _src_notify__WEBPACK_IMPORTED_MODULE_3__["default"].post("/check-notification", {
                 nid: e.target.dataset.nid,
                 status: e.target.classList.contains("accept-notify") ? "accept" : "decline"
               });
 
-            case 5:
+            case 3:
               response = _context.sent;
 
               if (!response.error) {
-                _context.next = 8;
+                _context.next = 6;
                 break;
               }
 
               return _context.abrupt("return", false);
 
-            case 8:
+            case 6:
               setNotifications(filteredNotifications);
 
-            case 9:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -3079,8 +3087,11 @@ var Notifications = function Notifications(_ref) {
           className: "notification-info",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "notification-user-image",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-              src: (_item$data$user_image = item.data.user_image) !== null && _item$data$user_image !== void 0 ? _item$data$user_image : "../../images/avatar.png"
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+              href: "all-users/".concat(item.data.user_uniqueid),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                src: (_item$data$user_image = item.data.user_image) !== null && _item$data$user_image !== void 0 ? _item$data$user_image : "../../images/avatar.png"
+              })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
@@ -3160,7 +3171,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: "https://seriousapp.test/api/",
-  // baseURL: "https://www.magaxat.com/api/",
+  // baseURL: "http://www.magaxat.com/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)
@@ -3185,7 +3196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: "https://seriousapp.test/api/",
-  // baseURL: "https://www.magaxat.com/api/",
+  // baseURL: "http://www.magaxat.com/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)
