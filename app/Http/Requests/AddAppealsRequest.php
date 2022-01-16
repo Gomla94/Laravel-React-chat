@@ -27,7 +27,7 @@ class AddAppealsRequest extends FormRequest
         return [
             'appeal_title' => ['required', 'string'],
             'appeal_description' => ['sometimes', 'nullable', 'string'],
-            'appeal_image' => ['max:2048', 'array'],
+            'appeal_image' => ['array'],
             'appeal_image.*' => ['max:2048', 'mimes:png,jpg,jpeg'],
             'appeal_video' => ['max:20168', 'mimes:mp4,mov,ogg,qt'],
         ];

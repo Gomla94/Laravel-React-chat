@@ -2,14 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
 class AdminController extends Controller
 {
+
+    public function home()
+    {
+        $user = Auth::user();
+        $user_counts = count(User::where('type', '!=', 'admin')->get());
+        $countries_counts = count(Country::all());
+
+        return view('admin.home',[ 
+                'user' => $user,
+                'user_counts' => $user_counts,
+                'countries_counts' => $countries_counts
+            ]);
+    }
+
+
     public function users()
     {
         $users = User::all();

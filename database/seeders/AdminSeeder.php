@@ -21,6 +21,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('admin'),
             'type' => 'admin',
             'country_id' => 2,
+            'unique_id' => str_random(60)
         ]);
 
         User::create([
@@ -29,6 +30,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('password'),
             'type' => 'admin',
             'country_id' => 2,
+            'unique_id' => str_random(60)
         ]);
 
         User::create([
@@ -42,7 +44,8 @@ class AdminSeeder extends Seeder
             'phone_number' => "+37495632145",
             'gender' => 'male',
             "date_of_birth" => now(),
-            "organisation_description" => 'SOme description very long.'
+            "organisation_description" => 'SOme description very long.',
+            'unique_id' => str_random(60)
         ]);
     }
 }

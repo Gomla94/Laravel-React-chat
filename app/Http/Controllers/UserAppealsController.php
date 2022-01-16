@@ -49,19 +49,21 @@ class UserAppealsController extends Controller
             'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : null,
         ]);
 
-        $other_images = array_except($request->appeal_image, 0);
-
-        foreach($other_images as $image) {
-            $file = $image;
-            $extension = $file->getClientOriginalExtension();
-            $other_image_name = uniqid(). '.' .$extension;
-            $file->move('images/appeals/appeal_images', $other_image_name); 
-            
-            $appeal->images()->create([
-                'title' => $request->title ?? null,
-                'image' => 'images/appeals/appeal_images/'.$other_image_name,
-            ]);
+        if (request('appeal_image')) {
+            $other_images = array_except($request->appeal_image, 0);
+            foreach($other_images as $image) {
+                $file = $image;
+                $extension = $file->getClientOriginalExtension();
+                $other_image_name = uniqid(). '.' .$extension;
+                $file->move('images/appeals/appeal_images', $other_image_name); 
+                
+                $appeal->images()->create([
+                    'title' => $request->title ?? null,
+                    'image' => 'images/appeals/appeal_images/'.$other_image_name,
+                ]);
+            }
         }
+        
 
         return redirect()->route('all-appeals');
     }

@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import chat from "../src/chat";
+import InputEmoji from "react-input-emoji";
+
 const ChatWindow = () => {
     const [users, setUsers] = useState([]);
     const [messages, setMessages] = useState([]);
@@ -7,11 +9,12 @@ const ChatWindow = () => {
     const [toUserId, setToUserId] = useState(null);
     const [chattingWithUser, setChattingWithUser] = useState(null);
     const [blockedUserId, setBlockedUserId] = useState(null);
-    const authId = window.Laravel.user.id;
+    const authId = window.Laravel.user.unique_id;
     const [spinner, setSpinner] = useState(null);
     const [userIsAlreadyBlocked, setUserIsAlreadyBlocked] = useState(null);
     const [blockMessage, setBlockMessage] = useState(null);
     const scrollToEndRef = useRef(null);
+    const [showAlertMessages, setShowAlertMessages] = useState(true);
 
     const envelopes = document.querySelectorAll(".user-green-message-box");
     const userBlocker = document.querySelector(".sound-checker");
@@ -43,9 +46,13 @@ const ChatWindow = () => {
     }, [toUserId]);
 
     const onKeyUp = (e) => {
-        if (e.code === "Enter") {
-            sendMessage();
+        if (toUserId === null) {
+            return false;
         }
+        sendMessage();
+        // if (e.code === "Enter") {
+        //     sendMessage();
+        // }
     };
 
     useEffect(() => {
@@ -71,26 +78,74 @@ const ChatWindow = () => {
     });
 
     const prevMessages = useRef([]);
+
     useEffect(() => {
         document.querySelector(".messages-middle-section").scrollTop =
             document.querySelector(".messages-middle-section").scrollHeight;
     }, [messages]);
 
+    const createAlertMessage = () => {
+        const messagesCount = document.querySelector(".messages-count");
+        if (!messagesCount) {
+            const chat = document.querySelector(".chat");
+            const alertMessageWrapper = document.createElement("div");
+            alertMessageWrapper.classList.add("alert-message-wrapper");
+            const alertMessage = document.createElement("div");
+            alertMessage.classList.add("alert-new-message");
+            const messageCountSpan = document.createElement("span");
+            messageCountSpan.classList.add("messages-count");
+            messageCountSpan.textContent = 1;
+            alertMessageWrapper.appendChild(alertMessage);
+            alertMessageWrapper.appendChild(messageCountSpan);
+            chat.prepend(alertMessageWrapper);
+        } else {
+            messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
+        }
+    };
+
     useEffect(() => {
         window.Echo.private(`messages.${authId}`).listen(
             "NewMessageEvent",
             (event) => {
-                prevMessages.current.push(event.message);
-                setMessages([...prevMessages.current]);
+                const messagesCount = document.querySelector(".messages-count");
+                if (!messagesCount) {
+                    createAlertMessage();
+                } else {
+                    messagesCount.textContent =
+                        parseInt(messagesCount.textContent) + 1;
+                }
             }
         );
     }, []);
 
     useEffect(() => {
+        const alertMessages = document.querySelector(".alert-message-wrapper");
+        if (alertMessages) {
+            alertMessages.remove();
+        }
+
+        window.Echo.leave(`messages.${authId}`);
+        window.Echo.private(`messages.${authId}`).listen(
+            "NewMessageEvent",
+            (event) => {
+                if (
+                    document
+                        .querySelector(".chat-wrapper")
+                        .classList.contains("show-chat-wrapper") === false
+                ) {
+                    createAlertMessage();
+                } else {
+                    return false;
+                }
+            }
+        );
+    }, [showAlertMessages]);
+
+    useEffect(() => {
         envelopes.forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.stopPropagation();
-                fetchTopUser(item.dataset.id);
+                fetchTopUser(item.dataset.nid);
                 document
                     .querySelector(".chat-wrapper")
                     .classList.toggle("show-chat-wrapper");
@@ -235,11 +290,12 @@ const ChatWindow = () => {
         }).then((response) => {
             setUsers(response.data);
             changeToUserId(null, userId);
-            // setToUserId(userId);
         });
     };
 
     const fetchAllUsers = () => {
+        setShowAlertMessages(!showAlertMessages);
+
         chat.get("/chat-users").then((response) => {
             setUsers(response.data);
         });
@@ -250,7 +306,7 @@ const ChatWindow = () => {
             return;
         }
         return messages.map((message, index) => {
-            if (message.user.id === authId) {
+            if (message.user.unique_id === authId) {
                 return (
                     <div className="sent-message-wrapper" key={index}>
                         <div className="sent-message-user-image-wrapper">
@@ -320,7 +376,7 @@ const ChatWindow = () => {
                 <div
                     className="chat-user-wrapper"
                     onClick={(e) => {
-                        changeToUserId(e, user.id);
+                        changeToUserId(e, user.unique_id);
                     }}
                     key={user.id}
                 >
@@ -341,26 +397,41 @@ const ChatWindow = () => {
         });
     };
 
+    const renderWelcomeMessage = () => {
+        if (toUserId === null) {
+            return (
+                <p className="welcome-message">
+                    <span>Note: </span> You need to subscribe to a user to be
+                    able to chat with him, also if a user is not subscribed to
+                    you he will not be able to receive your messages
+                </p>
+            );
+        }
+
+        return "";
+    };
+
     const sendMessage = (e) => {
-        if (newMessage === null) {
+        if (newMessage === null || newMessage === "") {
             return false;
         }
+
         chat.post("/messages", {
-            from: authId,
             to: toUserId,
             message: newMessage,
         }).then((response) => {
             setMessages([...messages, response.data.sent_message]);
         });
-        document.querySelector(".chat-message-input").value = "";
     };
 
     const sendMedia = (e) => {
+        if (toUserId == null || toUserId == "") {
+            return false;
+        }
         let formdata = new FormData();
         const image = e.target.files[0];
         formdata.append("file", image);
         formdata.append("to", toUserId);
-        formdata.append("from", authId);
         const fileSize = e.target.files[0].size / 1024 / 1024;
         if (fileSize > 2) {
             alert("maximum size is 2 MB");
@@ -377,6 +448,14 @@ const ChatWindow = () => {
         if (toUserId === null) {
             return false;
         }
+
+        window.Echo.private(`messages.${toUserId}.${authId}`).listen(
+            "NewMessageEvent",
+            (event) => {
+                prevMessages.current.push(event.message);
+                setMessages([...prevMessages.current]);
+            }
+        );
 
         chat.get(
             `/messages?from=${window.btoa(authId)}&to=${window.btoa(toUserId)}`
@@ -431,15 +510,13 @@ const ChatWindow = () => {
                     />
                 </div>
 
-                <input
-                    className="chat-message-input"
-                    disabled={toUserId ? false : true}
-                    placeholder="Напишите здесь свой текст ..."
-                    type="text"
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyPress={(e) => {
+                <InputEmoji
+                    onChange={setNewMessage}
+                    cleanOnEnter
+                    onEnter={(e) => {
                         onKeyUp(e);
                     }}
+                    placeholder="Напишите ..."
                 />
                 <div className="chat-send-wrapper">
                     <i
@@ -460,7 +537,7 @@ const ChatWindow = () => {
     };
 
     return (
-        <div>
+        <div className="chat">
             <i
                 className="far fa-comments navbar-user-comment"
                 onClick={fetchAllUsers}
@@ -501,6 +578,7 @@ const ChatWindow = () => {
                     <div className="messages-middle-section">
                         <div className="scroll" ref={scrollToEndRef}>
                             {renderredMessages(messages)}
+                            {renderWelcomeMessage()}
                         </div>
                     </div>
                     <div className="messages-bottom-section">

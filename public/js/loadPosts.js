@@ -1,10 +1,14 @@
 import { addComment } from "../js/addPostComment.js";
+import { showCommentSection } from "../js/addPostComment.js";
 import { fetchAllComments } from "../js/addPostComment.js";
 import { likePostClickHandler } from "../js/addPostLike.js";
 
 const postsWrapper = document.querySelector(".posts-wrapper");
 let currentPostsIds = [];
 const postDivs = document.querySelectorAll(".main-post");
+
+const mainPost = document.querySelector(".main-post");
+
 postDivs.forEach((item) => {
     currentPostsIds.push(parseInt(item.dataset.id));
 });
@@ -30,7 +34,8 @@ const loadMorePostsAndAddEventListeners = async () => {
     });
 
     document.querySelectorAll(".main-post-comments-icon").forEach((item) => {
-        item.addEventListener("click", showPostCommentSection);
+        item.removeEventListener("click", showCommentSection);
+        item.addEventListener("click", showCommentSection);
     });
 
     document.querySelectorAll(".main-post-comment-button").forEach((item) => {
@@ -49,7 +54,8 @@ const loadSpinner = document.querySelector(".more-posts-loader");
 const loadPosts = () => {
     if (
         window.scrollY + document.body.offsetHeight >=
-        document.body.scrollHeight
+            document.body.scrollHeight &&
+        mainPost !== null
     ) {
         postsWrapper.appendChild(createSpinner());
         window.removeEventListener("scroll", loadPosts);
@@ -123,7 +129,6 @@ const createPost = (post) => {
         </div>
     `;
 };
-window.addEventListener("scroll", loadPosts);
 
 function appendUserImage(post) {
     return `
@@ -226,3 +231,5 @@ function checkIfAuthUserLikedPost(post) {
         return false;
     }
 }
+
+window.addEventListener("scroll", loadPosts);

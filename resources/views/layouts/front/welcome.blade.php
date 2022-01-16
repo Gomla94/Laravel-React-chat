@@ -334,7 +334,7 @@
           <div class="appeal-card-description">
             <p>{{str_limit($appeal->description, 200)}}</p>
           </div>
-          <button class="appeal-card-button">Хочу помочь</button>
+          <a href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">Хочу помочь</a>
         </div>
       </div>
       @endforeach
@@ -367,7 +367,7 @@
     <div class="main-post" data-id="{{ $post->id }}">
       <div class="main-post-user-info-wrapper">
         <div class="main-post-user-image-wrapper">
-          <a href="{{ route('user.page', $post->user->id) }}">
+          <a href="{{ route('user.page', $post->user->unique_id) }}">
           <img
             src="{{asset($post->user->image ?? 'images/avatar.png')}}"
             alt=""
@@ -514,7 +514,7 @@
 
       <div class="form-group">
           <label class="create-post-label" for="title">Title</label>
-          <input type="text" class="form-control" name="appeal_title" placeholder="Title">
+          <input type="text" class="form-control" name="appeal_title" value="{{ old('appeal_title') }}" placeholder="Title">
           @error('appeal_title')
           <span style="color:red">{{$message}}</span>
           @enderror
@@ -522,7 +522,7 @@
 
       <div class="form-group">
           <label class="create-post-label" for="description">Description</label>
-          <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
+          <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('appeal_description') }}</textarea>
           @error('appeal_description')
           <span style="color:red">{{$message}}</span>
           @enderror
@@ -531,9 +531,13 @@
       <div class="form-group modal-image-container">
           <label class="create-post-label" for="image">Image</label>
           <input type="file" accept="image/*" multiple class="form-control" name="appeal_image[]">
-          @error('appeal_image')
-          <span style="color:red">{{$message}}</span>
-          @enderror
+          @if($errors->has('appeal_image.*'))
+            @foreach($errors->get('appeal_image.*') as $error)
+            @foreach($error as $err)
+              <p style="color:red">{{$err}}</p>
+            @endforeach
+            @endforeach
+          @endif
       </div>
 
       <div class="form-group modal-image-container">

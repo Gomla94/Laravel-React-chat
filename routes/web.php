@@ -85,6 +85,7 @@ Route::get('posts/{post}/all-comments', [UserPostsController::class, 'all_commen
 
 /** Users */
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function() {
+    Route::get('/home', [AdminController::class, 'home']);
     Route::get('users', [AdminController::class, 'users'])->name('users');
     Route::delete('users/{user}', [AdminController::class, 'delete_user'])->name('users.delete');
     Route::put('users/{user}/block', [AdminController::class, 'block_user'])->name('users.block');

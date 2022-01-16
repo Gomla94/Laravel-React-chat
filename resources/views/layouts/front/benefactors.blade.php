@@ -12,12 +12,12 @@
       <div class="users-social">
         <span class="user-social-span">{{ $benefactor->name }}</span>
         <span class="user-social-span">{{ $benefactor->email }}</span>
-        <span class="user-social-span">Открыть полный профиль</span>
+        {{-- <span class="user-social-span">Открыть полный профиль</span> --}}
       </div>
       @if(Auth::check())
         <div class="user-subscription-button">
-          <div class="user-green-message-box">
-            <i class="fas fa-envelope user-envelope" data-id={{ $benefactor->id }}></i>
+          <div class="user-green-message-box" data-id={{ $benefactor->id }}>
+            <i class="fas fa-envelope user-envelope"></i>
           </div>
         </div>
       @endif

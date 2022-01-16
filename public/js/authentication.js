@@ -4,7 +4,7 @@ const registerForm = document.querySelector(".register-form");
 const interestingListLabel = document.querySelector(".interesting-types-label");
 const childTypesLabel = document.querySelector(".child-types-label");
 const childTypesSelect = document.querySelector(".child-types-select");
-const additionalTypes = document.querySelector(".additional-types");
+const additionalTypes = document.querySelector(".additionals-group");
 const organisationDescriptionLabel = document.querySelector(
     ".organisation-label"
 );
@@ -48,9 +48,8 @@ typesList.forEach((item) => {
             interestingListLabel.classList.remove("show-interestings-list");
             organisationDiv.classList.remove("show-organisation");
             additionalTypes.classList.remove("show-additional-types");
-            const interestingListsSelect = document.querySelector(
-                ".interestings-list-ddl"
-            );
+            const interestingListsSelect =
+                document.querySelector(".interesting-types");
             if (interestingListsSelect) interestingListsSelect.remove();
         }
     });
@@ -61,21 +60,23 @@ const insertAfter = (referenceNode, newNode) => {
 };
 
 const createSelectInput = (interestingTypes = null) => {
-    const selectWrapper = document.createElement("div");
-    selectWrapper.classList.add("form-group");
-    const selectInput = document.createElement("select");
-    selectInput.classList.add("form-control");
-    selectInput.classList.add("form-input");
-    selectInput.classList.add("interestings-list-ddl");
-    selectInput.setAttribute("name", "interesting_type");
+    const interestingTypesWrapper = document.createElement("div");
+    interestingTypesWrapper.classList.add("interesting-types");
     interestingTypes.forEach((type) => {
-        const option = document.createElement("option");
-        option.value = type.id;
-        option.textContent = type.name;
-        selectInput.appendChild(option);
+        const checkboxWrapper = document.createElement("div");
+        checkboxWrapper.classList.add("checkbox-wrapper");
+        const label = document.createElement("label");
+        label.textContent = type.name;
+        const option = document.createElement("input");
+        option.setAttribute("type", "checkbox");
+        option.classList.add("type-checkbox");
+        option.setAttribute("name", "interesting_type[]");
+        option.setAttribute("value", type.id);
+        checkboxWrapper.appendChild(label);
+        checkboxWrapper.appendChild(option);
+        interestingTypesWrapper.appendChild(checkboxWrapper);
+        insertAfter(interestingListLabel, interestingTypesWrapper);
     });
-    selectWrapper.appendChild(selectInput);
-    insertAfter(interestingListLabel, selectWrapper);
     document
         .querySelector(".interesting-types-group-div")
         .classList.add("show-interesting-types");

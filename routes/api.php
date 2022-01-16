@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\V1\Post\PostController;
 use App\Http\Controllers\Api\V1\Profile\ProfileController;
 use App\Http\Controllers\Api\V1\Users\UsersController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,6 +22,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/top-chat-user', [MessagesController::class, 'top_chat_user']);
     Route::post('/block-user', [MessagesController::class, 'block_user']);
     Route::post('/unblock-user', [MessagesController::class, 'unblock_user']);
+
+     /** notifications */
+     Route::get('my_notifications', [UserController::class, 'my_notifications']);
+     Route::post('check-notification', [UserController::class, 'check_notification']);
 });
 
 // Application API routes
@@ -56,4 +62,3 @@ Route::prefix("v1")->middleware('json.response')->group(function () {
         Route::post('users/changeStatus/{user}', [UsersController::class,'changeStatus']);
     });
 });
-

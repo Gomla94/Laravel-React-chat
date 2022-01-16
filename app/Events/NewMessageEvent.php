@@ -32,6 +32,9 @@ class NewMessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel("messages.{$this->message->to}");
+        return [
+            new PrivateChannel("messages.{$this->message->from}.{$this->message->to}"),
+            new PrivateChannel("messages.{$this->message->to}")
+        ];
     }
 }

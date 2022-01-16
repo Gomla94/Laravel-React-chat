@@ -17,7 +17,7 @@ class User extends Authenticatable
 
     const STATUSES = [1 => 'active', 0 => 'blocked'];
     
-    const USER_TYPE = 'ordinary_user';
+    const USER_TYPE = 'user';
     const ADMIN_TYPE = 'admin';
     const BENEFACTOR_TYPE = 'benefactor';
 
@@ -41,7 +41,8 @@ class User extends Authenticatable
         'age',
         'api_token',
         'gender',
-        'country_id'
+        'country_id',
+        'unique_id'
     ];
 
     /**
@@ -64,6 +65,11 @@ class User extends Authenticatable
         'status' => 'integer',
         'date_of_birth' => 'date'
     ];
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'user_notifications.'.$this->id;
+    }
 
     public function interesting_type()
     {
