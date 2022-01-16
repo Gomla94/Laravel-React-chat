@@ -4,6 +4,8 @@ namespace App\Http\Resources\User;
 
 use App\Http\Resources\BaseResource;
 use App\Http\Resources\Country\CountryResource;
+use App\Http\Resources\InterestingType\InterestingTypeResource;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,7 +35,7 @@ class UserResource extends BaseResource
             "status" => $this->status,
             "age" => $this->age,
             "gender" => $this->gender,
-            "date_of_birth" => $this->date_of_birth,
+            "date_of_birth" => $this->date_of_birth->format('d/m/Y'),
             "organisation_description" => $this->organisation_description,
             'image' => $this->image ? Storage::disk('public')->url($this->image) : null,
             'email_verified' => $this->email_verified_at ? true : false,
@@ -44,10 +46,10 @@ class UserResource extends BaseResource
                 'created_at',
                 'updated_at'
             ]),
-
-            // TODO
-            // implement relational loading after changing many to many
-            "interesting_type_id" => $this->interesting_type_id,
+            "interesting_type" => InterestingTypeResource::make($this->whenLoaded('interesting_type'))->hide([
+                'created_at',
+                'updated_at'
+            ]),
         ]);
     }
 }

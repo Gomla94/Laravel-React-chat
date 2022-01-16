@@ -11,11 +11,12 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     use ApiResponser;
-    
+
     public function me()
     {
         return $this->successResponse([
-            'data' => UserResource::make(auth()->user())->hide(['updated_at','type','email_verified'])
+            'data' => UserResource::make(auth()->user()->load(['country','interesting_type']))
+                ->hide(['updated_at','type','email_verified'])
         ]);
     }
 

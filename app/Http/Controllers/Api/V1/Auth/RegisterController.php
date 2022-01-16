@@ -37,7 +37,7 @@ class RegisterController extends Controller
         return $this->successResponse([
             'message' => __('AuthApi.msg.registerSuccess'),
             'token' => $token,
-            'user' => UserResource::make($user)->only(['name','email','type','image'])
+            'user' => UserResource::make($user->load(['country']))->only(['name','email','type','image'])
         ]);
     }
 }

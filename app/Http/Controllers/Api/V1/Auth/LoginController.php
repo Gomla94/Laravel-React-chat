@@ -27,7 +27,7 @@ class LoginController extends Controller
         $token = $user->createToken($user->name)->plainTextToken;
         return $this->successResponse([
             'token' => $token,
-            'data' => UserResource::make($user)->only(['name','email','type','image'])
+            'data' => UserResource::make($user->load(['country','interesting_type']))->hide(['updated_at','email_verified'])
         ]);
     }
 }

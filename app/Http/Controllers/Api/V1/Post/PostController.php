@@ -18,7 +18,8 @@ class PostController extends Controller
     public function index(PostDataProvider $provider):JsonResponse
     {
         return $this->successResponse([
-            $provider->getBuilder()->paginate(10)->withQueryString()
+//            $provider->getBuilder()->paginate(10)->withQueryString()
+            'data' => PostResource::collection(Post::paginate(10))
         ]);
     }
 
