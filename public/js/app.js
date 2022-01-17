@@ -2294,9 +2294,11 @@ var ChatWindow = function ChatWindow() {
       chatUsersList.children[0].classList.toggle("current-active-user");
     } else {
       var parentElement = e.target.closest(".chat-user-wrapper");
+      parentElement.querySelector(".user-new-message-alert").classList.remove("show-user-new-message-alert");
       parentElement.classList.toggle("current-active-user");
     }
 
+    window.Echo.leave("messages.".concat(toUserId, ".").concat(authId));
     setToUserId(userId);
   };
 
@@ -2309,9 +2311,7 @@ var ChatWindow = function ChatWindow() {
       return false;
     }
 
-    sendMessage(); // if (e.code === "Enter") {
-    //     sendMessage();
-    // }
+    sendMessage();
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
@@ -2362,34 +2362,74 @@ var ChatWindow = function ChatWindow() {
     }
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
-      var messagesCount = document.querySelector(".messages-count");
+  var checkForTargetChatUserElement = function checkForTargetChatUserElement(targetChatUser) {
+    if (targetChatUser) {
+      targetChatUser.querySelector(".user-new-message-alert").classList.add("show-user-new-message-alert");
+    }
+  };
 
-      if (!messagesCount) {
-        createAlertMessage();
-      } else {
-        messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
-      }
-    });
-  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (users.length > 0) {
+      window.Echo.leave("messages.".concat(authId));
+      window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
+        checkChatWrapperStatusBeforeAlertingNewMessageCount(users, event.message.user);
+        if (toUserId === event.message.user.unique_id) return false;
+        var targetChatUser = document.getElementById(event.message.user.unique_id);
+        checkForTargetChatUserElement(targetChatUser);
+        return false;
+      });
+    }
+  }, [users, toUserId]);
+
+  var checkifMessageUserIsInMySubscribtion = function checkifMessageUserIsInMySubscribtion(checkSubscriber, subscribers) {
+    var targetUser = subscribers.findIndex(function (item) {
+      return checkSubscriber.id === item.id;
+    });
+
+    if (targetUser === -1) {
+      return false;
+    }
+
+    return true;
+  };
+
+  var checkChatWrapperStatusBeforeAlertingNewMessageCount = function checkChatWrapperStatusBeforeAlertingNewMessageCount(subscribers, userToCheck) {
+    var targetUser = subscribers.findIndex(function (user) {
+      return userToCheck.id === user.id;
+    });
+
+    if (targetUser === -1) {
+      return false;
+    } // return true;
+
+
+    if (document.querySelector(".chat-wrapper").classList.contains("show-chat-wrapper") === false) {
+      createAlertMessage();
+    } else {
+      return false;
+    }
+  };
+
+  var listenToNewMessageAndAlertCount = function listenToNewMessageAndAlertCount() {
+    removeAlertMessagesWrapper();
+    window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
+      checkChatWrapperStatusBeforeAlertingNewMessageCount();
+    });
+  };
+
+  var removeAlertMessagesWrapper = function removeAlertMessagesWrapper() {
     var alertMessages = document.querySelector(".alert-message-wrapper");
 
     if (alertMessages) {
       alertMessages.remove();
     }
+  };
 
-    window.Echo.leave("messages.".concat(authId));
-    window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
-      if (document.querySelector(".chat-wrapper").classList.contains("show-chat-wrapper") === false) {
-        createAlertMessage();
-      } else {
-        return false;
-      }
-    });
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    removeAlertMessagesWrapper();
   }, [showAlertMessages]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchAllUsers();
     envelopes.forEach(function (item) {
       item.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -2556,7 +2596,8 @@ var ChatWindow = function ChatWindow() {
   };
 
   var fetchAllUsers = function fetchAllUsers() {
-    setShowAlertMessages(!showAlertMessages);
+    // setShowAlertMessages(!showAlertMessages);
+    if (users.length !== 0) return;
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/chat-users").then(function (response) {
       setUsers(response.data);
     });
@@ -2633,7 +2674,10 @@ var ChatWindow = function ChatWindow() {
         onClick: function onClick(e) {
           changeToUserId(e, user.unique_id);
         },
+        id: user.unique_id,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "user-new-message-alert"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "chat-user-image-wrapper",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: user.image ? "../".concat(user.image) : "../images/avatar.png",
@@ -2782,7 +2826,9 @@ var ChatWindow = function ChatWindow() {
     className: "chat",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
       className: "far fa-comments navbar-user-comment",
-      onClick: fetchAllUsers
+      onClick: function onClick() {
+        setShowAlertMessages(!showAlertMessages);
+      }
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
       className: "fas fa-caret-up chat-arrow"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {

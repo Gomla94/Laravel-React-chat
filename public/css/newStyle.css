@@ -474,7 +474,7 @@ a {
 
 /* appeal card starts here */
 .appeal-card {
-    height: 100%;
+    /* height: 100%; */
     position: relative;
 }
 
@@ -505,7 +505,7 @@ a {
     font-weight: 400;
     margin-top: 10px;
     overflow-x: hidden;
-    height: 200px;
+    height: 120px;
     max-height: 200px;
 }
 
@@ -1249,12 +1249,29 @@ a {
     overflow-y: scroll;
 }
 
+.user-new-message-alert {
+    background-color: red;
+    height: 15px;
+    width: 15px;
+    border-radius: 20px;
+    position: absolute;
+    right: 10%;
+    /* top: %; */
+    display: none;
+}
+
+.show-user-new-message-alert {
+    display: block;
+}
+
 .chat-user-wrapper {
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
+    /* border: 1px solid red; */
 }
 
 .chat-user-image-wrapper {
@@ -1339,10 +1356,10 @@ a {
     align-items: center;
     margin: auto;
     margin-top: 10px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     position: relative;
     height: fit-content;
-    width: 90%;
+    /* width: 90%; */
 }
 
 .received-message-info {
@@ -1371,10 +1388,10 @@ a {
     align-items: center;
     margin: auto;
     margin-top: 10px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     position: relative;
     height: fit-content;
-    width: 90%;
+    /* width: 90%; */
 }
 
 .sent-message-info {
@@ -1609,6 +1626,7 @@ a {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 10px 0px;
+    grid-template-rows: 30%;
 }
 
 .user {

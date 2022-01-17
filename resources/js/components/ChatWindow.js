@@ -35,8 +35,13 @@ const ChatWindow = () => {
             chatUsersList.children[0].classList.toggle("current-active-user");
         } else {
             const parentElement = e.target.closest(".chat-user-wrapper");
+            parentElement
+                .querySelector(".user-new-message-alert")
+                .classList.remove("show-user-new-message-alert");
             parentElement.classList.toggle("current-active-user");
         }
+
+        window.Echo.leave(`messages.${toUserId}.${authId}`);
 
         setToUserId(userId);
     };
@@ -50,9 +55,6 @@ const ChatWindow = () => {
             return false;
         }
         sendMessage();
-        // if (e.code === "Enter") {
-        //     sendMessage();
-        // }
     };
 
     useEffect(() => {
@@ -103,45 +105,102 @@ const ChatWindow = () => {
         }
     };
 
+    const checkForTargetChatUserElement = (targetChatUser) => {
+        if (targetChatUser) {
+            targetChatUser
+                .querySelector(".user-new-message-alert")
+                .classList.add("show-user-new-message-alert");
+        }
+    };
+
     useEffect(() => {
+        if (users.length > 0) {
+            window.Echo.leave(`messages.${authId}`);
+
+            window.Echo.private(`messages.${authId}`).listen(
+                "NewMessageEvent",
+                (event) => {
+                    checkChatWrapperStatusBeforeAlertingNewMessageCount(
+                        users,
+                        event.message.user
+                    );
+
+                    if (toUserId === event.message.user.unique_id) return false;
+
+                    const targetChatUser = document.getElementById(
+                        event.message.user.unique_id
+                    );
+                    checkForTargetChatUserElement(targetChatUser);
+
+                    return false;
+                }
+            );
+        }
+    }, [users, toUserId]);
+
+    const checkifMessageUserIsInMySubscribtion = (
+        checkSubscriber,
+        subscribers
+    ) => {
+        const targetUser = subscribers.findIndex(
+            (item) => checkSubscriber.id === item.id
+        );
+
+        if (targetUser === -1) {
+            return false;
+        }
+
+        return true;
+    };
+
+    const checkChatWrapperStatusBeforeAlertingNewMessageCount = (
+        subscribers,
+        userToCheck
+    ) => {
+        const targetUser = subscribers.findIndex(
+            (user) => userToCheck.id === user.id
+        );
+
+        if (targetUser === -1) {
+            return false;
+        }
+
+        // return true;
+        if (
+            document
+                .querySelector(".chat-wrapper")
+                .classList.contains("show-chat-wrapper") === false
+        ) {
+            createAlertMessage();
+        } else {
+            return false;
+        }
+    };
+
+    const listenToNewMessageAndAlertCount = () => {
+        removeAlertMessagesWrapper();
+
         window.Echo.private(`messages.${authId}`).listen(
             "NewMessageEvent",
             (event) => {
-                const messagesCount = document.querySelector(".messages-count");
-                if (!messagesCount) {
-                    createAlertMessage();
-                } else {
-                    messagesCount.textContent =
-                        parseInt(messagesCount.textContent) + 1;
-                }
+                checkChatWrapperStatusBeforeAlertingNewMessageCount();
             }
         );
-    }, []);
+    };
 
-    useEffect(() => {
+    const removeAlertMessagesWrapper = () => {
         const alertMessages = document.querySelector(".alert-message-wrapper");
         if (alertMessages) {
             alertMessages.remove();
         }
+    };
 
-        window.Echo.leave(`messages.${authId}`);
-        window.Echo.private(`messages.${authId}`).listen(
-            "NewMessageEvent",
-            (event) => {
-                if (
-                    document
-                        .querySelector(".chat-wrapper")
-                        .classList.contains("show-chat-wrapper") === false
-                ) {
-                    createAlertMessage();
-                } else {
-                    return false;
-                }
-            }
-        );
+    useEffect(() => {
+        removeAlertMessagesWrapper();
     }, [showAlertMessages]);
 
     useEffect(() => {
+        fetchAllUsers();
         envelopes.forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -194,7 +253,6 @@ const ChatWindow = () => {
             return;
         }
 
-        // return;
         if (toUserId === blockedUserId) {
             setBlockedUserId(null);
             setUserIsAlreadyBlocked(false);
@@ -294,8 +352,8 @@ const ChatWindow = () => {
     };
 
     const fetchAllUsers = () => {
-        setShowAlertMessages(!showAlertMessages);
-
+        // setShowAlertMessages(!showAlertMessages);
+        if (users.length !== 0) return;
         chat.get("/chat-users").then((response) => {
             setUsers(response.data);
         });
@@ -379,7 +437,9 @@ const ChatWindow = () => {
                         changeToUserId(e, user.unique_id);
                     }}
                     key={user.id}
+                    id={user.unique_id}
                 >
+                    <div className="user-new-message-alert"></div>
                     <div className="chat-user-image-wrapper">
                         <img
                             src={
@@ -540,7 +600,9 @@ const ChatWindow = () => {
         <div className="chat">
             <i
                 className="far fa-comments navbar-user-comment"
-                onClick={fetchAllUsers}
+                onClick={() => {
+                    setShowAlertMessages(!showAlertMessages);
+                }}
             ></i>
             <i className="fas fa-caret-up chat-arrow"></i>
 
