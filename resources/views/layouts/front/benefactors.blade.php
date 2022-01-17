@@ -12,7 +12,7 @@
       <div class="users-social">
         <span class="user-social-span">{{ $benefactor->name }}</span>
         <span class="user-social-span">{{ $benefactor->email }}</span>
-        <span class="user-social-span">Открыть полный профиль</span>
+        <span class="user-social-span">@lang('translations.open_all_path')</span>
       </div>
       @if(Auth::check())
         <div class="user-subscription-button">

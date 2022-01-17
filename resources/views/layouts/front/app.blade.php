@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
     <title>
       Magaxat
@@ -82,16 +82,16 @@
             <a href="#" class="user-navbar-list-item logout">Logout</a>
             </form>
         </div>
-        @else 
+        @else
         <a href="{{ route('login') }}">Login</a>
         @endif
       </div>
-      
+
     </div>
     <div class="main">
     @yield('content')
     </div>
-    
+
     @stack('js')
 
   </body>
@@ -150,6 +150,12 @@
   </script>
   </head>
   <body>
+  <style>
+      body {
+          background-image: url("{{asset("images/bg.jpg")}}");
+          background-size: cover;
+      }
+  </style>
     <div class="overlay" id="overlay">
       <ul class="overlay-list">
         <a href="{{ route('all-videos') }}"
@@ -222,7 +228,7 @@
             @if(Auth::id())
             <div id="root"></div>
             @endif
-            
+
             @if(Auth::check())
             <div class="navbar-user-name">{{ auth()->user()->name }}</div>
             <div class="navbar-user-image-container">

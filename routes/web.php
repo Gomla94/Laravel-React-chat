@@ -15,23 +15,29 @@ use App\Http\Controllers\UserPostsController;
 use App\Models\InterestingType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
-Route::get('/', [FrontController::class, 'home'])->name('welcome');
-Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
-Route::get('/all-benefactors',[FrontController::class, 'all_benefactors'])->name('all-benefactors');
-Route::get('/all-appeals',[FrontController::class, 'all_appeals'])->name('all-appeals');
-Route::get('/all-appeals/{appeal}',[FrontController::class, 'show_appeal'])->name('show-appeal');
-Route::get('/all-users/{user}',[FrontController::class, 'show_user_page'])->name('user.page');
-Route::get('/all-videos/',[FrontController::class, 'show_videos_page'])->name('all-videos');
-Route::get('/all-videos/{id}',[FrontController::class, 'show_video_page'])->name('show-video');
-Route::post('/subscribe/{user}',[FrontController::class, 'subscribe'])->name('subscribe');
-Route::post('/unsubscribe/{user}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
-Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
-Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
-Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
+Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+{
+    Route::get('/', [FrontController::class, 'home'])->name('welcome');
+    Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
+    Route::get('/all-benefactors',[FrontController::class, 'all_benefactors'])->name('all-benefactors');
+    Route::get('/all-appeals',[FrontController::class, 'all_appeals'])->name('all-appeals');
+    Route::get('/all-appeals/{appeal}',[FrontController::class, 'show_appeal'])->name('show-appeal');
+    Route::get('/all-users/{user}',[FrontController::class, 'show_user_page'])->name('user.page');
+    Route::get('/all-videos/',[FrontController::class, 'show_videos_page'])->name('all-videos');
+    Route::get('/all-videos/{id}',[FrontController::class, 'show_video_page'])->name('show-video');
+    Route::post('/subscribe/{user}',[FrontController::class, 'subscribe'])->name('subscribe');
+    Route::post('/unsubscribe/{user}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
+    Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
+    Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
+
+});
+
 
 
 Auth::routes();
@@ -54,7 +60,7 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
     Route::get('my-posts/{post}/edit', [UserPostsController::class, 'edit'])->name('posts.edit');
     Route::put('my-posts/{post}/edit', [UserPostsController::class, 'update'])->name('posts.update');
     Route::delete('my-posts/{post}/delete', [UserPostsController::class, 'delete'])->name('posts.delete');
-    
+
     /** user appeals routes */
     Route::get('my-appeals', [UserAppealsController::class, 'my_appeals'])->name('my_appeals');
     Route::get('my-appeals/create', [UserAppealsController::class, 'create'])->name('appeals.create');
@@ -75,10 +81,10 @@ Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
     Route::post('posts/{post}/add-comment', [UserPostsController::class, 'add_comment'])->name('post.add-comment');
     Route::post('posts/{post}/add-like', [UserPostsController::class, 'add_like'])->name('post.add_like');
     Route::delete('posts/{post}/delete-like', [UserPostsController::class, 'delete_like'])->name('post.delete_like');
-    
+
     /** profile routes */
     Route::put('profile', [UserController::class,'update_profile'])->name('update-profile');
-    
+
 });
 Route::get('posts/{post}/all-comments', [UserPostsController::class, 'all_comments'])->name('post.all-comments');
 
