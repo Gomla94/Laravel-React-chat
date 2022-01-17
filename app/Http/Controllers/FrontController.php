@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewSubscribtionEvent;
 use App\Models\Appeal;
 use App\Models\Country;
 use App\Models\InterestingType;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\NewSubscribtion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class FrontController extends Controller
 {
@@ -49,6 +52,7 @@ class FrontController extends Controller
                     $interesting_type = InterestingType::where('name', request('interesting-in-type'))->pluck('id')->firstOrFail();
                     foreach($users as $user) {
                         $user_interesting_types_ids = json_decode($user->interesting_type_id);
+                        // dd($user_interesting_types_ids);
                         if (in_array($interesting_type, $user_interesting_types_ids)) {
                             array_push($filtered_users, $user);
                         }
@@ -80,7 +84,7 @@ class FrontController extends Controller
         $interesting_types = InterestingType::all();
         $countries = Country::all();
         return view('layouts.front.users', [
-            'users' => count($filtered_users) !== 0 ? $filtered_users : $users,
+            'users' => count($filter_keys) !== 0 ? $filtered_users : $users,
             'interesting_types' => $interesting_types,
             'countries' => $countries,
         ]);
@@ -109,12 +113,14 @@ class FrontController extends Controller
 
     public function show_user_page($id)
     {
-        $user = User::find($id);
-        $user = $user->load('interesting_type');
+        $user = User::where('unique_id', $id)->firstOrFail();
+        $user_interesting_types_ids = $user->interesting_type_id !== "null" ? json_decode($user->interesting_type_id) : [];
+        $my_interesting_types = $user_interesting_types_ids !== null ? InterestingType::whereIn('id', $user_interesting_types_ids)->get() : null;
         $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
         $countries = Country::all();
         $my_posts = $user->posts()->get();
+        $my_appeals = $user->appeals()->get();
         $my_posts_images = $user->posts()->whereNull('video')->whereNotNull('image')->get();
         $my_posts_videos = $user->posts()->whereNull('image')->whereNotNull('video')->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
@@ -129,6 +135,7 @@ class FrontController extends Controller
             'areas_of_interesting' => $areas_of_interesting,
             'countries' => $countries,
             'my_posts' => $my_posts,
+            'my_appeals' => $my_appeals,
             'my_posts_images' => $my_posts_images,
             'my_posts_videos' => $my_posts_videos,
             'my_subscribtions_users' => $my_subscribtions_users,
@@ -136,6 +143,8 @@ class FrontController extends Controller
             'my_subscribers' => $my_subscribers_users,
             'user_subscribers_count' => $user_subscribers_count,
             'user_subscribtions_count' => $user_subscribtions_count,
+            'my_interesting_types' => $my_interesting_types,
+            'user_interesting_types_ids' => $user_interesting_types_ids,
         ]);
     }
 
@@ -157,6 +166,7 @@ class FrontController extends Controller
     public function subscribe(User $user)
     {
         auth()->user()->subscribtions()->create(['user_id' => $user->id]);
+        broadcast(new NewSubscribtionEvent($user, Auth::user()))->toOthers();
         return back();
     }
 

@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('App.Models.User.{id}', function ($id) {
+    return true;
 });
 
 Broadcast::channel('messages.{to}', function ($user, $to) {
+    return true;
+});
+
+Broadcast::channel('messages.{from}.{to}', function ($user, $from, $to) {
+    return true;
+});
+
+Broadcast::channel('user_notifications.{to}', function ($to) {
     return true;
 });
 

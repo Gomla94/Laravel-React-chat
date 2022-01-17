@@ -20,7 +20,7 @@ class MessagesController extends Controller
         
         
         // return response()->json(['to' => $to, 'from' => $from]);
-        $chatting_with_user = User::find($to);
+        $chatting_with_user = User::where('unique_id', $to)->first();
         // $user_is_blocked = (bool)auth()->user()->chat_blocks()
         //                     ->where([ ['blocker_id', $from], ['user_id', $to] ])
         //                     ->orWhere([ ['user_id' , $from], ['blocker_id', $to] ])->count();
@@ -67,7 +67,7 @@ class MessagesController extends Controller
     public function storeMessage()
     {
         $to = request('to');
-        $from = request('from');
+        $from = Auth::user()->unique_id;
         $message = request('message');
 
         $attributes = validator(request()->all(), [

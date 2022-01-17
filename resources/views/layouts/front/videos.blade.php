@@ -11,7 +11,9 @@
         </div>
         <div class="video-details-container">
           <div class="video-user-image-container">
-            <img src="{{ asset($video->user->image ?? 'images/avatar.png')}}" class="video-user-image" alt="" />
+            <a href="{{ route('user.page', $video->user->unique_id) }}">
+              <img src="{{ asset($video->user->image ?? 'images/avatar.png')}}" class="video-user-image" alt="" />
+            </a>
           </div>
           <div class="video-info">
             <div class="video-name-container">
