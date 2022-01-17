@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="post-comments-container">
-                  
+
                 </div>
                 </div>
             </div>
@@ -149,7 +149,7 @@
       </div>
       <form action="{{ route('user.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-  
+
         <div class="form-group">
             <label class="create-post-label" for="title">Title</label>
             <input type="text" class="form-control" name="post_title" placeholder="Title">
@@ -157,7 +157,7 @@
             <span style="color:red">{{$message}}</span>
             @enderror
         </div>
-  
+
         <div class="form-group">
             <label class="create-post-label" for="post_description">Description</label>
             <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
@@ -165,8 +165,8 @@
             <span style="color:red">{{$message}}</span>
             @enderror
         </div>
-  
-        
+
+
         <div class="form-group modal-checker-container">
           <div class="post-modal-checker">
             <div class="modal-checker"></div>
@@ -180,18 +180,18 @@
             <span style="color:red">{{$message}}</span>
           @enderror
         </div>
-        
-  
+
+
         <div class="form-group post-modal-image-container">
             <label class="create-post-label" for="image">Image</label>
             <input type="file" class="form-control" name="post_image">
         </div>
-  
+
         <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
     </form>
     </div>
   </div>
-  
+
    <!-- add appeal modal -->
    <div class="appeals-modal-wrapper">
     <div class="modal-content">
@@ -200,7 +200,7 @@
       </div>
       <form action="{{ route('user.appeals.store', Auth::id()) }}" method="POST" enctype="multipart/form-data">
         @csrf
-  
+
         <div class="form-group">
             <label class="create-post-label" for="title">Title</label>
             <input type="text" class="form-control" name="appeal_title" placeholder="Title">
@@ -208,7 +208,7 @@
             <span style="color:red">{{$message}}</span>
             @enderror
         </div>
-  
+
         <div class="form-group">
             <label class="create-post-label" for="description">Description</label>
             <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
@@ -216,7 +216,7 @@
             <span style="color:red">{{$message}}</span>
             @enderror
         </div>
-  
+
         <div class="form-group modal-image-container">
             <label class="create-post-label" for="image">Image</label>
             <input type="file" class="form-control" name="appeal_image">
@@ -232,12 +232,12 @@
             <span style="color:red">{{$message}}</span>
           @enderror
       </div>
-  
+
         <button type="submit" class="btn btn-primary create-post-modal-btn">Create Appeal</button>
     </form>
     </div>
   </div>
-  
+
 @endsection
 
 @push('js')
@@ -278,7 +278,7 @@
     <div class="brief-image-wrapper">
       <div class="brief-image-container">
         <div class="brief-image-text">
-          <span class="brief-image-title">Социальный сеть</span>
+          <span class="brief-image-title">@lang("translations.social_site")</span>
           <span class="brief-image-site">MAGAXAT.COM</span>
         </div>
         <img class="brief-image" src="{{asset('images/toppng 1.png')}}" />
@@ -287,11 +287,7 @@
     <div class="brief-info-wrapper">
       <div class="brief-info-container">
         <p class="brief-title">
-          Также как разбавленное изрядной долей эмпатии, рациональное мышление в
-          значительной степени обусловливает важность позиций, занимаемых
-          участниками в отношении поставленных задач. Как принято считать,
-          интерактивные прототипы являются только методом политического участия
-          и ассоциативно распределены по отраслям.
+          @lang("translations.site_description")
         </p>
         <div class="brief-links">
           <!-- <div class="brief-phone-link">
@@ -315,7 +311,7 @@
 </div>
 
 <div class="help-section">
-  <div class="help-section-title">Кому нужна помощь прямо сейчас</div>
+  <div class="help-section-title">@lang("translations.need_help_now")</div>
   <div class="swiper">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
@@ -334,7 +330,7 @@
           <div class="appeal-card-description">
             <p>{{str_limit($appeal->description, 200)}}</p>
           </div>
-          <a href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">Хочу помочь</a>
+          <a href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">@lang("translations.want_help")</a>
         </div>
       </div>
       @endforeach
@@ -344,7 +340,7 @@
 
 <div class="main-posts">
   <div class="main-posts-buttons-container">
-    <p class="main-posts-title">лента новостей</p>
+    <p class="main-posts-title">@lang("translations.news")</p>
     @if(Auth::check())
     <div class="main-posts-buttons-wrapper">
       <div class="main-posts-search-wrapper">
@@ -353,10 +349,10 @@
         <i class="fas fa-microphone main-posts-search-microhphone"></i>
       </div>
       <div class="main-posts-add-buttons">
-        <button class="main-posts-add-appeal-button">запрос о помощи</button>
+        <button class="main-posts-add-appeal-button">@lang("translations.help_request")</button>
         <button class="main-posts-add-post-button">
           <i class="fal fa-plus"></i>
-          Новый пост
+          @lang("translations.new_post")
         </button>
       </div>
     </div>
@@ -417,7 +413,7 @@
             <span class="comment-error-span"></span>
           </div>
           <button type="button" class="main-post-comment-button">
-            Add Comment
+            @lang("translations.add_comment")
           </button>
         </form>
       </div>
@@ -470,20 +466,20 @@
       </div>
 
       <div class="form-group">
-          <label class="create-post-label" for="post_description">Description</label>
+          <label class="create-post-label" for="post_description">@lang("translations.description")</label>
           <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
           @error('post_description')
           <span style="color:red">{{$message}}</span>
           @enderror
       </div>
 
-      
+
       <div class="form-group modal-checker-container">
         <div class="post-modal-checker">
           <div class="modal-checker"></div>
         </div>
-        <label class="create-post-label image-label">Image</label>
-        <label class="create-post-label video-label">Video</label>
+        <label class="create-post-label image-label">@lang("translations.image")</label>
+        <label class="create-post-label video-label">@lang("translations.video")</label>
         @error('post_image')
           <span style="color:red">{{$message}}</span>
         @enderror
@@ -491,14 +487,14 @@
           <span style="color:red">{{$message}}</span>
         @enderror
       </div>
-      
+
 
       <div class="form-group post-modal-image-container">
-          <label class="create-post-label" for="image">Image</label>
+          <label class="create-post-label" for="image">@lang("translations.image")</label>
           <input type="file" accept="image/*" class="form-control" name="post_image">
       </div>
 
-      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
+      <button type="submit" class="btn btn-primary create-post-modal-btn">@lang("translations.create_post")</button>
   </form>
   </div>
 </div>
@@ -513,7 +509,7 @@
       @csrf
 
       <div class="form-group">
-          <label class="create-post-label" for="title">Title</label>
+          <label class="create-post-label" for="title">@lang('translations.title')</label>
           <input type="text" class="form-control" name="appeal_title" value="{{ old('appeal_title') }}" placeholder="Title">
           @error('appeal_title')
           <span style="color:red">{{$message}}</span>
@@ -521,7 +517,7 @@
       </div>
 
       <div class="form-group">
-          <label class="create-post-label" for="description">Description</label>
+          <label class="create-post-label" for="description">@lang("translations.description")</label>
           <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('appeal_description') }}</textarea>
           @error('appeal_description')
           <span style="color:red">{{$message}}</span>
@@ -529,7 +525,7 @@
       </div>
 
       <div class="form-group modal-image-container">
-          <label class="create-post-label" for="image">Image</label>
+          <label class="create-post-label" for="image">@lang("translations.image")</label>
           <input type="file" accept="image/*" multiple class="form-control" name="appeal_image[]">
           @if($errors->has('appeal_image.*'))
             @foreach($errors->get('appeal_image.*') as $error)
@@ -541,14 +537,14 @@
       </div>
 
       <div class="form-group modal-image-container">
-        <label class="create-post-label" for="video">Video</label>
+        <label class="create-post-label" for="video">@lang("translations.video")</label>
         <input type="file" accept="video/*" class="form-control" name="appeal_video">
         @error('appeal_video')
           <span style="color:red">{{$message}}</span>
         @enderror
     </div>
 
-      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Appeal</button>
+      <button type="submit" class="btn btn-primary create-post-modal-btn">@lang("translations.create_appeal")</button>
   </form>
   </div>
 </div>

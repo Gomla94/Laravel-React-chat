@@ -22,7 +22,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
         @error('image')
         <span class="error-span">{{$message}}</span>
         @enderror
-        
+
         <div class="form-group">
             <label class="create-post-label" for="date_of_birth">Date Of Birth</label>
             <input type="date" class="form-control" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}" name="date_of_birth">
@@ -48,7 +48,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 </div> --}}
 
 <div class="container">
-  
+
     <div class="profile-header">
       <div class="profile-img">
         <img class="profile-image" src="{{ asset( $user->image ?? 'images/avatar.png') }}" width="200" alt="Profile Image">
@@ -59,7 +59,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
         <h3 class="user-name">{{ $user->name }}</h3>
       </div>
     </div>
-  
+
     <div class="main-bd">
       <div class="left-side">
         <div class="profile-side">
@@ -68,29 +68,29 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ optional($user->date_of_birth)->format('Y-m-d') }}</p>
           <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ $user->gender }}</p>
           <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional($user->country)->name }}</p>
-          <p class="profile-info"> interested in type: 
+          <p class="profile-info"> @lang('translations.interest_type'):
             {{ $my_interesting_types !== null ? implode(', ', $my_interesting_types->pluck('name')->toArray()) : '' }}
           </p>
-          <p class="profile-info">additional type: {{ $user->additional_type }}</p>
-          
+          <p class="profile-info">@lang('translations.add_types'): {{ $user->additional_type }}</p>
+
         </div>
-  
+
       </div>
       <div class="right-side">
-  
+
         <div class="nav">
           <ul>
             @if(Auth::check())
               @if($user->id === auth()->user()->id)
-              <li onclick="tabs(0)" class="user-post active profile-item user-setting">Settings</li>
+              <li onclick="tabs(0)" class="user-post active profile-item user-setting">@lang('translations.settings')</li>
               @endif
             @endif
-            <li onclick="tabs(1)" class="user-review profile-item">Posts</li>
-            <li onclick="tabs(2)" class="user-images profile-item">Images</li>
-            <li onclick="tabs(3)" class="user-videos profile-item">Videos</li>
-            <li onclick="tabs(4)" class="user-videos profile-item">Appeals</li>
-            <li onclick="tabs(5)" class="user-videos profile-item">Subscribtions</li>
-            <li onclick="tabs(6)" class="user-setting profile-item"> Subscribers</li>
+            <li onclick="tabs(1)" class="user-review profile-item">@lang('translations.posts')</li>
+            <li onclick="tabs(2)" class="user-images profile-item">@lang('translations.images')</li>
+            <li onclick="tabs(3)" class="user-videos profile-item">@lang('translations.videos')</li>
+            <li onclick="tabs(4)" class="user-videos profile-item">@lang('translations.subscribtions')</li>
+            <li onclick="tabs(5)" class="user-videos profile-item">@lang('translations.subscribers')</li>
+            <li onclick="tabs(6)" class="user-setting profile-item"> @lang('translations.subscribers')</li>
           </ul>
         </div>
         <div class="profile-body">
@@ -101,7 +101,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 @method('PUT')
                 <div class="row profile-row">
                     <div class="col-md-6 mb-5">
-                        <label class="create-post-label" for="image">Image</label>
+                        <label class="create-post-label" for="image">@lang('translations.images')</label>
                         <input type="file" accept="image/*" class="form-control profile-image-input" name="image">
                         @error('image')
                         <span class="profile-error-span">{{$message}}</span>
@@ -109,7 +109,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
 
                     <div class="col-md-6 mb-5">
-                        <label class="create-post-label" for="date_of_birth">Date Of Birth</label>
+                        <label class="create-post-label" for="date_of_birth">@lang('translations.date_of_birth')</label>
                         <input type="date" class="form-control" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}" name="date_of_birth">
                         @error('date_of_birth')
                         <span class="profile-error-span">{{$message}}</span>
@@ -117,7 +117,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
 
                     <div class="col-md-6 mb-5">
-                        <label class="create-post-label" for="phone_number">Phone Number</label>
+                        <label class="create-post-label" for="phone_number">@lang('translations.phone_numb')</label>
                         <input type="text" class="form-control" value="{{ $user->phone_number }}" name="phone_number">
                         @error('phone_number')
                         <span class="profile-error-span">{{$message}}</span>
@@ -127,11 +127,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
                 <div class="row profile-row">
                     <div class="col-md-6">
-                        <label class="create-post-label" for="gender">Gender</label>
+                        <label class="create-post-label" for="gender">@lang('translations.gender')</label>
                         <select class="form-control" name="gender" id="gender">
-                            <option selected disabled>Select A Gender</option>
-                            <option value="male" {{ $user->gender === 'male' ? 'selected' : '' }}>Male</option>
-                            <option value="female" {{ $user->gender === 'female' ? 'selected' : '' }}>Female</option>
+                            <option selected disabled>@lang('translations.select_gender')</option>
+                            <option value="male" {{ $user->gender === 'male' ? 'selected' : '' }}>@lang('translations.male')</option>
+                            <option value="female" {{ $user->gender === 'female' ? 'selected' : '' }}>@lang('translations.female')</option>
                         </select>
                         @error('gender')
                         <span class="profile-error-span">{{$message}}</span>
@@ -139,9 +139,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
 
                     <div class="col-md-6">
-                        <label class="create-post-label" for="date_of_birth">Country</label>
+                        <label class="create-post-label" for="date_of_birth">@lang('translations.country')</label>
                         <select class="select form-control" name="country_id" id="country">
-                            <option selected disabled>Select A country</option>
+                            <option selected disabled>@lang('translations.select_country')</option>
                             @foreach($countries as $country)
                             <option value="{{ $country->id }}" {{ $user->country_id === $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
                             @endforeach
@@ -151,9 +151,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                         @enderror
                     </div>
                 </div>
-              
+
                 <div class="col-md-12" >
-                    <label class="create-post-label interesting-types-label" for="area_of_interest">Area Of Interesting</label>
+                    <label class="create-post-label interesting-types-label" for="area_of_interest">@lang('translations.interest_area')</label>
                     <div class="interesting-types">
                       @foreach($areas_of_interesting as $area)
                       <div class="checkbox-wrapper">
@@ -170,8 +170,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <span class="profile-error-span">{{$message}}</span>
                     @enderror
                 </div>
-                
-                <button type="submit" class="btn btn-primary update-profile-button">Update Profile</button>
+
+                <button type="submit" class="btn btn-primary update-profile-button">@lang('translations.upd_prof')</button>
               </form>
             @endif
           </div>
@@ -213,7 +213,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <p class="main-post-description">
                   @if($post->description) {{ str_limit($post->description, 500) }} @endif
                 </p>
-          
+
                 @if($post->image)
                 <div class="main-post-image-wrapper">
                   <img src="{{ asset($post->image) }}" alt="main-post-image" class="main-post-image" />
@@ -245,7 +245,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                       <span class="comment-error-span"></span>
                     </div>
                     <button type="button" class="main-post-comment-button">
-                      Add Comment
+                        @lang('translations.add_com')
                     </button>
                   </form>
                 </div>
@@ -279,7 +279,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             </div>
           </div>
           <div class="profile-posts-images tab">
-            <h1>My Images</h1>
+            <h1>@lang('translations.my_img')</h1>
             <div class="user-posts-wrapper">
               @foreach($my_posts_images as $image)
               <div class="main-post">
@@ -375,7 +375,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <p class="main-post-description">
                   @if($appeal->description) {{ str_limit($appeal->description, 500) }} @endif
                 </p>
-          
+
                 @if($appeal->image)
                 <div class="main-post-image-wrapper">
                   <img src="{{ asset($appeal->image) }}" alt="main-post-image" class="main-post-image" />
@@ -396,7 +396,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             </div>
           </div>
           <div class="profile-posts-subscibtions tab">
-            <h1>Subscribtions</h1>
+            <h1>@lang('translations.subscribtions')</h1>
             <div class="container all-users-list">
               @foreach($my_subscribtions_users as $subscribtion_user)
               <div class="user">
@@ -422,7 +422,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             </div>
           </div>
           <div class="profile-posts-subscribers tab">
-            <h1>Subscribers</h1>
+            <h1>@lang('translations.subscribers')</h1>
             <div class="container all-users-list">
               @foreach($my_subscribers as $subscriber_user)
               <div class="user">
@@ -477,7 +477,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           @enderror
       </div>
 
-      
+
       <div class="form-group modal-checker-container">
         <div class="post-modal-checker">
           <div class="modal-checker"></div>
@@ -491,7 +491,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           <span style="color:red">{{$message}}</span>
         @enderror
       </div>
-      
+
 
       <div class="form-group post-modal-image-container">
           <label class="create-post-label" for="image">Image</label>

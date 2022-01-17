@@ -3,9 +3,9 @@
 <div class="container">
     <div class="col-md-10">
         <div class="card">
-            <div class="card-header">All Posts</div>
+            <div class="card-header">@lang('translations.all_post')</div>
             <div class="card-body">
-                <a href="{{ route('user.posts.create') }}" class="btn btn-success mb-3">Add New Post</a>
+                <a href="{{ route('user.posts.create') }}" class="btn btn-success mb-3">@lang('translations.add_n_post')</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -18,11 +18,11 @@
                             <tr>
                                 <td>{{ $post->title }}</td>
                                 <td style="display:flex;">
-                                    <a href="{{ route('user.posts.edit', $post->id) }}" class="btn btn-warning mr-3">Edit</a>
+                                    <a href="{{ route('user.posts.edit', $post->id) }}" class="btn btn-warning mr-3">@lang('translations.edit')</a>
                                     <form action="{{ route('user.posts.delete', $post->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="btn btn-danger">@lang('translations.delete')</button>
                                     </form>
                                 </td>
                             </tr>

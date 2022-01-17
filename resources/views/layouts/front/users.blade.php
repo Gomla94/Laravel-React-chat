@@ -3,13 +3,13 @@
 <div class="container-fluid all-users-wrapper">
   <div class="filter-all-users-container">
     <div class="filter-users-wrapper">
-      <span class="filter-users-text">Фильтр</span>
+      <span class="filter-users-text">@lang("translations.filter")</span>
       <i class="fas fa-filter"></i>
     </div>
   </div>
   <div class="filters-list">
     <div class="filter-item">
-      <span class="filter-item-span">интересы</span>
+      <span class="filter-item-span">@lang("translations.interest")</span>
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
         @foreach($interesting_types as $type)
@@ -18,7 +18,7 @@
       </ul>
     </div>
     <div class="filter-item">
-      <span class="filter-item-span">страна</span>
+      <span class="filter-item-span">@lang("translations.country")</span>
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
         @foreach($countries as $country)
@@ -27,11 +27,11 @@
       </ul>
     </div>
     <div class="filter-item">
-      <span class="filter-item-span">пол</span>
+      <span class="filter-item-span">@lang('translations.gender')</span>
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
-        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}"><li class="sub-filter-item">мужчина</li></a>
-        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}"><li class="sub-filter-item">женщина</li></a>
+        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}"><li class="sub-filter-item">@lang("translations.male")</li></a>
+        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}"><li class="sub-filter-item">@lang("translations.female")</li></a>
       </ul>
     </div>
   </div>
@@ -52,7 +52,7 @@
       <div class="users-social">
         <span class="user-social-span">{{ $user->name }}</span>
         <span class="user-social-span">{{ $user->email }}</span>
-        {{-- <span class="user-social-span">Открыть полный профиль</span> --}}
+        {{-- <span class="user-social-span">@lang('translations.open_all_path')</span> --}}
       </div>
       @if(Auth::check())
         <div class="user-subscription-button">
@@ -65,10 +65,10 @@
             <button class="fas fa-check checkmark-icon"></button>
           </form>
           @else
-          <form action="{{ route('subscribe', $user->id) }}" method="POST"> 
+          <form action="{{ route('subscribe', $user->id) }}" method="POST">
             @csrf
             <button class="user-subscribe">
-              subscribe
+              @lang('translations.subscribe')
             </button>
           </form>
           @endif
