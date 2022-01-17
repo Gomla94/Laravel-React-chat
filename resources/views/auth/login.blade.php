@@ -4,19 +4,19 @@ Login
 @endsection
 @section('content')
   <div class="main-page-button-wrapper">
-    <a href="{{ route('welcome') }}">Home</a>
+    <a href="{{ route('welcome') }}">@lang('translations.home')</a>
   </div>
   <div class="god-container">
     <div class="super-container1">
-      <h2 class="title-h2">Welcome Back!</h2>
+      <h2 class="title-h2">@lang('translations.welcm')!</h2>
 
       <div class="container-p">
         <p class="subtitle-p">
-          To keep connected with us please login with your personal info.
+          @lang('translations.inf')
         </p>
 
         <div class="div-button1">
-          <a class="button1" href="{{ route('register') }}">Sign up</a>
+          <a class="button1" href="{{ route('register') }}">@lang('translations.sign')</a>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@ Login
     <br />
     <div class="super-container2">
       <div class="title-container">
-        <h1>Login</h1>
+        <h1>@lang('translations.login')</h1>
       </div>
       <!-- <div class="buttons-login">
         <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
@@ -64,11 +64,11 @@ Login
           <label for="no">No</label>
           <input type="radio" name="subscribe" id="No" /> -->
           <div class="button">
-            <button class="button2">Login</button>
+            <button class="button2">@lang('translations.login')</button>
           </div>
         </form>
       </div>
-      
+
     </div>
   </div>
 @endsection

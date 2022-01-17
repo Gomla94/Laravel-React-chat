@@ -3,14 +3,14 @@
 <div class="container">
     <div class="col-md-10">
         <div class="card">
-            <div class="card-header">All Appeals</div>
+            <div class="card-header">@lang('translations.all_appeals')</div>
             <div class="card-body">
-                <a href="{{ route('user.appeals.create') }}" class="btn btn-success mb-3">Add New Appeal</a>
+                <a href="{{ route('user.appeals.create') }}" class="btn btn-success mb-3">@lang('translations.add_appeal')</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <td>Title</td>
-                            <td>Actions</td>
+                            <td>@lang('translations.title')</td>
+                            <td>@lang('translations.action')</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,7 +23,7 @@
                                     <form action="{{ route('user.appeals.delete', $appeal->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="btn btn-danger">@lang('translations.delete')</button>
                                     </form>
                                 </td>
                             </tr>

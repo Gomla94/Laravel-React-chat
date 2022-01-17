@@ -3,13 +3,13 @@
 <div class="container">
     <div class="col-md-10">
         <div class="card">
-            <div class="card-header">Edit Appeal: <strong>{{ $appeal->title }}</strong></div>
+            <div class="card-header">@lang('translations.edit_appeal'): <strong>{{ $appeal->title }}</strong></div>
             <div class="card-body">
                <form action="{{ route('user.appeals.update', $appeal->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="title">Title</label>
+                        <label for="title">@lang('translations.title')</label>
                         <input type="text" class="form-control" name="appeal_title" placeholder="Title" value="{{ $appeal->title }}">
                         @error('title')
                         <span style="color:red">{{$message}}</span>
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">@lang('translations.description')</label>
                         <textarea name="appeal_description" class="form-control" id="description" cols="30" rows="10">{{ $appeal->description }}</textarea>
                         @error('description')
                         <span style="color:red">{{$message}}</span>
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Image</label>
+                        <label for="image">@lang('translations.image')</label>
                         <div>
                             <img src="{{ asset($appeal->image) }}" class="mb-3" alt="" width="200px" height="100px">
                         </div>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="video">Video</label>
+                        <label for="video">@lang('translations.video')</label>
                         <div>
                             <video src="{{ asset($appeal->video) }}" controls class="mb-3" width="200px" height="100px"></video>
                         </div>
@@ -46,7 +46,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Update Appeal</button>
+                    <button type="submit" class="btn btn-primary">@lang('translations.upd_appeal')</button>
                 </form>
             </div>
         </div>

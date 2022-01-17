@@ -50,25 +50,19 @@
   </script>
   </head>
   <body>
-  <style>
-      body {
-          background-image: url("{{asset("images/bg.jpg")}}");
-          background-size: cover;
-      }
-  </style>
     <div class="overlay" id="overlay">
       <ul class="overlay-list">
         <a href="{{ route('all-videos') }}"
-          ><li class="overlay-list-item">Видео пользователей</li></a
+          ><li class="overlay-list-item">@lang('translations.users_video')</li></a
         >
         <a href="{{ route('all-users') }}"
-          ><li class="overlay-list-item">Пользователи</li></a
+          ><li class="overlay-list-item">@lang('translations.users')</li></a
         >
         <a href="{{ route('all-benefactors') }}"
-          ><li class="overlay-list-item">Благотворительный фонд</li></a
+          ><li class="overlay-list-item">@lang('translations.benefac_fond')</li></a
         >
         <a href="{{ route('all-benefactors') }}"
-          ><li class="overlay-list-item">Благотварители</li></a
+          ><li class="overlay-list-item">@lang('translations.benefac')</li></a
         >
       </ul>
     </div>
@@ -97,28 +91,28 @@
               <a
                 href="{{ route('all-videos') }}"
                 class="{{ Route::currentRouteName() == 'all-videos' ? 'active-list-item' : 'list-item' }}"
-                >Видео пользователей</a
+                >@lang('translations.users_video')</a
               >
             </div>
             <div class="nav-item">
               <a
                 href="{{ route('all-users') }}"
                 class="{{ Route::currentRouteName() == 'all-users' ? 'active-list-item' : 'list-item' }}"
-                >Пользователи</a
+                >@lang('translations.users')</a
               >
             </div>
             <div class="nav-item">
               <a
                 href="{{ route('all-appeals') }}"
                 class="{{ Route::currentRouteName() == 'all-appeals' ? 'active-list-item' : 'list-item' }}"
-                >Благотворительный фонд</a
+                >@lang('translations.benefac_fond')</a
               >
             </div>
             <div class="nav-item">
               <a
                 href="{{ route('all-benefactors') }}"
                 class="{{ Route::currentRouteName() == 'all-benefactors' ? 'active-list-item' : 'list-item' }}"
-                >Благотварители</a
+                >@lang('translations.benefac')</a
               >
             </div>
 
@@ -126,29 +120,65 @@
 
           </div>
         </div>
+{{--          @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
+{{--              <li>--}}
+{{--                  <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
+{{--                      {{ $properties['native'] }}--}}
+{{--                  </a>--}}
+{{--              </li>--}}
+{{--          @endforeach--}}
+
+{{--          @dd( LaravelLocalization::getCurrentLocaleName())--}}
 
         <div class="col-md-2 col-sm-2 col-xs-2">
           <div class="navbar-user-container">
             <div class="navbar-language-item">
               <div class="language">
-                <span class="lang-name">UK</span>
+                  @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+                <span class="lang-name">ARM</span>
                 <div class="lang-image-wrapper">
-                  <img class="lang-image" src="{{ asset('images/uk-square.png') }}" />
+                  <img class="lang-image" src="{{ asset('images/armenia-square.png') }}" />
                 </div>
+                  @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+                      <span class="lang-name">UK</span>
+                      <div class="lang-image-wrapper">
+                          <img class="lang-image" src="{{ asset('images/uk-square.png') }}" />
+                      </div>
+                  @else
+                      <span class="lang-name">RUS</span>
+                      <div class="lang-image-wrapper">
+                          <img class="lang-image" src="{{ asset('images/russia-square.png') }}" />
+                      </div>
+                  @endif
               </div>
               <div class="language-list">
-                <div class="language">
-                  <span class="lang-name">RUS</span>
-                  <div class="lang-image-wrapper">
-                    <img class="lang-image" src="{{ asset('images/russia-square.png') }}" />
-                  </div>
-                </div>
-                <div class="language">
-                  <span class="lang-name">ARM</span>
-                  <div class="lang-image-wrapper">
-                    <img class="lang-image" src="{{ asset('images/armenia-square.png') }}" />
-                  </div>
-                </div>
+                  @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                     @if($localeCode == 'en')
+                     <div class="language">
+                         <div class="lang-image-wrapper">
+                             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                             <img class="lang-image" src="{{ asset('images/uk-square.png') }}" />
+                             </a>
+                         </div>
+                     </div>
+                     @elseif($localeCode == 'ru')
+                     <div class="language">
+                         <div class="lang-image-wrapper">
+                             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                             <img class="lang-image" src="{{ asset('images/russia-square.png') }}" />
+                             </a>
+                         </div>
+                     </div>
+                     @else
+                     <div class="language">
+                         <div class="lang-image-wrapper">
+                             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                             <img class="lang-image" src="{{ asset('images/armenia-square.png') }}" />
+                             </a>
+                         </div>
+                     </div>
+                     @endif
+                  @endforeach
               </div>
             </div>
             @if(Auth::id())
@@ -176,15 +206,15 @@
               <a
                 href="{{ route('user.profile') }}"
                 class="user-navbar-list-item"
-                >My Profile</a
+                >@lang('translations.my_profile')</a
               >
               <form action={{ route('logout') }} method="POST" class="logout-form">
                 @csrf
-                <a href="#" class="user-navbar-list-item logout">Logout</a>
+                <a href="#" class="user-navbar-list-item logout">@lang('translations.log_out')</a>
                 </form>
             </div>
             @else
-            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('login') }}">@lang('translations.log_in')</a>
             @endif
           </div>
         </div>

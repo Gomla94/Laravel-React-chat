@@ -36,11 +36,63 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
     Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
 
+
+
+    Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
+        /** user posts routes */
+        Route::get('my-posts', [UserPostsController::class, 'my_posts'])->name('my_posts');
+        Route::get('my-posts/create', [UserPostsController::class, 'create'])->name('posts.create');
+        Route::post('my-posts/create', [UserPostsController::class, 'store'])->name('posts.store');
+        Route::get('my-posts/{post}/edit', [UserPostsController::class, 'edit'])->name('posts.edit');
+        Route::put('my-posts/{post}/edit', [UserPostsController::class, 'update'])->name('posts.update');
+        Route::delete('my-posts/{post}/delete', [UserPostsController::class, 'delete'])->name('posts.delete');
+
+        /** user appeals routes */
+        Route::get('my-appeals', [UserAppealsController::class, 'my_appeals'])->name('my_appeals');
+        Route::get('my-appeals/create', [UserAppealsController::class, 'create'])->name('appeals.create');
+        Route::post('my-appeals/create', [UserAppealsController::class, 'store'])->name('appeals.store');
+        Route::get('my-appeals/{appeal}/edit', [UserAppealsController::class, 'edit'])->name('appeals.edit');
+        Route::put('my-appeals/{appeal}/edit', [UserAppealsController::class, 'update'])->name('appeals.update');
+        Route::delete('my-appeals/{appeal}/delete', [UserAppealsController::class, 'delete'])->name('appeals.delete');
+        Route::get('my-appeals/{appeal}/images', [UserAppealsController::class, 'appeal_images'])->name('appeal.images');
+        Route::get('my-appeals/{appeal}/images/create', [UserAppealsController::class, 'add_appeal_image'])->name('appeal-images.create');
+        Route::post('my-appeals/{appeal}/images/create', [UserAppealsController::class, 'store_appeal_image'])->name('appeal-images.store');
+        Route::get('my-appeals/{appeal}/images/{image}/edit', [UserAppealsController::class, 'edit_appeal_image'])->name('appeal-images.edit');
+        Route::put('my-appeals/{appeal}/images/{image}/update', [UserAppealsController::class, 'update_appeal_image'])->name('appeal-images.update');
+        Route::delete('my-appeals/{appeal}/images/{image}', [UserAppealsController::class, 'delete_appeal_image'])->name('appeal-images.delete');
+
+        // post comments
+
+        Route::get('posts/{post}/get-last-comment', [UserPostsController::class, 'get_last_comment']);
+        Route::post('posts/{post}/add-comment', [UserPostsController::class, 'add_comment'])->name('post.add-comment');
+        Route::post('posts/{post}/add-like', [UserPostsController::class, 'add_like'])->name('post.add_like');
+        Route::delete('posts/{post}/delete-like', [UserPostsController::class, 'delete_like'])->name('post.delete_like');
+
+        /** profile routes */
+        Route::put('profile', [UserController::class,'update_profile'])->name('update-profile');
+
+    });
+
+    /** Users */
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function() {
+        Route::get('/home', [AdminController::class, 'home']);
+        Route::get('users', [AdminController::class, 'users'])->name('users');
+        Route::delete('users/{user}', [AdminController::class, 'delete_user'])->name('users.delete');
+        Route::put('users/{user}/block', [AdminController::class, 'block_user'])->name('users.block');
+        Route::put('users/{user}/unblock', [AdminController::class, 'unblock_user'])->name('users.unblock');
+        Route::get('/users/create', [AdminController::class, 'create_user'])->name('users.create');
+        Route::post('/users', [AdminController::class, 'store_user'])->name('users.store');
+        Route::resource('interesting-types', InterestingTypesController::class);
+        Route::resource('countries', CountriesController::class);
+    });
+
+    Auth::routes();
+
+
 });
 
 
 
-Auth::routes();
 
 
 
@@ -52,53 +104,9 @@ Route::get('/auth/facebook/redirect', [FacebookController::class, 'callback']);
 Route::get('/auth/instagram/', [InstagramController::class, 'InstagramLogin'])->name('instagram.login');
 Route::get('/auth/instagram/redirect', [InstagramController::class, 'callback']);
 
-Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
-    /** user posts routes */
-    Route::get('my-posts', [UserPostsController::class, 'my_posts'])->name('my_posts');
-    Route::get('my-posts/create', [UserPostsController::class, 'create'])->name('posts.create');
-    Route::post('my-posts/create', [UserPostsController::class, 'store'])->name('posts.store');
-    Route::get('my-posts/{post}/edit', [UserPostsController::class, 'edit'])->name('posts.edit');
-    Route::put('my-posts/{post}/edit', [UserPostsController::class, 'update'])->name('posts.update');
-    Route::delete('my-posts/{post}/delete', [UserPostsController::class, 'delete'])->name('posts.delete');
 
-    /** user appeals routes */
-    Route::get('my-appeals', [UserAppealsController::class, 'my_appeals'])->name('my_appeals');
-    Route::get('my-appeals/create', [UserAppealsController::class, 'create'])->name('appeals.create');
-    Route::post('my-appeals/create', [UserAppealsController::class, 'store'])->name('appeals.store');
-    Route::get('my-appeals/{appeal}/edit', [UserAppealsController::class, 'edit'])->name('appeals.edit');
-    Route::put('my-appeals/{appeal}/edit', [UserAppealsController::class, 'update'])->name('appeals.update');
-    Route::delete('my-appeals/{appeal}/delete', [UserAppealsController::class, 'delete'])->name('appeals.delete');
-    Route::get('my-appeals/{appeal}/images', [UserAppealsController::class, 'appeal_images'])->name('appeal.images');
-    Route::get('my-appeals/{appeal}/images/create', [UserAppealsController::class, 'add_appeal_image'])->name('appeal-images.create');
-    Route::post('my-appeals/{appeal}/images/create', [UserAppealsController::class, 'store_appeal_image'])->name('appeal-images.store');
-    Route::get('my-appeals/{appeal}/images/{image}/edit', [UserAppealsController::class, 'edit_appeal_image'])->name('appeal-images.edit');
-    Route::put('my-appeals/{appeal}/images/{image}/update', [UserAppealsController::class, 'update_appeal_image'])->name('appeal-images.update');
-    Route::delete('my-appeals/{appeal}/images/{image}', [UserAppealsController::class, 'delete_appeal_image'])->name('appeal-images.delete');
-
-    // post comments
-
-    Route::get('posts/{post}/get-last-comment', [UserPostsController::class, 'get_last_comment']);
-    Route::post('posts/{post}/add-comment', [UserPostsController::class, 'add_comment'])->name('post.add-comment');
-    Route::post('posts/{post}/add-like', [UserPostsController::class, 'add_like'])->name('post.add_like');
-    Route::delete('posts/{post}/delete-like', [UserPostsController::class, 'delete_like'])->name('post.delete_like');
-
-    /** profile routes */
-    Route::put('profile', [UserController::class,'update_profile'])->name('update-profile');
-
-});
 Route::get('posts/{post}/all-comments', [UserPostsController::class, 'all_comments'])->name('post.all-comments');
 
 
-/** Users */
-Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function() {
-    Route::get('/home', [AdminController::class, 'home']);
-    Route::get('users', [AdminController::class, 'users'])->name('users');
-    Route::delete('users/{user}', [AdminController::class, 'delete_user'])->name('users.delete');
-    Route::put('users/{user}/block', [AdminController::class, 'block_user'])->name('users.block');
-    Route::put('users/{user}/unblock', [AdminController::class, 'unblock_user'])->name('users.unblock');
-    Route::get('/users/create', [AdminController::class, 'create_user'])->name('users.create');
-    Route::post('/users', [AdminController::class, 'store_user'])->name('users.store');
-    Route::resource('interesting-types', InterestingTypesController::class);
-    Route::resource('countries', CountriesController::class);
-});
+
 

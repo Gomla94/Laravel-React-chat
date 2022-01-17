@@ -3,7 +3,7 @@
 <div class="one-user-wrapper">
   <div class="filter-user-wrapper">
     <div class="filter-user-container">
-      <span class="filter-user-text">Фильтр</span>
+      <span class="filter-user-text">@lang('translations.filter')</span>
       <i class="fas fa-filter filter-user-icon"></i>
     </div>
     <div class="user-info-search-wrapper">
@@ -30,35 +30,35 @@
       </div>
       <div class="one-user-main-info-button">
         <div class="one-user-green-button">
-          <span class="green-button-text">Информация о пользователе</span>
+          <span class="green-button-text">@lang('translations.user_inf')</span>
         </div>
       </div>
       <div class="user-additional-info">
         @if($user->date_of_birth)
         <div class="info">
-          <div class="info-name">Дата рождения</div>
+          <div class="info-name">@lang('translations.date_of_birth')</div>
           <div class="info-value">{{ $user->date_of_birth }}</div>
         </div>
         @endif
         @if($user->email)
         <div class="info">
-          <div class="info-name">Электронный адрес</div>
+          <div class="info-name">@lang('translations.email')</div>
           <div class="info-value">{{ $user->email }}</div>
         </div>
         @endif
         <div class="info">
-          <div class="info-name">Пол</div>
+          <div class="info-name">@lang('translations.gender')</div>
           <div class="info-value">{{ $user->name }}</div>
         </div>
         @if($user->age)
         <div class="info">
-          <div class="info-name">Возраст</div>
+          <div class="info-name">@lang('translations.age')</div>
           <div class="info-value">{{ $user->age }}</div>
         </div>
         @endif
         @if($interesting_type)
         <div class="info">
-          <div class="info-name">Сфера деятельнсоти</div>
+          <div class="info-name">@lang('translations.interest_type')</div>
           <div class="info-value">{{ $interesting_type->name }}</div>
         </div>
         @endif
@@ -67,35 +67,35 @@
     <div class="one-user-social-info-wrapper">
       <div class="media-details">
         <span class="media-span media-title media-images-count-title"
-          >Фото</span
+          >@lang('translations.image')</span
         >
         <i class="fas fa-file-image media-icon media-image-icon"></i>
         <span class="media-count">{{ $user_images_count }}</span>
       </div>
       <div class="media-details">
         <span class="media-span media-title media-videos-count-title"
-          >Видео</span
+          >@lang('translations.video')</span
         >
         <i class="fas fa-photo-video media-icon media-videos-icon"></i>
         <span class="media-count">{{ $user_videos_count }}</span>
       </div>
       <div class="media-details">
         <span class="media-span media-title media-posts-count-title"
-          >Публикации</span
+          >@lang('translations.posts')</span
         >
         <i class="fas fa-book-open media-icon media-book-icon"></i>
         <span class="media-count">{{ $user_posts_count }}</span>
       </div>
       <div class="media-details">
         <span class="media-span media-title media-subscribers-count-title"
-          >подписчики</span
+          >@lang('translations.subscribtions')</span
         >
         <i class="fas fa-user media-icon media-image-icon"></i>
         <span class="media-count">{{ $user->subscribtions->count() }}</span>
       </div>
       <div class="media-details">
         <span class="media-span media-title media-subscribers-count-title"
-          >подписки</span
+          >@lang('translations.subscribers')</span
         >
         <i class="fas fa-users media-icon media-image-icon"></i>
         <span class="media-count">{{ $user->subscribers->count() }}</span>
@@ -104,7 +104,7 @@
   </div>
   <div class="main-posts">
     <div class="main-posts-buttons-container">
-      <p class="main-posts-title">лента новостей</p>
+      <p class="main-posts-title">@lang('translations.news')</p>
       <div class="main-posts-buttons-wrapper">
         <div class="main-posts-search-wrapper">
           <i class="fas fa-search main-posts-search-icon"></i>
@@ -113,11 +113,11 @@
         </div>
         <div class="main-posts-add-buttons">
           <button class="main-posts-add-appeal-button">
-            запрос о помощи
+            @lang('translations.create_appeal')
           </button>
           <button class="main-posts-add-post-button">
             <i class="fal fa-plus"></i>
-            Новый пост
+            @lang('translations.add_n_post')
           </button>
         </div>
       </div>
@@ -199,7 +199,7 @@
       @csrf
 
       <div class="form-group">
-          <label class="create-post-label" for="title">Title</label>
+          <label class="create-post-label" for="title">@lang('translations.title')</label>
           <input type="text" class="form-control" name="post_title" placeholder="Title" value="{{ old('post_title') }}">
           @error('post_title')
           <span style="color:red">{{$message}}</span>
@@ -207,20 +207,20 @@
       </div>
 
       <div class="form-group">
-          <label class="create-post-label" for="post_description">Description</label>
+          <label class="create-post-label" for="post_description">@lang('translations.descriptions')</label>
           <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('post_description') }}</textarea>
           @error('post_description')
           <span style="color:red">{{$message}}</span>
           @enderror
       </div>
 
-      
+
       <div class="form-group modal-checker-container">
         <div class="post-modal-checker">
           <div class="modal-checker"></div>
         </div>
-        <label class="create-post-label image-label">Image</label>
-        <label class="create-post-label video-label">Video</label>
+        <label class="create-post-label image-label">@lang('translations.image')</label>
+        <label class="create-post-label video-label">@lang('translations.video')</label>
         @error('post_image')
           <span style="color:red">{{$message}}</span>
         @enderror
@@ -228,14 +228,14 @@
           <span style="color:red">{{$message}}</span>
         @enderror
       </div>
-      
+
 
       <div class="form-group post-modal-image-container">
-          <label class="create-post-label" for="image">Image</label>
+          <label class="create-post-label" for="image">@lang('translations.image')</label>
           <input type="file" accept="image/*" class="form-control" name="post_image">
       </div>
 
-      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
+      <button type="submit" class="btn btn-primary create-post-modal-btn">@lang('translations.add_n_post')</button>
   </form>
   </div>
 </div>
@@ -250,7 +250,7 @@
       @csrf
 
       <div class="form-group">
-          <label class="create-post-label" for="title">Title</label>
+          <label class="create-post-label" for="title">@lang('translations.title')</label>
           <input type="text" class="form-control" name="appeal_title" placeholder="Title">
           @error('appeal_title')
           <span style="color:red">{{$message}}</span>
@@ -258,7 +258,7 @@
       </div>
 
       <div class="form-group">
-          <label class="create-post-label" for="description">Description</label>
+          <label class="create-post-label" for="description">@lang('translations.descriptions')</label>
           <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
           @error('appeal_description')
           <span style="color:red">{{$message}}</span>
@@ -266,7 +266,7 @@
       </div>
 
       <div class="form-group modal-image-container">
-          <label class="create-post-label" for="image">Image</label>
+          <label class="create-post-label" for="image">@lang('translations.image')</label>
           <input type="file" accept="image/*" multiple class="form-control" name="appeal_image[]">
           @error('appeal_image')
           <span style="color:red">{{$message}}</span>
@@ -274,14 +274,14 @@
       </div>
 
       <div class="form-group modal-image-container">
-        <label class="create-post-label" for="video">Video</label>
+        <label class="create-post-label" for="video">@lang('translations.video')</label>
         <input type="file" accept="video/*" class="form-control" name="appeal_video">
         @error('appeal_video')
           <span style="color:red">{{$message}}</span>
         @enderror
     </div>
 
-      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Appeal</button>
+      <button type="submit" class="btn btn-primary create-post-modal-btn">@lang('translations.add_appeal')</button>
   </form>
   </div>
 </div>
