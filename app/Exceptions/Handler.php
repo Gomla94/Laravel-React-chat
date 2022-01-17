@@ -12,8 +12,7 @@ class Handler extends ExceptionHandler
      *
      * @var string[]
      */
-    protected $dontReport = [
-        //
+    protected $dontReport = [//
     ];
 
     /**
@@ -21,11 +20,7 @@ class Handler extends ExceptionHandler
      *
      * @var string[]
      */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['current_password', 'password', 'password_confirmation',];
 
     /**
      * Register the exception handling callbacks for the application.
@@ -37,5 +32,51 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($request->expectsJson()) {
+            $exception = $this->prepareException($exception);
+
+            if ($exception instanceof \Illuminate\Http\Exception\HttpResponseException) {
+                return $exception->getResponse();
+            }
+            if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+                return $this->unauthenticated($request, $exception);
+            }
+            if ($exception instanceof \Illuminate\Validation\ValidationException) {
+                return $this->convertValidationExceptionToResponse($exception, $request);
+            }
+
+            $response = [];
+
+            $statusCode = 500;
+            if (method_exists($exception, 'getStatusCode')) {
+                $statusCode = $exception->getStatusCode();
+            }
+
+            switch ($statusCode) {
+                case 404:
+                    $response['message'] = 'Record not nound';
+                    break;
+
+                case 403:
+                    $response['message'] = 'Forbidden';
+                    break;
+
+                default:
+                    $response['message'] = $exception->getMessage();
+                    break;
+            }
+
+            if (config('app.debug')) {
+                $response['trace'] = $exception->getTrace();
+                $response['code'] = $exception->getCode();
+            }
+
+            return response()->json($response, $statusCode);
+        }
+        return parent::render($request, $exception);
     }
 }

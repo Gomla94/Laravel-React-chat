@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     const ACTIVE_STATUS = 1;
     const BLOCK_STATUS = 0;
@@ -125,5 +125,10 @@ class User extends Authenticatable
     {
         return (bool)$this->chat_blocks()->where('blocker_id', $this->id)
                                     ->where('user_id', $user_id)->count();
+    }
+
+    public function isAdmin():bool
+    {
+        return $this->type === "admin";
     }
 }
