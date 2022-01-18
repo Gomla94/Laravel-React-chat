@@ -17,13 +17,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-$lang = LaravelLocalization::setLocale();
-Route::group([
-    'prefix' => $lang,
-    'middleware' => ['localizationRedirect', 'localeViewPath']
-], function () {
-//our routes 
-Route::get('/', [FrontController::class, 'home'])->name('welcome');
+// $lang = LaravelLocalization::setLocale();
+// Route::group([
+//     'prefix' => $lang,
+//     'middleware' => ['localizationRedirect', 'localeViewPath']
+// ], function () {
+// //our routes 
+// });
+
+
+// Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+// {
+    Route::get('/', [FrontController::class, 'home'])->name('welcome');
     Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
     Route::get('/all-benefactors',[FrontController::class, 'all_benefactors'])->name('all-benefactors');
     Route::get('/all-appeals',[FrontController::class, 'all_appeals'])->name('all-appeals');
@@ -38,12 +43,6 @@ Route::get('/', [FrontController::class, 'home'])->name('welcome');
     Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
     Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
     Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
-});
-
-
-// Route::group(['prefix' => LaravelLocalization::setLocale()], function()
-// {
-    
 
 
 
