@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+$lang = LaravelLocalization::setLocale();
+dd($lang);
+
 
 // Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 // {
