@@ -26,8 +26,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 // });
 
 
-// Route::group(['prefix' => LaravelLocalization::setLocale()], function()
-// {
+Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+{
     Route::get('/', [FrontController::class, 'home'])->name('welcome');
     Route::get('/all-users',[FrontController::class, 'all_users'])->name('all-users');
     Route::get('/all-benefactors',[FrontController::class, 'all_benefactors'])->name('all-benefactors');
@@ -97,7 +97,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     Auth::routes();
 
 
-// });
+});
 
 
 
