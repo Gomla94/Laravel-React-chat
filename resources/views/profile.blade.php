@@ -86,11 +86,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               @endif
             @endif
             <li onclick="tabs(1)" class="user-review profile-item">@lang('translations.posts')</li>
-            <li onclick="tabs(2)" class="user-images profile-item">@lang('translations.images')</li>
-            <li onclick="tabs(3)" class="user-videos profile-item">@lang('translations.videos')</li>
-            <li onclick="tabs(4)" class="user-videos profile-item">@lang('translations.subscribtions')</li>
-            <li onclick="tabs(5)" class="user-videos profile-item">@lang('translations.subscribers')</li>
-            <li onclick="tabs(6)" class="user-setting profile-item"> @lang('translations.subscribers')</li>
+            <li onclick="tabs(2)" class="user-review profile-item">@lang('translations.appeals')</li>
+            <li onclick="tabs(3)" class="user-images profile-item">@lang('translations.images')</li>
+            <li onclick="tabs(4)" class="user-videos profile-item">@lang('translations.videos')</li>
+            <li onclick="tabs(5)" class="user-videos profile-item">@lang('translations.subscribtions')</li>
+            <li onclick="tabs(6)" class="user-videos profile-item">@lang('translations.subscribers')</li>
+            <li onclick="tabs(7)" class="user-setting profile-item"> @lang('translations.subscribers')</li>
           </ul>
         </div>
         <div class="profile-body">
@@ -186,6 +187,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <div class="user-posts-wrapper">
               @foreach($my_posts as $post)
               <div class="main-post">
+                @if(Auth::id() === $post->user->id)
                 <div class="delete-post-wrapper">
                   <form action="{{ route('user.posts.delete', $post->id) }}" method="POST">
                     @csrf
@@ -193,6 +195,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <button class="fas fa-close"></button>
                   </form>
                 </div>
+                @endif
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
                     <a href="{{ route('user.page', $post->user->unique_id) }}">
@@ -347,6 +350,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <div class="user-posts-wrapper">
               @foreach($my_appeals as $appeal)
               <div class="main-post">
+                @if(Auth::id() === $appeal->user->id)
                 <div class="delete-post-wrapper">
                   <form action="{{ route('user.appeals.delete', $appeal->id) }}" method="POST">
                     @csrf
@@ -354,6 +358,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <button class="fas fa-close"></button>
                   </form>
                 </div>
+                @endif
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
                     <a href="{{ route('user.page', $appeal->user->unique_id) }}">

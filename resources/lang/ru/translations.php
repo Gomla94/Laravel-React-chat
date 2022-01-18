@@ -27,6 +27,7 @@ return [
 
     "settings" => "Настройки",
     "posts" => "Посты",
+    "appeals" => "Обращение о помощи",
     "images" => "Изображения",
     "videos" => "Видео",
     "subscribtions" => "Подписки",

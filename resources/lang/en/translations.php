@@ -27,6 +27,7 @@
 
         "settings" => "Settings",
         "posts" => "Posts",
+        "appeals" => "Appeals",
         "images" => "Images",
         "videos" => "Videos",
         "subscribtions" => "Subscribtions",
