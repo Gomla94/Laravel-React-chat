@@ -1629,6 +1629,13 @@ a {
     grid-template-rows: 30%;
 }
 
+.profile-all-users-list {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px 0px;
+}
+
 .user {
     border: 1px solid rgb(251, 247, 247);
     margin: 5px 5px 5px 5px;

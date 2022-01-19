@@ -4,7 +4,7 @@
   <div class="container all-users-list">
     @foreach($benefactors as $benefactor)
     <div class="user">
-      <a href="{{ route('user.page', $benefactor->id) }}">
+      <a href="{{ route('user.page', $benefactor->unique_id) }}">
         <div class="user-image-wrapper">
           <img src="{{ asset($benefactor->image ?? 'images/avatar.png') }}" alt="user-image" />
         </div>
@@ -16,7 +16,7 @@
       </div>
       @if(Auth::check())
         <div class="user-subscription-button">
-          <div class="user-green-message-box" data-id={{ $benefactor->id }}>
+          <div class="user-green-message-box" data-nid={{ $benefactor->unique_id }}>
             <i class="fas fa-envelope user-envelope"></i>
           </div>
         </div>

@@ -91,7 +91,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <li onclick="tabs(4)" class="user-videos profile-item">@lang('translations.videos')</li>
             <li onclick="tabs(5)" class="user-videos profile-item">@lang('translations.subscribtions')</li>
             <li onclick="tabs(6)" class="user-videos profile-item">@lang('translations.subscribers')</li>
-            <li onclick="tabs(7)" class="user-setting profile-item"> @lang('translations.subscribers')</li>
           </ul>
         </div>
         <div class="profile-body">
@@ -402,7 +401,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           </div>
           <div class="profile-posts-subscibtions tab">
             <h1>@lang('translations.subscribtions')</h1>
-            <div class="container all-users-list">
+            <div class="container profile-all-users-list">
               @foreach($my_subscribtions_users as $subscribtion_user)
               <div class="user">
                 <a href="{{ route('user.page', $subscribtion_user->id) }}">
@@ -417,8 +416,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
                 @if(Auth::check() && auth()->user()->id !== $subscribtion_user->id)
                   <div class="user-subscription-button">
-                    <div class="user-green-message-box" data-id={{ $subscribtion_user->id }}>
-                      <i class="fas fa-envelope user-envelope" data-id={{ $subscribtion_user->id }}></i>
+                    <div class="user-green-message-box" data-nid={{ $subscribtion_user->unique_id }}>
+                      <i class="fas fa-envelope user-envelope"></i>
                     </div>
                   </div>
                 @endif
@@ -428,7 +427,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
           </div>
           <div class="profile-posts-subscribers tab">
             <h1>@lang('translations.subscribers')</h1>
-            <div class="container all-users-list">
+            <div class="container profile-all-users-list">
               @foreach($my_subscribers as $subscriber_user)
               <div class="user">
                 <a href="{{ route('user.page', $subscriber_user->id) }}">
@@ -442,8 +441,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 </div>
                 @if(Auth::check() && auth()->user()->id !== $subscriber_user->id)
                   <div class="user-subscription-button">
-                    <div class="user-green-message-box" data-id={{ $subscriber_user->id }}>
-                      <i class="fas fa-envelope user-envelope" data-id={{ $subscriber_user->id }}></i>
+                    <div class="user-green-message-box" data-nid={{ $subscriber_user->unique_id }}>
+                      <i class="fas fa-envelope user-envelope"></i>
                     </div>
                   </div>
                 @endif
