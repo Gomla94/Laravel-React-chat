@@ -3,7 +3,7 @@
         "social_site" => "Social network",
         "site_description" => "As well as diluted with a fair amount of empathy, rational thinking largely determines the importance of the positions taken by the participants in relation to the tasks assigned. As is commonly believed, interactive prototypes are only a method of political participation and are associatively distributed across industries.",
         "need_help_now" => "Who need help right now",
-        "want_help" => "Want help",
+        "want_help" => "See more",
         "news" => "News line",
         "help_request" => "Request for help",
         "new_post" => "New post",

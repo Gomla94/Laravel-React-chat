@@ -163,16 +163,19 @@ class FrontController extends Controller
         ]);
     }
 
-    public function subscribe(User $user)
+    public function subscribe($uniquid)
     {
-        auth()->user()->subscribtions()->create(['user_id' => $user->id]);
-        broadcast(new NewSubscribtionEvent($user, Auth::user()))->toOthers();
+        $user = User::where('unique_id', $uniquid)->firstOrFail();
+        $check_if_user_is_subscribed_to_me = (bool)$user->subscribtions()->where('user_id', auth()->user()->unique_id)->first();
+        auth()->user()->subscribtions()->create(['user_id' => $user->unique_id]);
+        broadcast(new NewSubscribtionEvent($user, Auth::user(), $check_if_user_is_subscribed_to_me))->toOthers();
         return back();
     }
 
-    public function unsubscribe(User $user)
+    public function unsubscribe($uniquid)
     {
-        $subscribtion = auth()->user()->subscribtions()->where('user_id', $user->id)->firstOrFail();
+        $user = User::where('unique_id', $uniquid)->firstOrFail();
+        $subscribtion = auth()->user()->subscribtions()->where('user_id', $user->unique_id)->firstOrFail();
         $subscribtion->delete();
         return back();
     }

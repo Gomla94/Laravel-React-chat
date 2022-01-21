@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth:api'], function() {
      /** notifications */
      Route::get('my_notifications', [UserController::class, 'my_notifications']);
      Route::post('check-notification', [UserController::class, 'check_notification']);
+     
+     Route::get('notification-user', [UserController::class, 'get_notification_user']);
 });
 
 // Application API routes

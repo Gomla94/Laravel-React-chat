@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import chat from "../src/chat";
 import InputEmoji from "react-input-emoji";
+import notify from "../src/notify";
 
 const ChatWindow = () => {
     const [users, setUsers] = useState([]);
@@ -17,6 +18,7 @@ const ChatWindow = () => {
     const [showAlertMessages, setShowAlertMessages] = useState(true);
 
     const envelopes = document.querySelectorAll(".user-green-message-box");
+
     const userBlocker = document.querySelector(".sound-checker");
     const userBlockerBackground = document.querySelector(
         ".sound-checker-background"
@@ -45,6 +47,31 @@ const ChatWindow = () => {
 
         setToUserId(userId);
     };
+
+    const notificationUser = async (nid) => {
+        const response = await notify.get("/notification-user", {
+            params: { nid: nid },
+        });
+        setUsers([...users, response.data]);
+    };
+
+    useEffect(() => {
+        const bellIcon = document.querySelector(".bell-icon");
+        if (bellIcon) {
+            bellIcon.addEventListener("click", () => {
+                setTimeout(() => {
+                    const acceptNotification =
+                        document.querySelectorAll(".accept-notify");
+
+                    acceptNotification.forEach((item) => {
+                        item.addEventListener("click", () => {
+                            notificationUser(item.dataset.nid);
+                        });
+                    });
+                }, 500);
+            });
+        }
+    }, [users]);
 
     useEffect(() => {
         fetchAllMessagesWithUser(toUserId);
@@ -138,21 +165,6 @@ const ChatWindow = () => {
         }
     }, [users, toUserId]);
 
-    const checkifMessageUserIsInMySubscribtion = (
-        checkSubscriber,
-        subscribers
-    ) => {
-        const targetUser = subscribers.findIndex(
-            (item) => checkSubscriber.id === item.id
-        );
-
-        if (targetUser === -1) {
-            return false;
-        }
-
-        return true;
-    };
-
     const checkChatWrapperStatusBeforeAlertingNewMessageCount = (
         subscribers,
         userToCheck
@@ -165,7 +177,6 @@ const ChatWindow = () => {
             return false;
         }
 
-        // return true;
         if (
             document
                 .querySelector(".chat-wrapper")
@@ -177,16 +188,16 @@ const ChatWindow = () => {
         }
     };
 
-    const listenToNewMessageAndAlertCount = () => {
-        removeAlertMessagesWrapper();
+    // const listenToNewMessageAndAlertCount = () => {
+    //     removeAlertMessagesWrapper();
 
-        window.Echo.private(`messages.${authId}`).listen(
-            "NewMessageEvent",
-            (event) => {
-                checkChatWrapperStatusBeforeAlertingNewMessageCount();
-            }
-        );
-    };
+    //     window.Echo.private(`messages.${authId}`).listen(
+    //         "NewMessageEvent",
+    //         (event) => {
+    //             checkChatWrapperStatusBeforeAlertingNewMessageCount();
+    //         }
+    //     );
+    // };
 
     const removeAlertMessagesWrapper = () => {
         const alertMessages = document.querySelector(".alert-message-wrapper");
@@ -344,9 +355,10 @@ const ChatWindow = () => {
 
     const fetchTopUser = (userId) => {
         chat.get("/top-chat-user", {
-            params: { user_id: parseInt(userId) },
+            params: { nid: userId },
         }).then((response) => {
             setUsers(response.data);
+            console.log(response.data);
             changeToUserId(null, userId);
         });
     };

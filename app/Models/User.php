@@ -103,7 +103,7 @@ class User extends Authenticatable
 
     public function subscribtions()
     {
-        return $this->hasMany(Subscribtion::class, 'subscriber_id');
+        return $this->hasMany(Subscribtion::class, 'subscriber_id', 'unique_id');
     }
 
     public function subscribers()

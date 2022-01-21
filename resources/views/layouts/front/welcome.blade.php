@@ -319,19 +319,21 @@
       @foreach($random_appeals as $appeal)
       <div class="swiper-slide">
         <div class="appeal-card">
-          <div class="appeal-card-image-wrapper">
-            @if($appeal->image)
-            <img src="{{ asset($appeal->image) }}" alt="appeal-image" class="appeal-card-image" />
-            @endif
-          </div>
-          <div class="appeal-card-title">
-            <p>{{$appeal->title}}</p>
+            <a href="{{ route('show-appeal', $appeal->id) }}">
+            <div class="appeal-card-image-wrapper">
+              @if($appeal->image)
+              <img src="{{ asset($appeal->image) }}" alt="appeal-image" class="appeal-card-image" />
+              @endif
             </div>
-          <div class="appeal-card-description">
-            <p>{{str_limit($appeal->description, 200)}}</p>
+            <div class="appeal-card-title">
+              <p>{{$appeal->title}}</p>
+              </div>
+            <div class="appeal-card-description">
+              <p>{{str_limit($appeal->description, 200)}}</p>
+            </div>
+            <a href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">@lang("translations.want_help")</a>
+          </a>
           </div>
-          <a href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">@lang("translations.want_help")</a>
-        </div>
       </div>
       @endforeach
     </div>

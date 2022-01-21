@@ -45,15 +45,14 @@ class MessagesController extends Controller
 
     public function top_chat_user()
     {
-        $user_id = request('user_id');
-
-        $user = User::where('id', $user_id)->get();
+        $user_uniqueid = request('nid');
+        $user = User::where('unique_id', $user_uniqueid)->first();
+        $merged_users = [];
         $user_subscriptions_ids = Auth::user()->subscribtions()->get()->pluck('user_id');
-        $user_subscriptions = User::where('id', '!=', $user_id)
+        $user_subscriptions = User::where('unique_id', '!=', $user_uniqueid)
         ->whereIn('id', $user_subscriptions_ids)->get();
-           
-        $merged_users = $user->merge($user_subscriptions);
-        return $merged_users;
+        $user_subscriptions->prepend($user);
+        return $user_subscriptions;
     }
 
     public function all_users()

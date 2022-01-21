@@ -12,7 +12,7 @@ class Subscribtion extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'subscriber_id', 'user_id');
+        return $this->belongsTo(User::class, 'subscriber_id', 'unique_id');
     }
 
 }

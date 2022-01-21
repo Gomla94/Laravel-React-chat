@@ -27,6 +27,6 @@ class NewSubscribtionListener
      */
     public function handle($event)
     {
-        Notification::send($event->user, new NewSubscribtion($event->user, $event->auth_user));
+        Notification::send($event->user, new NewSubscribtion($event->user, $event->auth_user, $event->check_if_user_is_subscribed_to_me));
     }
 }

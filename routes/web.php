@@ -36,8 +36,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::get('/all-users/{user}',[FrontController::class, 'show_user_page'])->name('user.page');
     Route::get('/all-videos/',[FrontController::class, 'show_videos_page'])->name('all-videos');
     Route::get('/all-videos/{id}',[FrontController::class, 'show_video_page'])->name('show-video');
-    Route::post('/subscribe/{user}',[FrontController::class, 'subscribe'])->name('subscribe');
-    Route::post('/unsubscribe/{user}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
+    Route::post('/subscribe/{id}',[FrontController::class, 'subscribe'])->name('subscribe');
+    Route::post('/unsubscribe/{id}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
     Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('profile', [UserController::class, 'profile'])->name('user.profile');

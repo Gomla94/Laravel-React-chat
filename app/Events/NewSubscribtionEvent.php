@@ -15,17 +15,18 @@ class NewSubscribtionEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $user;
     public $auth_user;
-    public $notification;
+    public $check_if_user_is_subscribed_to_me;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user, $auth_user)
+    public function __construct($user, $auth_user, $check_if_user_is_subscribed_to_me)
     {
         $this->user = $user;
         $this->auth_user = $auth_user;
+        $this->check_if_user_is_subscribed_to_me = $check_if_user_is_subscribed_to_me;
     }
 
     /**

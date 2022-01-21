@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 
@@ -105,12 +106,22 @@ class UserController extends Controller
             $user_notification = auth()->user()->notifications()->where('id', $notification_id)->firstOrFail();
             if ($status === 'accept') {
                 $user = User::where('email', $user_notification->data['user_email'])->first();
-                auth()->user()->subscribtions()->create(['user_id' => $user->id]);
+                auth()->user()->subscribtions()->create(['user_id' => $user->unique_id]);
             }
             $user_notification->update(['read_at' => now()]);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()]);
         }
+    }
+
+
+    public function get_notification_user()
+    {
+        $notification_id = request('nid');
+        $notification_data = DB::table('notifications')->where('id', $notification_id)->pluck('data')->first();
+        $notification_data = json_decode($notification_data);
+        $notification_user = User::where('email', $notification_data->user_email)->first();
+        return $notification_user;
     }
 
 }
