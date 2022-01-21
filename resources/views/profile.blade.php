@@ -193,6 +193,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     @method('DELETE')
                     <button class="fas fa-close"></button>
                   </form>
+                  <a href="{{ route('user.posts.edit', $post->id) }}" class="fas fa-edit"></a>
                 </div>
                 @endif
                 <div class="main-post-user-info-wrapper">
@@ -280,6 +281,64 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               @endforeach
             </div>
           </div>
+          <div class="profile-appeals tab">
+            <h1>Appeals</h1>
+            @if(Auth::id() === $user->id)
+              <button class="main-posts-add-appeal-button profile-add-post-button">запрос о помощи</button>
+            @endif
+            <div class="user-posts-wrapper">
+              @foreach($my_appeals as $appeal)
+              <div class="main-post">
+                @if(Auth::id() === $appeal->user->id)
+                <div class="delete-post-wrapper">
+                  <form action="{{ route('user.appeals.delete', $appeal->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="fas fa-close"></button>
+                  </form>
+                </div>
+                @endif
+                <div class="main-post-user-info-wrapper">
+                  <div class="main-post-user-image-wrapper">
+                    <a href="{{ route('user.page', $appeal->user->unique_id) }}">
+                    <img
+                      src="{{asset($appeal->user->image ?? 'images/avatar.png')}}"
+                      alt=""
+                      class="main-post-user-image"
+                    />
+                    </a>
+                  </div>
+                  <a href="{{ route('user.page', $appeal->user->unique_id) }}"></a>
+                  <div class="main-post-user-names-wrapper">
+                    <span class="main-post-user-name">{{ $appeal->user->name }}</span>
+                    <span class="main-post-user-email">{{'@'. $appeal->user->name }}</span>
+                  </div>
+                  <span class="post-date">{{ $appeal->created_at->format('Y-m-d h:i A') }}</span>
+                </div>
+                <p class="main-post-title">@if($appeal->title) {{ $appeal->title }} @endif</p>
+                <p class="main-post-description">
+                  @if($appeal->description) {{ str_limit($appeal->description, 500) }} @endif
+                </p>
+
+                @if($appeal->image)
+                <div class="main-post-image-wrapper">
+                  <img src="{{ asset($appeal->image) }}" alt="main-post-image" class="main-post-image" />
+                </div>
+                @endif
+                @if($appeal->video)
+                <div class="main-post-video-wrapper">
+                  <video
+                    controls
+                    src="{{ asset($appeal->video) }}"
+                    alt="main-post-video"
+                    class="main-post-video"
+                  ></video>
+                </div>
+                @endif
+              </div>
+              @endforeach
+            </div>
+          </div>
           <div class="profile-posts-images tab">
             <h1>@lang('translations.my_img')</h1>
             <div class="user-posts-wrapper">
@@ -341,64 +400,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               @endforeach
             </div>
           </div>
-          <div class="profile-appeals tab">
-            <h1>Appeals</h1>
-            @if(Auth::id() === $user->id)
-              <button class="main-posts-add-appeal-button profile-add-post-button">запрос о помощи</button>
-            @endif
-            <div class="user-posts-wrapper">
-              @foreach($my_appeals as $appeal)
-              <div class="main-post">
-                @if(Auth::id() === $appeal->user->id)
-                <div class="delete-post-wrapper">
-                  <form action="{{ route('user.appeals.delete', $appeal->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="fas fa-close"></button>
-                  </form>
-                </div>
-                @endif
-                <div class="main-post-user-info-wrapper">
-                  <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $appeal->user->unique_id) }}">
-                    <img
-                      src="{{asset($appeal->user->image ?? 'images/avatar.png')}}"
-                      alt=""
-                      class="main-post-user-image"
-                    />
-                    </a>
-                  </div>
-                  <a href="{{ route('user.page', $appeal->user->unique_id) }}"></a>
-                  <div class="main-post-user-names-wrapper">
-                    <span class="main-post-user-name">{{ $appeal->user->name }}</span>
-                    <span class="main-post-user-email">{{'@'. $appeal->user->name }}</span>
-                  </div>
-                  <span class="post-date">{{ $appeal->created_at->format('Y-m-d h:i A') }}</span>
-                </div>
-                <p class="main-post-title">@if($appeal->title) {{ $appeal->title }} @endif</p>
-                <p class="main-post-description">
-                  @if($appeal->description) {{ str_limit($appeal->description, 500) }} @endif
-                </p>
-
-                @if($appeal->image)
-                <div class="main-post-image-wrapper">
-                  <img src="{{ asset($appeal->image) }}" alt="main-post-image" class="main-post-image" />
-                </div>
-                @endif
-                @if($appeal->video)
-                <div class="main-post-video-wrapper">
-                  <video
-                    controls
-                    src="{{ asset($appeal->video) }}"
-                    alt="main-post-video"
-                    class="main-post-video"
-                  ></video>
-                </div>
-                @endif
-              </div>
-              @endforeach
-            </div>
-          </div>
+         
           <div class="profile-posts-subscibtions tab">
             <h1>@lang('translations.subscribtions')</h1>
             <div class="container profile-all-users-list">

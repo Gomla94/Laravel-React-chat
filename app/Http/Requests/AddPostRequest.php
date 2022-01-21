@@ -28,7 +28,7 @@ class AddPostRequest extends FormRequest
             'post_title' => ['required', 'string'],
             'post_description' => ['sometimes', 'nullable', 'string'],
             'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'post_video' => ['max:20168', 'mimes:mp4,mov,ogg,qt'],
+            'post_video' => ['max:10500', 'mimes:mp4,mov,ogg,qt'],
         ];
     }
 

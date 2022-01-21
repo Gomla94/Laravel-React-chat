@@ -47,6 +47,7 @@ class UserAppealsController extends Controller
             'description' => $request->appeal_description,
             'image' => request()->file('appeal_image') ? 'images/appeals/'.$image_name : null,
             'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : null,
+            'uniqueid' => uniqid()
         ]);
 
         if (request('appeal_image')) {
@@ -70,42 +71,50 @@ class UserAppealsController extends Controller
 
     public function edit(Appeal $appeal)
     {
-        return view('user.appeals.edit', ['appeal' => $appeal]);
+        return view('layouts.front.edit-appeal', ['appeal' => $appeal]);
     }
 
-    public function update(Appeal $appeal)
+    public function update(AddAppealsRequest $request, Appeal $appeal)
     {
-
-        $attributes = validator(request()->all(), [
-            'appeal_title' => ['string'],
-            'appeal_description' => ['string'],
-            'appeal_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'appeal_video' => ['max:5048'],
-        ])->validate();
         
         if (request()->file('appeal_image')) {
             File::delete(public_path($appeal->image));
-            $file = $attributes['appeal_image'];
+            $file = $request->appeal_image[0];
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
             $file->move('images/appeals/', $image_name);
         }
         if (request()->file('appeal_video')) {
             File::delete(public_path($appeal->video));
-            $file = $attributes['appeal_video'];
+            $file = $request->appeal_video;
             $extension = $file->getClientOriginalExtension();
             $video_name = uniqid(). '.' .$extension;
             $file->move('videos/appeals/', $video_name);
         }
 
         $appeal->update([
-            'title' => $attributes['appeal_title'],
-            'description' => $attributes['appeal_description'],
+            'title' => $request->appeal_title,
+            'description' => $request->appeal_description,
             'image' => request()->file('appeal_image') ? 'images/appeals/'.$image_name : $appeal->image,
             'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : $appeal->video,
         ]);
 
-        return redirect()->route('all-ppeals');
+        if (request('appeal_image')) {
+            $other_images = array_except($request->appeal_image, 0);
+            foreach($other_images as $image) {
+                $file = $image;
+                $extension = $file->getClientOriginalExtension();
+                $other_image_name = uniqid(). '.' .$extension;
+                $file->move('images/appeals/appeal_images', $other_image_name); 
+                
+                $appeal->images()->create([
+                    'title' => $request->title ?? null,
+                    'image' => 'images/appeals/appeal_images/'.$other_image_name,
+                ]);
+            }
+        }
+
+        return redirect()->route('all-appeals');
     }
 
     public function delete(Appeal $appeal)

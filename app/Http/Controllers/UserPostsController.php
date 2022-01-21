@@ -54,38 +54,31 @@ class UserPostsController extends Controller
 
     public function edit(Post $post)
     {
-        return view('user.posts.edit', ['post' => $post]);
+        return view('layouts.front.edit-post', ['post' => $post]);
     }
 
-    public function update(Post $post)
+    public function update(AddPostRequest $request, Post $post)
     {
         $user = Auth::user();
-        
-        $attributes = validator(request()->all(), [
-            'post_title' => ['required', 'string'],
-            'post_description' => ['sometimes', 'nullable', 'string'],
-            'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'post_video' => ['max:max:7168', 'mimes:mp4,mov,ogg,qt'],
-        ])->validate();
 
         if (request()->file('post_image')) {
             File::delete(public_path($post->image));
-            $file = $attributes['post_image'];
+            $file = $request->post_image;
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
             $file->move('images/posts/', $image_name);
         }
         if (request()->file('post_video')) {
             File::delete(public_path($post->video));
-            $file = $attributes['post_video'];
+            $file = $request->post_video;
             $extension = $file->getClientOriginalExtension();
             $video_name = uniqid(). '.' .$extension;
             $file->move('videos/posts/', $video_name);
         }
 
         $post->update([
-            'title' => $attributes['post_title'],
-            'description' => $attributes['post_description'],
+            'title' => $request->post_title,
+            'description' => $request->post_description,
             'image' => request()->file('post_image') ? 'images/posts/'.$image_name : $post->image,
             'video' => request()->file('post_video') ? 'videos/posts/'.$video_name : $post->video,
         ]);

@@ -7,6 +7,7 @@
     </div>
     <div class="main-appeal-info-container">
       <p class="main-appeal-title">{{ $appeal->title }}</p>
+      <p class="main-appeal-title">ID {{ $appeal->uniqueid }}</p>
       <p class="main-appeal-description">
        {{ $appeal->description }}
       </p>

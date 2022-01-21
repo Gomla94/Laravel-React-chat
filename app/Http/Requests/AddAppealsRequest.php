@@ -29,7 +29,7 @@ class AddAppealsRequest extends FormRequest
             'appeal_description' => ['sometimes', 'nullable', 'string'],
             'appeal_image' => ['array'],
             'appeal_image.*' => ['max:2048', 'mimes:png,jpg,jpeg'],
-            'appeal_video' => ['max:20168', 'mimes:mp4,mov,ogg,qt'],
+            'appeal_video' => ['max:10240', 'mimes:mp4,mov,ogg,qt'],
         ];
     }
 
