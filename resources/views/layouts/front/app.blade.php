@@ -130,8 +130,9 @@
 
 {{--          @dd( LaravelLocalization::getCurrentLocaleName())--}}
 
-        <div class="col-md-2 col-sm-2 col-xs-2">
-          <div class="navbar-user-container">
+        <div class="">
+        @if(Auth::check())
+          <div class="navbar-user-containerr">
             <div class="navbar-language-item">
               <div class="language">
                   @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
@@ -217,6 +218,61 @@
             <a href="{{ route('login') }}">@lang('translations.log_in')</a>
             @endif
           </div>
+        @else
+          <div class="login-navbar-user-containerr">
+            <div class="navbar-language-item">
+              <div class="language">
+                  @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+                <span class="lang-name">ARM</span>
+                <div class="lang-image-wrapper">
+                  <img class="lang-image" src="{{ asset('images/armenia-square.png') }}" />
+                </div>
+                  @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+                      <span class="lang-name">UK</span>
+                      <div class="lang-image-wrapper">
+                          <img class="lang-image" src="{{ asset('images/uk-square.png') }}" />
+                      </div>
+                  @else
+                      <span class="lang-name">RUS</span>
+                      <div class="lang-image-wrapper">
+                          <img class="lang-image" src="{{ asset('images/russia-square.png') }}" />
+                      </div>
+                  @endif
+              </div>
+              <div class="language-list">
+                  @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                     @if($localeCode == 'en')
+                     <div class="language">
+                         <div class="lang-image-wrapper">
+                             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                             <img class="lang-image" src="{{ asset('images/uk-square.png') }}" />
+                             </a>
+                         </div>
+                     </div>
+                     @elseif($localeCode == 'ru')
+                     <div class="language">
+                         <div class="lang-image-wrapper">
+                             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                             <img class="lang-image" src="{{ asset('images/russia-square.png') }}" />
+                             </a>
+                         </div>
+                     </div>
+                     @else
+                     <div class="language">
+                         <div class="lang-image-wrapper">
+                             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                             <img class="lang-image" src="{{ asset('images/armenia-square.png') }}" />
+                             </a>
+                         </div>
+                     </div>
+                     @endif
+                  @endforeach
+              </div>
+            </div>
+            <a href="{{ route('login') }}">@lang('translations.log_in')</a>
+
+          </div>
+        @endif
         </div>
       </div>
     </div>

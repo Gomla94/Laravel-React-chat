@@ -234,7 +234,7 @@ a {
     transition: opacity 0.5s;
 }
 
-.navbar-user-container {
+.navbar-user-containerr {
     width: 100px;
     height: 50px;
     display: flex;
@@ -242,7 +242,18 @@ a {
     align-items: center;
     margin-left: 20px;
     position: absolute;
-    right: 12%;
+    right: 35%;
+}
+
+.login-navbar-user-containerr {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+    position: absolute;
+    right: 5%;
 }
 
 .navbar-user-comment {
@@ -256,11 +267,20 @@ a {
     object-fit: contain;
 }
 
-.navbar-user-container > div {
+.navbar-user-containerr > div {
     padding: 0px 5px;
 }
 
-.navbar-user-container > a {
+.navbar-user-containerr > a {
+    text-decoration: none;
+    color: black;
+}
+
+.login-navbar-user-containerr > div {
+    padding: 0px 5px;
+}
+
+.login-navbar-user-containerr > a {
     text-decoration: none;
     color: black;
 }
@@ -2369,7 +2389,7 @@ a {
         align-items: center;
         margin-left: 20px;
         position: absolute;
-        right: 12%;
+        /* right: 12%; */
     }
 
     .navbar-logo-container {
@@ -2686,7 +2706,7 @@ a {
         align-items: center;
         margin-left: 20px;
         position: absolute;
-        right: 12%;
+        /* right: 12%; */
     }
 
     .navbar-logo-container {
