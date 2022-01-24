@@ -39,7 +39,6 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('password'),
             'type' => 'user',
             'country_id' => 2,
-            'interesting_type_id' => ["2"],
             'age' => 25,
             'phone_number' => "+37495632145",
             'gender' => 'male',
