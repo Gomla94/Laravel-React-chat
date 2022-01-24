@@ -18,8 +18,10 @@ class CreatePostsTable extends Migration
             $table->foreignId('user_id');
             $table->text('title')->nullable();
             $table->text('description')->nullable();
-            $table->text('image')->nullable();
-            $table->text('video')->nullable();
+            $table->string('image_name')->nullable();
+            $table->text('image_path')->nullable();
+            $table->string('video_name')->nullable();
+            $table->text('video_path')->nullable();
             $table->timestamps();
         });
     }

@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserPostsController extends Controller
@@ -30,23 +31,25 @@ class UserPostsController extends Controller
         
         if (request()->file('post_image')) {   
             $file = $request->post_image;
-            $extension = $file->getClientOriginalExtension();
-            $image_name = uniqid(). '.' .$extension;
-            $file->move('images/posts/', $image_name);             
+            $extension = $file->getClientOriginalExtension();  
+            $image_path = $request->file('post_image')->store('images', 's3');
+          
         }
 
         if (request()->file('post_video')) {
             $file = $request->post_video;
             $extension = $file->getClientOriginalExtension();
-            $video_name = uniqid(). '.' .$extension;
-            $file->move('videos/posts/', $video_name);
+            $video_path = $request->file('post_video')->store('videos', 's3');
+
         }
 
         $user->posts()->create([
             'title' => $request->post_title,
             'description' => $request->post_description,
-            'image' => request()->file('post_image') ? 'images/posts/'.$image_name : null,
-            'video' => request()->file('post_video') ? 'videos/posts/'.$video_name : null,
+            'image_name' => request()->file('post_image') ? basename($image_path) : null,
+            'image_path' => request()->file('post_image') ? Storage::disk('s3')->url($image_path) : null,
+            'video_name' => request()->file('post_video') ? basename($video_path) : null,
+            'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : null
         ]);
 
         return redirect()->route('welcome');
@@ -62,25 +65,25 @@ class UserPostsController extends Controller
         $user = Auth::user();
 
         if (request()->file('post_image')) {
-            File::delete(public_path($post->image));
+            Storage::disk('s3')->delete("images/{$post->image_name}");
             $file = $request->post_image;
             $extension = $file->getClientOriginalExtension();
-            $image_name = uniqid(). '.' .$extension;
-            $file->move('images/posts/', $image_name);
+            $image_path = $request->file('post_image')->store('images', 's3');
         }
         if (request()->file('post_video')) {
-            File::delete(public_path($post->video));
+            Storage::disk('s3')->delete("videos/{$post->video_name}");
             $file = $request->post_video;
             $extension = $file->getClientOriginalExtension();
-            $video_name = uniqid(). '.' .$extension;
-            $file->move('videos/posts/', $video_name);
+            $video_path = $request->file('post_video')->store('videos', 's3');
         }
 
         $post->update([
             'title' => $request->post_title,
             'description' => $request->post_description,
-            'image' => request()->file('post_image') ? 'images/posts/'.$image_name : $post->image,
-            'video' => request()->file('post_video') ? 'videos/posts/'.$video_name : $post->video,
+            'image_name' => request()->file('post_image') ? basename($image_path) : $post->image_name,
+            'image_path' => request()->file('post_image') ? Storage::disk('s3')->url($image_path) : $post->image_path,
+            'video_name' => request()->file('post_video') ? basename($video_path) : $post->video_name,
+            'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : $post->video_path
         ]);
 
         return redirect()->route('welcome');
@@ -88,8 +91,8 @@ class UserPostsController extends Controller
 
     public function delete(Post $post)
     {
-        File::delete(public_path($post->image));
-        File::delete(public_path($post->video));
+        Storage::disk('s3')->delete("images/{$post->image_name}");
+        Storage::disk('s3')->delete("videos/{$post->video_name}");
         $post->delete();
         return back();
     }

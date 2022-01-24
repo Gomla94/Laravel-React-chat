@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.front.app')
 @section('content')
-<div class="container">
-    <div class="col-md-10">
-        <div class="card">
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="card profile-card">
             <div class="card-header">@lang('translations.add_appeal')</div>
             <div class="card-body">
                <form action="{{ route('user.appeal-images.create', $appeal->id) }}" method="POST" enctype="multipart/form-data">

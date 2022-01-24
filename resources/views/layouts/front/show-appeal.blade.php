@@ -3,7 +3,7 @@
 <div class="container-fluid main-appeal-wrapper">
   <div class="main-appeal">
     <div class="main-appeal-image-container">
-      <img class="main-appeal-image" src="{{ asset($appeal->image ?? 'placeholder.png') }}" alt="" />
+      <img class="main-appeal-image" src="{{ asset($appeal->image_path ?? 'placeholder.png') }}" alt="" />
     </div>
     <div class="main-appeal-info-container">
       <p class="main-appeal-title">{{ $appeal->title }}</p>
@@ -22,7 +22,7 @@
       <div class="swiper-slide">
         <div class="appeal-card">
           <div class="appeal-card-image-wrapper">
-            <img src="{{ asset($image->image) }}" alt="" class="appeal-card-image" />
+            <img src="{{ asset($image->image_path) }}" alt="" class="appeal-card-image" />
           </div>
         </div>
       </div>
@@ -30,12 +30,12 @@
     </div>
   </div>
 
-  @if($appeal->video)
+  @if($appeal->video_path)
   <div class="main-appeal-video-container">
     <video
       class="main-appeal-video"
       controls
-      src="{{ asset($appeal->video) }}"
+      src="{{ asset($appeal->video_path) }}"
     ></video>
   </div>
   @endif

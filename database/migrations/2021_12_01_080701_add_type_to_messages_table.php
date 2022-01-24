@@ -15,7 +15,8 @@ class AddTypeToMessagesTable extends Migration
     {
         Schema::table('messages', function (Blueprint $table) {
             $table->string('type')->nullable();
-            $table->string('media_path')->nullable();
+            $table->string('media_name')->nullable();
+            $table->text('media_path')->nullable();
         });
     }
 

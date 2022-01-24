@@ -2654,7 +2654,7 @@ var ChatWindow = function ChatWindow() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "sent-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image ? "../".concat(message.user.image) : "../images/avatar.png",
+              src: message.user.image ? "".concat(message.user.image) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -2669,7 +2669,7 @@ var ChatWindow = function ChatWindow() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "received-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image ? "../".concat(message.user.image) : "../images/avatar.png",
+              src: message.user.image ? "".concat(message.user.image) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -2689,14 +2689,14 @@ var ChatWindow = function ChatWindow() {
         href: message.media_path,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
           className: "message-image",
-          src: "../".concat(message.media_path)
+          src: "".concat(message.media_path)
         })
       });
     } else if (message.type === "video") {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("video", {
         controls: true,
         className: "message-video",
-        src: "../".concat(message.media_path)
+        src: "".concat(message.media_path)
       });
     }
 

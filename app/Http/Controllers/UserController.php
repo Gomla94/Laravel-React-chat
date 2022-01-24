@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -25,8 +26,8 @@ class UserController extends Controller
         $countries = Country::all();
         $my_posts = $user->posts()->get();
         $my_appeals = $user->appeals()->get();
-        $my_posts_images = $user->posts()->whereNull('video')->whereNotNull('image')->get();
-        $my_posts_videos = $user->posts()->whereNull('image')->whereNotNull('video')->get();
+        $my_posts_images = $user->posts()->whereNull('video_path')->whereNotNull('image_path')->get();
+        $my_posts_videos = $user->posts()->whereNull('image_path')->whereNotNull('video_path')->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
         $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
         $my_subscribers = $user->subscribers()->pluck('subscriber_id');
@@ -79,15 +80,19 @@ class UserController extends Controller
 
     public function update_profile_image()
     {
+        Storage::disk('s3')->delete("images/".auth()->user()->image);
         $cropped_image = request('croppedImage');
         $image_array = explode(";", $cropped_image);
         $image_array_2 = explode(",", $image_array[1]);
-        $data = base64_decode($image_array_2[1]);
-        File::delete(auth()->user()->image);
-        $image_name = 'images/users/'.time(). '.' .'png';
+        $imageInfo = explode(";base64,", $cropped_image);
+        $imgExt = str_replace('data:image/', '', $imageInfo[0]);      
+        $image = str_replace(' ', '+', $imageInfo[1]);
+        $imageName = time().".".$imgExt;
+
+        Storage::disk('s3')->put("/images/{$imageName}",base64_decode($image));
+        $url = Storage::disk('s3')->url("images/{$imageName}");
         
-        file_put_contents(public_path($image_name), $data);
-        auth()->user()->update(['image' => $image_name]);
+        auth()->user()->update(['image' => $url]);
     }
 
     public function my_notifications()

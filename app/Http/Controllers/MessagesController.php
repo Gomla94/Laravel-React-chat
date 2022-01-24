@@ -10,6 +10,7 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MessagesController extends Controller
 {
@@ -59,7 +60,7 @@ class MessagesController extends Controller
     {
         $user = Auth::user();
         $user_subscriptions_ids = $user->subscribtions()->get()->pluck('user_id');
-        $user_subscriptions = User::whereIn('id', $user_subscriptions_ids)->get();
+        $user_subscriptions = User::whereIn('unique_id', $user_subscriptions_ids)->get();
         return $user_subscriptions;
     }
 
@@ -84,7 +85,9 @@ class MessagesController extends Controller
                 $file_type = 'video';
             }
             $file_name = uniqid(). '.' .$extension;
-            $file->move('chatmedia/', $file_name);
+            // $file->move('chatmedia/', $file_name);
+            $file_path = request()->file('file')->store('images', 's3');
+
         }
 
         $sent_message = Message::create([
@@ -92,7 +95,7 @@ class MessagesController extends Controller
             'to' => $to,
             'message' => $message ?? null,
             'type' => $file_type ?? null,
-            'media_path' => request('file') ? 'chatmedia/' . $file_name : null
+            'media_path' => request('file') ? Storage::disk('s3')->url($file_path) : null
         ]);
 
         broadcast(new NewMessageEvent($sent_message->load('user')))->toOthers();

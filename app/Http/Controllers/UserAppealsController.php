@@ -9,6 +9,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UserAppealsController extends Controller
 {
@@ -31,22 +32,22 @@ class UserAppealsController extends Controller
         if (request()->file('appeal_image')) {
             $file = $request->appeal_image[0];
             $extension = $file->getClientOriginalExtension();
-            $image_name = uniqid(). '.' .$extension;
-            $file->move('images/appeals/', $image_name);          
+            $image_path = $request->file('appeal_image')[0]->store('images', 's3');
         }
 
         if (request()->file('appeal_video')) {
             $file = $request->appeal_video;
             $extension = $file->getClientOriginalExtension();
-            $video_name = uniqid(). '.' .$extension;
-            $file->move('videos/appeals/', $video_name);
+            $video_path = $request->file('appeal_video')->store('videos', 's3');
         }
 
         $appeal = $user->appeals()->create([
             'title' => $request->appeal_title,
             'description' => $request->appeal_description,
-            'image' => request()->file('appeal_image') ? 'images/appeals/'.$image_name : null,
-            'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : null,
+            'image_name' => request()->file('appeal_image') ? basename($image_path) : null,
+            'image_path' => request()->file('appeal_image') ? Storage::disk('s3')->url($image_path) : null,
+            'video_name' => request()->file('appeal_video') ? basename($video_path) : null,
+            'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
             'uniqueid' => uniqid()
         ]);
 
@@ -55,12 +56,12 @@ class UserAppealsController extends Controller
             foreach($other_images as $image) {
                 $file = $image;
                 $extension = $file->getClientOriginalExtension();
-                $other_image_name = uniqid(). '.' .$extension;
-                $file->move('images/appeals/appeal_images', $other_image_name); 
+                $image_path = $image->store('images', 's3');
                 
                 $appeal->images()->create([
                     'title' => $request->title ?? null,
-                    'image' => 'images/appeals/appeal_images/'.$other_image_name,
+                    'image_name' => basename($image_path),
+                    'image_path' => Storage::disk('s3')->url($image_path)
                 ]);
             }
         }
@@ -78,25 +79,27 @@ class UserAppealsController extends Controller
     {
         
         if (request()->file('appeal_image')) {
-            File::delete(public_path($appeal->image));
+            Storage::disk('s3')->delete("images/{$appeal->image_name}");
             $file = $request->appeal_image[0];
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
-            $file->move('images/appeals/', $image_name);
+            $image_path = $file->store('images', 's3');
         }
         if (request()->file('appeal_video')) {
-            File::delete(public_path($appeal->video));
+            Storage::disk('s3')->delete("videos/{$appeal->video_name}");
             $file = $request->appeal_video;
             $extension = $file->getClientOriginalExtension();
             $video_name = uniqid(). '.' .$extension;
-            $file->move('videos/appeals/', $video_name);
+            $video_path = $request->file('appeal_video')->store('videos', 's3');
         }
 
         $appeal->update([
             'title' => $request->appeal_title,
             'description' => $request->appeal_description,
-            'image' => request()->file('appeal_image') ? 'images/appeals/'.$image_name : $appeal->image,
-            'video' => request()->file('appeal_video') ? 'videos/appeals/'.$video_name : $appeal->video,
+            'image_name' => request()->file('appeal_image') ? basename($image_path) : null,
+            'image_path' => request()->file('appeal_image') ? Storage::disk('s3')->url($image_path) : null,
+            'video_name' => request()->file('appeal_video') ? basename($video_path) : null,
+            'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
         ]);
 
         if (request('appeal_image')) {
@@ -104,12 +107,12 @@ class UserAppealsController extends Controller
             foreach($other_images as $image) {
                 $file = $image;
                 $extension = $file->getClientOriginalExtension();
-                $other_image_name = uniqid(). '.' .$extension;
-                $file->move('images/appeals/appeal_images', $other_image_name); 
+                $image_path = $image->store('images', 's3');
                 
                 $appeal->images()->create([
                     'title' => $request->title ?? null,
-                    'image' => 'images/appeals/appeal_images/'.$other_image_name,
+                    'image_name' => basename($image_path),
+                    'image_path' => Storage::disk('s3')->url($image_path)
                 ]);
             }
         }
@@ -119,8 +122,8 @@ class UserAppealsController extends Controller
 
     public function delete(Appeal $appeal)
     {
-        File::delete(public_path($appeal->image));
-        File::delete(public_path($appeal->video));
+        Storage::disk('s3')->delete("images/{$appeal->image_name}");
+        Storage::disk('s3')->delete("videos/{$appeal->video_name}");
         $appeal->delete();
         return back();
     }
@@ -147,12 +150,13 @@ class UserAppealsController extends Controller
             $file = $request->image;
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
-            $file->move('images/appeals/appeal_images', $image_name);          
+            $image_path = $file->store('images', 's3');          
         }
 
         $appeal->images()->create([
-            'title' => $request->title,
-            'image' => request()->file('image') ? 'images/appeals/appeal_images/'.$image_name : null,
+            'title' => $request->title ?? null,
+            'image_name' => basename($image_path),
+            'image_path' => Storage::disk('s3')->url($image_path)
         ]);
 
         return redirect()->route('user.appeal.images', $appeal->id);
@@ -169,16 +173,18 @@ class UserAppealsController extends Controller
     public function update_appeal_image(StoreImageRequest $request, Appeal $appeal, Image $image)
     {
         if (request()->file('image')) {
-            File::delete(public_path($image->image));
+            Storage::disk('s3')->delete("images/{$image->image_name}");
             $file = $request->image;
             $extension = $file->getClientOriginalExtension();
             $image_name = uniqid(). '.' .$extension;
-            $file->move('images/appeals/appeal_images', $image_name);          
+            $image_path = $file->store('images', 's3');
+         
         }
 
         $image->update([
             'title' => $request->title,
-            'image' => request()->file('image') ? 'images/appeals/appeal_images/'.$image_name : null,
+            'image_name' => basename($image_path),
+            'image_path' => Storage::disk('s3')->url($image_path)
         ]);
 
         return redirect()->route('user.appeal.images', $appeal->id);
@@ -186,7 +192,7 @@ class UserAppealsController extends Controller
 
     public function delete_appeal_image(Appeal $appeal, Image $image)
     {
-        File::delete(public_path($image->image));
+        Storage::disk('s3')->delete("images/{$image->image_name}");
         $image->delete();
         return back();
     }

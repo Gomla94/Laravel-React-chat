@@ -17,7 +17,8 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('imageable_type')->nullable();
             $table->integer('imageable_id')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image_name')->nullable();
+            $table->text('image_path')->nullable();
             $table->string('title')->nullable();
             $table->timestamps();
         });

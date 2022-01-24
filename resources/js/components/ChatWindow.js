@@ -383,7 +383,7 @@ const ChatWindow = () => {
                             <img
                                 src={
                                     message.user.image
-                                        ? `../${message.user.image}`
+                                        ? `${message.user.image}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
@@ -402,7 +402,7 @@ const ChatWindow = () => {
                             <img
                                 src={
                                     message.user.image
-                                        ? `../${message.user.image}`
+                                        ? `${message.user.image}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
@@ -424,7 +424,7 @@ const ChatWindow = () => {
                 <a download={"image"} href={message.media_path}>
                     <img
                         className="message-image"
-                        src={`../${message.media_path}`}
+                        src={`${message.media_path}`}
                     />
                 </a>
             );
@@ -433,7 +433,7 @@ const ChatWindow = () => {
                 <video
                     controls={true}
                     className="message-video"
-                    src={`../${message.media_path}`}
+                    src={`${message.media_path}`}
                 ></video>
             );
         }

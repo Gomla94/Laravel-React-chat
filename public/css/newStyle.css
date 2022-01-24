@@ -2389,7 +2389,7 @@ a {
         align-items: center;
         margin-left: 20px;
         position: absolute;
-        right: 12%;
+        right: 16%;
     }
 
     .navbar-logo-container {
@@ -2411,13 +2411,13 @@ a {
 
     .count {
         top: -10%;
-        right: 15%;
+        /* right: 15%; */
     }
 
     .chat-arrow {
         position: absolute;
         top: 35px;
-        right: 40%;
+        /* right: 40%; */
         font-size: 50px;
         color: rgb(239, 235, 241);
     }
@@ -2813,6 +2813,12 @@ a {
     }
 }
 
+@media screen and (max-width: 700px) {
+    .chat-wrapper {
+        right: -120%;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .navbar-user-containerr {
         width: 100px;
@@ -2822,7 +2828,7 @@ a {
         align-items: center;
         margin-left: 20px;
         position: absolute;
-        right: 37%;
+        right: 28%;
     }
 
     .all-videos-container {
@@ -2860,6 +2866,7 @@ a {
 
     .chat-wrapper {
         min-width: 400px;
+        max-width: 400px;
     }
 
     .chat-paperclip {
@@ -2994,7 +3001,7 @@ a {
 
 @media screen and (max-width: 460px) {
     .chat-wrapper {
-        right: -50%;
+        right: -120%;
     }
 }
 

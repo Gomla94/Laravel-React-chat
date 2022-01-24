@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.front.app')
 @section('content')
-<div class="container">
-    <div class="col-md-10">
-        <div class="card">
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="card profile-card">
             <div class="card-header">All Appeals</div>
             <div class="card-body">
                 <a href="{{ route('user.appeal-images.create', $appeal->id) }}" class="btn btn-success mb-3">Add New Image</a>
@@ -18,9 +18,9 @@
                         @foreach ($appeal_images as $image)
                             <tr>
                                 <td>{{ $image->title }}</td>
-                                <td><img src="{{ asset($image->image) }}" width="150px" height="100px"></td>
-                                <td style="display:flex;">
-                                    <a href="{{ route('user.appeal-images.edit', [$appeal->id, $image->id]) }}" class="btn btn-warning mr-3">Edit</a>
+                                <td><img src="{{ asset($image->image_path) }}" width="150px" height="100px"></td>
+                                <td style="">
+                                    <a href="{{ route('user.appeal-images.edit', [$appeal->id, $image->id]) }}" class="btn btn-warning mb-3">Edit</a>
                                     <form action="{{ route('user.appeal-images.delete', [$appeal->id, $image->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

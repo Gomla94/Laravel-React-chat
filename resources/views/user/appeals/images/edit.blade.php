@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.front.app')
 @section('content')
-<div class="container">
-    <div class="col-md-10">
-        <div class="card">
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="card profile-card">
             <div class="card-header">@lang('translations.add_appeal')</div>
             <div class="card-body">
                <form action="{{ route('user.appeal-images.update', [$appeal->id, $image->id]) }}" method="POST" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label for="image">@lang('translations.image')</label>
-                        <img src="{{ $image->image }}" width="150px" height="100px" alt="">
+                        <img src="{{ $image->image_path }}" width="150px" height="100px" alt="">
                         <input type="file" class="form-control" name="image">
                         @error('image')
                         <span style="color:red">{{$message}}</span>

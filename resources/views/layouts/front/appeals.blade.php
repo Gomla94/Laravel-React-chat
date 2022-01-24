@@ -5,9 +5,9 @@
     @foreach($appeals as $appeal)
     <div class="user">
       <a href="{{ route('show-appeal', $appeal->id) }}">
-        @if($appeal->image)
+        @if($appeal->image_path)
         <div class="user-image-wrapper">
-          <img src="{{ asset($appeal->image) }}" alt="appeal-image" />
+          <img src="{{ asset($appeal->image_path) }}" alt="appeal-image" />
         </div>
         @endif
       </a>
