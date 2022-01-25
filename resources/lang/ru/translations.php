@@ -1,6 +1,6 @@
 <?php
 return [
-    'forgot-passsword' => 'Забыл пароль',
+    'forgot-password' => 'Забыл пароль',
     'reset-password' => 'сбросить пароль',
     'reset-button' => 'отправить электронное письмо для сброса пароля',
     'reset-success' => 'Мы отправили вашу новую ссылку пароля',

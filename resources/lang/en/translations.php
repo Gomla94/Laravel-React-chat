@@ -1,6 +1,6 @@
 <?php
     return [
-        'forgot-passsword' => 'Forgot your password?',
+        'forgot-password' => 'Forgot your password?',
         'reset-password' => 'Reset Password',
         'reset-button' => 'Send message to reset the password',
         'reset-success' => 'We sent you new link for password',
