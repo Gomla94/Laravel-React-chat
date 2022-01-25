@@ -1,5 +1,8 @@
 <?php
     return [
+        'reset-password' => 'Reset Password',
+        'reset-button' => 'Send message to reset the password',
+        'reset-success' => 'We sent you new link for password',
         "social_site" => "Social network",
         "site_description" => "As well as diluted with a fair amount of empathy, rational thinking largely determines the importance of the positions taken by the participants in relation to the tasks assigned. As is commonly believed, interactive prototypes are only a method of political participation and are associatively distributed across industries.",
         "need_help_now" => "Who need help right now",

@@ -1,65 +1,61 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@extends('layouts.auth')
+@section('title')
+Forgot Your Password
 @endsection
+@section('content')
+  <div class="main-page-button-wrapper">
+    <a href="{{ route('welcome') }}">@lang('translations.home')</a>
+  </div>
+  <div class="god-container">
+    <div class="super-container1">
+      <h2 class="title-h2">@lang('translations.welcm')!</h2>
+
+      <div class="container-p">
+        <p class="subtitle-p">
+          @lang('translations.inf')
+        </p>
+
+        <div class="div-button1">
+          <a class="button1" href="{{ route('register') }}">@lang('translations.sign')</a>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="super-container2">
+      <div class="title-container">
+        <h1>@lang('translations.reset-password')</h1>
+      </div>
+      @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            @lang('translations.reset-success')
+        </div>
+        @endif
+        <form action="{{ route('password.update') }}" method="POST" class="register-form">
+            <input type="hidden" name="token" value="{{$token}}" />
+          @csrf
+          <div class="input-div">
+            <label for="email"></label>
+            <input type="email" name="email" value="{{ old('email') }}" id="email" placeholder="E-mail" />
+          </div>
+            @error('email')
+            <span class="error-span">{{ $message }}</span>
+            @enderror
+          <div class="input-div">
+            <label for="password"></label>
+            <input type="password" name="password" id="password" placeholder="E-mail" />
+          </div>
+            @error('password')
+            <span class="error-span">{{ $message }}</span>
+            @enderror
+          <div class="input-div">
+            <label for="password"></label>
+            <input type="password" name="password_confirmation" id="password" />
+          </div>
+          <button class="resetbutton">@lang('translations.reset-password')</button>
+        </form>
+
+    </div>
+  </div>
+@endsection
+

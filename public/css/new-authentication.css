@@ -17,6 +17,14 @@ body {
 }
 
 /*********containers*********/
+.error-span {
+    color: red;
+}
+
+.forgot-link {
+    text-decoration: none;
+}
+
 .god-container {
     /* background-color: #886227; */
     background-color: white;
@@ -110,6 +118,21 @@ label {
     font-family: "Montserrat", sans-serif;
 }
 /*****buttons*****/
+
+.resetbutton {
+    width: auto;
+    padding: 1%;
+    /* padding-left: 30px; */
+    /* padding-right: 30px; */
+    border-radius: 30px;
+    border: 0 solid transparent;
+    background-color: #f1c47b;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    font-size: 18px;
+}
 
 .div-button1 {
     margin-top: 55px;

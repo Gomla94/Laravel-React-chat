@@ -63,6 +63,7 @@ Login
           ><input type="radio" name="subscribe" id="Yes" />
           <label for="no">No</label>
           <input type="radio" name="subscribe" id="No" /> -->
+          <a class="forgot-link" href="{{route('password.request')}}">Forgot your password?</a>
           <div class="button">
             <button class="button2">@lang('translations.login')</button>
           </div>
