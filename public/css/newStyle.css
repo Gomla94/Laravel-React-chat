@@ -2939,7 +2939,7 @@ a {
         text-align: start;
     }
 
-    .appeal-card-button {
+    .appeal-card a {
         width: max-content;
     }
 }
