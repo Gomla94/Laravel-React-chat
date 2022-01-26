@@ -26,7 +26,7 @@ class FrontController extends Controller
         $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
 
         if(request('search-key')) {
-            $random_posts = Post::where('title', 'like', request('search-key'))->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
+            $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
             dd($random_posts);
         }
 
