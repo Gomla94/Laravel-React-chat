@@ -42,7 +42,7 @@ const NewSubscribtionNotification = () => {
     };
 
     const loadNotifications = async () => {
-        const response = await notify.get("/my_notifications/");
+        const response = await notify.get("/my_notifications");
         const loadedNotifications = response.data;
         setNotifications(loadedNotifications);
         // return renderNotifications(loadedNotifications);
