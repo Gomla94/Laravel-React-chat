@@ -2939,8 +2939,8 @@ a {
         text-align: start;
     }
 
-    .appeal-card a {
-        width: max-content;
+    .appeal-card-button {
+        width: max-content !important;
     }
 }
 
