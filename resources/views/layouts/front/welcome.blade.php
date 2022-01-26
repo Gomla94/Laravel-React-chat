@@ -48,10 +48,10 @@
               @endif
             </div>
             <div class="appeal-card-title">
-              <p>{{$appeal->title}}</p>
+              <p>{{str_limit($appeal->title, 150)}}</p>
               </div>
             <div class="appeal-card-description">
-              <p>{{str_limit($appeal->description, 200)}}</p>
+              <p>{{str_limit($appeal->description, 150)}}</p>
             </div>
             <a href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">@lang("translations.want_help")</a>
           </a>

@@ -2926,11 +2926,17 @@ a {
         grid-template-columns: 1fr 1fr 1fr;
         padding: 10px;
     }
-}
 
-@media screen and (max-width: 650px) {
     .post-date {
         display: none;
+    }
+
+    .appeal-card-title {
+        text-align: start;
+    }
+
+    .appeal-card-description {
+        text-align: start;
     }
 }
 
