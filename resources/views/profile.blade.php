@@ -454,11 +454,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
 
       <div class="form-group modal-checker-container">
+        <label class="create-post-label image-label">@lang("translations.image")</label>
         <div class="post-modal-checker">
           <div class="modal-checker"></div>
         </div>
-        <label class="create-post-label image-label">Image</label>
-        <label class="create-post-label video-label">Video</label>
+        <label class="create-post-label video-label">@lang("translations.video")</label>
         @error('post_image')
           <span style="color:red">{{$message}}</span>
         @enderror
@@ -534,5 +534,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
   <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
   <script src="{{ asset('js/addPostComment.js') }}" defer type="module"></script>
   <script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
+  <script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
   @endpush
 @endsection
