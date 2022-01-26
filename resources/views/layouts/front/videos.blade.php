@@ -6,7 +6,7 @@
       <div class="video-wrapper">
         <div class="video-container">
           <a href="{{ route('show-video', $video->id) }}">
-            <video class="video-item" src="{{ asset($video->video) }}"></video>
+            <video class="video-item" src="{{ asset($video->video_path) }}"></video>
           </a>
         </div>
         <div class="video-details-container">

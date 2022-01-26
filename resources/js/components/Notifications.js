@@ -37,20 +37,22 @@ const Notifications = ({ notifications, setNotifications }) => {
             `[data-nid="${unid}"]`
         );
 
-        if (!targetedGreenButton) return false;
+        if (targetedGreenButton) {
+            if (icon.classList.contains("deny-notify")) return true;
 
-        if (icon.classList.contains("deny-notify")) return true;
-
-        const targetedForm = targetedGreenButton.nextElementSibling;
-        targetedForm.setAttribute(
-            "action",
-            `${window.location.origin}/unsubscribe/${unid}`
-        );
-        targetedForm.querySelector("button").classList.remove("user-subscribe");
-        targetedForm.querySelector("button").innerText = "";
-        targetedForm
-            .querySelector("button")
-            .classList.add("fas", "fa-check", "checkmark-icon");
+            const targetedForm = targetedGreenButton.nextElementSibling;
+            targetedForm.setAttribute(
+                "action",
+                `${window.location.origin}/unsubscribe/${unid}`
+            );
+            targetedForm
+                .querySelector("button")
+                .classList.remove("user-subscribe");
+            targetedForm.querySelector("button").innerText = "";
+            targetedForm
+                .querySelector("button")
+                .classList.add("fas", "fa-check", "checkmark-icon");
+        }
 
         return true;
     };
@@ -63,7 +65,7 @@ const Notifications = ({ notifications, setNotifications }) => {
         return myNotifications.map((item) => {
             return (
                 <div className="notification" key={item.id}>
-                    <div className="notification-title">New Subscribtion</div>
+                    {/* <div className="notification-title">New Subscribtion</div> */}
                     <div className="notification-info">
                         <div className="notification-user-image">
                             <a href={`all-users/${item.data.user_uniqueid}`}>
@@ -121,6 +123,7 @@ const Notifications = ({ notifications, setNotifications }) => {
     return (
         <div className="notifications-wrapper">
             <div className="notifications-container">
+                <p className="notifications-title">Notifications</p>
                 {renderNotifications(notifications)}
             </div>
         </div>

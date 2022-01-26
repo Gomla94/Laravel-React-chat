@@ -21,7 +21,7 @@ return [
     "filter" => "Фильтр",
     "interest" => "Интересы",
     "country" => "Страна",
-    "male" => "Мшужчина",
+    "male" => "Мужчина",
     "female" => "Женщина",
     "gender" => "Пол",
     "open_all_path" => "Открыть полный путь",
@@ -33,8 +33,12 @@ return [
     "posts" => "Посты",
     "images" => "Изображения",
     "videos" => "Видео",
+    "appeals" => "Обращения",
     "subscribtions" => "Подписки",
     "subscribers" => "Подписчики",
+
+    "individual" => "личное",
+    "organisation" => "организация",
 
     "date_of_birth" => "Дата рождения",
     "phone_numb" => "Телефонный номер",

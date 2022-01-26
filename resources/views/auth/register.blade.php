@@ -4,7 +4,12 @@ Register
 @endsection
 @section('content')
   <div class="main-page-button-wrapper">
-    <a href="{{ route('welcome') }}">@lang('translations.home')</a>
+    <a href="{{ route('welcome') }}"
+      ><img
+        src="{{asset('images/dark-logo.jpeg')}}"
+        class="navbar-logo"
+        alt=""
+    /></a>
   </div>
   <div class="r-god-container">
     <div class="r-super-container1">
@@ -52,7 +57,7 @@ Register
               id="password"
               placeholder="Password"
             />
-            <i class="fas fa-eye show-password-icon"></i>
+            {{-- <i class="fas fa-eye show-password-icon"></i> --}}
 
           </div>
           @error('password')

@@ -134,7 +134,7 @@ function appendUserImage(post) {
     return `
         <div class="main-post-user-image-wrapper">
             <img
-            src="/${
+            src="${
                 post.user.image ? `${post.user.image}` : "images/avatar.png"
             }"
             alt="user-image"

@@ -4,7 +4,12 @@ Forgot Your Password
 @endsection
 @section('content')
   <div class="main-page-button-wrapper">
-    <a href="{{ route('welcome') }}">@lang('translations.home')</a>
+    <a href="{{ route('welcome') }}"
+      ><img
+        src="{{asset('images/dark-logo.jpeg')}}"
+        class="navbar-logo"
+        alt=""
+    /></a>
   </div>
   <div class="god-container">
     <div class="super-container1">

@@ -115,20 +115,8 @@
                 >@lang('translations.benefac')</a
               >
             </div>
-
-
-
           </div>
         </div>
-{{--          @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
-{{--              <li>--}}
-{{--                  <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
-{{--                      {{ $properties['native'] }}--}}
-{{--                  </a>--}}
-{{--              </li>--}}
-{{--          @endforeach--}}
-
-{{--          @dd( LaravelLocalization::getCurrentLocaleName())--}}
 
         <div class="">
         @if(Auth::check())
@@ -136,17 +124,14 @@
             <div class="navbar-language-item">
               <div class="language">
                   @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
-                <span class="lang-name">ARM</span>
                 <div class="lang-image-wrapper">
                   <img class="lang-image" src="{{ asset('images/armenia-square.png') }}" />
                 </div>
                   @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
-                      <span class="lang-name">UK</span>
                       <div class="lang-image-wrapper">
                           <img class="lang-image" src="{{ asset('images/uk-square.png') }}" />
                       </div>
                   @else
-                      <span class="lang-name">RUS</span>
                       <div class="lang-image-wrapper">
                           <img class="lang-image" src="{{ asset('images/russia-square.png') }}" />
                       </div>
@@ -223,17 +208,14 @@
             <div class="navbar-language-item">
               <div class="language">
                   @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
-                <span class="lang-name">ARM</span>
                 <div class="lang-image-wrapper">
                   <img class="lang-image" src="{{ asset('images/armenia-square.png') }}" />
                 </div>
                   @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
-                      <span class="lang-name">UK</span>
                       <div class="lang-image-wrapper">
                           <img class="lang-image" src="{{ asset('images/uk-square.png') }}" />
                       </div>
                   @else
-                      <span class="lang-name">RUS</span>
                       <div class="lang-image-wrapper">
                           <img class="lang-image" src="{{ asset('images/russia-square.png') }}" />
                       </div>

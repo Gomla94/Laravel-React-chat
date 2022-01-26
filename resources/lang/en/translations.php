@@ -37,6 +37,9 @@
         "subscribtions" => "Subscribtions",
         "subscribers" => "Subscribers",
 
+        "individual" => "Individual",
+        "organisation" => "Organisation",
+
         "date_of_birth" => "Date Of Birth",
         "phone_numb" => "Phone Number",
         "select_gender" => "Select a Gender",

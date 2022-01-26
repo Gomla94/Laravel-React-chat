@@ -33,8 +33,12 @@ return [
     "posts" => "Գրառումներ",
     "images" => "Նկարներ",
     "videos" => "Տեսահոլովակներ",
+    "appeals" => "Դիմում",
     "subscribtions" => "Հետևում եմ",
     "subscribers" => "Հետևորդներ",
+
+    "individual" => "անձնական",
+    "organisation" => "կազմակերպություն",
 
     "date_of_birth" => "Ծննդյան ամսաթիվ",
     "phone_numb" => "Հերախոսահամար",

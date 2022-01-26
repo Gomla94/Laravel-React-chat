@@ -12,7 +12,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
       <div class="profile-img">
         <img class="profile-image" src="{{ asset( $user->image ?? 'images/avatar.png') }}" width="200" alt="Profile Image">
         <div class="image-demo"></div>
-
       </div>
       <div class="profile-nav-info">
         <h3 class="user-name">{{ $user->name }}</h3>
@@ -21,35 +20,34 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
     <div class="main-bd">
       <div class="left-side">
+        @if(Auth::id() === $user->id)
         <div class="profile-side">
           <p class="profile-info"><i class="fa fa-phone profile-info-icon"></i> {{ $user->phone_number }}</p>
           <p class="profile-info"><i class="fa fa-envelope profile-info-icon"></i> {{ $user->email }}</p>
           <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ optional($user->date_of_birth)->format('Y-m-d') }}</p>
-          <p class="profile-info"><i class="fas fa-venus-mars profile-info-icon"></i> {{ $user->gender }}</p>
+          <p class="profile-info"><i class="fas fa-restroom profile-info-icon"></i> {{ $user->gender }}</p>
           <p class="profile-info"><i class="fas fa-globe-europe profile-info-icon"></i> {{ optional($user->country)->name }}</p>
           <p class="profile-info"> @lang('translations.interest_type'):
             {{ $my_interesting_types !== null ? implode(', ', $my_interesting_types->pluck('name')->toArray()) : '' }}
           </p>
           <p class="profile-info">@lang('translations.add_types'): {{ $user->additional_type }}</p>
-
         </div>
-
+        @endif
       </div>
       <div class="right-side">
-
         <div class="nav">
           <ul>
             @if(Auth::check())
               @if($user->id === auth()->user()->id)
               <li onclick="tabs(0)" class="user-post active profile-item user-setting">@lang('translations.settings')</li>
               @endif
-            @endif
             <li onclick="tabs(1)" class="user-review profile-item">@lang('translations.posts')</li>
             <li onclick="tabs(2)" class="user-review profile-item">@lang('translations.appeals')</li>
             <li onclick="tabs(3)" class="user-images profile-item">@lang('translations.images')</li>
             <li onclick="tabs(4)" class="user-videos profile-item">@lang('translations.videos')</li>
             <li onclick="tabs(5)" class="user-videos profile-item">@lang('translations.subscribtions')</li>
             <li onclick="tabs(6)" class="user-videos profile-item">@lang('translations.subscribers')</li>
+          @endif
           </ul>
         </div>
         <div class="profile-body">
@@ -82,6 +80,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                         <span class="profile-error-span">{{$message}}</span>
                         @enderror
                     </div>
+
+                    <div class="col-md-6 mb-5">
+                      <label class="create-post-label" for="additional_type">@lang('translations.add_type')</label>
+                      <select class="form-control" name="additional_type" id="additional_type">
+                          <option selected disabled>@lang('translations.add_types')</option>
+                          <option value="individual" {{ $user->additional_type === 'individual' ? 'selected' : '' }}>@lang('translations.individual')</option>
+                          <option value="organisation" {{ $user->additional_type === 'organisation' ? 'selected' : '' }}>@lang('translations.organisation')</option>
+                      </select>
+                      @error('additional_type')
+                      <span class="profile-error-span">{{$message}}</span>
+                      @enderror
+                  </div>
                 </div>
 
                 <div class="row profile-row">

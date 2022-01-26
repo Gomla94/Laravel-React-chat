@@ -1,6 +1,7 @@
 $(".profile-image-input").on("change", function () {
     $(".left-side").css("margin-top", "80px");
     $(".profile-image").remove();
+    $(".image-demo").croppie("destroy");
     $image_crop = $(".image-demo").croppie({
         enableExif: true,
         viewport: {

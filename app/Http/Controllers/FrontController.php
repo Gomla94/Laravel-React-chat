@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Notifications\NewSubscribtion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
@@ -22,9 +23,15 @@ class FrontController extends Controller
             $user->update(['api_token' => str_random(60)]);
         }
 
+        $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
+
+        if(request('search-key')) {
+            $random_posts = Post::where('title', request('search-key'))->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
+
+        }
+
         $random_users = User::whereType(User::USER_TYPE)->inRandomOrder()->limit(10)->get();
         $random_appeals = Appeal::with('user')->inRandomOrder()->limit(12)->get();
-        $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
         return view('layouts.front.welcome', [
             'random_users' => $random_users,
             'random_appeals' => $random_appeals,
@@ -121,8 +128,8 @@ class FrontController extends Controller
         $countries = Country::all();
         $my_posts = $user->posts()->get();
         $my_appeals = $user->appeals()->get();
-        $my_posts_images = $user->posts()->whereNull('video')->whereNotNull('image')->get();
-        $my_posts_videos = $user->posts()->whereNull('image')->whereNotNull('video')->get();
+        $my_posts_images = $user->posts()->whereNull('video_path')->whereNotNull('image_path')->get();
+        $my_posts_videos = $user->posts()->whereNull('image_path')->whereNotNull('video_path')->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
         $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
         $my_subscribers = $user->subscribers()->pluck('subscriber_id');
@@ -150,13 +157,13 @@ class FrontController extends Controller
 
     public function show_videos_page()
     {
-        $posts_with_videos = Post::whereNotNull('video')->with('user')->get();
+        $posts_with_videos = Post::whereNotNull('video_path')->with('user')->get();
         return view('layouts.front.videos', ['videos' => $posts_with_videos]);
     }
 
     public function show_video_page($id)
-    {   $post = Post::whereNotNull('video')->whereId($id)->with('user')->firstOrFail();
-        $other_videos = Post::whereNotNull('video')->where('id', '!=', $id)->with('user')->get();
+    {   $post = Post::whereNotNull('video_path')->whereId($id)->with('user')->firstOrFail();
+        $other_videos = Post::whereNotNull('video_path')->where('id', '!=', $id)->with('user')->get();
         return view('layouts.front.video-details', [
             'video' => $post,
             'other_videos' => $other_videos

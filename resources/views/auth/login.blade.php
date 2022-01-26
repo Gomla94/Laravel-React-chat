@@ -4,7 +4,12 @@ Login
 @endsection
 @section('content')
   <div class="main-page-button-wrapper">
-    <a href="{{ route('welcome') }}">@lang('translations.home')</a>
+      <a href="{{ route('welcome') }}"
+        ><img
+          src="{{asset('images/dark-logo.jpeg')}}"
+          class="navbar-logo"
+          alt=""
+      /></a>
   </div>
   <div class="god-container">
     <div class="super-container1">
@@ -26,14 +31,6 @@ Login
       <div class="title-container">
         <h1>@lang('translations.login')</h1>
       </div>
-      <!-- <div class="buttons-login">
-        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-        <a href="#"><i class="fab fa-google fa-2x"></i></a>
-        <a href="#"><i class="fab fa-twitter-square fa-2x"></i></a>
-      </div> -->
-      <!-- <div class="container-p">
-        <p class="request-data">or us an e-mail for registration</p>
-      </div> -->
       <div class="form">
         <form action="{{ route('login') }}" method="POST">
           @csrf
@@ -56,13 +53,6 @@ Login
           @error('password')
             <span style="color:red">{{$message}}</span>
           @enderror
-          <!-- <div class="do-you-subrscibe">
-            <label for="">Do you want subscribe for our newsletter?</label>
-          </div>
-          <label for="">Yes</label
-          ><input type="radio" name="subscribe" id="Yes" />
-          <label for="no">No</label>
-          <input type="radio" name="subscribe" id="No" /> -->
           <a class="forgot-link" href="{{route('password.request')}}">@lang('translations.forgot-password')</a>
           <div class="button">
             <button class="button2">@lang('translations.login')</button>

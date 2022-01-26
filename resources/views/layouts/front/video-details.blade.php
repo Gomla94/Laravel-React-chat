@@ -2,25 +2,25 @@
 @section('content')
 <div class="container-fluid view-video-wrapper">
     <div class="view-main-video-wrapper">
-         <div class="view-main-video-container">
-             <video controls src="{{ asset($video->video) }}" class="main-video"></video>
-         </div>
+        <div class="view-main-video-container">
+        <video controls src="{{ asset($video->video_path) }}" class="main-video"></video>
+        </div>
+        <div class="main-video-title-wrapper">
+            <span class="main-video-title">{{ $video->title }}</span>
+        </div>
          <div class="view-main-video-details-container">
-             <div class="main-video-user-image-wrapper">
-                 <img src="{{ asset($video->user->image ?? 'images/avatar.png') }}" class="main-video-user-image" />
-             </div>
-             <div class="main-video-info">
-                 <div class="main-video-title-wrapper">
-                     <span class="main-video-title">{{ $video->title }}</span>
-                 </div>
-                 <div class="main-video-user-name-wrapper">
-                     <span class="main-video-user-name">{{ $video->user->name }}</span>
-                 </div>
-                 <div class="main-video-time-wrapper">
-                     <span class="main-video-time">{{ $video->created_at->diffForHumans() }}</span>
-                 </div>
-             </div>
-             
+            <div class="main-video-user-image-wrapper">
+                <img src="{{ asset($video->user->image ?? 'images/avatar.png') }}" class="main-video-user-image" />
+            </div>
+        
+            <div class="main-video-info">
+            <div class="main-video-user-name-wrapper">
+                <span class="main-video-user-name">{{ $video->user->name }}</span>
+            </div>
+            <div class="main-video-time-wrapper">
+                <span class="main-video-time">{{ $video->created_at->diffForHumans() }}</span>
+            </div>
+            </div>
          </div>
     </div>
     <div class="view-other-videos-wrapper">

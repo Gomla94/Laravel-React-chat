@@ -3177,13 +3177,16 @@ var Notifications = function Notifications(_ref) {
 
   var changeSubscribtionForm = function changeSubscribtionForm(icon, unid) {
     var targetedGreenButton = document.querySelector("[data-nid=\"".concat(unid, "\"]"));
-    if (!targetedGreenButton) return false;
-    if (icon.classList.contains("deny-notify")) return true;
-    var targetedForm = targetedGreenButton.nextElementSibling;
-    targetedForm.setAttribute("action", "".concat(window.location.origin, "/unsubscribe/").concat(unid));
-    targetedForm.querySelector("button").classList.remove("user-subscribe");
-    targetedForm.querySelector("button").innerText = "";
-    targetedForm.querySelector("button").classList.add("fas", "fa-check", "checkmark-icon");
+
+    if (targetedGreenButton) {
+      if (icon.classList.contains("deny-notify")) return true;
+      var targetedForm = targetedGreenButton.nextElementSibling;
+      targetedForm.setAttribute("action", "".concat(window.location.origin, "/unsubscribe/").concat(unid));
+      targetedForm.querySelector("button").classList.remove("user-subscribe");
+      targetedForm.querySelector("button").innerText = "";
+      targetedForm.querySelector("button").classList.add("fas", "fa-check", "checkmark-icon");
+    }
+
     return true;
   };
 
@@ -3197,10 +3200,7 @@ var Notifications = function Notifications(_ref) {
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "notification",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "notification-title",
-          children: "New Subscribtion"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "notification-info",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "notification-user-image",
@@ -3245,9 +3245,12 @@ var Notifications = function Notifications(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "notifications-wrapper",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "notifications-container",
-      children: renderNotifications(notifications)
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        className: "notifications-title",
+        children: "Notifications"
+      }), renderNotifications(notifications)]
     })
   });
 };

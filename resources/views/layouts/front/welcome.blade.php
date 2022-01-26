@@ -68,9 +68,10 @@
     @if(Auth::check())
     <div class="main-posts-buttons-wrapper">
       <div class="main-posts-search-wrapper">
-        <i class="fas fa-search main-posts-search-icon"></i>
-        <input type="text" class="main-posts-search-input" />
-        <i class="fas fa-microphone main-posts-search-microhphone"></i>
+        <form action="{{ route('welcome', request()->query()) }}" method="GET">
+          <i class="fas fa-search main-posts-search-icon"></i>
+          <input type="text" name="search-key" class="main-posts-search-input" />
+        </form>
       </div>
       <div class="main-posts-add-buttons">
         <button class="main-posts-add-appeal-button">@lang("translations.help_request")</button>
@@ -199,10 +200,10 @@
 
 
       <div class="form-group modal-checker-container">
+        <label class="create-post-label image-label">@lang("translations.image")</label>
         <div class="post-modal-checker">
           <div class="modal-checker"></div>
         </div>
-        <label class="create-post-label image-label">@lang("translations.image")</label>
         <label class="create-post-label video-label">@lang("translations.video")</label>
         @error('post_image')
           <span style="color:red">{{$message}}</span>

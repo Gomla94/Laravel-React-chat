@@ -167,7 +167,7 @@ label {
     background-color: #f1c47b;
     margin-top: 10%;
     margin-bottom: 5%;
-    width: 20%;
+    width: fit-content;
     padding: 1.5%;
     border-radius: 800px;
     border: 0 solid transparent;
@@ -343,11 +343,17 @@ label {
     background-color: #f1c47b;
     margin-top: 2%;
     margin-left: 10%;
-    width: fit-content;
-    padding: 10px;
+    padding: 2px;
     border-radius: 10px;
     border: 0 solid transparent;
     cursor: pointer;
+    height: 70px;
+    width: 70px;
+}
+
+.main-page-button-wrapper img {
+    height: 100%;
+    width: 100%;
 }
 
 .main-page-button-wrapper:hover {
