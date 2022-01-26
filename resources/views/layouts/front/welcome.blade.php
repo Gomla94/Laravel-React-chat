@@ -71,6 +71,7 @@
         <form action="{{ route('welcome', request()->query()) }}" method="GET">
           <i class="fas fa-search main-posts-search-icon"></i>
           <input type="text" name="search-key" class="main-posts-search-input" />
+          <button class="search-button">@lang('translations.search')</button>
         </form>
       </div>
       <div class="main-posts-add-buttons">

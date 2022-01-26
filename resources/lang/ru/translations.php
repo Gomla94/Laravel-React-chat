@@ -1,5 +1,6 @@
 <?php
 return [
+    'search' => 'поиск',
     'forgot-password' => 'Забыл пароль',
     'reset-password' => 'сбросить пароль',
     'reset-button' => 'отправить электронное письмо для сброса пароля',

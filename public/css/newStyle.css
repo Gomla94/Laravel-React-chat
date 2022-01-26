@@ -639,6 +639,15 @@ a {
     color: rgb(177, 177, 177);
 }
 
+.search-button {
+    background-color: rgb(1, 59, 1);
+    color: white;
+    border: none;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 7px 0px rgba(0, 0, 0, 0.3);
+}
+
 .main-posts-add-appeal-button {
     background-color: rgb(1, 59, 1);
     color: white;
@@ -2588,20 +2597,41 @@ a {
     .one-user-social-info-wrapper {
         grid-template-columns: 1fr 1fr 1fr;
     }
-}
 
-@media screen and (max-width: 930px) {
-    .main-posts-search-wrapper {
-        display: none;
+    .main-posts-buttons-container {
+        height: auto;
+        width: 90%;
+        margin: auto;
     }
 
-    .main-posts-buttons-wrapper {
+    .main-posts-search-wrapper {
+        /* right: 20%; */
+    }
+
+    .main-posts-add-buttons {
+        /* left: 20%; */
         position: relative;
     }
 
     .main-posts-add-post-button {
-        right: 0;
-        position: absolute;
+        /* right: 0;
+        position: absolute; */
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .main-posts-search-wrapper {
+        /* right: 20%; */
+    }
+
+    .main-posts-buttons-wrapper {
+        position: relative;
+        /* left: 20%; */
+    }
+
+    .main-posts-add-post-button {
+        /* right: 0;
+        position: absolute; */
     }
 
     .profile-add-post-button {
@@ -2989,6 +3019,22 @@ a {
     }
 }
 
+@media screen and (max-width: 550px) {
+    .main-posts-buttons-wrapper {
+        flex-direction: column;
+    }
+
+    .main-posts-search-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .main-posts-add-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+    }
+}
+
 @media screen and (max-width: 530px) {
     .one-user-social-info-wrapper {
         flex: 2;
@@ -3028,24 +3074,6 @@ a {
         margin: auto;
     }
 
-    .main-posts-add-buttons {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 100px;
-        height: 100px;
-        width: auto;
-    }
-
-    .main-posts-add-post-button {
-        position: absolute;
-        right: -10%;
-    }
-
-    .main-posts-add-appeal-button {
-        position: absolute;
-        left: -10%;
-    }
-
     .swiper {
         margin-top: 20px;
     }
@@ -3062,6 +3090,24 @@ a {
 @media screen and (max-width: 460px) {
     .chat-wrapper {
         right: -120%;
+    }
+
+    .main-posts-add-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .chat-wrapper {
+        right: -120%;
+    }
+
+    .main-posts-add-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
     }
 }
 
