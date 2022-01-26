@@ -19,7 +19,7 @@ const Notifications = ({ notifications, setNotifications }) => {
 
             setNotifications(filteredNotifications);
 
-            const response = await notify.post("/check-notification", {
+            const response = await notify.post("/check-notification/", {
                 nid: e.target.dataset.nid,
                 status: e.target.classList.contains("accept-notify")
                     ? "accept"
