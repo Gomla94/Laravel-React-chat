@@ -28,6 +28,8 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
+    <script>window.Laravel.csrf = {csrfToken: '{{ csrf_token() }}'}</script>
+
 
     @yield('css')
 
