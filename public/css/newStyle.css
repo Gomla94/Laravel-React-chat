@@ -2938,6 +2938,10 @@ a {
     .appeal-card-description {
         text-align: start;
     }
+
+    .appeal-card-button {
+        width: max-content;
+    }
 }
 
 @media screen and (max-width: 640px) {
