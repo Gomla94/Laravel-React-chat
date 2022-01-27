@@ -42,6 +42,8 @@ navbarLangIcon.addEventListener("click", () => {
 if (chatWrapper) {
     mainDiv.addEventListener("click", () => {
         chatWrapper.classList.remove("show-chat-wrapper");
+        postsModalWrapper.style.display = "none";
+        appealsModalWrapper.style.display = "none";
         if (overlay.classList.contains("menu-slide-right")) {
             menuBars.classList.toggle("menu-active");
             overlay.classList.toggle("menu-slide-right");
