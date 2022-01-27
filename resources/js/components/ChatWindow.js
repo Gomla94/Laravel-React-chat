@@ -456,7 +456,7 @@ const ChatWindow = () => {
                         <img
                             src={
                                 user.image
-                                    ? `../${user.image}`
+                                    ? `${user.image_path}`
                                     : `../images/avatar.png`
                             }
                             className="chat-user-image"
