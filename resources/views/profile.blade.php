@@ -20,8 +20,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
     <div class="main-bd">
       <div class="left-side">
-        @if(Auth::id() === $user->id)
         <div class="profile-side">
+          @if(Auth::id() === $user->id)
           <p class="profile-info"><i class="fa fa-phone profile-info-icon"></i> {{ $user->phone_number }}</p>
           <p class="profile-info"><i class="fa fa-envelope profile-info-icon"></i> {{ $user->email }}</p>
           <p class="profile-info"><i class="fas fa-calendar-week profile-info-icon"></i> {{ optional($user->date_of_birth)->format('Y-m-d') }}</p>
@@ -31,8 +31,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             {{ $my_interesting_types !== null ? implode(', ', $my_interesting_types->pluck('name')->toArray()) : '' }}
           </p>
           <p class="profile-info">@lang('translations.add_types'): {{ $user->additional_type }}</p>
+          @endif
         </div>
-        @endif
       </div>
       <div class="right-side">
         <div class="nav">
