@@ -1196,7 +1196,7 @@ a {
 .messages-count {
     position: absolute;
     top: 2%;
-    right: 4%;
+    right: 30%;
 }
 
 .chat-wrapper {
@@ -2459,7 +2459,7 @@ a {
     .messages-count {
         position: absolute;
         top: 2%;
-        left: 60%;
+        right: 30%;
     }
 
     .count {
