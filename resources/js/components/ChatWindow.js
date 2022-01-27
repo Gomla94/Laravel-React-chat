@@ -382,8 +382,8 @@ const ChatWindow = () => {
                         <div className="sent-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image
-                                        ? `${message.user.image}`
+                                    message.user.image_path
+                                        ? `${message.user.image_path}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
@@ -401,8 +401,8 @@ const ChatWindow = () => {
                         <div className="received-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image
-                                        ? `${message.user.image}`
+                                    message.user.image_path
+                                        ? `${message.user.image_path}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
