@@ -34,7 +34,7 @@
     @yield('css')
 
     @if(Auth::check())
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js?version=4') }}" defer></script>
     @endif
 
     @if(!Auth::check())
