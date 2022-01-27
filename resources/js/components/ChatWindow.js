@@ -382,8 +382,8 @@ const ChatWindow = () => {
                         <div className="sent-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image_path
-                                        ? `${message.user.image_path}`
+                                    message.user.image !== null
+                                        ? `${message.user.image}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
@@ -401,8 +401,8 @@ const ChatWindow = () => {
                         <div className="received-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image_path
-                                        ? `${message.user.image_path}`
+                                    message.user.image !== null
+                                        ? `${message.user.image}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
@@ -455,8 +455,8 @@ const ChatWindow = () => {
                     <div className="chat-user-image-wrapper">
                         <img
                             src={
-                                user.image_path
-                                    ? `${user.image_path}`
+                                user.image !== null
+                                    ? `${user.image}`
                                     : `../images/avatar.png`
                             }
                             className="chat-user-image"
