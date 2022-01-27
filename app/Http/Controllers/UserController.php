@@ -18,6 +18,7 @@ class UserController extends Controller
 
     public function profile()
     {
+        // dd(Auth::user());
         $user = Auth::user();
         $user_interesting_types_ids = $user->interesting_type_id !== "null" ? json_decode($user->interesting_type_id) : [];
         $my_interesting_types = $user_interesting_types_ids !== null ? InterestingType::whereIn('id', $user_interesting_types_ids)->get() : null;

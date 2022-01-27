@@ -330,7 +330,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                   <span class="post-date">{{ $image->created_at->format('Y-m-d h:i A') }}</span>
                 </div>
                 <div class="main-post-image-wrapper">
-                  <img src="{{ asset($image->image) }}" alt="main-post-image" class="main-post-image" />
+                  <img src="{{ asset($image->image_path) }}" alt="main-post-image" class="main-post-image" />
                 </div>
               </div>
               @endforeach
@@ -360,7 +360,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 <div class="main-post-video-wrapper">
                   <video
                     controls
-                    src="{{ asset($video->video) }}"
+                    src="{{ asset($video->video_path) }}"
                     alt="main-post-video"
                     class="main-post-video"
                   ></video>
