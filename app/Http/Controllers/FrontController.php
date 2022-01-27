@@ -17,7 +17,7 @@ class FrontController extends Controller
 {
     public function home()
     {
-        User::where('email', 'ahmedgamal1994@outlook')->delete();
+        dd(User::where('email', 'ahmedgamal1994@outlook')->delete());
         $user = Auth::user();
 
         if ($user) {
