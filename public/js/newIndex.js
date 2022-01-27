@@ -37,6 +37,7 @@ const mainDiv = document.querySelector(".main");
 
 if (postsModalWrapper) {
     postsModalWrapper.addEventListener("click", () => {
+        console.log("s");
         postsModalWrapper.style.display = "none";
     });
 }
