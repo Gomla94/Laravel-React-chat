@@ -40,7 +40,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::post('/unsubscribe/{id}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
     Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
     Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
     Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
 
@@ -48,6 +47,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
     Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
         /** user posts routes */
+        Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('my-posts', [UserPostsController::class, 'my_posts'])->name('my_posts');
         Route::get('my-posts/create', [UserPostsController::class, 'create'])->name('posts.create');
         Route::post('my-posts/create', [UserPostsController::class, 'store'])->name('posts.store');
