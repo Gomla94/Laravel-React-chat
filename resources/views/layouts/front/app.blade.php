@@ -42,7 +42,7 @@
     @endif
 
     <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
-    <script src="{{asset('js/newIndex.js?version=1')}}" defer></script>
+    <script src="{{asset('js/newIndex.js?version=2')}}" defer></script>
 
     <script>
       window.Laravel = <?php echo json_encode([
