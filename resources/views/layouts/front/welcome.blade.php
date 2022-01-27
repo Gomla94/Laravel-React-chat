@@ -175,8 +175,8 @@
 </div>
 
 <!-- add post modal -->
-<div class="posts-modal-wrapper">
-  <div class="modal-content">
+<disv class="posts-modal-wrapper">
+  <div class="posts-modal-content">
     <div class="close-modal-container">
       <span class="close-posts-modal">&times;</span>
     </div>
@@ -225,9 +225,11 @@
   </div>
 </div>
 
+  
+
  <!-- add appeal modal -->
  <div class="appeals-modal-wrapper">
-  <div class="modal-content">
+  <div class="appeals-modal-content">
     <div class="close-modal-container">
       <span class="close-appeals-modal">&times;</span>
     </div>
@@ -274,6 +276,7 @@
   </form>
   </div>
 </div>
+  
 
 @endsection
 @push('js')

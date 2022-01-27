@@ -10,6 +10,8 @@ const postsBtn = document.querySelector(".main-posts-add-post-button");
 const appealsBtn = document.querySelector(".main-posts-add-appeal-button");
 const postsModalWrapper = document.querySelector(".posts-modal-wrapper");
 const appealsModalWrapper = document.querySelector(".appeals-modal-wrapper");
+const postsModalContnt = document.querySelector(".posts-modal-content");
+const appealsModalContnt = document.querySelector(".appeals-modal-content");
 const closePostsModal = document.querySelector(".close-posts-modal");
 const closeAppealsModal = document.querySelector(".close-appeals-modal");
 
@@ -35,14 +37,28 @@ const profileImageInput = document.querySelector(".profile-image-input");
 
 const mainDiv = document.querySelector(".main");
 
+if (postsModalContnt) {
+    postsModalContnt.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+}
+
+if (appealsModalContnt) {
+    appealsModalContnt.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+}
+
 if (postsModalWrapper) {
-    postsModalWrapper.addEventListener("click", () => {
+    postsModalWrapper.addEventListener("click", (e) => {
+        postsModalContnt.classList.remove("show-posts-modal-content");
         postsModalWrapper.style.display = "none";
     });
 }
 
 if (appealsModalWrapper) {
     appealsModalWrapper.addEventListener("click", () => {
+        appealsModalContnt.classList.remove("show-posts-modal-content");
         appealsModalWrapper.style.display = "none";
     });
 }
@@ -73,10 +89,12 @@ if (logoutAnchor) {
 
 const showPostsModal = () => {
     postsModalWrapper.style.display = "block";
+    postsModalContnt.classList.add("show-posts-modal-content");
 };
 
 const showAppealsModal = () => {
     appealsModalWrapper.style.display = "block";
+    appealsModalContnt.classList.add("show-posts-modal-content");
 };
 
 if (postsBtn) {
