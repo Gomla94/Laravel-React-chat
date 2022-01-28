@@ -58,7 +58,7 @@ class FrontController extends Controller
                     $interesting_type = InterestingType::where('name', request('interesting-in-type'))->pluck('id')->firstOrFail();
                     foreach($users as $user) {
                         $user_interesting_types_ids = json_decode($user->interesting_type_id);
-                        if (count($user_interesting_types_ids)) {
+                        if ($user_interesting_types_ids !== null) {
                             if (in_array($interesting_type, $user_interesting_types_ids)) {
                                 array_push($filtered_users, $user);
                             }
