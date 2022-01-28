@@ -429,7 +429,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
   <!-- add post modal -->
 <div class="posts-modal-wrapper">
-  <div class="modal-content">
+  <div class="posts-modal-content">
     <div class="close-modal-container">
       <span class="close-posts-modal">&times;</span>
     </div>
@@ -481,7 +481,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
  <!-- add appeal modal -->
  <div class="appeals-modal-wrapper">
-  <div class="modal-content">
+  <div class="appeals-modal-content">
     <div class="close-modal-container">
       <span class="close-appeals-modal">&times;</span>
     </div>
