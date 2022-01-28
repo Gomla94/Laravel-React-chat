@@ -30,9 +30,9 @@ class UserController extends Controller
         $my_posts_images = $user->posts()->whereNull('video_path')->whereNotNull('image_path')->get();
         $my_posts_videos = $user->posts()->whereNull('image_path')->whereNotNull('video_path')->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
-        $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
+        $my_subscribtions_users = User::whereIn('unique_id', $my_subscribtions)->get();
         $my_subscribers = $user->subscribers()->pluck('subscriber_id');
-        $my_subscribers_users = User::whereIn('id', $my_subscribers)->get();
+        $my_subscribers_users = User::whereIn('unique_id', $my_subscribers)->get();
         $user_subscribers_count = $user->subscribers()->count();
         $user_subscribtions_count = $user->subscribtions()->count();
 
@@ -61,6 +61,7 @@ class UserController extends Controller
             'image' => ['sometimes','nullable','max:2048', 'mimes:png,jpg,jpeg'],
             'date_of_birth' => ['sometimes','nullable','date'],
             'phone_number' => ['sometimes','nullable','numeric'],
+            'additional_type' => ['sometimes','nullable','in:individual,organisation'],
             'interesting_type' => ['sometimes', 'nullable', 'array'],
             'interesting_type.*' => ['numeric', Rule::exists('interesting_types', 'id')],
             'country_id' => ['sometimes','nullable','integer', Rule::exists('countries', 'id')],
@@ -74,6 +75,7 @@ class UserController extends Controller
             'gender' => $attributes['gender'] ?? null,
             'country_id' => $attributes['country_id'] ?? null,
             'interesting_type_id' => json_encode(request('interesting_type'))?? null,
+            'additional_type' => $attributes['additional_type']
         ]);
 
         return redirect()->route('user.profile');

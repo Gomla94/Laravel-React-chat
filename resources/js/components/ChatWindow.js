@@ -4,6 +4,7 @@ import InputEmoji from "react-input-emoji";
 import notify from "../src/notify";
 
 const ChatWindow = () => {
+    const [showChatWrapper, setShowChatWrapper] = useState(false);
     const [users, setUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
@@ -358,13 +359,11 @@ const ChatWindow = () => {
             params: { nid: userId },
         }).then((response) => {
             setUsers(response.data);
-            console.log(response.data);
             changeToUserId(null, userId);
         });
     };
 
     const fetchAllUsers = () => {
-        // setShowAlertMessages(!showAlertMessages);
         if (users.length !== 0) return;
         chat.get("/chat-users").then((response) => {
             setUsers(response.data);

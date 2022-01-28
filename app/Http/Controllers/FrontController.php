@@ -23,10 +23,10 @@ class FrontController extends Controller
             $user->update(['api_token' => str_random(60)]);
         }
 
-        $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
-
+        $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
+        
         if(request('search-key')) {
-            $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->get();
+            $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
         }
 
         $random_users = User::whereType(User::USER_TYPE)->inRandomOrder()->limit(10)->get();
@@ -41,7 +41,7 @@ class FrontController extends Controller
     public function load_more_posts()
     {
         $requested_ids = request('ids');
-        $more_posts = Post::with(['user', 'comments', 'likes'])->whereNotIn('id', $requested_ids)->limit(5)->get();
+        $more_posts = Post::with(['user', 'comments', 'likes'])->whereNotIn('id', $requested_ids)->limit(5)->orderBy('created_at', 'desc')->get();
         return $more_posts;
     }
 

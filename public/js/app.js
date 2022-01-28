@@ -2116,8 +2116,10 @@ try {
  */
 
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+// window.axios.defaults.headers.common["X-CSRF-TOKEN"] =
+//     document.head.querySelector('meta[name="csrf-token"]');
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -2137,8 +2139,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
   key: "f3410ab18dff50208018",
   cluster: "mt1",
-  encrypted: true,
-  forceTLS: true // disableStats: true,
+  encrypted: true // forceTLS: true,
+  // disableStats: true,
   // wsPort: 6001,
   // wssPort: 6001,
   // enabledTransports: ["ws", "wss"],
@@ -2227,59 +2229,64 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var ChatWindow = function ChatWindow() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      users = _useState2[0],
-      setUsers = _useState2[1];
+      showChatWrapper = _useState2[0],
+      setShowChatWrapper = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      messages = _useState4[0],
-      setMessages = _useState4[1];
+      users = _useState4[0],
+      setUsers = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      newMessage = _useState6[0],
-      setNewMessage = _useState6[1];
+      messages = _useState6[0],
+      setMessages = _useState6[1];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      toUserId = _useState8[0],
-      setToUserId = _useState8[1];
+      newMessage = _useState8[0],
+      setNewMessage = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      chattingWithUser = _useState10[0],
-      setChattingWithUser = _useState10[1];
+      toUserId = _useState10[0],
+      setToUserId = _useState10[1];
 
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      blockedUserId = _useState12[0],
-      setBlockedUserId = _useState12[1];
-
-  var authId = window.Laravel.user.unique_id;
+      chattingWithUser = _useState12[0],
+      setChattingWithUser = _useState12[1];
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
-      spinner = _useState14[0],
-      setSpinner = _useState14[1];
+      blockedUserId = _useState14[0],
+      setBlockedUserId = _useState14[1];
+
+  var authId = window.Laravel.user.unique_id;
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState16 = _slicedToArray(_useState15, 2),
-      userIsAlreadyBlocked = _useState16[0],
-      setUserIsAlreadyBlocked = _useState16[1];
+      spinner = _useState16[0],
+      setSpinner = _useState16[1];
 
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState18 = _slicedToArray(_useState17, 2),
-      blockMessage = _useState18[0],
-      setBlockMessage = _useState18[1];
+      userIsAlreadyBlocked = _useState18[0],
+      setUserIsAlreadyBlocked = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState20 = _slicedToArray(_useState19, 2),
+      blockMessage = _useState20[0],
+      setBlockMessage = _useState20[1];
 
   var scrollToEndRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
-      _useState20 = _slicedToArray(_useState19, 2),
-      showAlertMessages = _useState20[0],
-      setShowAlertMessages = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+      _useState22 = _slicedToArray(_useState21, 2),
+      showAlertMessages = _useState22[0],
+      setShowAlertMessages = _useState22[1];
 
   var envelopes = document.querySelectorAll(".user-green-message-box");
   var userBlocker = document.querySelector(".sound-checker");
@@ -2629,13 +2636,11 @@ var ChatWindow = function ChatWindow() {
       }
     }).then(function (response) {
       setUsers(response.data);
-      console.log(response.data);
       changeToUserId(null, userId);
     });
   };
 
   var fetchAllUsers = function fetchAllUsers() {
-    // setShowAlertMessages(!showAlertMessages);
     if (users.length !== 0) return;
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/chat-users").then(function (response) {
       setUsers(response.data);
@@ -2654,7 +2659,7 @@ var ChatWindow = function ChatWindow() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "sent-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image ? "".concat(message.user.image) : "../images/avatar.png",
+              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -2669,7 +2674,7 @@ var ChatWindow = function ChatWindow() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "received-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image ? "".concat(message.user.image) : "../images/avatar.png",
+              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -2719,7 +2724,7 @@ var ChatWindow = function ChatWindow() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "chat-user-image-wrapper",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-            src: user.image ? "../".concat(user.image) : "../images/avatar.png",
+            src: user.image !== null ? "".concat(user.image) : "../images/avatar.png",
             className: "chat-user-image",
             alt: ""
           })
@@ -2996,9 +3001,21 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
       notifications = _useState4[0],
       setNotifications = _useState4[1];
 
+  var navbarChatIcon = document.querySelector(".navbar-user-comment");
+
+  var removeChatWrapper = function removeChatWrapper() {
+    var chatWrapper = document.querySelector(".chat-wrapper");
+    var chatArrow = document.querySelector(".chat-arrow");
+    chatWrapper.classList.remove("show-chat-wrapper");
+    chatArrow.classList.remove("show-chat-arrow");
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var mainDiv = document.querySelector(".main");
     mainDiv.addEventListener("click", function () {
+      setShowNotifications(false);
+    });
+    navbarChatIcon.addEventListener("click", function () {
       setShowNotifications(false);
     });
   }, []);
@@ -3037,12 +3054,12 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _src_notify__WEBPACK_IMPORTED_MODULE_3__["default"].get("/my_notifications");
+              return _src_notify__WEBPACK_IMPORTED_MODULE_3__["default"].get("my_notifications");
 
             case 2:
               response = _context.sent;
               loadedNotifications = response.data;
-              setNotifications(loadedNotifications); // return renderNotifications(loadedNotifications);
+              setNotifications(loadedNotifications);
 
             case 5:
             case "end":
@@ -3061,6 +3078,7 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
       className: "fas fa-bell bell-icon",
       onClick: function onClick() {
+        removeChatWrapper();
         setShowNotifications(!showNotifications);
       },
       children: renderNotificationsCount()
@@ -3297,7 +3315,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  // baseURL: "https://seriousapp.test/api/",
   baseURL: "https://www.magaxat.com/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
@@ -3322,7 +3339,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  // baseURL: "https://seriousapp.test/api/",
   baseURL: "https://www.magaxat.com/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",

@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="image">@lang('translations.image')</label>
                         <div>
-                            <img src="{{ asset($appeal->image) }}" class="mb-3" alt="" width="200px" height="100px">
+                            <img src="{{ $appeal->image_path }}" class="mb-3" alt="" width="200px" height="100px">
                         </div>
                         <input type="file" class="form-control" name="appeal_image">
                         @error('image')
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="video">@lang('translations.video')</label>
                         <div>
-                            <video src="{{ asset($appeal->video) }}" controls class="mb-3" width="200px" height="100px"></video>
+                            <video src="{{ $appeal->video_path }}" controls class="mb-3" width="200px" height="100px"></video>
                         </div>
                         <input type="file" class="form-control" name="appeal_video">
                         @error('video')

@@ -18,7 +18,7 @@
                         @foreach ($appeal_images as $image)
                             <tr>
                                 <td>{{ $image->title }}</td>
-                                <td><img src="{{ asset($image->image_path) }}" width="150px" height="100px"></td>
+                                <td><img src="{{ $image->image_path }}" width="150px" height="100px"></td>
                                 <td style="">
                                     <a href="{{ route('user.appeal-images.edit', [$appeal->id, $image->id]) }}" class="btn btn-warning mb-3">Edit</a>
                                     <form action="{{ route('user.appeal-images.delete', [$appeal->id, $image->id]) }}" method="POST">

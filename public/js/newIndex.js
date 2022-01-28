@@ -18,9 +18,6 @@ const closeAppealsModal = document.querySelector(".close-appeals-modal");
 const navbarLangIcon = document.querySelector(".navbar-language-item");
 const languagesList = document.querySelector(".language-list");
 
-// const addCommentBtn = document.querySelectorAll(".post-comment-btn");
-// const commentIcon = document.querySelectorAll(".main-post-comments-icon");
-
 const filterUsersIcon = document.querySelector(".filter-users-wrapper");
 const filtersList = document.querySelector(".filters-list");
 const filterItems = document.querySelectorAll(".filter-item");
@@ -67,19 +64,28 @@ navbarLangIcon.addEventListener("click", () => {
     languagesList.classList.toggle("show-language-list");
 });
 
-if (chatWrapper) {
-    mainDiv.addEventListener("click", () => {
+mainDiv.addEventListener("click", () => {
+    if (chatWrapper) {
         chatWrapper.classList.remove("show-chat-wrapper");
-        if (overlay.classList.contains("menu-slide-right")) {
-            menuBars.classList.toggle("menu-active");
-            overlay.classList.toggle("menu-slide-right");
-            overlay.classList.toggle("menu-slide-left");
-        }
-        document
-            .querySelector(".chat-arrow")
-            .classList.remove("show-chat-arrow");
-    });
-}
+    }
+
+    if (chatArrow) {
+        chatArrow.classList.remove("show-chat-arrow");
+    }
+
+    if (userNavbarList.classList.contains("show-user-navbar-list")) {
+        userNavbarList.classList.remove("show-user-navbar-list");
+    }
+
+    if (filtersList) {
+        filtersList.classList.remove("show-filters-list");
+    }
+    if (overlay.classList.contains("menu-slide-right")) {
+        menuBars.classList.toggle("menu-active");
+        overlay.classList.toggle("menu-slide-right");
+        overlay.classList.toggle("menu-slide-left");
+    }
+});
 
 if (logoutAnchor) {
     logoutAnchor.addEventListener("click", () => {
@@ -128,7 +134,8 @@ if (userGreenButton) {
 }
 
 if (filterUsersIcon) {
-    filterUsersIcon.addEventListener("click", () => {
+    filterUsersIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
         subFilterLists.forEach((list) => {
             list.style.display = "none";
         });
@@ -144,6 +151,8 @@ const filterItemClickHandler = (e) => {
     subFilterLists.forEach((list) => {
         list.style.display = "none";
     });
+
+    e.stopPropagation();
 
     filterArrows.forEach((arrow) => {
         arrow.classList.remove("active-filter-arrow");
@@ -172,7 +181,8 @@ if (filterItems) {
 }
 
 if (navbarChatIcon) {
-    navbarChatIcon.addEventListener("click", () => {
+    navbarChatIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
         chatWrapper.classList.toggle("show-chat-wrapper");
         chatArrow.classList.toggle("show-chat-arrow");
     });

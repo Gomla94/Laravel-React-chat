@@ -67,8 +67,10 @@ const createSelectInput = (interestingTypes = null) => {
         checkboxWrapper.classList.add("checkbox-wrapper");
         const label = document.createElement("label");
         label.textContent = type.name;
+        label.setAttribute("for", type.id);
         const option = document.createElement("input");
         option.setAttribute("type", "checkbox");
+        option.setAttribute("id", type.id);
         option.classList.add("type-checkbox");
         option.setAttribute("name", "interesting_type[]");
         option.setAttribute("value", type.id);
