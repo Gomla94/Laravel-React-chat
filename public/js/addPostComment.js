@@ -71,7 +71,7 @@ export const addComment = async (e) => {
         errorLabel.innerText = "Title Field Cannot Be Empty";
     } else {
         const response = await axios.post(
-            `posts/${commentInput.id}/add-comment`,
+            `/posts/${commentInput.id}/add-comment`,
             {
                 title: commentInput.value,
             }

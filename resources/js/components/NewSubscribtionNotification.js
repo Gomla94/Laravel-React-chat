@@ -6,10 +6,22 @@ const NewSubscribtionNotification = () => {
     const authId = window.Laravel.user.id;
     const [showNotifications, setShowNotifications] = useState(false);
     const [notifications, setNotifications] = useState(null);
+    const navbarChatIcon = document.querySelector(".navbar-user-comment");
+
+    const removeChatWrapper = () => {
+        const chatWrapper = document.querySelector(".chat-wrapper");
+        const chatArrow = document.querySelector(".chat-arrow");
+        chatWrapper.classList.remove("show-chat-wrapper");
+        chatArrow.classList.remove("show-chat-arrow");
+    };
 
     useEffect(() => {
         const mainDiv = document.querySelector(".main");
         mainDiv.addEventListener("click", () => {
+            setShowNotifications(false);
+        });
+
+        navbarChatIcon.addEventListener("click", () => {
             setShowNotifications(false);
         });
     }, []);
@@ -45,7 +57,6 @@ const NewSubscribtionNotification = () => {
         const response = await notify.get("my_notifications");
         const loadedNotifications = response.data;
         setNotifications(loadedNotifications);
-        // return renderNotifications(loadedNotifications);
     };
 
     return (
@@ -53,6 +64,7 @@ const NewSubscribtionNotification = () => {
             <i
                 className="fas fa-bell bell-icon"
                 onClick={() => {
+                    removeChatWrapper();
                     setShowNotifications(!showNotifications);
                 }}
             >

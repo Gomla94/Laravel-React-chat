@@ -153,7 +153,8 @@
 
         </div>
     </div>
-    @push('js')
-        <script src="{{ asset('js/authentication.js') }}"></script>
-    @endpush
+  </div>
+@push('js')
+<script src="{{ asset('js/authentication.js?version=1') }}"></script>
+@endpush
 @endsection

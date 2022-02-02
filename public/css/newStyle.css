@@ -888,7 +888,7 @@ a {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+.posts-modal-content {
     background: rgb(184, 91, 0);
     background: linear-gradient(
         198deg,
@@ -901,6 +901,37 @@ a {
     border: 1px solid #888;
     width: 50% !important;
     border-radius: 10px;
+    position: fixed;
+    z-index: 1000;
+    left: 25%;
+    /* top: 180%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    /* display: none; */
+}
+
+.show-posts-modal-content {
+    display: block;
+    /* z-index: 1000; */
+    /* position: absolute; */
+}
+
+.appeals-modal-content {
+    background: rgb(184, 91, 0);
+    background: linear-gradient(
+        198deg,
+        rgba(184, 91, 0, 1) 12%,
+        rgba(240, 221, 116, 1) 62%,
+        rgba(204, 98, 1, 1) 99%
+    );
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50% !important;
+    border-radius: 10px;
+    position: fixed;
+    z-index: 1000;
+    left: 25%;
 }
 
 .close-modal-container {

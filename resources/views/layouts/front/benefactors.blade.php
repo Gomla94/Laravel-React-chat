@@ -19,6 +19,19 @@
           <div class="user-green-message-box" data-nid={{ $benefactor->unique_id }}>
             <i class="fas fa-envelope user-envelope"></i>
           </div>
+          @if(auth()->user()->subscribed($benefactor->unique_id))
+          <form action="{{ route('unsubscribe', $benefactor->unique_id) }}" method="POST">
+            @csrf
+            <button class="fas fa-check checkmark-icon"></button>
+          </form>
+          @else
+          <form action="{{ route('subscribe', $benefactor->unique_id) }}" method="POST">
+            @csrf
+            <button class="user-subscribe">
+              @lang('translations.subscribe')
+            </button>
+          </form>
+          @endif
         </div>
       @endif
     </div>

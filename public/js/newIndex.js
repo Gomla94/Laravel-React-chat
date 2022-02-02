@@ -10,14 +10,13 @@ const postsBtn = document.querySelector(".main-posts-add-post-button");
 const appealsBtn = document.querySelector(".main-posts-add-appeal-button");
 const postsModalWrapper = document.querySelector(".posts-modal-wrapper");
 const appealsModalWrapper = document.querySelector(".appeals-modal-wrapper");
+const postsModalContnt = document.querySelector(".posts-modal-content");
+const appealsModalContnt = document.querySelector(".appeals-modal-content");
 const closePostsModal = document.querySelector(".close-posts-modal");
 const closeAppealsModal = document.querySelector(".close-appeals-modal");
 
 const navbarLangIcon = document.querySelector(".navbar-language-item");
 const languagesList = document.querySelector(".language-list");
-
-// const addCommentBtn = document.querySelectorAll(".post-comment-btn");
-// const commentIcon = document.querySelectorAll(".main-post-comments-icon");
 
 const filterUsersIcon = document.querySelector(".filter-users-wrapper");
 const filtersList = document.querySelector(".filters-list");
@@ -35,25 +34,58 @@ const profileImageInput = document.querySelector(".profile-image-input");
 
 const mainDiv = document.querySelector(".main");
 
+if (postsModalContnt) {
+    postsModalContnt.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+}
+
+if (appealsModalContnt) {
+    appealsModalContnt.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+}
+
+if (postsModalWrapper) {
+    postsModalWrapper.addEventListener("click", (e) => {
+        postsModalContnt.classList.remove("show-posts-modal-content");
+        postsModalWrapper.style.display = "none";
+    });
+}
+
+if (appealsModalWrapper) {
+    appealsModalWrapper.addEventListener("click", () => {
+        appealsModalContnt.classList.remove("show-posts-modal-content");
+        appealsModalWrapper.style.display = "none";
+    });
+}
+
 navbarLangIcon.addEventListener("click", () => {
     languagesList.classList.toggle("show-language-list");
 });
 
-if (chatWrapper) {
-    mainDiv.addEventListener("click", () => {
+mainDiv.addEventListener("click", () => {
+    if (chatWrapper) {
         chatWrapper.classList.remove("show-chat-wrapper");
-        postsModalWrapper.style.display = "none";
-        appealsModalWrapper.style.display = "none";
-        if (overlay.classList.contains("menu-slide-right")) {
-            menuBars.classList.toggle("menu-active");
-            overlay.classList.toggle("menu-slide-right");
-            overlay.classList.toggle("menu-slide-left");
-        }
-        document
-            .querySelector(".chat-arrow")
-            .classList.remove("show-chat-arrow");
-    });
-}
+    }
+
+    if (chatArrow) {
+        chatArrow.classList.remove("show-chat-arrow");
+    }
+
+    if (userNavbarList.classList.contains("show-user-navbar-list")) {
+        userNavbarList.classList.remove("show-user-navbar-list");
+    }
+
+    if (filtersList) {
+        filtersList.classList.remove("show-filters-list");
+    }
+    if (overlay.classList.contains("menu-slide-right")) {
+        menuBars.classList.toggle("menu-active");
+        overlay.classList.toggle("menu-slide-right");
+        overlay.classList.toggle("menu-slide-left");
+    }
+});
 
 if (logoutAnchor) {
     logoutAnchor.addEventListener("click", () => {
@@ -63,10 +95,12 @@ if (logoutAnchor) {
 
 const showPostsModal = () => {
     postsModalWrapper.style.display = "block";
+    postsModalContnt.classList.add("show-posts-modal-content");
 };
 
 const showAppealsModal = () => {
     appealsModalWrapper.style.display = "block";
+    appealsModalContnt.classList.add("show-posts-modal-content");
 };
 
 if (postsBtn) {
@@ -100,7 +134,8 @@ if (userGreenButton) {
 }
 
 if (filterUsersIcon) {
-    filterUsersIcon.addEventListener("click", () => {
+    filterUsersIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
         subFilterLists.forEach((list) => {
             list.style.display = "none";
         });
@@ -116,6 +151,8 @@ const filterItemClickHandler = (e) => {
     subFilterLists.forEach((list) => {
         list.style.display = "none";
     });
+
+    e.stopPropagation();
 
     filterArrows.forEach((arrow) => {
         arrow.classList.remove("active-filter-arrow");
@@ -144,7 +181,8 @@ if (filterItems) {
 }
 
 if (navbarChatIcon) {
-    navbarChatIcon.addEventListener("click", () => {
+    navbarChatIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
         chatWrapper.classList.toggle("show-chat-wrapper");
         chatArrow.classList.toggle("show-chat-arrow");
     });

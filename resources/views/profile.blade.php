@@ -82,7 +82,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
 
                     <div class="col-md-6 mb-5">
-                      <label class="create-post-label" for="additional_type">@lang('translations.add_type')</label>
+                      <label class="create-post-label" for="additional_type">@lang('translations.add_types')</label>
                       <select class="form-control" name="additional_type" id="additional_type">
                           <option selected disabled>@lang('translations.add_types')</option>
                           <option value="individual" {{ $user->additional_type === 'individual' ? 'selected' : '' }}>@lang('translations.individual')</option>
@@ -265,6 +265,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     @method('DELETE')
                     <button class="fas fa-close"></button>
                   </form>
+                  <a href="{{ route('user.appeals.edit', $appeal->id) }}" class="fas fa-edit"></a>
                 </div>
                 @endif
                 <div class="main-post-user-info-wrapper">
@@ -429,7 +430,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
   <!-- add post modal -->
 <div class="posts-modal-wrapper">
-  <div class="modal-content">
+  <div class="posts-modal-content">
     <div class="close-modal-container">
       <span class="close-posts-modal">&times;</span>
     </div>
@@ -481,7 +482,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
  <!-- add appeal modal -->
  <div class="appeals-modal-wrapper">
-  <div class="modal-content">
+  <div class="appeals-modal-content">
     <div class="close-modal-container">
       <span class="close-appeals-modal">&times;</span>
     </div>
@@ -532,8 +533,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
   @push('js')
   <script src="{{ asset('js/profilePage.js') }}" defer></script>
   <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
-  <script src="{{ asset('js/addPostComment.js') }}" defer type="module"></script>
-  <script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
+  <script src="{{ asset('js/addPostComment.js?version=1') }}" defer type="module"></script>
+  <script src="{{ asset('js/addPostLike.js?version=1') }}" defer type="module"></script>
   <script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
   @endpush
 @endsection

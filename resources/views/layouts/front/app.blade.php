@@ -34,7 +34,7 @@
     @yield('css')
 
     @if(Auth::check())
-    <script src="{{ asset('js/app.js?version=6') }}" defer></script>
+    <script src="{{ asset('js/app.js?version=7') }}" defer></script>
     @endif
 
     @if(!Auth::check())
@@ -42,7 +42,7 @@
     @endif
 
     <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
-    <script src="{{asset('js/newIndex.js')}}" defer></script>
+    <script src="{{asset('js/newIndex.js?version=5')}}" defer></script>
 
     <script>
       window.Laravel = <?php echo json_encode([

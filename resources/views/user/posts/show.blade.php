@@ -16,11 +16,11 @@
                     </div>
                     <div class="post-image">
                         <label for="title">Post Image</label>
-                        <img src="{{ asset($post->image) }}" alt="">
+                        <img src="{{ $post->image_path }}" alt="">
                     </div>
                     <div class="post-title">
                         <label for="title">Post Video</label>
-                        <video src="{{ $post->video }}"></video>
+                        <video src="{{ $post->video_path }}"></video>
                     </div>
                 </div>
             </div>
