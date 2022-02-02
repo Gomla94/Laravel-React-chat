@@ -46,16 +46,16 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
 
-     public function showRegistrationForm()
-     {
+    public function showRegistrationForm()
+    {
         $interesting_types = InterestingType::all();
         return view('auth.register', ['types' => $interesting_types]);
-     }
-     
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -64,17 +64,31 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'type' => ['required', 'string', 'in:benefactor,user'],
             'phone_number' => ['sometimes', 'nullable', 'numeric'],
-            'interesting_type' => ['required_if:type,user','array'],
+            'interesting_type' => ['required_if:type,user', 'array'],
             'interesting_type.*' => ['numeric', Rule::exists('interesting_types', 'id')],
             'additional_type' => ['sometimes', 'nullable', 'string', 'in:individual,organisation'],
             'organisation_description' => ['sometimes', 'nullable', 'string'],
-        ]);
+        ],
+            [
+                'name.required' => __('translations.required.error'),
+                'name.max' => __('translations.max.error'),
+                'email.required' => __('translations.required.error'),
+                'email.email' => __('translations.email.error'),
+                'email.max' => __('translations.max.error'),
+                'password.required' => __('translations.required.error'),
+                'password.min' => __('translations.min.error'),
+                'type.required' => __('translations.required.error'),
+                'phone_number.numeric' => __('translations.numeric.error'),
+                'interesting_type.required_if' => __('translations.required.error'),
+                'interesting_type.*.numeric' => __('translations.numeric.error'),
+            ]
+        );
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
     protected function create(array $data)

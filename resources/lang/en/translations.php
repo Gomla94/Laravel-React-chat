@@ -3,7 +3,7 @@
         'search' => 'Search',
         'forgot-password' => 'Forgot your password?',
         'reset-password' => 'Reset Password',
-        'reset-button' => 'Send message to reset the password',
+        'reset-button' => 'Send',
         'reset-success' => 'We sent you new link for password',
         "social_site" => "Social network",
         "site_description" => "As well as diluted with a fair amount of empathy, rational thinking largely determines the importance of the positions taken by the participants in relation to the tasks assigned. As is commonly believed, interactive prototypes are only a method of political participation and are associatively distributed across industries.",
@@ -61,7 +61,6 @@
 
         "all_appeals" => "Al appeals",
         "add_appeal" => "Add New Appeal",
-        "create_appeal" => "Create Appeal",
         "action" => "Actions",
         "edit_appeal" => "Edit Appeal",
         "upd_appeal" => "Update Appeal",
@@ -77,7 +76,6 @@
         "log_out" => "Logout",
         "log_in" => "Login",
         "my_profile" => "My profile",
-        "filter" => "Filter",
         "user_inf" => "Information about user",
         "email" => "Email",
         "age" => "Age",
@@ -89,9 +87,22 @@
         "acc_create" => "Create an account",
         "type" => "Type",
         "user" => "User",
-        "select_type" => "Select type",
         "individ" => "Individual",
         "org" => "Organisation",
         "org_desc" => "Organisation Description",
         "sign_up" => "Sign up",
+
+        // 01/27/2022
+        'e_mail' => 'E-mail',
+        'password' => 'Password',
+        'name'=> 'Name',
+
+        'required.error' => 'The field is required.',
+        'unique.error' => 'It should not be repeated.',
+        'max.error' => 'Must not exceed 255 characters.',
+        'email.error' => 'Enter the correct email address.',
+        'min.error' => 'Should not be less than 8.',
+        'numeric.error' => 'There should be only numbers.',
+        'forgot_password' => 'Forgot Your Password',
+
     ];

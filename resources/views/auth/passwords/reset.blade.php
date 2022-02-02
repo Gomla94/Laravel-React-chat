@@ -1,19 +1,19 @@
 @extends('layouts.auth')
 @section('title')
-Forgot Your Password
+@lang('translations.forgot_password')
 @endsection
 @section('content')
-  <div class="main-page-button-wrapper">
-    <a href="{{ route('welcome') }}"
-      ><img
-        src="{{asset('images/dark-logo.jpeg')}}"
-        class="navbar-logo"
-        alt=""
-    /></a>
-  </div>
+    <div class="main-page-button-wrapper">
+        <a href="{{ route('welcome') }}" class="containers">
+            <img class="box-logo"
+                 src="{{asset('images/dark-logo-new.jpeg')}}"
+            />
+            <div class="box-shadow"></div>
+        </a>
+    </div>
   <div class="god-container">
     <div class="super-container1">
-      <h2 class="title-h2">@lang('translations.welcm')!</h2>
+      <h2 class="title-h2">@lang('translations.welcm')</h2>
 
       <div class="container-p">
         <p class="subtitle-p">
@@ -21,7 +21,7 @@ Forgot Your Password
         </p>
 
         <div class="div-button1">
-          <a class="button1" href="{{ route('register') }}">@lang('translations.sign')</a>
+          <a class="custom-btn btn-7 mb-5" href="{{ route('register') }}"><span>@lang('translations.sign')</span></a>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@ Forgot Your Password
             <label for="password"></label>
             <input type="password" name="password_confirmation" id="password" />
           </div>
-          <button class="resetbutton">@lang('translations.reset-password')</button>
+            <button class="custom-btn btn-7 mb-5"><span>@lang('translations.reset-password')</span></button>
         </form>
 
     </div>

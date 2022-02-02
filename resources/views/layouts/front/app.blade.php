@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/dark-logo-new.jpeg') }}" />
     <title>Magaxat</title>
     <link rel="stylesheet" href="{{asset('css/newStyle.css?version=2')}}" />
     <link
@@ -82,7 +82,7 @@
           <div class="navbar-logo-container">
             <a href="{{ route('welcome') }}"
               ><img
-                src="{{asset('images/dark-logo.jpeg')}}"
+                src="{{asset('images/dark-logo-new.jpeg')}}"
                 class="navbar-logo"
                 alt=""
             /></a>
@@ -255,7 +255,6 @@
               </div>
             </div>
             <a href="{{ route('login') }}">@lang('translations.log_in')</a>
-
           </div>
         @endif
         </div>

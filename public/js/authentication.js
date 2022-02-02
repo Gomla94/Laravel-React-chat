@@ -90,3 +90,4 @@ const fetchAllInterstingTypes = () => {
         createSelectInput(response.data);
     });
 };
+
