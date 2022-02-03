@@ -104,5 +104,4 @@
         'min.error' => 'Should not be less than 8.',
         'numeric.error' => 'There should be only numbers.',
         'forgot_password' => 'Forgot Your Password',
-
     ];

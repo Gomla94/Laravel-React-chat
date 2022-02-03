@@ -34,7 +34,7 @@ return [
     "posts" => "Գրառումներ",
     "images" => "Նկարներ",
     "videos" => "Տեսահոլովակներ",
-    "appeals" => "Դիմում",
+    "appeals" => "Դիմումներ",
     "subscribtions" => "Հետևում եմ",
     "subscribers" => "Հետևորդներ",
 

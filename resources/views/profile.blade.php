@@ -145,11 +145,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             @endif
           </div>
           <div class="profile-posts tab">
-            <h1>Posts</h1>
+            <h1>@lang('translations.posts')</h1>
             @if(Auth::id() === $user->id)
               <button class="main-posts-add-post-button profile-add-post-button">
                 <i class="fal fa-plus"></i>
-                Новый пост
+                @lang('translations.create_post')
               </button>
             @endif
             <div class="user-posts-wrapper">
@@ -179,7 +179,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <span class="main-post-user-name">{{ $post->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
                   </div>
-                  <span class="post-date">{{ $post->created_at->format('Y-m-d h:iA') }}</spabutton>
+                  <span class="post-date">{{ $post->created_at->format('Y-m-d h:iA') }}</span>
                 </div>
                 <p class="main-post-title">@if($post->title) {{ $post->title }} @endif</p>
                 <p class="main-post-description">
@@ -251,9 +251,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             </div>
           </div>
           <div class="profile-appeals tab">
-            <h1>Appeals</h1>
+            <h1>@lang('translations.appeals')</h1>
             @if(Auth::id() === $user->id)
-              <button class="main-posts-add-appeal-button profile-add-post-button">запрос о помощи</button>
+              <button class="main-posts-add-appeal-button profile-add-post-button">+ @lang('translations.create_appeal')</button>
             @endif
             <div class="user-posts-wrapper">
               @foreach($my_appeals as $appeal)
@@ -338,7 +338,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             </div>
           </div>
           <div class="profile-posts-videos tab">
-            <h1>Videos</h1>
+            <h1>@lang('translations.videos')</h1>
             <div class="user-posts-wrapper">
               @foreach($my_posts_videos as $video)
               <div class="main-post">
@@ -370,7 +370,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               @endforeach
             </div>
           </div>
-         
+
           <div class="profile-posts-subscibtions tab">
             <h1>@lang('translations.subscribtions')</h1>
             <div class="container profile-all-users-list">
@@ -438,15 +438,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
       @csrf
 
       <div class="form-group">
-          <label class="create-post-label" for="title">Title</label>
-          <input type="text" class="form-control" name="post_title" placeholder="Title">
+          <label class="create-post-label" for="title">@lang('translations.title')</label>
+          <input type="text" class="form-control" name="post_title" placeholder="">
           @error('post_title')
           <span style="color:red">{{$message}}</span>
           @enderror
       </div>
 
       <div class="form-group">
-          <label class="create-post-label" for="post_description">Description</label>
+          <label class="create-post-label" for="post_description">@lang('translations.description')</label>
           <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
           @error('post_description')
           <span style="color:red">{{$message}}</span>
@@ -470,11 +470,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
 
       <div class="form-group post-modal-image-container">
-          <label class="create-post-label" for="image">Image</label>
+          <label class="create-post-label" for="image">@lang("translations.image")</label>
           <input type="file" accept="image/*" class="form-control" name="post_image">
       </div>
 
-      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Post</button>
+      <button type="submit" class="btn create-post-modal-btn">@lang("translations.create_post")</button>
   </form>
   </div>
 </div>
@@ -490,15 +490,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
       @csrf
 
       <div class="form-group">
-          <label class="create-post-label" for="title">Title</label>
-          <input type="text" class="form-control" name="appeal_title" value="{{ old('appeal_title') }}" placeholder="Title">
+          <label class="create-post-label" for="title">@lang("translations.title")</label>
+          <input type="text" class="form-control" name="appeal_title" value="{{ old('appeal_title') }}" placeholder="">
           @error('appeal_title')
           <span style="color:red">{{$message}}</span>
           @enderror
       </div>
 
       <div class="form-group">
-          <label class="create-post-label" for="description">Description</label>
+          <label class="create-post-label" for="description">@lang("translations.description")</label>
           <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('appeal_description') }}</textarea>
           @error('appeal_description')
           <span style="color:red">{{$message}}</span>
@@ -506,7 +506,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
       </div>
 
       <div class="form-group modal-image-container">
-          <label class="create-post-label" for="image">Image</label>
+          <label class="create-post-label" for="image">@lang("translations.image")</label>
           <input type="file" accept="image/*" multiple class="form-control" name="appeal_image[]">
           @if($errors->has('appeal_image.*'))
             @foreach($errors->get('appeal_image.*') as $error)
@@ -518,14 +518,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
       </div>
 
       <div class="form-group modal-image-container">
-        <label class="create-post-label" for="video">Video</label>
+        <label class="create-post-label" for="video">@lang("translations.video")</label>
         <input type="file" accept="video/*" class="form-control" name="appeal_video">
         @error('appeal_video')
           <span style="color:red">{{$message}}</span>
         @enderror
     </div>
 
-      <button type="submit" class="btn btn-primary create-post-modal-btn">Create Appeal</button>
+      <button type="submit" class="btn btn-primary create-post-modal-btn">@lang("translations.create_appeal")</button>
   </form>
   </div>
 </div>

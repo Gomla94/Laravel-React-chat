@@ -22,7 +22,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 //     'prefix' => $lang,
 //     'middleware' => ['localizationRedirect', 'localeViewPath']
 // ], function () {
-// //our routes 
+// //our routes
 // });
 
 
