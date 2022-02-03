@@ -34,7 +34,7 @@ return [
     "posts" => "Посты",
     "images" => "Изображения",
     "videos" => "Видео",
-    "appeals" => "Обращения",
+    "appeals" => "Обращение",
     "subscribtions" => "Подписки",
     "subscribers" => "Подписчики",
 

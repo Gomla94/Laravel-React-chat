@@ -14,6 +14,28 @@ html {
     padding: 0px;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #886227;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #886227;
+}
+
 .main {
     height: 100% !important;
     margin-top: 80px;
@@ -519,6 +541,9 @@ a {
 .appeal-card {
     /* height: 100%; */
     position: relative;
+    border: 1px solid silver;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .appeal-card-image-wrapper {
@@ -536,25 +561,34 @@ a {
     text-align: center;
     font-size: 20px;
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 5px;
     overflow-x: hidden;
-    min-height: 100px;
+    min-height: auto;
     max-height: 100px;
     overflow-y: hidden;
     min-width: 150px;
+    border-bottom: 1px solid silver;
     max-width: 450px;
     word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .appeal-card-description {
     text-align: center;
     font-size: 18px;
+    padding-top: 10px;
     font-weight: 400;
     /* margin-top: 10px; */
     overflow-x: hidden;
     min-height: 100px;
     max-height: 100px;
     overflow-y: hidden;
+    border-radius: 10px;
     min-width: 150px;
     max-width: 450px;
     word-break: break-word;
@@ -570,6 +604,7 @@ a {
     border-radius: 3px;
     /* margin-top: 30px;
     margin-bottom: 20px; */
+    margin-bottom: 10px;
     text-decoration: none;
 }
 
@@ -789,11 +824,11 @@ a {
 
 .main-post-comment-button {
     color: white;
-    background-color: rgb(2, 2, 110);
+    background-color: #886227;
     border-radius: 3px;
     height: 30px;
     width: auto;
-    padding: 10px;
+    padding: 20px;
     border: none;
     margin-bottom: 20px;
     cursor: pointer;
@@ -889,13 +924,7 @@ a {
 }
 
 .posts-modal-content {
-    background: rgb(184, 91, 0);
-    background: linear-gradient(
-        198deg,
-        rgba(184, 91, 0, 1) 12%,
-        rgba(240, 221, 116, 1) 62%,
-        rgba(204, 98, 1, 1) 99%
-    );
+    background: linear-gradient(180deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -917,13 +946,7 @@ a {
 }
 
 .appeals-modal-content {
-    background: rgb(184, 91, 0);
-    background: linear-gradient(
-        198deg,
-        rgba(184, 91, 0, 1) 12%,
-        rgba(240, 221, 116, 1) 62%,
-        rgba(204, 98, 1, 1) 99%
-    );
+    background: linear-gradient(180deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -937,7 +960,6 @@ a {
 .close-modal-container {
     width: 100%;
     height: 30px;
-    margin-bottom: 30px;
 }
 
 .close-posts-modal,
@@ -965,7 +987,7 @@ a {
 }
 
 .post-modal-checker {
-    background-color: brown;
+    background-color: white;
     height: 20px;
     width: 50px;
     border-radius: 50px;
@@ -983,7 +1005,7 @@ a {
 }
 
 .modal-checker {
-    background-color: rgb(255, 197, 62);
+    background-color: #bd9455;
     height: 20px;
     width: 25px;
     border-radius: 50px;
@@ -1002,19 +1024,30 @@ a {
     padding: 10px;
 }
 
+.create-post-modal-btn{
+    float: right;
+    margin-right: 75px;
+    border-radius: 10px !important;
+    color: white !important;
+    border: 0 !important;
+    background-color: rgb(1, 59, 1) !important;
+    /*background:linear-gradient(0deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);*/
+
+}
+
 .create-post-label {
     font-size: 15px;
     font-weight: 500;
-    color: rgb(1, 1, 112);
+    color: black;
 }
 
 .form-control {
     width: 95% !important;
     height: 40px !important;
     border-radius: 3px;
-    color: rgb(1, 1, 112);
-    border: 2px solid rgb(1, 1, 112);
-    background-color: rgb(251, 212, 149);
+    color: white;;
+    border: white;;
+    background-color: #bd9455;
     padding: 10px;
     font-size: 15px;
     font-weight: 500;
@@ -1026,12 +1059,10 @@ a {
 
 .text-area-form-control {
     width: 95%;
-    height: 70px;
+    height: 80px;
     border-radius: 3px;
-    color: rgb(1, 1, 112);
-    border: 2px solid rgb(1, 1, 112);
-    background-color: rgb(251, 212, 149);
     padding: 10px;
+    outline: none;
     font-size: 15px;
     font-weight: 500;
     resize: none;
@@ -1646,8 +1677,9 @@ a {
     height: 50px;
     margin-bottom: 10px;
     border: 1px solid #886227;
-    background-color: #886227;
+    background: linear-gradient(0deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
     color: white;
+    user-select: none;
     padding: 10px 10px;
     border-radius: 10px;
     display: flex;
@@ -1691,6 +1723,7 @@ a {
     padding: 10px;
     cursor: pointer;
     position: relative;
+    user-select: none;
     width: auto;
 }
 
@@ -1709,6 +1742,8 @@ a {
     top: 0px;
     left: 300px;
     height: auto;
+    max-height: 400px;
+    overflow-y: auto;
     width: 300px;
     box-shadow: -5px 6px 48px -13px #886227;
     background: linear-gradient(270deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
@@ -1724,6 +1759,7 @@ a {
 .sub-filters-list a {
     text-decoration: none;
     color: white;
+
 }
 
 .sub-filter-item:hover {
@@ -1732,9 +1768,8 @@ a {
 }
 
 .active-filter-arrow {
-    background-color: rgb(159, 119, 58);
+    background-color: #886227;
     border-radius: 5px;
-    padding: 5px;
 }
 
 .sub-filter-item {
@@ -1744,6 +1779,7 @@ a {
 
 .filter-item-arrow {
     color: white;
+    padding: 5px;
 }
 
 .all-users-list {
@@ -3437,7 +3473,7 @@ button.createbtn i {
     text-align: center;
 }
 
-.profile-posts {
+.profile-posts, .profile-appeals, .profile-posts-images, .profile-posts-videos, .profile-posts-subscibtions, .profile-posts-subscribers, .profile-form {
     background-color: rgb(250, 225, 193);
 }
 
@@ -3528,21 +3564,12 @@ button.createbtn i {
 
 @media screen and (max-width: 600px) {
     .nav ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        display: flex;
+        flex-wrap: wrap;
         height: auto;
         background: #fff;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-    }
-}
-
-@media screen and (max-width: 550px) {
-    .nav ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        height: auto;
-        background: #fff;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 5px rgb(0 0 0 / 30%);
+        padding-left: 0;
     }
 }
 
