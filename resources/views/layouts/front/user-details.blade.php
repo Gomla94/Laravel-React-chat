@@ -1,4 +1,7 @@
 @extends('layouts.front.app')
+@section('meta-description')
+<meta name="description" content="this is the user {{ $user->name }} main page">
+@endsection
 @section('content')
 <div class="one-user-wrapper">
   <div class="filter-user-wrapper">

@@ -19,13 +19,8 @@ class MessagesController extends Controller
         $from = base64_decode(request('from'));
         $to = base64_decode(request('to'));
         
-        
-        // return response()->json(['to' => $to, 'from' => $from]);
         $chatting_with_user = User::where('unique_id', $to)->first();
-        // $user_is_blocked = (bool)auth()->user()->chat_blocks()
-        //                     ->where([ ['blocker_id', $from], ['user_id', $to] ])
-        //                     ->orWhere([ ['user_id' , $from], ['blocker_id', $to] ])->count();
-
+       
         $blocked_this_user = auth()->user()->chat_blocks()
                                 ->where('user_id', $to)->first();
 
@@ -48,7 +43,6 @@ class MessagesController extends Controller
     {
         $user_uniqueid = request('nid');
         $user = User::where('unique_id', $user_uniqueid)->first();
-        $merged_users = [];
         $user_subscriptions_ids = Auth::user()->subscribtions()->get()->pluck('user_id');
         $user_subscriptions = User::where('unique_id', '!=', $user_uniqueid)
         ->whereIn('id', $user_subscriptions_ids)->get();
@@ -84,8 +78,7 @@ class MessagesController extends Controller
             } else {
                 $file_type = 'video';
             }
-            $file_name = uniqid(). '.' .$extension;
-            // $file->move('chatmedia/', $file_name);
+           
             $file_path = request()->file('file')->store('images', 's3');
 
         }
@@ -118,16 +111,16 @@ class MessagesController extends Controller
         ->where('user_id', $unblockedUser)->firstOrFail();
 
         $if_i_still_blocked_the_user = (bool)ChatBlock::where('blocker_id', $unblockedUser)
-                                            ->where('user_id', auth()->user()->id)->count();
+                                            ->where('user_id', auth()->user()->unique_id)->count();
 
         broadcast(new UnblockUserEvent($chat_unblock->load('user'), $if_i_still_blocked_the_user))->toOthers();
         $chat_unblock->delete();
         return response()->json(['unBlockedUser' => $chat_unblock, 'stillBlocked' => $if_i_still_blocked_the_user]);
     }
 
-    public function check_if_user_is_blocked($user_id)
-    {
-        $auth_user = auth()->user();
-        return $auth_user->has_blocked($user_id);
-    }
+    // public function check_if_user_is_blocked($user_id)
+    // {
+    //     $auth_user = auth()->user();
+    //     return $auth_user->has_blocked($user_id);
+    // }
 }

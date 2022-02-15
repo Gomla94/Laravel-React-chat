@@ -2290,7 +2290,16 @@ var ChatWindow = function ChatWindow() {
 
   var envelopes = document.querySelectorAll(".user-green-message-box");
   var userBlocker = document.querySelector(".sound-checker");
-  var userBlockerBackground = document.querySelector(".sound-checker-background");
+  var userBlockerBackground = document.querySelector(".sound-checker-background"); // useEffect(() => {
+  //     const comments = document.querySelector(".navbar-user-comment");
+  //     comments.addEventListener("click", check);
+  // }, []);
+  // const check = () => {
+  //     setShowChatWrapper((prevStatus) => !prevStatus);
+  // };
+  // useEffect(() => {
+  //     console.log(showChatWrapper);
+  // }, [showChatWrapper]);
 
   var changeToUserId = function changeToUserId(e, userId) {
     var activeUsersClass = document.querySelectorAll(".current-active-user");
@@ -2659,7 +2668,7 @@ var ChatWindow = function ChatWindow() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "sent-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
+              src: message.user.image_path !== null ? "".concat(message.user.image_path) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -2674,7 +2683,7 @@ var ChatWindow = function ChatWindow() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "received-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
+              src: message.user.image_path !== null ? "".concat(message.user.image_path) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -3316,6 +3325,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: "https://www.magaxat.com/api/",
+  // baseURL: "https://seriousapp.test/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)
@@ -3340,6 +3350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: "https://www.magaxat.com/api/",
+  // baseURL: "https://seriousapp.test/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)

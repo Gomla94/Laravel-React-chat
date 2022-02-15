@@ -13,6 +13,6 @@ class ChatBlock extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'blocker_id');
+        return $this->belongsTo(User::class, 'blocker_id', 'unique_id');
     }
 }

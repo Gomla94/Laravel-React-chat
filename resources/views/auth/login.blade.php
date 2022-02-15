@@ -5,7 +5,7 @@
     <div class="main-page-button-wrapper">
         <a href="{{ route('welcome') }}" class="containers">
             <img class="box-logo"
-                 src="{{asset('images/dark-logo-new.jpeg')}}"/>
+                 src="{{asset('images/dark-logo.jpeg')}}"/>
             <div class="box-shadow"></div>
         </a>
     </div>

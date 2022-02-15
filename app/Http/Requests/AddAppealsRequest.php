@@ -30,6 +30,7 @@ class AddAppealsRequest extends FormRequest
             'appeal_image' => ['array'],
             'appeal_image.*' => ['max:2048', 'mimes:png,jpg,jpeg'],
             'appeal_video' => ['max:10240', 'mimes:mp4,mov,ogg,qt'],
+            'appeal_pdf' => ['max:1024', 'mimes:pdf'],
         ];
     }
 

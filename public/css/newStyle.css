@@ -87,6 +87,10 @@ a {
     position: relative;
 }
 
+.overlay-list-item a {
+    color: rgb(250, 225, 193);
+}
+
 .overlay-list-item::after {
     content: "";
     background-color: rgb(250, 225, 193);
@@ -160,7 +164,6 @@ a {
     background-color: white;
     display: none;
     box-shadow: -5px 6px 48px -13px #886227;
-
 }
 
 .show-language-list {
@@ -178,7 +181,6 @@ a {
     flex-direction: row;
     cursor: pointer;
     margin-top: 0px;
-
 }
 
 .lang-name {
@@ -195,9 +197,12 @@ a {
     width: 100%;
     background-color: white !important;
     border: none;
-
 }
 /* end language section */
+
+.navbar-links-wrapper {
+    margin-left: -20px;
+}
 
 .navbar-logo-container {
     width: 110px;
@@ -271,9 +276,14 @@ a {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     position: absolute;
     /* right: 37%; */
+}
+
+.navbar-user-name a {
+    text-decoration: none;
+    color: black;
 }
 
 .login-navbar-user-containerr {
@@ -353,7 +363,7 @@ a {
     box-shadow: 0px 10px 30px -12px #886227;
     display: flex;
     flex-direction: column;
-    padding:  5px 20px !important;
+    padding: 5px 20px !important;
     z-index: 0;
     opacity: 0;
     transition: all 0.5s;
@@ -563,7 +573,7 @@ a {
     font-weight: 600;
     margin-top: 5px;
     overflow-x: hidden;
-    min-height: auto;
+    min-height: 100px;
     max-height: 100px;
     overflow-y: hidden;
     min-width: 150px;
@@ -576,6 +586,8 @@ a {
     -webkit-line-clamp: 2; /* number of lines to show */
     line-clamp: 2;
     -webkit-box-orient: vertical;
+    width: 95%;
+    padding: 10px;
 }
 
 .appeal-card-description {
@@ -592,6 +604,8 @@ a {
     min-width: 150px;
     max-width: 450px;
     word-break: break-word;
+    width: 95%;
+    padding: 10px;
 }
 
 .appeal-card-button {
@@ -924,7 +938,11 @@ a {
 }
 
 .posts-modal-content {
-    background: linear-gradient(180deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(208, 175, 134, 0.98) 0%,
+        #886227 100%
+    );
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -946,7 +964,11 @@ a {
 }
 
 .appeals-modal-content {
-    background: linear-gradient(180deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(208, 175, 134, 0.98) 0%,
+        #886227 100%
+    );
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -1024,7 +1046,7 @@ a {
     padding: 10px;
 }
 
-.create-post-modal-btn{
+.create-post-modal-btn {
     float: right;
     margin-right: 75px;
     border-radius: 10px !important;
@@ -1032,7 +1054,6 @@ a {
     border: 0 !important;
     background-color: rgb(1, 59, 1) !important;
     /*background:linear-gradient(0deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);*/
-
 }
 
 .create-post-label {
@@ -1045,8 +1066,8 @@ a {
     width: 95% !important;
     height: 40px !important;
     border-radius: 3px;
-    color: white;;
-    border: white;;
+    color: white;
+    border: white;
     background-color: #bd9455;
     padding: 10px;
     font-size: 15px;
@@ -1208,7 +1229,7 @@ a {
 }
 
 .change-sound-checker-background {
-    background-color: rgb(159, 162, 170);
+    background-color: rgb(164 166 172) !important;
 }
 
 .loader {
@@ -1677,7 +1698,11 @@ a {
     height: 50px;
     margin-bottom: 10px;
     border: 1px solid #886227;
-    background: linear-gradient(0deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
+    background: linear-gradient(
+        0deg,
+        rgba(208, 175, 134, 0.98) 0%,
+        #886227 100%
+    );
     color: white;
     user-select: none;
     padding: 10px 10px;
@@ -1693,7 +1718,11 @@ a {
 .filters-list {
     width: 300px;
     height: auto;
-    background: linear-gradient(0deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
+    background: linear-gradient(
+        0deg,
+        rgba(208, 175, 134, 0.98) 0%,
+        #886227 100%
+    );
     border-radius: 5px;
     color: white;
     display: none;
@@ -1703,7 +1732,6 @@ a {
     border: 1px solid white;
     top: 70px;
     box-shadow: -5px 6px 48px -13px #886227;
-
 }
 
 .show-filters-list {
@@ -1746,7 +1774,11 @@ a {
     overflow-y: auto;
     width: 300px;
     box-shadow: -5px 6px 48px -13px #886227;
-    background: linear-gradient(270deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
+    background: linear-gradient(
+        270deg,
+        rgba(208, 175, 134, 0.98) 0%,
+        #886227 100%
+    );
     border-radius: 5px;
     color: white;
     flex-direction: column;
@@ -1759,7 +1791,6 @@ a {
 .sub-filters-list a {
     text-decoration: none;
     color: white;
-
 }
 
 .sub-filter-item:hover {
@@ -1797,6 +1828,17 @@ a {
     padding: 10px 0px;
 }
 
+.user-profile {
+    border: 1px solid rgb(251, 247, 247);
+    margin: 5px 5px 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+}
+
 .user {
     border: 1px solid rgb(251, 247, 247);
     margin: 5px 5px 5px 5px;
@@ -1830,6 +1872,21 @@ a {
     font-size: 16px;
     font-weight: 500;
     width: 50%;
+    text-align: center;
+    word-break: break-word;
+}
+
+.profile-users-social {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin-right: 20px;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
     text-align: center;
     word-break: break-word;
 }
@@ -2367,6 +2424,8 @@ a {
     padding-left: 20px;
     font-size: 20px;
     font-weight: 600;
+    width: 90%;
+    overflow-wrap: break-word;
 }
 
 .main-appeal-description {
@@ -2404,6 +2463,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 95% !important;
 }
 
 .interesting-types-label {
@@ -2825,6 +2885,15 @@ a {
     }
 }
 
+@media screen and (max-width: 900px) {
+    .profile-all-users-list {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 10px 0px;
+    }
+}
+
 @media screen and (max-width: 850px) {
     .all-videos-container {
         width: 90%;
@@ -3016,10 +3085,14 @@ a {
 
     .appeal-card-title {
         text-align: start;
+        padding: 10px;
+        min-height: 80px;
+        max-height: 80px;
     }
 
     .appeal-card-description {
         text-align: start;
+        padding: 10px;
     }
 
     .appeal-card-button {
@@ -3473,7 +3546,13 @@ button.createbtn i {
     text-align: center;
 }
 
-.profile-posts, .profile-appeals, .profile-posts-images, .profile-posts-videos, .profile-posts-subscibtions, .profile-posts-subscribers, .profile-form {
+.profile-posts,
+.profile-appeals,
+.profile-posts-images,
+.profile-posts-videos,
+.profile-posts-subscibtions,
+.profile-posts-subscribers,
+.profile-form {
     background-color: rgb(250, 225, 193);
 }
 

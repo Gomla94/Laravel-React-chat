@@ -15,8 +15,8 @@ class CreateChatBlocksTable extends Migration
     {
         Schema::create('chat_blocks', function (Blueprint $table) {
             $table->id();
-            $table->integer('blocker_id')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->string('blocker_id')->nullable();
+            $table->string('user_id')->nullable();
             $table->timestamps();
         });
     }

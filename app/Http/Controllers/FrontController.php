@@ -17,6 +17,7 @@ class FrontController extends Controller
 {
     public function home()
     {
+
         $user = Auth::user();
 
         if ($user) {

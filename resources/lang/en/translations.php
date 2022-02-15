@@ -91,6 +91,7 @@
         "org" => "Organisation",
         "org_desc" => "Organisation Description",
         "sign_up" => "Sign up",
+        "pdf" => 'PDF',
 
         // 01/27/2022
         'e_mail' => 'E-mail',

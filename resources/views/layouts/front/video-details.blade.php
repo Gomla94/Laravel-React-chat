@@ -1,4 +1,7 @@
 @extends('layouts.front.app')
+@section('meta-description')
+<meta name="description" content="this is the {{ $video->title }} main page">
+@endsection
 @section('content')
 <div class="container-fluid view-video-wrapper">
     <div class="view-main-video-wrapper">
@@ -27,7 +30,7 @@
         @foreach($other_videos as $other_video)
          <div class="other-video-wrapper">
              <div class="other-video-container">
-               <a href="{{ route('show-video', $other_video->id) }}"><video src="{{ asset($other_video->video) }}"></video></a>
+               <a rel="preconnect" href="{{ route('show-video', $other_video->id) }}"><video src="{{ asset($other_video->video) }}"></video></a>
              </div>
              <div class="other-video-info-wrapper">
                <div class="other-video-title-wrapper">

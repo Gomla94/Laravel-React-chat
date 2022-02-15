@@ -18,7 +18,6 @@ class UserController extends Controller
 
     public function profile()
     {
-        // dd(Auth::user());
         $user = Auth::user();
         $user_interesting_types_ids = $user->interesting_type_id !== "null" ? json_decode($user->interesting_type_id) : [];
         $my_interesting_types = $user_interesting_types_ids !== null ? InterestingType::whereIn('id', $user_interesting_types_ids)->get() : null;
@@ -75,7 +74,7 @@ class UserController extends Controller
             'gender' => $attributes['gender'] ?? null,
             'country_id' => $attributes['country_id'] ?? null,
             'interesting_type_id' => json_encode(request('interesting_type'))?? null,
-            'additional_type' => $attributes['additional_type']
+            'additional_type' => request('additional_type') ? $attributes['additional_type'] : null
         ]);
 
         return redirect()->route('user.profile');

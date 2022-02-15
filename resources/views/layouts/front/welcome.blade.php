@@ -1,4 +1,7 @@
 @extends('layouts.front.app')
+@section('meta-description')
+<meta name="description" content="this is the main page of magaxat.com">
+@endsection
 @section('content')
 
 <div class="container-fluid brief">
@@ -9,7 +12,7 @@
           <span class="brief-image-title">@lang("translations.social_site")</span>
           <span class="brief-image-site">MAGAXAT.COM</span>
         </div>
-        <img class="brief-image" src="{{asset('images/toppng 1.png')}}" />
+        <img class="brief-image" alt="brief-image" src="{{asset('images/toppng 1.png')}}" />
       </div>
     </div>
     <div class="brief-info-wrapper">
@@ -41,7 +44,7 @@
       @foreach($random_appeals as $appeal)
       <div class="swiper-slide">
         <div class="appeal-card">
-            <a href="{{ route('show-appeal', $appeal->id) }}">
+            <a rel="preconnect" href="{{ route('show-appeal', $appeal->id) }}">
             <div class="appeal-card-image-wrapper">
               @if($appeal->image_path)
               <img src="{{ asset($appeal->image_path) }}" alt="appeal-image" class="appeal-card-image" />
@@ -53,7 +56,7 @@
             <div class="appeal-card-description">
               <p>{{str_limit($appeal->description, 50)}}</p>
             </div>
-            <a href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">@lang("translations.want_help")</a>
+            <a rel="preconnect" href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">@lang("translations.want_help")</a>
           </a>
           </div>
       </div>
@@ -89,15 +92,15 @@
     <div class="main-post" data-id="{{ $post->id }}">
       <div class="main-post-user-info-wrapper">
         <div class="main-post-user-image-wrapper">
-          <a href="{{ route('user.page', $post->user->unique_id) }}">
+          <a rel="preconnect" href="{{ route('user.page', $post->user->unique_id) }}">
           <img
             src="{{asset($post->user->image ?? 'images/avatar.png')}}"
-            alt=""
+            alt="user-image"
             class="main-post-user-image"
           />
           </a>
         </div>
-        <a href="{{ route('user.page', $post->user->id) }}"></a>
+        <a rel="preconnect" href="{{ route('user.page', $post->user->id) }}"></a>
         <div class="main-post-user-names-wrapper">
           <span class="main-post-user-name">{{ $post->user->name }}</span>
           <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
@@ -193,7 +196,7 @@
 
       <div class="form-group">
           <label class="create-post-label" for="post_description">@lang("translations.description")</label>
-          <textarea name="post_description" class="text-area-form-control" id="description" cols="30" rows="10"></textarea>
+          <textarea name="post_description" class="text-area-form-control" id="post-description" cols="30" rows="10"></textarea>
           @error('post_description')
           <span style="color:red">{{$message}}</span>
           @enderror
@@ -246,7 +249,7 @@
 
       <div class="form-group">
           <label class="create-post-label" for="description">@lang("translations.description")</label>
-          <textarea name="appeal_description" class="text-area-form-control" id="description" cols="30" rows="10">{{ old('appeal_description') }}</textarea>
+          <textarea name="appeal_description" class="text-area-form-control" id="appeal-description" cols="30" rows="10">{{ old('appeal_description') }}</textarea>
           @error('appeal_description')
           <span style="color:red">{{$message}}</span>
           @enderror
@@ -270,7 +273,15 @@
         @error('appeal_video')
           <span style="color:red">{{$message}}</span>
         @enderror
-    </div>
+      </div>
+
+      <div class="form-group modal-image-container">
+        <label class="create-post-label" for="video">@lang("translations.pdf")</label>
+        <input type="file" accept=".pdf" class="form-control" name="appeal_pdf">
+        @error('appeal_pdf')
+          <span style="color:red">{{$message}}</span>
+        @enderror
+      </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">@lang("translations.create_appeal")</button>
   </form>
@@ -300,10 +311,31 @@
 <script>
  var swiper = new Swiper(".swiper", {
         slidesPerView: 3,
+        // slidesPerView: "auto",
+
         spaceBetween: 30,
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
+        },
+        breakpoints: {
+          100: {
+            slidesPerView:2,
+            spaceBetween: 30
+          },
+          480: {
+            slidesPerView:2,
+            spaceBetween: 30
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 40
+          },
+
+          900: {
+            slidesPerView: 3,
+            spaceBetween: 40
+          }
         },
       });
 </script>

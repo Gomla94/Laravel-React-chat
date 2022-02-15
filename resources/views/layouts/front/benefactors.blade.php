@@ -1,10 +1,13 @@
 @extends('layouts.front.app')
+@section('meta-description')
+<meta name="description" content="this is the benefactors page in magaxat.com">
+@endsection
 @section('content')
 <div class="container-fluid all-users-wrapper">
   <div class="container all-users-list">
     @foreach($benefactors as $benefactor)
     <div class="user">
-      <a href="{{ route('user.page', $benefactor->unique_id) }}">
+      <a rel="preconnect" href="{{ route('user.page', $benefactor->unique_id) }}">
         <div class="user-image-wrapper">
           <img src="{{ asset($benefactor->image ?? 'images/avatar.png') }}" alt="user-image" />
         </div>

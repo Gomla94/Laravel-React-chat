@@ -31,14 +31,17 @@ class UserAppealsController extends Controller
 
         if (request()->file('appeal_image')) {
             $file = $request->appeal_image[0];
-            $extension = $file->getClientOriginalExtension();
             $image_path = $request->file('appeal_image')[0]->store('images', 's3');
         }
 
         if (request()->file('appeal_video')) {
             $file = $request->appeal_video;
-            $extension = $file->getClientOriginalExtension();
             $video_path = $request->file('appeal_video')->store('videos', 's3');
+        }
+
+        if (request()->file('appeal_pdf')) {
+            $file = $request->appeal_video;
+            $pdf_path = $request->file('appeal_pdf')->store('files', 's3');
         }
 
         $appeal = $user->appeals()->create([
@@ -48,6 +51,8 @@ class UserAppealsController extends Controller
             'image_path' => request()->file('appeal_image') ? Storage::disk('s3')->url($image_path) : null,
             'video_name' => request()->file('appeal_video') ? basename($video_path) : null,
             'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
+            'pdf_name' => request()->file('appeal_pdf') ? basename($pdf_path) : null,
+            'pdf_path' => request()->file('appeal_pdf') ? Storage::disk('s3')->url($pdf_path) : null,
             'uniqueid' => uniqid()
         ]);
 
@@ -55,7 +60,6 @@ class UserAppealsController extends Controller
             $other_images = array_except($request->appeal_image, 0);
             foreach($other_images as $image) {
                 $file = $image;
-                $extension = $file->getClientOriginalExtension();
                 $image_path = $image->store('images', 's3');
                 
                 $appeal->images()->create([

@@ -1,4 +1,7 @@
 @extends('layouts.front.app')
+@section('meta-description')
+<meta name="description" content="this is the users page of magaxat.com">
+@endsection
 @section('content')
 <div class="container-fluid all-users-wrapper">
   <div class="filter-all-users-container">
@@ -13,7 +16,7 @@
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
         @foreach($interesting_types as $type)
-        <a href="{{ route('all-users', array_merge(request()->query(), ['interesting-in-type' => $type->name])) }}"><li class="sub-filter-item">{{ $type->name }}</li></a>
+        <a rel="preconnect" href="{{ route('all-users', array_merge(request()->query(), ['interesting-in-type' => $type->name])) }}"><li class="sub-filter-item">{{ $type->name }}</li></a>
         @endforeach
       </ul>
     </div>
@@ -22,7 +25,7 @@
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
         @foreach($countries as $country)
-        <a href="{{ route('all-users', array_merge(request()->query(), ['country' => $country->name])) }}"><li class="sub-filter-item">{{ $country->name }}</li></a>
+        <a rel="preconnect" href="{{ route('all-users', array_merge(request()->query(), ['country' => $country->name])) }}"><li class="sub-filter-item">{{ $country->name }}</li></a>
         @endforeach
       </ul>
     </div>
@@ -30,15 +33,15 @@
       <span class="filter-item-span">@lang('translations.gender')</span>
       <i class="fas fa-chevron-right filter-item-arrow"></i>
       <ul class="sub-filters-list">
-        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}"><li class="sub-filter-item">@lang("translations.male")</li></a>
-        <a href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}"><li class="sub-filter-item">@lang("translations.female")</li></a>
+        <a rel="preconnect" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}"><li class="sub-filter-item">@lang("translations.male")</li></a>
+        <a rel="preconnect" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}"><li class="sub-filter-item">@lang("translations.female")</li></a>
       </ul>
     </div>
   </div>
   <div class="container all-users-list">
     @foreach($users as $user)
     <div class="user">
-      <a href="{{ route('user.page', $user->unique_id) }}">
+      <a rel="preconnect" href="{{ route('user.page', $user->unique_id) }}">
         <div class="user-image-wrapper">
           @if ($user->image === null && $user->gender === 'female')
             <img src="{{ asset($user->image ?? 'images/female-avatar.png') }}" alt="user-image" />

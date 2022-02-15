@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @yield('meta-description')
     {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('images/dark-logo-new.jpeg') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
     <title>Magaxat</title>
     <link rel="stylesheet" href="{{asset('css/newStyle.css?version=2')}}" />
     <link
@@ -27,8 +28,10 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script> --}}
 
 
     @yield('css')
@@ -55,18 +58,18 @@
   <body>
     <div class="overlay" id="overlay">
       <ul class="overlay-list">
-        <a href="{{ route('all-videos') }}"
-          ><li class="overlay-list-item">@lang('translations.users_video')</li></a
-        >
-        <a href="{{ route('all-users') }}"
-          ><li class="overlay-list-item">@lang('translations.users')</li></a
-        >
-        <a href="{{ route('all-benefactors') }}"
-          ><li class="overlay-list-item">@lang('translations.benefac_fond')</li></a
-        >
-        <a href="{{ route('all-benefactors') }}"
-          ><li class="overlay-list-item">@lang('translations.benefac')</li></a
-        >
+       <li class="overlay-list-item">
+        <a rel="preconnect" href="{{ route('all-videos') }}">@lang('translations.users_video')</a>
+       </li>
+        <li class="overlay-list-item">
+        <a rel="preconnect" href="{{ route('all-users') }}">@lang('translations.users')</a>
+        </li>
+        <li class="overlay-list-item">
+          <a rel="preconnect" href="{{ route('all-benefactors') }}">@lang('translations.benefac_fond')</a>
+        </li>
+        <li class="overlay-list-item">
+          <a rel="preconnect" href="{{ route('all-benefactors') }}">@lang('translations.benefac')</a>
+        </li>
       </ul>
     </div>
     <div class="main-navbar">
@@ -80,9 +83,9 @@
         </div>
         <div class="col-md-2 col-sm-2 col-xs-2">
           <div class="navbar-logo-container">
-            <a href="{{ route('welcome') }}"
+            <a rel="preconnect" href="{{ route('welcome') }}"
               ><img
-                src="{{asset('images/dark-logo-new.jpeg')}}"
+                src="{{asset('images/dark-logo.jpeg')}}"
                 class="navbar-logo"
                 alt=""
             /></a>
@@ -179,9 +182,13 @@
             @endif
 
             @if(Auth::check())
-            <div class="navbar-user-name">{{ auth()->user()->name }}</div>
+            <div class="navbar-user-name">
+              <a href="{{ route('user.profile') }}">
+              {{ auth()->user()->name }}
+              </a>
+              </div>
             <div class="navbar-user-image-container">
-              <a href="{{ route('user.profile') }}"
+              <a rel="preconnect" href="{{ route('user.profile') }}"
                 ><img
                   src="{{asset(auth()->user()->image ?? 'images/avatar.png')}}"
                   alt="user-image"
@@ -203,7 +210,7 @@
                 </form>
             </div>
             @else
-            <a href="{{ route('login') }}">@lang('translations.log_in')</a>
+            <a rel="preconnect" href="{{ route('login') }}">@lang('translations.log_in')</a>
             @endif
           </div>
         @else
@@ -254,7 +261,7 @@
                   @endforeach
               </div>
             </div>
-            <a href="{{ route('login') }}">@lang('translations.log_in')</a>
+            <a rel="preconnect" href="{{ route('login') }}">@lang('translations.log_in')</a>
           </div>
         @endif
         </div>

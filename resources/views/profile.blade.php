@@ -1,4 +1,7 @@
 @extends('layouts.front.app')
+@section('meta-description')
+<meta name="description" content="this is the user {{ $user->name }} profile page">
+@endsection
 @section('css')
 <link
 rel="stylesheet"
@@ -67,7 +70,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 
                     <div class="col-md-6 mb-5">
                         <label class="create-post-label" for="date_of_birth">@lang('translations.date_of_birth')</label>
-                        <input type="date" class="form-control" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}" name="date_of_birth">
+                        <input type="date" class="form-control" id="dt" min="1899-01-01" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}" name="date_of_birth">
                         @error('date_of_birth')
                         <span class="profile-error-span">{{$message}}</span>
                         @enderror
@@ -108,7 +111,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
 
                     <div class="col-md-6 mb-5">
-                        <label class="create-post-label" for="date_of_birth">@lang('translations.country')</label>
+                        <label class="create-post-label" for="country">@lang('translations.country')</label>
                         <select class="form-control" name="country_id" id="country">
                             <option selected disabled>@lang('translations.select_country')</option>
                             @foreach($countries as $country)
@@ -121,7 +124,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
                 </div>
 
-                <div class="col-md-12" >
+                <div class="row profile-row" >
                     <label class="create-post-label interesting-types-label" for="area_of_interest">@lang('translations.interest_area')</label>
                     <div class="interesting-types">
                       @foreach($areas_of_interesting as $area)
@@ -167,7 +170,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 @endif
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $post->user->unique_id) }}">
+                    <a rel="preconnect" href="{{ route('user.page', $post->user->unique_id) }}">
                     <img
                       src="{{asset($post->user->image ?? 'images/avatar.png')}}"
                       alt=""
@@ -186,16 +189,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                   @if($post->description) {{ str_limit($post->description, 500) }} @endif
                 </p>
 
-                @if($post->image)
+                @if($post->image_path)
                 <div class="main-post-image-wrapper">
-                  <img src="{{ asset($post->image) }}" alt="main-post-image" class="main-post-image" />
+                  <img src="{{ asset($post->image_path) }}" alt="main-post-image" class="main-post-image" />
                 </div>
                 @endif
-                @if($post->video)
+                @if($post->video_path)
                 <div class="main-post-video-wrapper">
                   <video
                     controls
-                    src="{{ asset($post->video) }}"
+                    src="{{ asset($post->video_path) }}"
                     alt="main-post-video"
                     class="main-post-video"
                   ></video>
@@ -270,7 +273,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 @endif
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $appeal->user->unique_id) }}">
+                    <a rel="preconnect" href="{{ route('user.page', $appeal->user->unique_id) }}">
                     <img
                       src="{{asset($appeal->user->image ?? 'images/avatar.png')}}"
                       alt=""
@@ -278,7 +281,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     />
                     </a>
                   </div>
-                  <a href="{{ route('user.page', $appeal->user->unique_id) }}"></a>
+                  <a rel="preconnect" href="{{ route('user.page', $appeal->user->unique_id) }}"></a>
                   <div class="main-post-user-names-wrapper">
                     <span class="main-post-user-name">{{ $appeal->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $appeal->user->name }}</span>
@@ -290,16 +293,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                   @if($appeal->description) {{ str_limit($appeal->description, 500) }} @endif
                 </p>
 
-                @if($appeal->image)
+                @if($appeal->image_path)
                 <div class="main-post-image-wrapper">
-                  <img src="{{ asset($appeal->image) }}" alt="main-post-image" class="main-post-image" />
+                  <img src="{{ asset($appeal->image_path) }}" alt="main-post-image" class="main-post-image" />
                 </div>
                 @endif
-                @if($appeal->video)
+                @if($appeal->video_path)
                 <div class="main-post-video-wrapper">
                   <video
                     controls
-                    src="{{ asset($appeal->video) }}"
+                    src="{{ asset($appeal->video_path) }}"
                     alt="main-post-video"
                     class="main-post-video"
                   ></video>
@@ -316,7 +319,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               <div class="main-post">
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $image->user->unique_id) }}">
+                    <a rel="preconnect" href="{{ route('user.page', $image->user->unique_id) }}">
                       <img
                       src="{{asset($image->user->image ?? 'images/avatar.png')}}"
                       alt=""
@@ -344,7 +347,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
               <div class="main-post">
                 <div class="main-post-user-info-wrapper">
                   <div class="main-post-user-image-wrapper">
-                    <a href="{{ route('user.page', $video->user->unique_id) }}">
+                    <a rel="preconnect" href="{{ route('user.page', $video->user->unique_id) }}">
                     <img
                       src="{{asset($video->user->image ?? 'images/avatar.png')}}"
                       alt=""
@@ -375,13 +378,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <h1>@lang('translations.subscribtions')</h1>
             <div class="container profile-all-users-list">
               @foreach($my_subscribtions_users as $subscribtion_user)
-              <div class="user">
-                <a href="{{ route('user.page', $subscribtion_user->id) }}">
-                  <div class="user-image-wrapper">
+              <div class="user-profile">
+                <div class="user-image-wrapper">
+                  <a rel="preconnect" href="{{ route('user.page', $subscribtion_user->id) }}">
                     <img src="{{ asset($subscribtion_user->image ?? 'images/avatar.png') }}" alt="user-image" />
+                  </a>
                   </div>
-                </a>
-                <div class="users-social">
+                <div class="profile-users-social">
                   <span class="user-social-span">{{ $subscribtion_user->name }}</span>
                   <span class="user-social-span">{{ $subscribtion_user->email }}</span>
                   {{-- <span class="user-social-span">Открыть полный профиль</span> --}}
@@ -401,13 +404,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
             <h1>@lang('translations.subscribers')</h1>
             <div class="container profile-all-users-list">
               @foreach($my_subscribers as $subscriber_user)
-              <div class="user">
-                <a href="{{ route('user.page', $subscriber_user->id) }}">
+              <div class="user-profile">
+                <a rel="preconnect" href="{{ route('user.page', $subscriber_user->id) }}">
                   <div class="user-image-wrapper">
                     <img src="{{ asset($subscriber_user->image ?? 'images/avatar.png') }}" alt="user-image" />
                   </div>
                 </a>
-                <div class="users-social">
+                <div class="profile-users-social">
                   <span class="user-social-span">{{ $subscriber_user->name }}</span>
                   <span class="user-social-span">{{ $subscriber_user->email }}</span>
                 </div>

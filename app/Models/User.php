@@ -108,7 +108,7 @@ class User extends Authenticatable
 
     public function subscribers()
     {
-        return $this->hasMany(Subscribtion::class, 'user_id');
+        return $this->hasMany(Subscribtion::class, 'user_id', 'unique_id');
     }
 
     public function subscribed($user_id)
@@ -118,13 +118,13 @@ class User extends Authenticatable
 
     public function chat_blocks()
     {
-        return $this->hasMany(ChatBlock::class, 'blocker_id');
+        return $this->hasMany(ChatBlock::class, 'blocker_id', 'unique_id');
     }
 
-    public function has_blocked($user_id)
+    public function has_blocked($unique_id)
     {
-        return (bool)$this->chat_blocks()->where('blocker_id', $this->id)
-                                    ->where('user_id', $user_id)->count();
+        return (bool)$this->chat_blocks()->where('blocker_id', $this->unique_id)
+                                    ->where('user_id', $unique_id)->count();
     }
 
     public function isAdmin():bool

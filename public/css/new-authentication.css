@@ -28,7 +28,7 @@ body {
     width: 70px;
 }
 
-.box-logo{
+.box-logo {
     width: 70px;
     height: 70px;
     margin: 10px auto;
@@ -39,7 +39,7 @@ body {
     -webkit-transition-duration: 0.3s;
 }
 
-.box-shadow{
+.box-shadow {
     width: 70px;
     height: 10px;
     border-radius: 50%;
@@ -52,18 +52,22 @@ body {
     -webkit-transition-duration: 0.3s;
 }
 
-.box-logo:hover{
+.box-logo:hover {
     top: 30px;
     transition-duration: 0.3s;
     -webkit-transition-duration: 0.3s;
 }
-.containers:hover > .box-shadow{
+.containers:hover > .box-shadow {
     width: 50px;
     transition-duration: 0.3s;
     -webkit-transition-duration: 0.3s;
 }
 
-input[type=text]:focus,input[type=password]:focus,input[type=email]:focus, textarea:focus, select:focus{
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
     outline: none;
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
 }
@@ -155,14 +159,13 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus, texta
     overflow-y: auto;
 }
 
-.text-with-hover{
+.text-with-hover {
     color: #886227;
 }
 
-.text-with-hover:hover{
-    color: #6c4915
+.text-with-hover:hover {
+    color: #6c4915;
 }
-
 
 .custom-btn {
     width: 130px;
@@ -170,21 +173,24 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus, texta
     color: #fff;
     border-radius: 5px;
     padding: 10px 25px;
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     font-weight: 500;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
-    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-    7px 7px 20px 0px rgba(0,0,0,.1),
-    4px 4px 5px 0px rgba(0,0,0,.1);
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
     outline: none;
 }
 /* 7 */
 .btn-7 {
-    background: linear-gradient(0deg, rgba(208, 175, 134, 0.98) 0%, #886227 100%);
+    background: linear-gradient(
+        0deg,
+        rgba(208, 175, 134, 0.98) 0%,
+        #886227 100%
+    );
     line-height: 42px;
     padding: 0;
     border: none;
@@ -202,14 +208,12 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus, texta
     right: 0;
     bottom: 0;
     background-color: #886227;
-    box-shadow:
-        -7px -7px 20px 0px rgba(255,255,255,.9),
-        -4px -4px 5px 0px rgba(255,255,255,.9),
-        7px 7px 20px 0px rgba(0,0,0,.2),
-        4px 4px 5px 0px rgba(0,0,0,.3);
+    box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, 0.9),
+        -4px -4px 5px 0px rgba(255, 255, 255, 0.9),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.2), 4px 4px 5px 0px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
-.btn-7:before{
+.btn-7:before {
     height: 0%;
     width: 2px;
 }
@@ -217,7 +221,7 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus, texta
     width: 0%;
     height: 2px;
 }
-.btn-7:hover{
+.btn-7:hover {
     color: #886227;
     background: transparent;
 }
@@ -234,11 +238,9 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus, texta
     left: 0;
     top: 0;
     background-color: #886227;
-    box-shadow:
-        -7px -7px 20px 0px rgba(255,255,255,.9),
-        -4px -4px 5px 0px rgba(255,255,255,.9),
-        7px 7px 20px 0px rgba(0,0,0,.2),
-        4px 4px 5px 0px rgba(0,0,0,.3);
+    box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, 0.9),
+        -4px -4px 5px 0px rgba(255, 255, 255, 0.9),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.2), 4px 4px 5px 0px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 .btn-7 span:before {
@@ -509,6 +511,11 @@ label {
 
 @media screen and (max-width: 1100px) {
     .god-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .r-god-container {
         flex-direction: column;
         width: 90%;
     }

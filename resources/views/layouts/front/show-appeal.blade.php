@@ -1,4 +1,7 @@
 @extends('layouts.front.app')
+@section('meta-description')
+<meta name="description" content="this is the appeal {{ $appeal->title }} main page">
+@endsection
 @section('content')
 <div class="container-fluid main-appeal-wrapper">
   <div class="main-appeal">
@@ -37,6 +40,12 @@
       controls
       src="{{ asset($appeal->video_path) }}"
     ></video>
+  </div>
+  @endif
+
+  @if($appeal->pdf_path)
+  <div class="main-appeal-video-container">
+    <a href="{{ $appeal->pdf_path }}" download="true">pdf</a>
   </div>
   @endif
 </div>

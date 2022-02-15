@@ -25,6 +25,19 @@ const ChatWindow = () => {
         ".sound-checker-background"
     );
 
+    // useEffect(() => {
+    //     const comments = document.querySelector(".navbar-user-comment");
+    //     comments.addEventListener("click", check);
+    // }, []);
+
+    // const check = () => {
+    //     setShowChatWrapper((prevStatus) => !prevStatus);
+    // };
+
+    // useEffect(() => {
+    //     console.log(showChatWrapper);
+    // }, [showChatWrapper]);
+
     const changeToUserId = (e, userId) => {
         const activeUsersClass = document.querySelectorAll(
             ".current-active-user"
@@ -381,8 +394,8 @@ const ChatWindow = () => {
                         <div className="sent-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image !== null
-                                        ? `${message.user.image}`
+                                    message.user.image_path !== null
+                                        ? `${message.user.image_path}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
@@ -400,8 +413,8 @@ const ChatWindow = () => {
                         <div className="received-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image !== null
-                                        ? `${message.user.image}`
+                                    message.user.image_path !== null
+                                        ? `${message.user.image_path}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
