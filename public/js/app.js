@@ -2226,6 +2226,11 @@ var ChatWindow = function ChatWindow() {
       users = _useState6[0],
       setUsers = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      clicked = _useState8[0],
+      setClicked = _useState8[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var userNavbarcomments = document.querySelector(".navbar-user-comment");
     userNavbarcomments.addEventListener("click", checkChatWrapper);
@@ -2244,6 +2249,7 @@ var ChatWindow = function ChatWindow() {
   }, []);
 
   var fetchTopUser = function fetchTopUser(userId) {
+    setClicked(true);
     _src_chat__WEBPACK_IMPORTED_MODULE_1__["default"].get("/top-chat-user", {
       params: {
         nid: userId
@@ -2268,7 +2274,8 @@ var ChatWindow = function ChatWindow() {
       }
     }), showChatWrapper ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ChatWrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
       showAlertMessages: showAlertMessages,
-      fetchedUsers: users
+      fetchedUsers: users,
+      clicked: clicked
     }) : ""]
   });
 };
@@ -2382,6 +2389,15 @@ var ChatWrapper = function ChatWrapper(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     setUsers(props.fetchedUsers);
   }, [props.fetchedUsers]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    console.log(props.clicked);
+
+    if (props.clicked === false) {
+      fetchAllUsers();
+    }
+
+    if (props.fetchedUsers.length === 0) return;
+  }, []);
 
   var changeToUserId = function changeToUserId(e, userId) {
     var activeUsersClass = document.querySelectorAll(".current-active-user");
@@ -2493,10 +2509,6 @@ var ChatWrapper = function ChatWrapper(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     removeAlertMessagesWrapper();
   }, [props.showAlertMessages]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (props.fetchedUsers.length === 0) return;
-    fetchAllUsers();
-  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (toUserId === null) {
       return false;

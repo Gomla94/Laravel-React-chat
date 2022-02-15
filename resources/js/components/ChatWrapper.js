@@ -25,6 +25,15 @@ const ChatWrapper = (props) => {
         setUsers(props.fetchedUsers);
     }, [props.fetchedUsers]);
 
+    useEffect(() => {
+        console.log(props.clicked);
+        if (props.clicked === false) {
+            fetchAllUsers();
+        }
+
+        if (props.fetchedUsers.length === 0) return;
+    }, []);
+
     const changeToUserId = (e, userId) => {
         const activeUsersClass = document.querySelectorAll(
             ".current-active-user"
@@ -121,12 +130,6 @@ const ChatWrapper = (props) => {
     useEffect(() => {
         removeAlertMessagesWrapper();
     }, [props.showAlertMessages]);
-
-    useEffect(() => {
-        if (props.fetchedUsers.length === 0) return;
-
-        fetchAllUsers();
-    }, []);
 
     useEffect(() => {
         if (toUserId === null) {

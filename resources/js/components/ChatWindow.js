@@ -7,6 +7,7 @@ const ChatWindow = () => {
     const [showChatWrapper, setShowChatWrapper] = useState(false);
     const [showAlertMessages, setShowAlertMessages] = useState(true);
     const [users, setUsers] = useState([]);
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         const userNavbarcomments = document.querySelector(
@@ -29,6 +30,7 @@ const ChatWindow = () => {
     }, []);
 
     const fetchTopUser = (userId) => {
+        setClicked(true);
         chat.get("/top-chat-user", {
             params: { nid: userId },
         }).then((response) => {
@@ -53,6 +55,7 @@ const ChatWindow = () => {
                 <ChatWrapper
                     showAlertMessages={showAlertMessages}
                     fetchedUsers={users}
+                    clicked={clicked}
                 />
             ) : (
                 ""
