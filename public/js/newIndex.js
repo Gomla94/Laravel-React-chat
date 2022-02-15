@@ -65,9 +65,9 @@ navbarLangIcon.addEventListener("click", () => {
 });
 
 mainDiv.addEventListener("click", () => {
-    if (chatWrapper) {
-        chatWrapper.classList.remove("show-chat-wrapper");
-    }
+    // if (chatWrapper) {
+    //     chatWrapper.classList.remove("show-chat-wrapper");
+    // }
 
     if (chatArrow) {
         chatArrow.classList.remove("show-chat-arrow");
@@ -183,8 +183,8 @@ if (filterItems) {
 if (navbarChatIcon) {
     navbarChatIcon.addEventListener("click", (e) => {
         e.stopPropagation();
-        chatWrapper.classList.toggle("show-chat-wrapper");
-        chatArrow.classList.toggle("show-chat-arrow");
+        // chatWrapper.classList.toggle("show-chat-wrapper");
+        // chatArrow.classList.toggle("show-chat-arrow");
     });
 }
 
