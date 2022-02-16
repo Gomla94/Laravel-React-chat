@@ -26,12 +26,13 @@ const ChatWrapper = (props) => {
     }, [props.fetchedUsers]);
 
     useEffect(() => {
-        console.log(props.clicked);
-        if (props.clicked === false) {
+        if (props.clicked.value === false) {
             fetchAllUsers();
         }
 
-        if (props.fetchedUsers.length === 0) return;
+        if (props.fetchedUsers.length === 0) {
+            return;
+        }
     }, []);
 
     const changeToUserId = (e, userId) => {
@@ -368,8 +369,8 @@ const ChatWrapper = (props) => {
                         <div className="sent-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image_path !== null
-                                        ? `${message.user.image_path}`
+                                    message.user.image !== null
+                                        ? `${message.user.image}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"
@@ -387,8 +388,8 @@ const ChatWrapper = (props) => {
                         <div className="received-message-user-image-wrapper">
                             <img
                                 src={
-                                    message.user.image_path !== null
-                                        ? `${message.user.image_path}`
+                                    message.user.image !== null
+                                        ? `${message.user.image}`
                                         : `../images/avatar.png`
                                 }
                                 alt="user-image"

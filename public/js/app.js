@@ -2192,6 +2192,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/chat */ "./resources/js/src/chat.js");
 /* harmony import */ var _ChatWrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChatWrapper */ "./resources/js/components/ChatWrapper.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2226,13 +2232,16 @@ var ChatWindow = function ChatWindow() {
       users = _useState6[0],
       setUsers = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    value: false
+  }),
       _useState8 = _slicedToArray(_useState7, 2),
       clicked = _useState8[0],
       setClicked = _useState8[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var userNavbarcomments = document.querySelector(".navbar-user-comment");
+    userNavbarcomments.addEventListener("click", changeClicked);
     userNavbarcomments.addEventListener("click", checkChatWrapper);
     var mainDiv = document.querySelector(".main");
     mainDiv.addEventListener("click", function () {
@@ -2249,7 +2258,9 @@ var ChatWindow = function ChatWindow() {
   }, []);
 
   var fetchTopUser = function fetchTopUser(userId) {
-    setClicked(true);
+    setClicked(_objectSpread(_objectSpread({}, clicked), {}, {
+      value: true
+    }));
     _src_chat__WEBPACK_IMPORTED_MODULE_1__["default"].get("/top-chat-user", {
       params: {
         nid: userId
@@ -2263,6 +2274,13 @@ var ChatWindow = function ChatWindow() {
     setShowChatWrapper(function (prevStatus) {
       return !prevStatus;
     });
+  };
+
+  var changeClicked = function changeClicked() {
+    setUsers([]);
+    setClicked(_objectSpread(_objectSpread({}, clicked), {}, {
+      value: false
+    }));
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -2390,13 +2408,13 @@ var ChatWrapper = function ChatWrapper(props) {
     setUsers(props.fetchedUsers);
   }, [props.fetchedUsers]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log(props.clicked);
-
-    if (props.clicked === false) {
+    if (props.clicked.value === false) {
       fetchAllUsers();
     }
 
-    if (props.fetchedUsers.length === 0) return;
+    if (props.fetchedUsers.length === 0) {
+      return;
+    }
   }, []);
 
   var changeToUserId = function changeToUserId(e, userId) {
@@ -2747,7 +2765,7 @@ var ChatWrapper = function ChatWrapper(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "sent-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image_path !== null ? "".concat(message.user.image_path) : "../images/avatar.png",
+              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -2762,7 +2780,7 @@ var ChatWrapper = function ChatWrapper(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "received-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image_path !== null ? "".concat(message.user.image_path) : "../images/avatar.png",
+              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })

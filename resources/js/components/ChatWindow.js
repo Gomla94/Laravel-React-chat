@@ -7,12 +7,13 @@ const ChatWindow = () => {
     const [showChatWrapper, setShowChatWrapper] = useState(false);
     const [showAlertMessages, setShowAlertMessages] = useState(true);
     const [users, setUsers] = useState([]);
-    const [clicked, setClicked] = useState(false);
+    const [clicked, setClicked] = useState({ value: false });
 
     useEffect(() => {
         const userNavbarcomments = document.querySelector(
             ".navbar-user-comment"
         );
+        userNavbarcomments.addEventListener("click", changeClicked);
         userNavbarcomments.addEventListener("click", checkChatWrapper);
         const mainDiv = document.querySelector(".main");
         mainDiv.addEventListener("click", () => {
@@ -30,7 +31,7 @@ const ChatWindow = () => {
     }, []);
 
     const fetchTopUser = (userId) => {
-        setClicked(true);
+        setClicked({ ...clicked, value: true });
         chat.get("/top-chat-user", {
             params: { nid: userId },
         }).then((response) => {
@@ -40,6 +41,11 @@ const ChatWindow = () => {
 
     const checkChatWrapper = () => {
         setShowChatWrapper((prevStatus) => !prevStatus);
+    };
+
+    const changeClicked = () => {
+        setUsers([]);
+        setClicked({ ...clicked, value: false });
     };
 
     return (
