@@ -50,6 +50,14 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                       <label class="create-post-label" for="video">@lang("translations.pdf")</label>
+                        <input type="file" accept=".pdf" class="form-control" name="appeal_pdf">
+                        @error('appeal_pdf')
+                        <span style="color:red">{{$message}}</span>
+                        @enderror
+                    </div>
+
                     <button type="submit" class="btn btn-primary">@lang('translations.upd_appeal')</button>
                 </form>
             </div>

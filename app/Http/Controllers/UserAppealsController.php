@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddAppealsRequest;
 use App\Http\Requests\StoreImageRequest;
+use App\Http\Requests\UpdateAppealRequest;
 use App\Models\Appeal;
 use App\Models\Image;
 use Illuminate\Http\Request;
@@ -30,17 +31,14 @@ class UserAppealsController extends Controller
         $user = Auth::user();
 
         if (request()->file('appeal_image')) {
-            $file = $request->appeal_image[0];
             $image_path = $request->file('appeal_image')[0]->store('images', 's3');
         }
 
         if (request()->file('appeal_video')) {
-            $file = $request->appeal_video;
             $video_path = $request->file('appeal_video')->store('videos', 's3');
         }
 
         if (request()->file('appeal_pdf')) {
-            $file = $request->appeal_video;
             $pdf_path = $request->file('appeal_pdf')->store('files', 's3');
         }
 
@@ -79,31 +77,35 @@ class UserAppealsController extends Controller
         return view('layouts.front.edit-appeal', ['appeal' => $appeal]);
     }
 
-    public function update(AddAppealsRequest $request, Appeal $appeal)
+    public function update(UpdateAppealRequest $request, Appeal $appeal)
     {
         
         if (request()->file('appeal_image')) {
             Storage::disk('s3')->delete("images/{$appeal->image_name}");
             $file = $request->appeal_image[0];
-            $extension = $file->getClientOriginalExtension();
-            $image_name = uniqid(). '.' .$extension;
             $image_path = $file->store('images', 's3');
         }
+
         if (request()->file('appeal_video')) {
             Storage::disk('s3')->delete("videos/{$appeal->video_name}");
             $file = $request->appeal_video;
-            $extension = $file->getClientOriginalExtension();
-            $video_name = uniqid(). '.' .$extension;
             $video_path = $request->file('appeal_video')->store('videos', 's3');
         }
+
+        if (request()->file('appeal_pdf')) {
+            $pdf_path = $request->file('appeal_pdf')->store('files', 's3');
+        }
+
 
         $appeal->update([
             'title' => $request->appeal_title,
             'description' => $request->appeal_description,
             'image_name' => request()->file('appeal_image') ? basename($image_path) : null,
-            'image_path' => request()->file('appeal_image') ? Storage::disk('s3')->url($image_path) : null,
+            'image_path' => request()->file('appeal_image') ? Storage::disk('s3')->url($image_path) : $appeal->image_path,
             'video_name' => request()->file('appeal_video') ? basename($video_path) : null,
-            'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
+            'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : $appeal->video_path,
+            'pdf_name' => request()->file('appeal_pdf') ? basename($pdf_path) : null,
+            'pdf_path' => request()->file('appeal_pdf') ? Storage::disk('s3')->url($pdf_path) : $appeal->pdf,
         ]);
 
         if (request('appeal_image')) {

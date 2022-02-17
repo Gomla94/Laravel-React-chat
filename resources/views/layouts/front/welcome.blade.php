@@ -243,7 +243,7 @@
           <label class="create-post-label" for="title">@lang('translations.title')</label>
           <input type="text" class="form-control" name="appeal_title" value="{{ old('appeal_title') }}" placeholder="Title">
           @error('appeal_title')
-          <span style="color:red">{{$message}}</span>
+          <p style="color:red">{{$message}}</p>
           @enderror
       </div>
 
@@ -251,13 +251,16 @@
           <label class="create-post-label" for="description">@lang("translations.description")</label>
           <textarea name="appeal_description" class="text-area-form-control" id="appeal-description" cols="30" rows="10">{{ old('appeal_description') }}</textarea>
           @error('appeal_description')
-          <span style="color:red">{{$message}}</span>
+          <p style="color:red">{{$message}}</p>
           @enderror
       </div>
 
       <div class="form-group modal-image-container">
           <label class="create-post-label" for="image">@lang("translations.image")</label>
           <input type="file" accept="image/*" multiple class="form-control" name="appeal_image[]">
+          @error('appeal_image')
+          <p style="color:red">{{$message}}</p>
+          @enderror
           @if($errors->has('appeal_image.*'))
             @foreach($errors->get('appeal_image.*') as $error)
             @foreach($error as $err)

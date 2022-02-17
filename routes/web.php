@@ -43,7 +43,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
     Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
     Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
-
+    Route::get('payment', [FrontController::class, 'payment'])->name('payment');
 
 
     Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {

@@ -11,10 +11,20 @@ use App\Models\User;
 use App\Notifications\NewSubscribtion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Omnipay\Omnipay;
+
 
 class FrontController extends Controller
 {
+
+    public function payment()
+    {
+        //
+    }
+
+
     public function home()
     {
 

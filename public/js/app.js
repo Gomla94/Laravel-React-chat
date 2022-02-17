@@ -3440,8 +3440,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "https://www.magaxat.com/api/",
-  // baseURL: "https://seriousapp.test/api/",
+  // baseURL: "https://www.magaxat.com/api/",
+  baseURL: "https://seriousapp.test/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)

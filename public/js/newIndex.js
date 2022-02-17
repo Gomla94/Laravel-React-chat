@@ -73,7 +73,10 @@ mainDiv.addEventListener("click", () => {
         chatArrow.classList.remove("show-chat-arrow");
     }
 
-    if (userNavbarList.classList.contains("show-user-navbar-list")) {
+    if (
+        userNavbarList &&
+        userNavbarList.classList.contains("show-user-navbar-list")
+    ) {
         userNavbarList.classList.remove("show-user-navbar-list");
     }
 

@@ -12,7 +12,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" href="{{ asset('images/dark-logo-new.jpeg') }}"/>
+    <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}"/>
 
     <link
         rel="stylesheet"

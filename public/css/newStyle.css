@@ -586,7 +586,7 @@ a {
     -webkit-line-clamp: 2; /* number of lines to show */
     line-clamp: 2;
     -webkit-box-orient: vertical;
-    width: 95%;
+    /* width: 95%; */
     padding: 10px;
 }
 
@@ -1090,6 +1090,257 @@ a {
 }
 
 /* posts modal ends here */
+
+/* appeal page report start here */
+
+.appeal-report-wrapper {
+    display: none;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.appeal-id-wrapper {
+    flex: 1;
+    height: auto;
+    padding: 10px;
+}
+
+.appeal-id-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.main-appeal-id-container {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+}
+
+.appeal-id {
+    border: 1px solid #c88d56;
+    padding: 10px;
+    width: 100%;
+}
+
+.appeal-id-btn-wrapper {
+    position: relative;
+}
+
+.appeal-id-btn {
+    background-color: #c88d56;
+    color: white;
+    padding: 15px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: absolute;
+    height: 55px;
+    top: -5px;
+}
+
+.appeal-id-btn i {
+    color: white;
+}
+
+.appeal-pdf-wrapper {
+    flex: 1;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.appeal-pdf-download-wrapper {
+    border: 1px solid #c88d56;
+    padding: 5px;
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding: 10px;
+}
+
+.appeal-pdf-download-wrapper a {
+    text-decoration: none;
+    color: black;
+}
+
+.download-pdf-title {
+    padding-top: 10px;
+}
+
+.pdf-buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.pdf-button-one-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 250px;
+    cursor: pointer;
+}
+
+.pdf-btnone-wrapper {
+    border: 1px solid #c88d56;
+    padding: 8px;
+    border-radius: 15px;
+}
+
+.pdf-button-two-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 250px;
+    cursor: pointer;
+}
+
+.pdf-btntwo-wrapper {
+    border: 1px solid #c88d56;
+    padding: 8px;
+    border-radius: 15px;
+}
+
+.currency-wrapper {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 15px;
+}
+
+.trans-title {
+    margin-bottom: 20px;
+}
+
+.trans-wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.trans-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.trans-input {
+    padding: 5px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: 1px solid #c88d56;
+    height: 40px;
+    width: 70%;
+}
+
+.trans-list {
+    border-color: #c88d56;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: absolute;
+    right: 2%;
+    height: 40px;
+    background-color: white !important;
+}
+
+.trans-link {
+    background-color: #5ea7a7;
+    color: white;
+    border-radius: 20px;
+    width: 60%;
+    padding: 5px;
+    border: none;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.trans-data {
+    background-color: #5ea7a7;
+    width: 50%;
+    height: 300px;
+    border-radius: 3px;
+    margin: auto;
+}
+
+.s-trans {
+    display: block;
+}
+
+.h-trans {
+    display: none;
+}
+
+.trans-data-header {
+    width: 100%;
+    /* background-color: red; */
+    height: 50px;
+    position: relative;
+}
+
+.trans-header-icon-wrapper {
+    background-color: white;
+    height: 70px;
+    width: 70px;
+    border-radius: 50px;
+    position: absolute;
+    left: 45%;
+    top: -50%;
+    border: 1px solid grey;
+    box-shadow: 0px 7px 20px 0px rgb(138, 138, 138);
+    display: flex;
+    justify-content: center;
+}
+
+.trans-header-icon-wrapper svg {
+    width: 70%;
+    margin-top: -8px;
+}
+
+.trans-data-details {
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+    margin-top: 5px;
+}
+
+.trans-data-keys {
+    flex: 1;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.trans-key {
+    padding: 8px;
+    font-weight: 600;
+}
+
+.trans-val {
+    padding: 8px;
+    font-weight: 600;
+}
+
+.trans-data-vals {
+    flex: 1;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+/* appeal page report end here */
 
 /* notifications start here */
 
@@ -2440,6 +2691,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 100px;
 }
 
 .appeal-swiper {
@@ -2914,6 +3166,20 @@ a {
         color: rgb(13, 119, 180);
         width: 35%;
     }
+
+    .trans-data {
+        height: fit-content;
+        width: 80%;
+        text-align: end;
+    }
+
+    .trans-data-keys {
+        text-align: left;
+    }
+
+    .trans-data-vals {
+        align-items: unset;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -2926,6 +3192,10 @@ a {
         margin-left: 20px;
         position: absolute;
         right: 22%;
+    }
+
+    .appeal-report-wrapper {
+        flex-direction: column;
     }
 
     .brief-container {
@@ -3183,6 +3453,10 @@ a {
         width: 100%;
         height: 100%;
     }
+
+    .trans-data {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 550px) {
@@ -3209,6 +3483,14 @@ a {
         display: grid;
         grid-template-columns: 1fr 1fr;
         padding: 10px;
+    }
+
+    .pdf-buttons-wrapper {
+        flex-direction: column;
+    }
+
+    .pdf-button-one-wrapper {
+        margin-bottom: 10px;
     }
 }
 
@@ -3262,6 +3544,17 @@ a {
         display: flex;
         justify-content: space-between;
         width: 60%;
+    }
+
+    .trans-data {
+        height: fit-content;
+        width: 100%;
+        text-align: end;
+    }
+
+    .trans-val {
+        padding: 10px;
+        font-weight: 600;
     }
 }
 
