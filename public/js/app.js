@@ -3105,9 +3105,12 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
 
   var removeChatWrapper = function removeChatWrapper() {
     var chatWrapper = document.querySelector(".chat-wrapper");
-    var chatArrow = document.querySelector(".chat-arrow");
-    chatWrapper.classList.remove("show-chat-wrapper");
-    chatArrow.classList.remove("show-chat-arrow");
+
+    if (chatWrapper) {
+      var chatArrow = document.querySelector(".chat-arrow");
+      chatWrapper.classList.remove("show-chat-wrapper");
+      chatArrow.classList.remove("show-chat-arrow");
+    }
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
