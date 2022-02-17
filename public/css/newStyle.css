@@ -3288,7 +3288,8 @@ a {
 
     .main-appeal-image-container {
         flex: none;
-        height: 400px;
+        height: fit-content;
+        margin-bottom: 50px;
     }
 
     .one-user-social-info-wrapper {
