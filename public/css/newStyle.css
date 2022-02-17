@@ -946,11 +946,11 @@ a {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50% !important;
+    width: 60% !important;
     border-radius: 10px;
     position: fixed;
     z-index: 1000;
-    left: 25%;
+    left: 20%;
     /* top: 180%;
     left: 50%;
     transform: translate(-50%, -50%); */
@@ -972,11 +972,11 @@ a {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50% !important;
+    width: 60% !important;
     border-radius: 10px;
     position: fixed;
     z-index: 1000;
-    left: 25%;
+    left: 20%;
 }
 
 .close-modal-container {
@@ -3297,6 +3297,16 @@ a {
 
     .notifications-container {
         grid-template-columns: 1fr;
+    }
+
+    .appeals-modal-content {
+        width: 80% !important;
+        left: 10%;
+    }
+
+    .posts-modal-content {
+        width: 80% !important;
+        left: 10%;
     }
 }
 
