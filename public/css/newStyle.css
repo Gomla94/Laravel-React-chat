@@ -3416,6 +3416,14 @@ a {
         font-size: 25px;
     }
 
+    .main-posts-buttons-wrapper {
+        flex-direction: column;
+    }
+
+    .main-posts-search-wrapper {
+        margin-bottom: 10px;
+    }
+
     .appeal-card-button {
         background-color: rgb(1, 59, 1);
         color: white;
@@ -3470,10 +3478,6 @@ a {
 }
 
 @media screen and (max-width: 550px) {
-    .main-posts-buttons-wrapper {
-        flex-direction: column;
-    }
-
     .main-posts-search-wrapper {
         margin-bottom: 20px;
     }
