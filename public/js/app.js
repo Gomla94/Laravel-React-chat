@@ -3105,7 +3105,6 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
 
   var removeChatWrapper = function removeChatWrapper() {
     var chatWrapper = document.querySelector(".chat-wrapper");
-    console.log(chatWrapper);
 
     if (chatWrapper) {
       var chatArrow = document.querySelector(".chat-arrow");
