@@ -2925,6 +2925,16 @@ a {
     }
 }
 
+@media screen and (max-width: 1070px) {
+    .main-posts-buttons-wrapper {
+        flex-direction: column;
+    }
+
+    .main-posts-search-wrapper {
+        margin-bottom: 10px;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .view-video-wrapper {
         height: auto;
@@ -3015,10 +3025,6 @@ a {
 }
 
 @media screen and (max-width: 930px) {
-    .main-posts-search-wrapper {
-        /* right: 20%; */
-    }
-
     .main-posts-buttons-wrapper {
         position: relative;
         /* left: 20%; */
