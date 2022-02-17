@@ -17,21 +17,23 @@
     </div>
   </div>
 
-  <div class="swiper appeal-swiper">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      @foreach($appeal_images as $image)
-      <div class="swiper-slide">
-        <div class="appeal-card">
-          <div class="appeal-card-image-wrapper">
-            <img src="{{ asset($image->image_path) }}" alt="" class="appeal-card-image" />
+  @if($appeal_images->count() > 0)
+    <div class="swiper appeal-swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        @foreach($appeal_images as $image)
+        <div class="swiper-slide">
+          <div class="appeal-card">
+            <div class="appeal-card-image-wrapper">
+              <img src="{{ asset($image->image_path) }}" alt="" class="appeal-card-image" />
+            </div>
           </div>
         </div>
+        @endforeach
       </div>
-      @endforeach
     </div>
-  </div>
+  @endif
 
   @if($appeal->video_path)
   <div class="main-appeal-video-container">
