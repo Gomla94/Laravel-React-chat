@@ -178,7 +178,7 @@
 </div>
 
 <!-- add post modal -->
-<disv class="posts-modal-wrapper">
+<div class="posts-modal-wrapper">
   <div class="posts-modal-content">
     <div class="close-modal-container">
       <span class="close-posts-modal">&times;</span>
