@@ -10,10 +10,11 @@ const NewSubscribtionNotification = () => {
 
     const removeChatWrapper = () => {
         const chatWrapper = document.querySelector(".chat-wrapper");
+        console.log(chatWrapper);
         if (chatWrapper) {
             const chatArrow = document.querySelector(".chat-arrow");
-            chatWrapper.classList.remove("show-chat-wrapper");
-            chatArrow.classList.remove("show-chat-arrow");
+            chatWrapper.remove();
+            chatArrow.remove();
         }
     };
 

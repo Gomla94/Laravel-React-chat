@@ -3105,11 +3105,12 @@ var NewSubscribtionNotification = function NewSubscribtionNotification() {
 
   var removeChatWrapper = function removeChatWrapper() {
     var chatWrapper = document.querySelector(".chat-wrapper");
+    console.log(chatWrapper);
 
     if (chatWrapper) {
       var chatArrow = document.querySelector(".chat-arrow");
-      chatWrapper.classList.remove("show-chat-wrapper");
-      chatArrow.classList.remove("show-chat-arrow");
+      chatWrapper.remove();
+      chatArrow.remove();
     }
   };
 
