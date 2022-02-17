@@ -3486,7 +3486,7 @@ a {
     .main-posts-add-buttons {
         display: flex;
         justify-content: space-between;
-        width: 60%;
+        width: 90%;
     }
 }
 
@@ -3558,7 +3558,7 @@ a {
     .main-posts-add-buttons {
         display: flex;
         justify-content: space-between;
-        width: 60%;
+        /* width: 60%; */
     }
 
     .trans-data {
