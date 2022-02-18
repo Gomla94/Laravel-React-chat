@@ -2800,7 +2800,6 @@ a {
         display: inline;
         position: fixed;
         left: 5%;
-        top: 1%;
     }
 
     .notifications-wrapper {
@@ -3558,7 +3557,22 @@ a {
 
 @media screen and (max-width: 460px) {
     .chat-wrapper {
-        right: -120%;
+        right: -100%;
+    }
+
+    .sound-checker-background {
+        height: 20px;
+        width: 40px;
+        margin: 10px 15px;
+    }
+
+    .react-emoji {
+        width: 65% !important;
+        margin-left: 5%;
+    }
+
+    .welcome-message {
+        font-size: 15px;
     }
 
     .navbar-language-item {
@@ -3588,10 +3602,6 @@ a {
 }
 
 @media screen and (max-width: 430px) {
-    .chat-wrapper {
-        right: -120%;
-    }
-
     .main-posts-add-buttons {
         display: flex;
         justify-content: space-between;
