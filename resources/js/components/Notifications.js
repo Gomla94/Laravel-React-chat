@@ -34,24 +34,23 @@ const Notifications = ({ notifications, setNotifications }) => {
 
     const changeSubscribtionForm = (icon, unid) => {
         const targetedGreenButton = document.querySelector(
-            `[data-nid="${unid}"]`
+            `[data-uunid="${unid}"]`
         );
 
         if (targetedGreenButton) {
             if (icon.classList.contains("deny-notify")) return true;
 
-            const targetedForm = targetedGreenButton.nextElementSibling;
+            const targetedForm = targetedGreenButton.querySelector(".sub-form");
+
             targetedForm.setAttribute(
                 "action",
                 `${window.location.origin}/unsubscribe/${unid}`
             );
-            targetedForm
-                .querySelector("button")
-                .classList.remove("user-subscribe");
-            targetedForm.querySelector("button").innerText = "";
-            targetedForm
-                .querySelector("button")
-                .classList.add("fas", "fa-check", "checkmark-icon");
+
+            const buttonToChange = targetedForm.querySelector("button");
+            buttonToChange.classList.remove("user-subscribe");
+            buttonToChange.innerText = "";
+            buttonToChange.classList.add("fas", "fa-check", "checkmark-icon");
         }
 
         return true;

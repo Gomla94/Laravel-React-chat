@@ -59,29 +59,29 @@ const ChatWrapper = (props) => {
         setToUserId(userId);
     };
 
-    const notificationUser = async (nid) => {
-        const response = await notify.get("/notification-user", {
-            params: { nid: nid },
-        });
-        setUsers([...users, response.data]);
-    };
+    // const notificationUser = async (nid) => {
+    //     const response = await notify.get("/notification-user", {
+    //         params: { nid: nid },
+    //     });
+    //     setUsers([...users, response.data]);
+    // };
 
     useEffect(() => {
-        const bellIcon = document.querySelector(".bell-icon");
-        if (bellIcon) {
-            bellIcon.addEventListener("click", () => {
-                setTimeout(() => {
-                    const acceptNotification =
-                        document.querySelectorAll(".accept-notify");
+        // const bellIcon = document.querySelector(".bell-icon");
+        // if (bellIcon) {
+        //     bellIcon.addEventListener("click", () => {
+        //         setTimeout(() => {
+        //             const acceptNotification =
+        //                 document.querySelectorAll(".accept-notify");
 
-                    acceptNotification.forEach((item) => {
-                        item.addEventListener("click", () => {
-                            notificationUser(item.dataset.nid);
-                        });
-                    });
-                }, 500);
-            });
-        }
+        //             acceptNotification.forEach((item) => {
+        //                 item.addEventListener("click", () => {
+        //                     notificationUser(item.dataset.nid);
+        //                 });
+        //             });
+        //         }, 500);
+        //     });
+        // }
 
         if (users.length !== 0 && props.fetchedUsers.length !== 0) {
             changeToUserId(null, props.fetchedUsers[0].unique_id);
@@ -179,6 +179,7 @@ const ChatWrapper = (props) => {
             alertMessageWrapper.appendChild(messageCountSpan);
             chat.prepend(alertMessageWrapper);
         } else {
+            console.log("messages count");
             messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
         }
     };
@@ -214,7 +215,7 @@ const ChatWrapper = (props) => {
                 }
             );
         }
-    }, [users, toUserId]);
+    }, [toUserId]);
 
     const checkChatWrapperStatusBeforeAlertingNewMessageCount = (
         subscribers,
@@ -228,27 +229,12 @@ const ChatWrapper = (props) => {
             return false;
         }
 
-        if (
-            document
-                .querySelector(".chat-wrapper")
-                .classList.contains("show-chat-wrapper") === false
-        ) {
+        if (document.querySelector(".chat-wrapper") === null) {
             createAlertMessage();
         } else {
             return false;
         }
     };
-
-    // const listenToNewMessageAndAlertCount = () => {
-    //     removeAlertMessagesWrapper();
-
-    //     window.Echo.private(`messages.${authId}`).listen(
-    //         "NewMessageEvent",
-    //         (event) => {
-    //             checkChatWrapperStatusBeforeAlertingNewMessageCount();
-    //         }
-    //     );
-    // };
 
     const removeAlertMessagesWrapper = () => {
         const alertMessages = document.querySelector(".alert-message-wrapper");
@@ -475,10 +461,13 @@ const ChatWrapper = (props) => {
             return false;
         }
 
+        document.querySelector(".react-input-emoji--input").textContent = "";
+
         chat.post("/messages", {
             to: toUserId,
             message: newMessage,
         }).then((response) => {
+            setNewMessage(null);
             setMessages([...messages, response.data.sent_message]);
         });
     };

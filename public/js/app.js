@@ -2188,10 +2188,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _src_chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/chat */ "./resources/js/src/chat.js");
-/* harmony import */ var _ChatWrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChatWrapper */ "./resources/js/components/ChatWrapper.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _src_chat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src/chat */ "./resources/js/src/chat.js");
+/* harmony import */ var _src_notify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/notify */ "./resources/js/src/notify.js");
+/* harmony import */ var _ChatWrapper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ChatWrapper */ "./resources/js/components/ChatWrapper.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2216,30 +2233,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var ChatWindow = function ChatWindow() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var authId = window.Laravel.user.unique_id;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       showChatWrapper = _useState2[0],
       setShowChatWrapper = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
       _useState4 = _slicedToArray(_useState3, 2),
       showAlertMessages = _useState4[0],
       setShowAlertMessages = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
       users = _useState6[0],
       setUsers = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     value: false
   }),
       _useState8 = _slicedToArray(_useState7, 2),
       clicked = _useState8[0],
       setClicked = _useState8[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var userNavbarcomments = document.querySelector(".navbar-user-comment");
     userNavbarcomments.addEventListener("click", changeClicked);
     userNavbarcomments.addEventListener("click", checkChatWrapper);
@@ -2256,12 +2276,35 @@ var ChatWindow = function ChatWindow() {
       });
     });
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchAllUsers();
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var bellIcon = document.querySelector(".bell-icon");
+
+    if (bellIcon) {
+      bellIcon.addEventListener("click", function () {
+        setTimeout(function () {
+          var acceptNotification = document.querySelectorAll(".accept-notify");
+          acceptNotification.forEach(function (item) {
+            item.addEventListener("click", function () {
+              notificationUser(item.dataset.nid);
+            });
+          });
+        }, 500);
+      });
+    }
+
+    window.Echo["private"]("messages.".concat(authId)).listen("NewMessageEvent", function (event) {
+      checkChatWrapperStatusBeforeAlertingNewMessageCount(users, event.message.user);
+    });
+  }, [users]);
 
   var fetchTopUser = function fetchTopUser(userId) {
     setClicked(_objectSpread(_objectSpread({}, clicked), {}, {
       value: true
     }));
-    _src_chat__WEBPACK_IMPORTED_MODULE_1__["default"].get("/top-chat-user", {
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/top-chat-user", {
       params: {
         nid: userId
       }
@@ -2269,6 +2312,37 @@ var ChatWindow = function ChatWindow() {
       setUsers(response.data);
     });
   };
+
+  var notificationUser = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(nid) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _src_notify__WEBPACK_IMPORTED_MODULE_3__["default"].get("/notification-user", {
+                params: {
+                  nid: nid
+                }
+              });
+
+            case 2:
+              response = _context.sent;
+              setUsers([].concat(_toConsumableArray(users), [response.data]));
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function notificationUser(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   var checkChatWrapper = function checkChatWrapper() {
     setShowChatWrapper(function (prevStatus) {
@@ -2283,14 +2357,56 @@ var ChatWindow = function ChatWindow() {
     }));
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  var fetchAllUsers = function fetchAllUsers() {
+    if (users.length !== 0) return;
+    _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/chat-users").then(function (response) {
+      setUsers(response.data);
+    });
+  };
+
+  var checkChatWrapperStatusBeforeAlertingNewMessageCount = function checkChatWrapperStatusBeforeAlertingNewMessageCount(subscribers, userToCheck) {
+    var targetUser = subscribers.findIndex(function (user) {
+      return userToCheck.id === user.id;
+    });
+
+    if (targetUser === -1) {
+      return false;
+    } else {
+      createAlertMessage();
+    }
+  };
+
+  var createAlertMessage = function createAlertMessage() {
+    if (document.querySelector(".chat-wrapper") !== null) return false;
+    var messagesCount = document.querySelector(".messages-count");
+
+    if (!messagesCount) {
+      var _chat = document.querySelector(".chat");
+
+      var alertMessageWrapper = document.createElement("div");
+      alertMessageWrapper.classList.add("alert-message-wrapper");
+      var alertMessage = document.createElement("div");
+      alertMessage.classList.add("alert-new-message");
+      var messageCountSpan = document.createElement("span");
+      messageCountSpan.classList.add("messages-count");
+      messageCountSpan.textContent = 1;
+      alertMessageWrapper.appendChild(alertMessage);
+      alertMessageWrapper.appendChild(messageCountSpan);
+
+      _chat.prepend(alertMessageWrapper);
+    } else {
+      messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
+    }
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "chat",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
       className: "far fa-comments navbar-user-comment",
       onClick: function onClick() {
         setShowAlertMessages(!showAlertMessages);
       }
-    }), showChatWrapper ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ChatWrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), showChatWrapper ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ChatWrapper__WEBPACK_IMPORTED_MODULE_4__["default"], {
       showAlertMessages: showAlertMessages,
       fetchedUsers: users,
       clicked: clicked
@@ -2320,8 +2436,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_input_emoji__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-input-emoji */ "./node_modules/react-input-emoji/dist/index.es.js");
 /* harmony import */ var _src_notify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/notify */ "./resources/js/src/notify.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2329,6 +2443,8 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -2434,55 +2550,29 @@ var ChatWrapper = function ChatWrapper(props) {
 
     window.Echo.leave("messages.".concat(toUserId, ".").concat(authId));
     setToUserId(userId);
-  };
+  }; // const notificationUser = async (nid) => {
+  //     const response = await notify.get("/notification-user", {
+  //         params: { nid: nid },
+  //     });
+  //     setUsers([...users, response.data]);
+  // };
 
-  var notificationUser = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(nid) {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _src_notify__WEBPACK_IMPORTED_MODULE_4__["default"].get("/notification-user", {
-                params: {
-                  nid: nid
-                }
-              });
-
-            case 2:
-              response = _context.sent;
-              setUsers([].concat(_toConsumableArray(users), [response.data]));
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function notificationUser(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var bellIcon = document.querySelector(".bell-icon");
-
-    if (bellIcon) {
-      bellIcon.addEventListener("click", function () {
-        setTimeout(function () {
-          var acceptNotification = document.querySelectorAll(".accept-notify");
-          acceptNotification.forEach(function (item) {
-            item.addEventListener("click", function () {
-              notificationUser(item.dataset.nid);
-            });
-          });
-        }, 500);
-      });
-    }
-
+    // const bellIcon = document.querySelector(".bell-icon");
+    // if (bellIcon) {
+    //     bellIcon.addEventListener("click", () => {
+    //         setTimeout(() => {
+    //             const acceptNotification =
+    //                 document.querySelectorAll(".accept-notify");
+    //             acceptNotification.forEach((item) => {
+    //                 item.addEventListener("click", () => {
+    //                     notificationUser(item.dataset.nid);
+    //                 });
+    //             });
+    //         }, 500);
+    //     });
+    // }
     if (users.length !== 0 && props.fetchedUsers.length !== 0) {
       changeToUserId(null, props.fetchedUsers[0].unique_id);
     }
@@ -2567,6 +2657,7 @@ var ChatWrapper = function ChatWrapper(props) {
 
       _chat.prepend(alertMessageWrapper);
     } else {
+      console.log("messages count");
       messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
     }
   };
@@ -2588,7 +2679,7 @@ var ChatWrapper = function ChatWrapper(props) {
         return false;
       });
     }
-  }, [users, toUserId]);
+  }, [toUserId]);
 
   var checkChatWrapperStatusBeforeAlertingNewMessageCount = function checkChatWrapperStatusBeforeAlertingNewMessageCount(subscribers, userToCheck) {
     var targetUser = subscribers.findIndex(function (user) {
@@ -2599,21 +2690,12 @@ var ChatWrapper = function ChatWrapper(props) {
       return false;
     }
 
-    if (document.querySelector(".chat-wrapper").classList.contains("show-chat-wrapper") === false) {
+    if (document.querySelector(".chat-wrapper") === null) {
       createAlertMessage();
     } else {
       return false;
     }
-  }; // const listenToNewMessageAndAlertCount = () => {
-  //     removeAlertMessagesWrapper();
-  //     window.Echo.private(`messages.${authId}`).listen(
-  //         "NewMessageEvent",
-  //         (event) => {
-  //             checkChatWrapperStatusBeforeAlertingNewMessageCount();
-  //         }
-  //     );
-  // };
-
+  };
 
   var removeAlertMessagesWrapper = function removeAlertMessagesWrapper() {
     var alertMessages = document.querySelector(".alert-message-wrapper");
@@ -2624,35 +2706,35 @@ var ChatWrapper = function ChatWrapper(props) {
   };
 
   var blockUserStyle = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var unBlockResponse;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context.prev = _context.next) {
             case 0:
               if (chattingWithUser) {
-                _context2.next = 2;
+                _context.next = 2;
                 break;
               }
 
-              return _context2.abrupt("return");
+              return _context.abrupt("return");
 
             case 2:
               if (!(toUserId === blockedUserId)) {
-                _context2.next = 13;
+                _context.next = 13;
                 break;
               }
 
               setBlockedUserId(null);
               setUserIsAlreadyBlocked(false);
               setSpinner(true);
-              _context2.next = 8;
+              _context.next = 8;
               return _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/unblock-user/", {
                 unblockedUser: blockedUserId
               });
 
             case 8:
-              unBlockResponse = _context2.sent;
+              unBlockResponse = _context.sent;
               setTimeout(function () {
                 setSpinner(null);
               }, 3000);
@@ -2663,7 +2745,7 @@ var ChatWrapper = function ChatWrapper(props) {
                 setBlockMessage("");
               }
 
-              _context2.next = 20;
+              _context.next = 20;
               break;
 
             case 13:
@@ -2671,7 +2753,7 @@ var ChatWrapper = function ChatWrapper(props) {
               setUserIsAlreadyBlocked(true);
               setSpinner(true);
               setBlockMessage("You cannot send messages to a user you blocked!");
-              _context2.next = 19;
+              _context.next = 19;
               return _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/block-user/", {
                 blockedUser: toUserId
               });
@@ -2683,14 +2765,14 @@ var ChatWrapper = function ChatWrapper(props) {
 
             case 20:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
         }
-      }, _callee2);
+      }, _callee);
     }));
 
     return function blockUserStyle() {
-      return _ref2.apply(this, arguments);
+      return _ref.apply(this, arguments);
     };
   }();
 
@@ -2860,10 +2942,12 @@ var ChatWrapper = function ChatWrapper(props) {
       return false;
     }
 
+    document.querySelector(".react-input-emoji--input").textContent = "";
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].post("/messages", {
       to: toUserId,
       message: newMessage
     }).then(function (response) {
+      setNewMessage(null);
       setMessages([].concat(_toConsumableArray(messages), [response.data.sent_message]));
     });
   };
@@ -3297,15 +3381,16 @@ var Notifications = function Notifications(_ref) {
   }();
 
   var changeSubscribtionForm = function changeSubscribtionForm(icon, unid) {
-    var targetedGreenButton = document.querySelector("[data-nid=\"".concat(unid, "\"]"));
+    var targetedGreenButton = document.querySelector("[data-uunid=\"".concat(unid, "\"]"));
 
     if (targetedGreenButton) {
       if (icon.classList.contains("deny-notify")) return true;
-      var targetedForm = targetedGreenButton.nextElementSibling;
+      var targetedForm = targetedGreenButton.querySelector(".sub-form");
       targetedForm.setAttribute("action", "".concat(window.location.origin, "/unsubscribe/").concat(unid));
-      targetedForm.querySelector("button").classList.remove("user-subscribe");
-      targetedForm.querySelector("button").innerText = "";
-      targetedForm.querySelector("button").classList.add("fas", "fa-check", "checkmark-icon");
+      var buttonToChange = targetedForm.querySelector("button");
+      buttonToChange.classList.remove("user-subscribe");
+      buttonToChange.innerText = "";
+      buttonToChange.classList.add("fas", "fa-check", "checkmark-icon");
     }
 
     return true;

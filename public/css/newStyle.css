@@ -1360,7 +1360,7 @@ a {
     color: white;
     padding: 6px;
     padding-top: 5%;
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -1531,6 +1531,7 @@ a {
     position: relative;
     left: 60%;
     border-radius: 10px;
+    margin-top: -11px;
 }
 
 .show-alert-message-wrapper {
@@ -2064,6 +2065,10 @@ a {
     padding: 5px;
 }
 
+.right-check {
+    width: 120px !important;
+}
+
 .all-users-list {
     height: 100%;
     display: grid;
@@ -2150,6 +2155,7 @@ a {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+    width: 120px;
 }
 
 .user-green-message-box {
@@ -2169,7 +2175,7 @@ a {
 
 .user-subscribe {
     height: 40px;
-    /* width: fit-content; */
+    width: 120px;
     border-radius: 5px;
     background-color: rgb(7, 70, 7);
     color: white;
@@ -2852,13 +2858,8 @@ a {
 
     .messages-count {
         position: absolute;
-        top: 2%;
-        right: 30%;
-    }
-
-    .count {
-        top: -10%;
-        /* right: 15%; */
+        top: -7%;
+        right: 24%;
     }
 
     .chat-arrow {

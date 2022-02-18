@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     {{-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> --}}
-    <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;"/>
+    <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no, user-scalable=0"/>
 
     @yield('meta-description')
     {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
     <title>Magaxat</title>
-    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=12')}}" />
+    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=13')}}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
@@ -40,7 +40,7 @@
     @yield('css')
 
     @if(Auth::check())
-    <script src="{{ asset('js/app.js?version=13') }}" defer></script>
+    <script src="{{ asset('js/app.js?version=14') }}" defer></script>
     @endif
 
     @if(!Auth::check())

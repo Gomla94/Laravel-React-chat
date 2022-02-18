@@ -57,17 +57,17 @@
         <span class="user-social-span">{{ $user->email }}</span>
       </div>
       @if(Auth::check())
-        <div class="user-subscription-button">
+        <div class="user-subscription-button" data-uunid={{ $user->unique_id }}>
           @if(auth()->user()->subscribed($user->unique_id))
           <div class="user-green-message-box" data-nid={{ $user->unique_id }}>
             <i class="fas fa-envelope user-envelope"></i>
           </div>
-          <form action="{{ route('unsubscribe', $user->unique_id) }}" method="POST">
+          <form action="{{ route('unsubscribe', $user->unique_id) }}" class="unsub-form" method="POST">
             @csrf
             <button class="fas fa-check checkmark-icon"></button>
           </form>
           @else
-          <form action="{{ route('subscribe', $user->unique_id) }}" method="POST">
+          <form action="{{ route('subscribe', $user->unique_id) }}" class="sub-form" method="POST">
             @csrf
             <button class="user-subscribe">
               @lang('translations.subscribe')
