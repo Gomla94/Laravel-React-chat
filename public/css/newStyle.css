@@ -3566,6 +3566,15 @@ a {
         margin: 10px 15px;
     }
 
+    .sound-checker {
+        width: 25px;
+        height: 25px;
+    }
+
+    .change-sound-checker {
+        left: 10px;
+    }
+
     .react-emoji {
         width: 65% !important;
         margin-left: 5%;
