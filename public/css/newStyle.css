@@ -3575,6 +3575,19 @@ a {
         left: 10px;
     }
 
+    .messages-section {
+        width: 60%;
+    }
+
+    .chat-user-image-wrapper {
+        height: 40px;
+        width: 40px;
+    }
+
+    .chat-user-name {
+        padding-top: 8px;
+    }
+
     .react-emoji {
         width: 65% !important;
         margin-left: 5%;
