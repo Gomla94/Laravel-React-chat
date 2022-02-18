@@ -2800,7 +2800,7 @@ a {
         display: inline;
         position: fixed;
         left: 5%;
-        top: 2%;
+        top: 1%;
     }
 
     .notifications-wrapper {
@@ -3559,6 +3559,14 @@ a {
 @media screen and (max-width: 460px) {
     .chat-wrapper {
         right: -120%;
+    }
+
+    .navbar-language-item {
+        display: none;
+    }
+
+    .navbar-user-containerr {
+        right: 25%;
     }
 
     .main-posts-add-buttons {
