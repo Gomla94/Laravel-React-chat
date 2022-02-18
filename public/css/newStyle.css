@@ -3396,8 +3396,8 @@ a {
     }
 
     .chat-wrapper {
-        min-width: 400px;
-        max-width: 400px;
+        min-width: 500px;
+        max-width: 500px;
     }
 
     .chat-paperclip {
@@ -3418,6 +3418,11 @@ a {
 }
 
 @media screen and (max-width: 600px) {
+    .chat-wrapper {
+        min-width: 400px;
+        max-width: 400px;
+    }
+
     .help-section-title {
         font-size: 25px;
     }
@@ -3556,9 +3561,9 @@ a {
 }
 
 @media screen and (max-width: 460px) {
-    .chat-wrapper {
+    /* .chat-wrapper {
         right: -100%;
-    }
+    } */
 
     .sound-checker-background {
         height: 20px;
@@ -3582,6 +3587,7 @@ a {
     .chat-user-image-wrapper {
         height: 40px;
         width: 40px;
+        display: none;
     }
 
     .chat-user-name {
@@ -3597,12 +3603,12 @@ a {
         font-size: 15px;
     }
 
-    .navbar-language-item {
+    /* .navbar-language-item {
         display: none;
-    }
+    } */
 
     .navbar-user-containerr {
-        right: 25%;
+        right: 32%;
     }
 
     .main-posts-add-buttons {
@@ -3624,6 +3630,11 @@ a {
 }
 
 @media screen and (max-width: 430px) {
+    .chat-wrapper {
+        min-width: 380px;
+        max-width: 380px;
+    }
+
     .main-posts-add-buttons {
         display: flex;
         justify-content: space-between;

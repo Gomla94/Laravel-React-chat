@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
     <title>Magaxat</title>
-    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=10')}}" />
+    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=11')}}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
@@ -38,7 +38,7 @@
     @yield('css')
 
     @if(Auth::check())
-    <script src="{{ asset('js/app.js?version=11') }}" defer></script>
+    <script src="{{ asset('js/app.js?version=12') }}" defer></script>
     @endif
 
     @if(!Auth::check())
