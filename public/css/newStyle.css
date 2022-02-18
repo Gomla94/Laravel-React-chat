@@ -1540,8 +1540,8 @@ a {
 
 .messages-count {
     position: absolute;
-    top: 2%;
-    right: 30%;
+    top: -8%;
+    right: 25%;
 }
 
 .chat-wrapper {
