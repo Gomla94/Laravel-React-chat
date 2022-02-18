@@ -3419,8 +3419,8 @@ a {
 
 @media screen and (max-width: 600px) {
     .chat-wrapper {
-        min-width: 400px;
-        max-width: 400px;
+        min-width: 500px;
+        max-width: 500px;
     }
 
     .help-section-title {
@@ -3498,6 +3498,30 @@ a {
         justify-content: space-between;
         width: 90%;
     }
+
+    .chat-wrapper {
+        min-width: 450px;
+        max-width: 450px;
+    }
+
+    .chat-user-image-wrapper {
+        display: none;
+    }
+
+    .sound-checker-background {
+        height: 20px;
+        width: 40px;
+        margin: 10px 15px;
+    }
+
+    .sound-checker {
+        width: 25px;
+        height: 25px;
+    }
+
+    .change-sound-checker {
+        left: 10px;
+    }
 }
 
 @media screen and (max-width: 530px) {
@@ -3531,6 +3555,11 @@ a {
         right: 30%;
     }
 
+    .chat-wrapper {
+        min-width: 400px;
+        max-width: 400px;
+    }
+
     .help-section-title {
         font-size: 25px;
     }
@@ -3561,33 +3590,13 @@ a {
 }
 
 @media screen and (max-width: 460px) {
-    /* .chat-wrapper {
-        right: -100%;
-    } */
-
-    .sound-checker-background {
-        height: 20px;
-        width: 40px;
-        margin: 10px 15px;
-    }
-
-    .sound-checker {
-        width: 25px;
-        height: 25px;
-    }
-
-    .change-sound-checker {
-        left: 10px;
+    .chat-wrapper {
+        min-width: 380px;
+        max-width: 380px;
     }
 
     .messages-section {
         width: 60%;
-    }
-
-    .chat-user-image-wrapper {
-        height: 40px;
-        width: 40px;
-        display: none;
     }
 
     .chat-user-name {
@@ -3630,10 +3639,10 @@ a {
 }
 
 @media screen and (max-width: 430px) {
-    .chat-wrapper {
+    /* .chat-wrapper {
         min-width: 380px;
         max-width: 380px;
-    }
+    } */
 
     .main-posts-add-buttons {
         display: flex;
