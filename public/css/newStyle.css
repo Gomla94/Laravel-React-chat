@@ -1570,8 +1570,8 @@ a {
 }
 
 .react-input-emoji--input {
-    overflow-x: unset;
-    overflow-y: unset;
+    overflow-x: unset !important;
+    overflow-y: unset !important;
     width: fit-content !important;
 }
 
