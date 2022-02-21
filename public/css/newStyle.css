@@ -3669,6 +3669,10 @@ a {
     .messages-top-section {
         width: 99%;
     }
+
+    .messages-bottom-section {
+        width: 99%;
+    }
 }
 
 @media screen and (max-width: 350px) {
