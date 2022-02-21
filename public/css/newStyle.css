@@ -1569,6 +1569,10 @@ a {
     box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.2);
 }
 
+.react-input-emoji--input {
+    width: fit-content !important;
+}
+
 .show-chat-wrapper {
     display: flex;
     opacity: 1;
