@@ -3258,7 +3258,7 @@ a {
         font-size: 23px;
         padding: 0px 10px;
         cursor: pointer;
-        height: 45%;
+        height: 60%;
         position: absolute;
         top: 20%;
         left: 6px;
@@ -3412,6 +3412,7 @@ a {
 
     .chat-paperclip {
         width: 32px;
+        height: 45%;
     }
 
     .messages-section {
