@@ -3315,6 +3315,10 @@ a {
         width: 80% !important;
         left: 10%;
     }
+
+    .posts-wrapper {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 780px) {
