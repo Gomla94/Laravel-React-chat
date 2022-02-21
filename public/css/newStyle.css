@@ -3653,6 +3653,15 @@ a {
         justify-content: space-between;
         width: 90%;
     }
+
+    .chat-wrapper {
+        min-width: 355px;
+        max-width: 355px;
+    }
+
+    .messages-top-section {
+        width: 99%;
+    }
 }
 
 @media screen and (max-width: 350px) {
