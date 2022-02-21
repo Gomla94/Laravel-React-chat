@@ -182,7 +182,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <span class="main-post-user-name">{{ $post->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
                   </div>
-                  <span class="post-date">{{ $post->created_at->format('Y-m-d h:iA') }}</span>
+                  <span class="profile-post-date">{{ $post->created_at->format('Y-m-d h:iA') }}</span>
                 </div>
                 <p class="main-post-title">@if($post->title) {{ $post->title }} @endif</p>
                 <p class="main-post-description">
@@ -286,7 +286,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <span class="main-post-user-name">{{ $appeal->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $appeal->user->name }}</span>
                   </div>
-                  <span class="post-date">{{ $appeal->created_at->format('Y-m-d h:i A') }}</span>
+                  <span class="profile-post-date">{{ $appeal->created_at->format('Y-m-d h:i A') }}</span>
                 </div>
                 <p class="main-post-title">@if($appeal->title) {{ $appeal->title }} @endif</p>
                 <p class="main-post-description">
@@ -331,7 +331,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <span class="main-post-user-name">{{ $image->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $image->user->name }}</span>
                   </div>
-                  <span class="post-date">{{ $image->created_at->format('Y-m-d h:i A') }}</span>
+                  <span class="profile-post-date">{{ $image->created_at->format('Y-m-d h:i A') }}</span>
                 </div>
                 <div class="main-post-image-wrapper">
                   <img src="{{ asset($image->image_path) }}" alt="main-post-image" class="main-post-image" />
@@ -359,7 +359,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     <span class="main-post-user-name">{{ $video->user->name }}</span>
                     <span class="main-post-user-email">{{'@'. $video->user->name }}</span>
                   </div>
-                  <span class="post-date">{{ $video->created_at->format('Y-m-d h:i A') }}</span>
+                  <span class="profile-post-date">{{ $video->created_at->format('Y-m-d h:i A') }}</span>
                 </div>
                 <div class="main-post-video-wrapper">
                   <video

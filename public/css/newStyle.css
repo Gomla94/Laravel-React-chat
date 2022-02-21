@@ -739,6 +739,7 @@ a {
     display: flex;
     flex-direction: row;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .main-post-user-image-wrapper {
@@ -754,6 +755,13 @@ a {
 }
 
 .post-date {
+    position: absolute;
+    right: 1%;
+    font-weight: 600;
+    color: black;
+}
+
+.profile-post-date {
     position: absolute;
     right: 1%;
     font-weight: 600;
@@ -1369,7 +1377,7 @@ a {
     width: 300px;
     background-color: white;
     position: fixed;
-    right: 3%;
+    right: 6%;
     top: 8%;
     z-index: 10;
     display: flex;
@@ -3348,11 +3356,6 @@ a {
         right: 25%;
     }
 
-    .notifications-wrapper {
-        width: 200px;
-        right: 17%;
-    }
-
     .all-videos-container {
         width: 90%;
         height: auto;
@@ -3368,10 +3371,6 @@ a {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         padding: 10px;
-    }
-
-    .post-date {
-        display: none;
     }
 
     .appeal-card-title {
@@ -3588,16 +3587,17 @@ a {
     .user-info-search-wrapper {
         display: none;
     }
-
-    .post-date {
-        display: none;
-    }
 }
 
 @media screen and (max-width: 460px) {
     .chat-wrapper {
         min-width: 380px;
         max-width: 380px;
+    }
+
+    .notifications-wrapper {
+        width: 300px;
+        right: 10%;
     }
 
     .messages-section {
@@ -3644,15 +3644,25 @@ a {
 }
 
 @media screen and (max-width: 430px) {
-    /* .chat-wrapper {
-        min-width: 380px;
-        max-width: 380px;
-    } */
+    .profile-post-date {
+        display: none;
+    }
 
     .main-posts-add-buttons {
         display: flex;
         justify-content: space-between;
         width: 90%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .notifications-wrapper {
+        width: 250px;
+        right: 10%;
+    }
+
+    .post-date {
+        display: none;
     }
 }
 

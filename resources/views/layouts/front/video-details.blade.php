@@ -30,7 +30,7 @@
         @foreach($other_videos as $other_video)
          <div class="other-video-wrapper">
              <div class="other-video-container">
-               <a rel="preconnect" href="{{ route('show-video', $other_video->id) }}"><video src="{{ asset($other_video->video) }}"></video></a>
+               <a rel="preconnect" href="{{ route('show-video', $other_video->id) }}"><video src="{{ asset($other_video->video_path) }}"></video></a>
              </div>
              <div class="other-video-info-wrapper">
                <div class="other-video-title-wrapper">
