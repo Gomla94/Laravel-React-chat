@@ -29,7 +29,7 @@ class FrontController extends Controller
     {
         
         $user_ip = $request->ip();
-        $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=195.208.218.98"));
+        $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip={$user_ip}"));
         $user_country = $geo["geoplugin_countryName"];
         
         $user = Auth::user();
