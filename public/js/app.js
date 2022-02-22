@@ -2276,8 +2276,7 @@ var ChatWindow = function ChatWindow() {
       });
     });
   }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    fetchAllUsers();
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {// fetchAllUsers();
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var bellIcon = document.querySelector(".bell-icon");

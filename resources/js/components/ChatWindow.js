@@ -33,7 +33,7 @@ const ChatWindow = () => {
     }, []);
 
     useEffect(() => {
-        fetchAllUsers();
+        // fetchAllUsers();
     }, []);
 
     useEffect(() => {
