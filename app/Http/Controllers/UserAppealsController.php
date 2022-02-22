@@ -17,7 +17,7 @@ class UserAppealsController extends Controller
     public function my_appeals()
     {
         $my_appeals = Auth::user()->appeals()->get();
-        return view('user.appeals.index', ['my_appeals' => $my_appeals]);
+        return view('layouts.front.my-appeals', ['my_appeals' => $my_appeals]);
     }
 
     public function create()

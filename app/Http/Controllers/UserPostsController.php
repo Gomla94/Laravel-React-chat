@@ -16,7 +16,7 @@ class UserPostsController extends Controller
     public function my_posts()
     {
         $my_posts = Auth::user()->posts()->get();
-        return view('user.posts.index', ['my_posts' => $my_posts]);
+        return view('layouts.front.my-posts', ['my_posts' => $my_posts]);
     }
 
     public function create()

@@ -5,7 +5,7 @@
         <div class="card profile-card">
             <div class="card-header">@lang('translations.all_appeals')</div>
             <div class="card-body">
-                <a href="{{ route('user.appeals.create') }}" class="btn btn-success mb-3">@lang('translations.add_appeal')</a>
+                {{-- <a href="{{ route('user.appeals.create') }}" class="btn btn-success mb-3">@lang('translations.add_appeal')</a> --}}
                 <table class="table">
                     <thead>
                         <tr>

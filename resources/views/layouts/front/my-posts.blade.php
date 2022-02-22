@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header">@lang('translations.all_post')</div>
             <div class="card-body">
-                <a href="{{ route('user.posts.create') }}" class="btn btn-success mb-3">@lang('translations.add_n_post')</a>
+                {{-- <a href="{{ route('user.posts.create') }}" class="btn btn-success mb-3">@lang('translations.add_n_post')</a> --}}
                 <table class="table">
                     <thead>
                         <tr>
