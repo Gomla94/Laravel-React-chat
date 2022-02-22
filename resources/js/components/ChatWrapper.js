@@ -356,7 +356,7 @@ const ChatWrapper = (props) => {
                                 src={
                                     message.user.image !== null
                                         ? `${message.user.image}`
-                                        : `../images/avatar.png`
+                                        : `../../images/avatar.png`
                                 }
                                 alt="user-image"
                                 className="chat-user-image"
@@ -376,7 +376,7 @@ const ChatWrapper = (props) => {
                                     src={
                                         message.user.image !== null
                                             ? `${message.user.image}`
-                                            : `../images/avatar.png`
+                                            : `../../images/avatar.png`
                                     }
                                     alt="user-image"
                                     className="chat-user-image"
@@ -431,7 +431,7 @@ const ChatWrapper = (props) => {
                             src={
                                 user.image !== null
                                     ? `${user.image}`
-                                    : `../images/avatar.png`
+                                    : `../../images/avatar.png`
                             }
                             className="chat-user-image"
                             alt=""

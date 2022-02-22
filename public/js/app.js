@@ -2846,7 +2846,7 @@ var ChatWrapper = function ChatWrapper(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "sent-message-user-image-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
+              src: message.user.image !== null ? "".concat(message.user.image) : "../../images/avatar.png",
               alt: "user-image",
               className: "chat-user-image"
             })
@@ -2863,7 +2863,7 @@ var ChatWrapper = function ChatWrapper(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               href: "/all-users/".concat(toUserId),
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-                src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
+                src: message.user.image !== null ? "".concat(message.user.image) : "../../images/avatar.png",
                 alt: "user-image",
                 className: "chat-user-image"
               })
@@ -2914,7 +2914,7 @@ var ChatWrapper = function ChatWrapper(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "chat-user-image-wrapper",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-            src: user.image !== null ? "".concat(user.image) : "../images/avatar.png",
+            src: user.image !== null ? "".concat(user.image) : "../../images/avatar.png",
             className: "chat-user-image",
             alt: ""
           })

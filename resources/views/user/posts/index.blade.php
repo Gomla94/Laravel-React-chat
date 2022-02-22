@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.front.app')
 @section('content')
 <div class="container">
     <div class="col-md-10">
@@ -17,7 +17,7 @@
                         @foreach ($my_posts as $post)
                             <tr>
                                 <td>{{ $post->title }}</td>
-                                <td style="display:flex;">
+                                <td style="display:flex;justify-content:space-between">
                                     <a href="{{ route('user.posts.edit', $post->id) }}" class="btn btn-warning mr-3">@lang('translations.edit')</a>
                                     <form action="{{ route('user.posts.delete', $post->id) }}" method="POST">
                                         @csrf

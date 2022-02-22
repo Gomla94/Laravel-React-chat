@@ -20,8 +20,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "mcamara/laravel-localization": "^1.6",
         "pusher/pusher-php-server": "^7.0",
-        "socialiteproviders/instagram": "^4.1",
-        "stevebauman/location": "^6.3"
+        "socialiteproviders/instagram": "^4.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
