@@ -174,13 +174,15 @@
               id="{{ $post->id }}"
             ></i>
           </div>
-          @if(!$post->is_shared || $post->is_shared && $post->shared_by !== Auth::id())
-          <div class="main-post-share">
-            <form action="{{ route('post.share', $post->id) }}" method="POST">
-              @csrf
-              <button class="fa-solid fa-share share-btn"></button>
-            </form>
-          </div>
+          @if(Auth::check())
+            @if(!$post->is_shared || $post->is_shared && $post->shared_by !== Auth::id())
+            <div class="main-post-share">
+              <form action="{{ route('post.share', $post->id) }}" method="POST">
+                @csrf
+                <button class="fa-solid fa-share share-btn"></button>
+              </form>
+            </div>
+            @endif
           @endif
         </div>
         <div class="main-post-comments-section"></div>
