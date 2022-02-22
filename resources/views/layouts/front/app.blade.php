@@ -39,9 +39,7 @@
 
     @yield('css')
 
-    @if(Auth::check())
-    <script src="{{ asset('js/app.js?version=19') }}"></script>
-    @endif
+  
 
     @if(!Auth::check())
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -276,7 +274,9 @@
         @yield('content')
     </div>
 
-
+    @if(Auth::check())
+    <script src="{{ asset('js/app.js?version=19') }}"></script>
+    @endif
     @stack('js')
   </body>
 </html>
