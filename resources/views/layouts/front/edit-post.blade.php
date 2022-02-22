@@ -1,6 +1,6 @@
 @extends('layouts.front.app')
 @section('content')
-<div class="container-fluid">
+{{-- <div class="container-fluid">
     <div class="col-md-12">
         <div class="card profile-card">
             <div class="card-header">@lang('translations.edit_post'): <strong>{{ $post->title }}</strong></div>
@@ -51,5 +51,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
