@@ -26,9 +26,11 @@
 
                     <div class="form-group">
                         <label for="image">@lang('translations.image')</label>
+                        @if($appeal->image_path !== null)
                         <div>
                             <img src="{{ $appeal->image_path }}" class="mb-3" alt="" width="200px" height="100px">
                         </div>
+                        @endif
                         <input type="file" accept="image/*" class="form-control" name="appeal_image[]">
                         @if($errors->has('appeal_image.*'))
                             @foreach($errors->get('appeal_image.*') as $error)
@@ -41,9 +43,11 @@
 
                     <div class="form-group">
                         <label for="video">@lang('translations.video')</label>
+                        @if($appeal->video_path !== null)
                         <div>
                             <video src="{{ $appeal->video_path }}" controls class="mb-3" width="200px" height="100px"></video>
                         </div>
+                        @endif
                         <input type="file" class="form-control" name="appeal_video">
                         @error('appeal_video')
                         <span style="color:red">{{$message}}</span>

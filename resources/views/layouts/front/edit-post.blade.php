@@ -26,9 +26,11 @@
 
                     <div class="form-group">
                         <label for="image">@lang('translations.image')</label>
-                        <div>
-                            <img src="{{ $post->image_path }}" class="mb-3" alt="" width="200px" height="100px">
-                        </div>
+                        @if($post->image_path !== null)
+                            <div>
+                                <img src="{{ $post->image_path }}" class="mb-3" alt="" width="200px" height="100px">
+                            </div>
+                        @endif
                         <input type="file" class="form-control" name="post_image">
                         @error('image')
                         <span style="color:red">{{$message}}</span>
@@ -37,9 +39,11 @@
 
                     <div class="form-group">
                         <label for="video">@lang('translations.video')</label>
+                        @if($post->video_path !== null)
                         <div>
                             <video src="{{ $post->video_path }}" controls class="mb-3" width="200px" height="100px"></video>
                         </div>
+                        @endif
                         <input type="file" class="form-control" name="post_video">
                         @error('video')
                         <span style="color:red">{{$message}}</span>
