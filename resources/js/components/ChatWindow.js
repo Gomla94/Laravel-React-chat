@@ -5,7 +5,7 @@ import notify from "../src/notify";
 import ChatWrapper from "./ChatWrapper";
 
 const ChatWindow = () => {
-    const authId = window.Laravel.user.unique_id;
+    const authId = window.atob(window.uuxyz.uuxyzq);
     const [showChatWrapper, setShowChatWrapper] = useState(false);
     const [showAlertMessages, setShowAlertMessages] = useState(true);
     const [users, setUsers] = useState([]);

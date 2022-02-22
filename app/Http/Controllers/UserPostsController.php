@@ -49,7 +49,8 @@ class UserPostsController extends Controller
             'image_name' => request()->file('post_image') ? basename($image_path) : null,
             'image_path' => request()->file('post_image') ? Storage::disk('s3')->url($image_path) : null,
             'video_name' => request()->file('post_video') ? basename($video_path) : null,
-            'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : null
+            'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : null,
+            'country' => $request->country
         ]);
 
         return redirect()->route('welcome');
@@ -83,7 +84,8 @@ class UserPostsController extends Controller
             'image_name' => request()->file('post_image') ? basename($image_path) : $post->image_name,
             'image_path' => request()->file('post_image') ? Storage::disk('s3')->url($image_path) : $post->image_path,
             'video_name' => request()->file('post_video') ? basename($video_path) : $post->video_name,
-            'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : $post->video_path
+            'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : $post->video_path,
+            'country' => $request->country
         ]);
 
         return redirect()->route('welcome');
@@ -141,5 +143,23 @@ class UserPostsController extends Controller
             return $th->getMessage();
         }
        
+    }
+
+    public function share_post(Post $post)
+    {
+        $post_to_share = $post->with('user')->first();
+        $shared_post = Post::create([
+            'user_id' => $post_to_share->user_id,
+            'title' => $post_to_share->title,
+            'description' => $post_to_share->description,
+            'image_name' => $post_to_share->image_name,
+            'image_path' => $post_to_share->image_path,
+            'video_name' => $post_to_share->video_name,
+            'video_path' => $post_to_share->video_path,
+            'is_shared' => true,
+            'shared_by' => auth()->user()->id
+        ]);
+
+        return back();
     }
 }

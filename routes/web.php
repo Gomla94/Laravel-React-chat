@@ -44,6 +44,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
     Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
     Route::get('payment', [FrontController::class, 'payment'])->name('payment');
+    Route::post('posts/{post}', [UserPostsController::class, 'share_post'])->name('post.share');
 
 
     Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {

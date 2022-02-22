@@ -2235,7 +2235,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var ChatWindow = function ChatWindow() {
-  var authId = window.Laravel.user.unique_id;
+  var authId = window.atob(window.uuxyz.uuxyzq);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2500,7 +2500,7 @@ var ChatWrapper = function ChatWrapper(props) {
       blockedUserId = _useState12[0],
       setBlockedUserId = _useState12[1];
 
-  var authId = window.Laravel.user.unique_id;
+  var authId = window.atob(window.uuxyz.uuxyzq);
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
@@ -2657,7 +2657,6 @@ var ChatWrapper = function ChatWrapper(props) {
 
       _chat.prepend(alertMessageWrapper);
     } else {
-      console.log("messages count");
       messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
     }
   };
@@ -2861,10 +2860,13 @@ var ChatWrapper = function ChatWrapper(props) {
           className: "received-message-wrapper",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "received-message-user-image-wrapper",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
-              alt: "user-image",
-              className: "chat-user-image"
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+              href: "/all-users/".concat(toUserId),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+                src: message.user.image !== null ? "".concat(message.user.image) : "../images/avatar.png",
+                alt: "user-image",
+                className: "chat-user-image"
+              })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "received-message-info",
@@ -3090,7 +3092,10 @@ var ChatWrapper = function ChatWrapper(props) {
           className: "messages-top-section",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "chatting-with-user",
-            children: [" ", chattingWithUser]
+            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+              href: "/all-users/".concat(toUserId),
+              children: chattingWithUser
+            })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "chatting-user-status",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -3173,7 +3178,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var NewSubscribtionNotification = function NewSubscribtionNotification() {
-  var authId = window.Laravel.user.id;
+  var authId = window.atob(window.uuxyz.uuxyzd);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3507,7 +3512,8 @@ __webpack_require__.r(__webpack_exports__);
   // baseURL: "https://seriousapp.test/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
-    authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)
+    authorization: "Bearer ".concat(window.uuxyz ? window.atob(window.uuxyz.uuxyzt) : null // window.Laravel ? window.Laravel.user.api_token : null
+    )
   }
 }));
 
@@ -3532,7 +3538,8 @@ __webpack_require__.r(__webpack_exports__);
   // baseURL: "https://seriousapp.test/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
-    authorization: "Bearer ".concat(window.Laravel ? window.Laravel.user.api_token : null)
+    authorization: "Bearer ".concat(window.uuxyz ? window.atob(window.uuxyz.uuxyzt) : null // window.Laravel ? window.Laravel.user.api_token : null
+    )
   }
 }));
 

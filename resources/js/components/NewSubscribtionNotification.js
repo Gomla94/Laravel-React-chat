@@ -3,7 +3,7 @@ import Notifications from "./Notifications";
 import notify from "../src/notify";
 
 const NewSubscribtionNotification = () => {
-    const authId = window.Laravel.user.id;
+    const authId = window.atob(window.uuxyz.uuxyzd);
     const [showNotifications, setShowNotifications] = useState(false);
     const [notifications, setNotifications] = useState(null);
     const navbarChatIcon = document.querySelector(".navbar-user-comment");

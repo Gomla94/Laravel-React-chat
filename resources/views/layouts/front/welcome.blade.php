@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 
+@if(auth()->user() == null)
 <div class="container-fluid brief">
   <div class="brief-container">
     <div class="brief-image-wrapper">
@@ -34,6 +35,7 @@
     </div>
   </div>
 </div>
+@endif
 
 <div class="help-section">
   <div class="help-section-title">@lang("translations.need_help_now")</div>
@@ -89,89 +91,100 @@
   </div>
   <div class="posts-wrapper">
     @foreach($random_posts as $post)
-    <div class="main-post" data-id="{{ $post->id }}">
-      <div class="main-post-user-info-wrapper">
-        <div class="main-post-user-image-wrapper">
+      <div class="main-post" data-id="{{ $post->id }}">
+        <div class="main-post-user-info-wrapper">
+          <div class="main-post-user-image-wrapper">
+            <a rel="preconnect" href="{{ route('user.page', $post->user->unique_id) }}">
+            <img
+              src="{{asset($post->user->image ?? 'images/avatar.png')}}"
+              alt="user-image"
+              class="main-post-user-image"
+            />
+            </a>
+          </div>
           <a rel="preconnect" href="{{ route('user.page', $post->user->unique_id) }}">
-          <img
-            src="{{asset($post->user->image ?? 'images/avatar.png')}}"
-            alt="user-image"
-            class="main-post-user-image"
-          />
+            <div class="main-post-user-names-wrapper">
+              <span class="main-post-user-name">
+                {{ $post->user->name }}
+              </span>
+              <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
+            </div>
           </a>
+          <span class="post-date">{{ $post->created_at->format('Y-m-d h:i A') }}</span>
         </div>
-        <a rel="preconnect" href="{{ route('user.page', $post->user->id) }}"></a>
-        <div class="main-post-user-names-wrapper">
-          <span class="main-post-user-name">{{ $post->user->name }}</span>
-          <span class="main-post-user-email">{{'@'. $post->user->name }}</span>
-        </div>
-        <span class="post-date">{{ $post->created_at->format('Y-m-d h:i A') }}</span>
-      </div>
-      <p class="main-post-title">@if($post->title) {{ $post->title }} @endif</p>
-      <p class="main-post-description">
-        @if($post->description) {{ str_limit($post->description, 500) }} @endif
-      </p>
+        <p class="main-post-title">@if($post->title) {{ $post->title }} @endif</p>
+        <p class="main-post-description">
+          @if($post->description) {{ str_limit($post->description, 500) }} @endif
+        </p>
 
-      @if($post->image_path)
-      <div class="main-post-image-wrapper">
-        <img src="{{ asset($post->image_path) }}" alt="main-post-image" class="main-post-image" />
-      </div>
-      @endif @if($post->video_path)
-      <div class="main-post-video-wrapper">
-        <video
-          controls
-          src="{{ asset($post->video_path) }}"
-          alt="main-post-video"
-          class="main-post-video"
-        ></video>
-      </div>
-      @endif
-      @if(Auth::check())
-      <div class="main-post-comment-form-wrapper">
-        <form class="main-post-comment-form">
-          <div class="form-group">
-            <textarea
-              name="title"
-              class="form-control main-post-form-textarea"
+        @if($post->image_path)
+        <div class="main-post-image-wrapper">
+          <img src="{{ asset($post->image_path) }}" alt="main-post-image" class="main-post-image" />
+        </div>
+        @endif @if($post->video_path)
+        <div class="main-post-video-wrapper">
+          <video
+            controls
+            src="{{ asset($post->video_path) }}"
+            alt="main-post-video"
+            class="main-post-video"
+          ></video>
+        </div>
+        @endif
+        @if(Auth::check())
+        <div class="main-post-comment-form-wrapper">
+          <form class="main-post-comment-form">
+            <div class="form-group">
+              <textarea
+                name="title"
+                class="form-control main-post-form-textarea"
+                id="{{ $post->id }}"
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+            <div class="comment-error-div">
+              <span class="comment-error-span"></span>
+            </div>
+            <button type="button" class="main-post-comment-button">
+              @lang("translations.add_comment")
+            </button>
+          </form>
+        </div>
+        @endif
+        <div class="main-post-socials">
+          <div class="main-post-likes">
+            <span>{{ $post->likes->count() }}</span>
+            @if(Auth::check())
+            <i
               id="{{ $post->id }}"
-              cols="30"
-              rows="10"
-            ></textarea>
+              class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }} post-heart-icon"
+            ></i>
+            @else
+            <i
+              id="{{ $post->id }}"
+              class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }}"
+            ></i>
+            @endif
           </div>
-          <div class="comment-error-div">
-            <span class="comment-error-span"></span>
+          <div class="main-post-comments">
+            <span class="comments-count-span">{{ $post->comments->count() }}</span>
+            <i
+              class="far fa-comments main-post-comments-icon"
+              id="{{ $post->id }}"
+            ></i>
           </div>
-          <button type="button" class="main-post-comment-button">
-            @lang("translations.add_comment")
-          </button>
-        </form>
-      </div>
-      @endif
-      <div class="main-post-socials">
-        <div class="main-post-likes">
-          <span>{{ $post->likes->count() }}</span>
-          @if(Auth::check())
-          <i
-            id="{{ $post->id }}"
-            class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }} post-heart-icon"
-          ></i>
-          @else
-          <i
-            id="{{ $post->id }}"
-            class="icon fas {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart' }}"
-          ></i>
+          @if(!$post->is_shared || $post->is_shared && $post->shared_by !== Auth::id())
+          <div class="main-post-share">
+            <form action="{{ route('post.share', $post->id) }}" method="POST">
+              @csrf
+              <button class="fa-solid fa-share share-btn"></button>
+            </form>
+          </div>
           @endif
         </div>
-        <div class="main-post-comments">
-          <span class="comments-count-span">{{ $post->comments->count() }}</span>
-          <i
-            class="far fa-comments main-post-comments-icon"
-            id="{{ $post->id }}"
-          ></i>
-        </div>
+        <div class="main-post-comments-section"></div>
       </div>
-      <div class="main-post-comments-section"></div>
-    </div>
     @endforeach
     {{-- <div class="more-posts-loader"></div> --}}
   </div>
@@ -202,7 +215,6 @@
           @enderror
       </div>
 
-
       <div class="form-group modal-checker-container">
         <label class="create-post-label image-label">@lang("translations.image")</label>
         <div class="post-modal-checker">
@@ -217,10 +229,18 @@
         @enderror
       </div>
 
-
       <div class="form-group post-modal-image-container">
           <label class="create-post-label" for="image">@lang("translations.image")</label>
           <input type="file" accept="image/*" class="form-control" name="post_image">
+      </div>
+
+      <div class="form-group post-modal-image-container">
+        <label class="create-post-label" for="countries">@lang("translations.country")</label>
+        <select name="country" class="form-control" id="country">
+          @foreach($countries as $country)
+            <option value="{{ $country->id }}">{{ $country->name }}</option>
+          @endforeach
+        </select>
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">@lang("translations.create_post")</button>
@@ -294,6 +314,11 @@
 
 @endsection
 @push('js')
+
+<script>
+ window.uuxyz.uuxyzc = <?php echo json_encode($user_country); ?>
+</script>
+
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ asset('js/addPostComment.js') }}" defer type="module"></script>
 <script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
@@ -323,15 +348,15 @@
         },
         breakpoints: {
           100: {
-            slidesPerView:2,
+            slidesPerView:1,
             spaceBetween: 30
           },
           480: {
-            slidesPerView:2,
+            slidesPerView:1,
             spaceBetween: 30
           },
           640: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 40
           },
 

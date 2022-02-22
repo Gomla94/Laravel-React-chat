@@ -10,7 +10,7 @@ const ChatWrapper = (props) => {
     const [toUserId, setToUserId] = useState(null);
     const [chattingWithUser, setChattingWithUser] = useState(null);
     const [blockedUserId, setBlockedUserId] = useState(null);
-    const authId = window.Laravel.user.unique_id;
+    const authId = window.atob(window.uuxyz.uuxyzq);
     const [spinner, setSpinner] = useState(null);
     const [userIsAlreadyBlocked, setUserIsAlreadyBlocked] = useState(null);
     const [blockMessage, setBlockMessage] = useState(null);
@@ -179,7 +179,6 @@ const ChatWrapper = (props) => {
             alertMessageWrapper.appendChild(messageCountSpan);
             chat.prepend(alertMessageWrapper);
         } else {
-            console.log("messages count");
             messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
         }
     };
@@ -372,15 +371,17 @@ const ChatWrapper = (props) => {
                 return (
                     <div className="received-message-wrapper" key={index}>
                         <div className="received-message-user-image-wrapper">
-                            <img
-                                src={
-                                    message.user.image !== null
-                                        ? `${message.user.image}`
-                                        : `../images/avatar.png`
-                                }
-                                alt="user-image"
-                                className="chat-user-image"
-                            />
+                            <a href={`/all-users/${toUserId}`}>
+                                <img
+                                    src={
+                                        message.user.image !== null
+                                            ? `${message.user.image}`
+                                            : `../images/avatar.png`
+                                    }
+                                    alt="user-image"
+                                    className="chat-user-image"
+                                />
+                            </a>
                         </div>
                         <div className="received-message-info">
                             {renderMessageType(message)}
@@ -612,7 +613,9 @@ const ChatWrapper = (props) => {
                     <div className="messages-top-section">
                         <div className="chatting-with-user">
                             {" "}
-                            {chattingWithUser}
+                            <a href={`/all-users/${toUserId}`}>
+                                {chattingWithUser}
+                            </a>
                         </div>
                         <div className="chatting-user-status">
                             <div className="chatting-user-status-icon"></div>

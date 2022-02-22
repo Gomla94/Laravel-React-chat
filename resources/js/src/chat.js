@@ -6,7 +6,8 @@ export default axios.create({
     headers: {
         "Access-Control-Allow-Origin": "*",
         authorization: `Bearer ${
-            window.Laravel ? window.Laravel.user.api_token : null
+            window.uuxyz ? window.atob(window.uuxyz.uuxyzt) : null
+            // window.Laravel ? window.Laravel.user.api_token : null
         }`,
     },
 });

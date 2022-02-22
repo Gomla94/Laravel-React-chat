@@ -9,12 +9,12 @@ use App\Models\InterestingType;
 use App\Models\Post;
 use App\Models\User;
 use App\Notifications\NewSubscribtion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Omnipay\Omnipay;
-
 
 class FrontController extends Controller
 {
@@ -25,27 +25,38 @@ class FrontController extends Controller
     }
 
 
-    public function home()
+    public function home(Request $request)
     {
-
+        
+        $user_ip = $request->ip();
+        $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=195.208.218.98"));
+        $user_country = $geo["geoplugin_countryName"];
+        
         $user = Auth::user();
 
         if ($user) {
             $user->update(['api_token' => str_random(60)]);
         }
 
-        $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
+        $posts_with_user_country = Post::with(['user', 'comments', 'likes'])->where('country', $user_country)->inRandomOrder()->orderBy('created_at', 'desc')->get();
+
+        $posts_without_user_country = Post::with(['user', 'comments', 'likes'])->where('country', '!=', $user_country)
+        ->orWhere('country', null)->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
         
+        $random_posts = $posts_with_user_country->merge($posts_without_user_country);
+
         if(request('search-key')) {
             $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
         }
 
-        $random_users = User::whereType(User::USER_TYPE)->inRandomOrder()->limit(10)->get();
         $random_appeals = Appeal::with('user')->inRandomOrder()->limit(12)->get();
+        $countries = Country::all();
+        
         return view('layouts.front.welcome', [
-            'random_users' => $random_users,
             'random_appeals' => $random_appeals,
             'random_posts' => $random_posts,
+            'countries' => $countries,
+            'user_country' => $user_country
         ]);
     }
 
@@ -99,7 +110,6 @@ class FrontController extends Controller
             }
         }
         
-
         $interesting_types = InterestingType::all();
         $countries = Country::all();
         return view('layouts.front.users', [

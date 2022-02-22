@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
 class AddPostRequest extends FormRequest
@@ -29,6 +30,7 @@ class AddPostRequest extends FormRequest
             'post_description' => ['sometimes', 'nullable', 'string'],
             'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
             'post_video' => ['max:10500', 'mimes:mp4,mov,ogg,qt'],
+            'country' => ['string', Rule::exists('countries', 'name')]
         ];
     }
 

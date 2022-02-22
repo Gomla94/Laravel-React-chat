@@ -87,8 +87,8 @@ const createPost = (post) => {
             </div>
             <p class="main-post-title">${post.title}</p>
             ${post.description ? appendPostDescription(post) : ""}
-            ${post.image ? appendPostImage(post) : ""}
-            ${post.video ? appendPostVideo(post) : ""}
+            ${post.image_path ? appendPostImage(post) : ""}
+            ${post.video_path ? appendPostVideo(post) : ""}
             <div class="main-post-comment-form-wrapper">
             <form class="main-post-comment-form">
                 <div class="form-group">
@@ -155,7 +155,7 @@ function appendPostDescription(post) {
 function appendPostImage(post) {
     return `
         <div class="main-post-image-wrapper">
-        <img src="${post.image}" alt="post-image" class="main-post-image" />
+        <img src="${post.image_path}" alt="post-image" class="main-post-image" />
         </div>
     `;
 }
@@ -165,7 +165,7 @@ function appendPostVideo(post) {
         <div class="main-post-video-wrapper">
         <video
             controls
-            src="${post.video}"
+            src="${post.video_path}"
             alt="video"
             class="main-post-video"
         ></video>

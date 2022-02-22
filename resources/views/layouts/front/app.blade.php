@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
     <title>Magaxat</title>
-    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=28')}}" />
+    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=29')}}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
@@ -40,7 +40,7 @@
     @yield('css')
 
     @if(Auth::check())
-    <script src="{{ asset('js/app.js?version=15') }}" defer></script>
+    <script src="{{ asset('js/app.js?version=16') }}" defer></script>
     @endif
 
     @if(!Auth::check())
@@ -51,9 +51,10 @@
     <script src="{{asset('js/newIndex.js?version=5')}}" defer></script>
 
     <script>
-      window.Laravel = <?php echo json_encode([
-              'csrfToken' => Csrf_token(),
-              'user' => Auth::check() ? auth()->user() : null,
+      window.uuxyz = <?php echo json_encode([
+            'uuxyzd' => Auth::check() ? base64_encode(auth()->user()->id) : null,
+            'uuxyzt' => Auth::check() ? base64_encode(auth()->user()->api_token) : null,
+            'uuxyzq' => Auth::check() ? base64_encode(auth()->user()->unique_id) : null,
           ]);
       ?>
   </script>
@@ -213,7 +214,7 @@
                 </form>
             </div>
             @else
-            <a rel="preconnect" href="{{ route('login') }}">@lang('translations.log_in')</a>
+            <a rel="preconnect" class="login-link" href="{{ route('login') }}">@lang('translations.log_in')</a>
             @endif
           </div>
         @else
@@ -264,7 +265,7 @@
                   @endforeach
               </div>
             </div>
-            <a rel="preconnect" href="{{ route('login') }}">@lang('translations.log_in')</a>
+            <a rel="preconnect" class="login-link" href="{{ route('login') }}">@lang('translations.log_in')</a>
           </div>
         @endif
         </div>
