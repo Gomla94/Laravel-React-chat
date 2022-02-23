@@ -240,8 +240,11 @@
         <label class="create-post-label" for="countries">@lang("translations.country")</label>
         <select name="country" class="form-control" id="country">
           @foreach($countries as $country)
-            <option value="{{ $country->id }}">{{ $country->name }}</option>
+            <option value="{{ $country->name }}">{{ $country->name }}</option>
           @endforeach
+          @error('country')
+            <span style="color:red">{{$message}}</span>
+          @enderror
         </select>
       </div>
 
