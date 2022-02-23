@@ -8,8 +8,10 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserPostsController extends Controller
 {
@@ -159,6 +161,9 @@ class UserPostsController extends Controller
             'is_shared' => true,
             'shared_by' => auth()->user()->id
         ]);
+
+        Alert::success('Post shared successfully');
+
 
         return back();
     }

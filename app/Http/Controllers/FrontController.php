@@ -27,23 +27,32 @@ class FrontController extends Controller
 
     public function home(Request $request)
     {
-        
-        $user_ip = $request->ip();
-        $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip={$user_ip}"));
-        $user_country = $geo["geoplugin_countryName"];
-        
+        if(!$sock = @fsockopen('www.google.com', 80))
+        {
+            $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->orderBy('created_at', 'desc')->get();
+
+        }
+        else
+        {
+            $user_ip = $request->ip();
+            $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip={$user_ip}"));
+            $user_country = $geo['geoplugin_countryName'];
+
+            $posts_with_user_country = Post::with(['user', 'comments', 'likes'])->where('country', $user_country)->inRandomOrder()->orderBy('created_at', 'desc')->get();
+
+            $posts_without_user_country = Post::with(['user', 'comments', 'likes'])->where('country', '!=', $user_country)
+            ->orWhere('country', null)->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
+            
+            $random_posts = $posts_with_user_country->merge($posts_without_user_country);
+        }
+       
         $user = Auth::user();
 
         if ($user) {
             $user->update(['api_token' => str_random(60)]);
         }
 
-        $posts_with_user_country = Post::with(['user', 'comments', 'likes'])->where('country', $user_country)->inRandomOrder()->orderBy('created_at', 'desc')->get();
-
-        $posts_without_user_country = Post::with(['user', 'comments', 'likes'])->where('country', '!=', $user_country)
-        ->orWhere('country', null)->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
         
-        $random_posts = $posts_with_user_country->merge($posts_without_user_country);
 
         if(request('search-key')) {
             $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
