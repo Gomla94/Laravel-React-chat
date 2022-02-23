@@ -176,7 +176,11 @@ function appendPostVideo(post) {
 }
 
 function appendShareForm(post) {
-    if (window.uuxyz.uuxyzd !== null) {
+    if (
+        window.uuxyz.uuxyzd !== null &&
+        post.user_id !== window.atob(window.uuxyz.uuzyxd) &&
+        post.shared_by !== window.atob(window.uuxyz.uuzyxd)
+    ) {
         const webPath = window.location.origin;
         const csrfToken = document.querySelector(
             'meta[name="csrf-token"]'
@@ -194,6 +198,53 @@ function appendShareForm(post) {
         return "";
     }
 }
+
+// const showPostCommentSection = async (e) => {
+//     const clickedCommentIcon = e.target;
+//     const addCommentSection =
+//         clickedCommentIcon.closest(".main-post-socials").previousElementSibling;
+
+//     addCommentSection.classList.toggle("show-main-post-comment-form-wrapper");
+
+//     const commentsSection =
+//         clickedCommentIcon.closest(".main-post-socials").nextElementSibling;
+
+//     commentsSection.classList.toggle("show-add-comment-section");
+
+//     const shownCommentsSection = commentsSection.querySelectorAll(".comment");
+
+//     if (shownCommentsSection.length > 0) {
+//         commentsSection.classList.toggle("show-main-post-comments-section");
+
+//         shownCommentsSection.forEach((section) => {
+//             section.remove();
+//         });
+//         return false;
+//     }
+
+//     const comments = await fetchAllComments(clickedCommentIcon.id);
+//     if (comments.length === 0) {
+//         return false;
+//     }
+
+//     comments.forEach((comment) => {
+//         const commentDiv = `<div id="comment" class="comment">
+//         <div class="comment-date">
+//         <span class="comment-user-name">${comment.user.name}</span>
+//         <span class="comment-date">${new Date(
+//             comment.created_at
+//         ).toDateString()}</span>
+//         </div>
+//         <p class="comment-body">${comment.title}</p>
+//       </div>
+//         `;
+//         clickedCommentIcon.closest(
+//             ".main-post-socials"
+//         ).nextElementSibling.innerHTML += commentDiv;
+//     });
+
+//     commentsSection.classList.toggle("show-main-post-comments-section");
+// };
 
 function checkIfAuthUserLikedPost(post) {
     if (window.uuxyz.uuxyzd !== null) {
