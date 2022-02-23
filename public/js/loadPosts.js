@@ -219,10 +219,12 @@ const showPostCommentSection = async (e) => {
 };
 
 function checkIfAuthUserLikedPost(post) {
-    if (window.Laravel.user !== null) {
+    if (window.uuxyz.uuxyzd !== null) {
         let liked = false;
         post.likes.forEach((item) => {
-            item.user_id === window.Laravel.user.id ? (liked = true) : null;
+            item.user_id === window.atob(window.uuxyz.uuxyzd)
+                ? (liked = true)
+                : null;
         });
         return liked;
     } else {
