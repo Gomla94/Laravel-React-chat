@@ -3242,6 +3242,10 @@ a {
         right: 22%;
     }
 
+    .help-section {
+        height: 90%;
+    }
+
     .appeal-report-wrapper {
         flex-direction: column;
     }
