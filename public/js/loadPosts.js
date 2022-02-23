@@ -111,9 +111,7 @@ const createPost = (post) => {
             <div class="main-post-socials">
             <div class="main-post-likes">
                 <span>${post.likes ? post.likes.length : 0}</span>
-                <i id=${post.id} class="fas fa-heart main-post-heart-icon ${
-        window.Laravel.user ? "post-heart-icon" : ""
-    }
+                <i id=${post.id} class="fas fa-heart main-post-heart-icon 
     ${checkIfAuthUserLikedPost(post) ? "liked-post-heart-icon" : ""}"></i>
             </div>
             <div class="main-post-comments">

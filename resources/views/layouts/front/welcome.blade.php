@@ -175,7 +175,7 @@
             ></i>
           </div>
           @if(Auth::check())
-            @if(!$post->is_shared || $post->is_shared && $post->shared_by !== Auth::id())
+            @if($post->user_id !== Auth::id())
             <div class="main-post-share">
               <form action="{{ route('post.share', $post->id) }}" method="POST">
                 @csrf
