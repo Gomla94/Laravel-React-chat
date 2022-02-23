@@ -534,7 +534,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
 </div>
 
   @push('js')
-  <script src="{{ asset('js/profilePage.js') }}" defer></script>
+  <script src="{{ asset('js/profilePage.js?version=1') }}" defer></script>
   <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
   <script src="{{ asset('js/addPostComment.js?version=1') }}" defer type="module"></script>
   <script src="{{ asset('js/addPostLike.js?version=1') }}" defer type="module"></script>
