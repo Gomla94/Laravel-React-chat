@@ -328,7 +328,7 @@
 <script src="{{ asset('js/addPostComment.js') }}" defer type="module"></script>
 <script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
 <script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
-<script src="{{ asset('js/loadPosts.js?version=5') }}" defer type="module"></script>
+<script src="{{ asset('js/loadPosts.js?version=6') }}" defer type="module"></script>
 <script>
   const postsModalContent = document.querySelector('.posts-modal-wrapper');
   const appealsModalContent = document.querySelector('.appeals-modal-wrapper');

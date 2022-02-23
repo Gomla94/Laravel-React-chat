@@ -38,12 +38,14 @@ class FrontController extends Controller
             $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip={$user_ip}"));
             $user_country = $geo['geoplugin_countryName'];
 
-            $posts_with_user_country = Post::with(['user', 'comments', 'likes'])->where('country', $user_country)->inRandomOrder()->orderBy('created_at', 'desc')->get();
+            // $posts_with_user_country = Post::with(['user', 'comments', 'likes'])->where('country', $user_country)->inRandomOrder()->limit(2)->orderBy('created_at', 'desc')->get();
 
-            $posts_without_user_country = Post::with(['user', 'comments', 'likes'])->where('country', '!=', $user_country)
-            ->orWhere('country', null)->inRandomOrder()->limit(2)->orderBy('created_at', 'desc')->get();
+            // $posts_without_user_country = Post::with(['user', 'comments', 'likes'])->where('country', '!=', $user_country)
+            // ->orWhere('country', null)->inRandomOrder()->limit(2)->orderBy('created_at', 'desc')->get();
             
-            $random_posts = $posts_with_user_country->merge($posts_without_user_country);
+            // $random_posts = $posts_with_user_country->merge($posts_without_user_country);
+            $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(2)->orderBy('created_at', 'desc')->get();
+
         }
        
         $user = Auth::user();
