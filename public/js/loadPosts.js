@@ -178,8 +178,8 @@ function appendPostVideo(post) {
 function appendShareForm(post) {
     if (
         window.uuxyz.uuxyzd !== null &&
-        post.user_id !== window.atob(window.uuxyz.uuzyd) &&
-        post.shared_by !== window.atob(window.uuxyz.uuzyd)
+        post.user_id !== window.atob(window.uuxyz.uuxyzd) &&
+        post.shared_by !== window.atob(window.uuxyz.uuxyzd)
     ) {
         const webPath = window.location.origin;
         const csrfToken = document.querySelector(
