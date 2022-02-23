@@ -1,6 +1,5 @@
 import { addComment } from "../js/addPostComment.js";
 import { showCommentSection } from "../js/addPostComment.js";
-import { fetchAllComments } from "../js/addPostComment.js";
 import { likePostClickHandler } from "../js/addPostLike.js";
 
 const postsWrapper = document.querySelector(".posts-wrapper");
@@ -90,38 +89,43 @@ const createPost = (post) => {
             ${post.image_path ? appendPostImage(post) : ""}
             ${post.video_path ? appendPostVideo(post) : ""}
             <div class="main-post-comment-form-wrapper">
-            <form class="main-post-comment-form">
-                <div class="form-group">
-                <textarea
-                    name="title"
-                    class="form-control main-post-form-textarea"
-                    id="${post.id}"
-                    cols="30"
-                    rows="10"
-                ></textarea>
-                </div>
-                <div class="comment-error-div">
-                    <span class="comment-error-span"></span>
-                </div>
-                <button type="button" class="main-post-comment-button">
-                Add Comment
-                </button>
-            </form>
+                <form class="main-post-comment-form">
+                    <div class="form-group">
+                    <textarea
+                        name="title"
+                        class="form-control main-post-form-textarea"
+                        id="${post.id}"
+                        cols="30"
+                        rows="10"
+                    ></textarea>
+                    </div>
+                    <div class="comment-error-div">
+                        <span class="comment-error-span"></span>
+                    </div>
+                    <button type="button" class="main-post-comment-button">
+                    Add Comment
+                    </button>
+                </form>
             </div>
             <div class="main-post-socials">
-            <div class="main-post-likes">
-                <span>${post.likes ? post.likes.length : 0}</span>
-                <i id=${post.id} class="fas fa-heart main-post-heart-icon 
-    ${checkIfAuthUserLikedPost(post) ? "liked-post-heart-icon" : ""}"></i>
-            </div>
-            <div class="main-post-comments">
-                <span class="comments-count-span">${
-                    post.comments ? post.comments.length : 0
-                }</span>
-                <i class="far fa-comments main-post-comments-icon" id=${
-                    post.id
-                }></i>
-            </div>
+                <div class="main-post-likes">
+                    <span>${post.likes ? post.likes.length : 0}</span>
+                    <i id=${post.id} class="fas fa-heart main-post-heart-icon 
+                        ${
+                            checkIfAuthUserLikedPost(post)
+                                ? "liked-post-heart-icon"
+                                : ""
+                        }"></i>
+                </div>
+                <div class="main-post-comments">
+                    <span class="comments-count-span">${
+                        post.comments ? post.comments.length : 0
+                    }</span>
+                    <i class="far fa-comments main-post-comments-icon" id=${
+                        post.id
+                    }></i>
+                </div>
+                ${appendShareForm(post)}
             </div>
             <div class="main-post-comments-section"></div>
         </div>
@@ -171,52 +175,25 @@ function appendPostVideo(post) {
     `;
 }
 
-const showPostCommentSection = async (e) => {
-    const clickedCommentIcon = e.target;
-    const addCommentSection =
-        clickedCommentIcon.closest(".main-post-socials").previousElementSibling;
+function appendShareForm(post) {
+    if (window.uuxyz.uuxyzd !== null) {
+        const webPath = window.location.origin;
+        const csrfToken = document.querySelector(
+            'meta[name="csrf-token"]'
+        ).content;
 
-    addCommentSection.classList.toggle("show-main-post-comment-form-wrapper");
-
-    const commentsSection =
-        clickedCommentIcon.closest(".main-post-socials").nextElementSibling;
-
-    commentsSection.classList.toggle("show-add-comment-section");
-
-    const shownCommentsSection = commentsSection.querySelectorAll(".comment");
-
-    if (shownCommentsSection.length > 0) {
-        commentsSection.classList.toggle("show-main-post-comments-section");
-
-        shownCommentsSection.forEach((section) => {
-            section.remove();
-        });
-        return false;
-    }
-
-    const comments = await fetchAllComments(clickedCommentIcon.id);
-    if (comments.length === 0) {
-        return false;
-    }
-
-    comments.forEach((comment) => {
-        const commentDiv = `<div id="comment" class="comment">
-        <div class="comment-date">
-        <span class="comment-user-name">${comment.user.name}</span>
-        <span class="comment-date">${new Date(
-            comment.created_at
-        ).toDateString()}</span>
+        return `
+        <div class="main-post-share">
+            <form action="${webPath}/posts/${post.id}/share" method="POST">
+                <input type="hidden" name="_token" value="${csrfToken}"/>
+                <button class="fa-solid fa-share share-btn"></button>
+            </form>
         </div>
-        <p class="comment-body">${comment.title}</p>
-      </div>
-        `;
-        clickedCommentIcon.closest(
-            ".main-post-socials"
-        ).nextElementSibling.innerHTML += commentDiv;
-    });
-
-    commentsSection.classList.toggle("show-main-post-comments-section");
-};
+    `;
+    } else {
+        return "";
+    }
+}
 
 function checkIfAuthUserLikedPost(post) {
     if (window.uuxyz.uuxyzd !== null) {

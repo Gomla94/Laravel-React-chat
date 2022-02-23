@@ -149,21 +149,19 @@ class UserPostsController extends Controller
 
     public function share_post(Post $post)
     {
-        $post_to_share = $post->with('user')->first();
         $shared_post = Post::create([
-            'user_id' => $post_to_share->user_id,
-            'title' => $post_to_share->title,
-            'description' => $post_to_share->description,
-            'image_name' => $post_to_share->image_name,
-            'image_path' => $post_to_share->image_path,
-            'video_name' => $post_to_share->video_name,
-            'video_path' => $post_to_share->video_path,
+            'user_id' => Auth::id(),
+            'title' => $post->title,
+            'description' => $post->description,
+            'image_name' => $post->image_name,
+            'image_path' => $post->image_path,
+            'video_name' => $post->video_name,
+            'video_path' => $post->video_path,
             'is_shared' => true,
             'shared_by' => auth()->user()->id
         ]);
 
         Alert::success('Post shared successfully');
-
 
         return back();
     }
