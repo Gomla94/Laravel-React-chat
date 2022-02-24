@@ -67,7 +67,7 @@
   </div>
 </div>
 
-<div class="share-links-wrapper">
+{{-- <div class="share-links-wrapper">
   <div class="share-links-container">
     <div class="facebook-share-link">
       <a href="{{ $share_links['facebook'] }}" target="_blank">Facebook</a>
@@ -79,7 +79,7 @@
       <a href="{{ $share_links['linkedin'] }}" target="_blank">Linkedin</a>
     </div>
   </div>
-</div>
+</div> --}}
 
 <div class="main-posts">
   <div class="main-posts-buttons-container">

@@ -1,5 +1,6 @@
 const showPaymentFormBtn = document.querySelector(".pdf-button-one-wrapper");
 const showPaymentDetails = document.querySelector(".pdf-button-two-wrapper");
+const appealIdBtn = document.querySelector(".appeal-id-btn-wrapper");
 const paymentWrapper = document.querySelector(".currency-wrapper");
 const paymentData = document.querySelector(".trans-data");
 
@@ -38,3 +39,4 @@ const togglePaymentDiv = () => {
 
 // showPaymentFormBtn.addEventListener("click", togglePaymentDiv);
 showPaymentDetails.addEventListener("click", togglePaymentDetailsWrapper);
+appealIdBtn.addEventListener("click", togglePaymentDetailsWrapper);

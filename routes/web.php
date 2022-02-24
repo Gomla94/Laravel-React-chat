@@ -40,14 +40,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::post('/unsubscribe/{id}',[FrontController::class, 'unsubscribe'])->name('unsubscribe');
     Route::get('interesting-types', [InterestingTypesController::class, 'all_types']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
-    Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
     Route::get('/loadposts', [FrontController::class, 'load_more_posts']);
     Route::get('payment', [FrontController::class, 'payment'])->name('payment');
     Route::post('posts/{post}/share', [UserPostsController::class, 'share_post'])->name('post.share');
 
 
     Route::group(['middleware' => 'auth', 'as' => 'user.'], function() {
+
+        // profile routes
+        Route::get('profile', [UserController::class, 'profile'])->name('profile');
+        Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
+    
         /** user posts routes */
         Route::get('my-posts', [UserPostsController::class, 'my_posts'])->name('my_posts');
         Route::get('my-posts/create', [UserPostsController::class, 'create'])->name('posts.create');

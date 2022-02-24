@@ -2559,6 +2559,12 @@ var ChatWrapper = function ChatWrapper(props) {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var chatInput = document.querySelector(".react-input-emoji--wrapper");
+    chatInput.addEventListener("click", function (e) {
+      e.target.classList.add("react-input-emoji--input2");
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     // const bellIcon = document.querySelector(".bell-icon");
     // if (bellIcon) {
     //     bellIcon.addEventListener("click", () => {

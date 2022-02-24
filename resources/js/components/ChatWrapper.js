@@ -67,6 +67,13 @@ const ChatWrapper = (props) => {
     // };
 
     useEffect(() => {
+        const chatInput = document.querySelector(".react-input-emoji--wrapper");
+        chatInput.addEventListener("click", (e) => {
+            e.target.classList.add("react-input-emoji--input2");
+        });
+    }, []);
+
+    useEffect(() => {
         // const bellIcon = document.querySelector(".bell-icon");
         // if (bellIcon) {
         //     bellIcon.addEventListener("click", () => {
