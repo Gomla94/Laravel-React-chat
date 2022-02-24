@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Omnipay\Omnipay;
+use Share;
 
 class FrontController extends Controller
 {
@@ -24,13 +25,14 @@ class FrontController extends Controller
         //
     }
 
+   
 
     public function home(Request $request)
     {
+        
         if(!$sock = @fsockopen('www.google.com', 80))
         {
             $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
-
         }
         else
         {
@@ -60,12 +62,21 @@ class FrontController extends Controller
 
         $random_appeals = Appeal::with('user')->inRandomOrder()->limit(12)->get();
         $countries = Country::all();
+
+        $current_url = url()->current();
+        $share_links = Share::page($current_url)
+                        ->facebook()
+                        ->twitter()
+                        ->linkedin()
+                        ->getRawLinks();
+
         
         return view('layouts.front.welcome', [
             'random_appeals' => $random_appeals,
             'random_posts' => $random_posts,
             'countries' => $countries,
-            'user_country' => $user_country
+            'user_country' => $user_country,
+            'share_links' => $share_links
         ]);
     }
 
@@ -143,9 +154,17 @@ class FrontController extends Controller
     public function show_appeal(Appeal $appeal)
     {
         $appeal_images = $appeal->images()->get();
+        $current_url = url()->current();
+        $share_links = Share::page($current_url)
+                        ->facebook()
+                        ->twitter()
+                        ->linkedin()
+                        ->getRawLinks();
+
         return view('layouts.front.show-appeal', [
             'appeal' => $appeal,
-            'appeal_images' => $appeal_images
+            'appeal_images' => $appeal_images,
+            'share_links' => $share_links
         ]);
     }
 

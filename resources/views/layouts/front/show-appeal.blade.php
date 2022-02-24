@@ -8,7 +8,19 @@
     <div class="main-appeal-image-container">
       <img class="main-appeal-image" src="{{ asset($appeal->image_path ?? 'placeholder.png') }}" alt="" />
     </div>
+    
     <div class="main-appeal-info-container">
+      <div class="appeal-share-links-wrapper">
+          <div class="facebook-share-link">
+            <a href="{{ $share_links['facebook'] }}" target="_blank">Facebook</a>
+          </div>
+          <div class="twitter-share-link">
+            <a href="{{ $share_links['twitter'] }}" target="_blank">Twitter</a>
+          </div>
+          <div class="linkedin-share-link">
+            <a href="{{ $share_links['linkedin'] }}" target="_blank">Linkedin</a>
+          </div>
+      </div>
       <p class="main-appeal-title">{{ $appeal->title }}</p>
       <p class="main-appeal-title">ID {{ $appeal->uniqueid }}</p>
       <p class="main-appeal-description">
@@ -52,12 +64,7 @@
         <p class="appeal-id-description">Чтобы помочь Анастасие, можете отправить вашу желаему сумму на счет Magaxat, отметив ID получателя</p>
       </div>
       <div class="main-appeal-id-container">
-        <p class="appeal-id">{{$appeal->uniqueid  }}</p>
-        <div class="appeal-id-btn-wrapper">
-          <div class="appeal-id-btn">
-            <i class="fa-solid fa-angle-right"></i>
-          </div>
-        </div>
+        <div class="pdf-btnone-wrapper">{{$appeal->uniqueid}}</div>
       </div>
     </div>
     <div class="appeal-pdf-wrapper">

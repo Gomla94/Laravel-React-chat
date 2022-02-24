@@ -67,6 +67,20 @@
   </div>
 </div>
 
+<div class="share-links-wrapper">
+  <div class="share-links-container">
+    <div class="facebook-share-link">
+      <a href="{{ $share_links['facebook'] }}" target="_blank">Facebook</a>
+    </div>
+    <div class="twitter-share-link">
+      <a href="{{ $share_links['twitter'] }}" target="_blank">Twitter</a>
+    </div>
+    <div class="linkedin-share-link">
+      <a href="{{ $share_links['linkedin'] }}" target="_blank">Linkedin</a>
+    </div>
+  </div>
+</div>
+
 <div class="main-posts">
   <div class="main-posts-buttons-container">
     <p class="main-posts-title">@lang("translations.news")</p>

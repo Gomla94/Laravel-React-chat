@@ -66,7 +66,7 @@
         <a rel="preconnect" href="{{ route('all-users') }}">@lang('translations.users')</a>
         </li>
         <li class="overlay-list-item">
-          <a rel="preconnect" href="{{ route('all-benefactors') }}">@lang('translations.benefac_fond')</a>
+          <a rel="preconnect" href="{{ route('all-appeals') }}">@lang('translations.benefac_fond')</a>
         </li>
         <li class="overlay-list-item">
           <a rel="preconnect" href="{{ route('all-benefactors') }}">@lang('translations.benefac')</a>

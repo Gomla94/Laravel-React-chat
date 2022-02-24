@@ -129,7 +129,7 @@ select:focus {
 .super-container1 {
     background: linear-gradient(90deg, #e3e3e3 0%, #b38a5a 100%);
     flex: 1;
-    padding-top: 2%;
+    padding: 3%;
     border-radius: 5% 0 0 5%;
     /* height: fit-content; */
 }
@@ -137,7 +137,7 @@ select:focus {
 .r-super-container1 {
     background: linear-gradient(90deg, #e3e3e3 0%, #b38a5a 100%);
     flex: 1;
-    padding-top: 2%;
+    padding: 3%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -513,6 +513,22 @@ label {
     .god-container {
         flex-direction: column;
         width: 90%;
+    }
+
+    .main-page-button-wrapper {
+        padding: unset;
+    }
+
+    .box-logo {
+        width: 70px;
+        height: 70px;
+        margin: 10px;
+        position: relative;
+        top: 10px;
+        cursor: pointer;
+        transition-duration: 0.3s;
+        -webkit-transition-duration: 0.3s;
+        z-index: 100;
     }
 
     .r-god-container {

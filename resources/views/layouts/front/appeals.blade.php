@@ -15,7 +15,11 @@
         @endif
       </a>
       <div class="users-social">
-        <span class="appeal-title">{{ $appeal->title }}</span>
+        <span class="appeal-title">
+          <a rel="preconnect" href="{{ route('show-appeal', $appeal->title) }}">
+          {{ $appeal->title }}
+          </a>
+        </span>
         <span class="appeal-description">{{ str_limit($appeal->description, 100) }}</span>
         
       </div>
