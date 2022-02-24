@@ -65,6 +65,7 @@ class MessagesController extends Controller
         $message = request('message');
 
         $attributes = validator(request()->all(), [
+            'message' => ['string'],
             'file' => ['sometimes', 'nullable', 'max:2048', 'mimes:png,jpg,jpeg,mp4,mov,ogg,qt', 'max:2048'],
         ])->validate();
         

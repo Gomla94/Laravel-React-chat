@@ -51,7 +51,7 @@ class UserAppealsController extends Controller
             'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
             'pdf_name' => request()->file('appeal_pdf') ? basename($pdf_path) : null,
             'pdf_path' => request()->file('appeal_pdf') ? Storage::disk('s3')->url($pdf_path) : null,
-            'uniqueid' => uniqid()
+            'uniqueid' => time()
         ]);
 
         if (request('appeal_image')) {
