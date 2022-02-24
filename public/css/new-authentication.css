@@ -614,4 +614,17 @@ label {
     .super-container1 {
         padding: 5%;
     }
+
+    .box-logo {
+        width: 70px;
+        height: 70px;
+        margin: unset;
+        position: relative;
+        top: -10px;
+        left: -20px;
+        cursor: pointer;
+        transition-duration: 0.3s;
+        -webkit-transition-duration: 0.3s;
+        z-index: 100;
+    }
 }
