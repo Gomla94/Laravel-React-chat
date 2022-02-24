@@ -3734,6 +3734,11 @@ a {
         height: 90%;
     }
 
+    .count {
+        height: auto;
+        width: auto;
+    }
+
     .help-section-title {
         font-size: 25px;
     }
