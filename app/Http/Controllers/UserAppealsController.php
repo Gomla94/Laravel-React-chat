@@ -42,6 +42,14 @@ class UserAppealsController extends Controller
             $pdf_path = $request->file('appeal_pdf')->store('files', 's3');
         }
 
+
+        $last_uniqueid = Appeal::latest()->pluck('uniqueid')->first();
+        if ($last_uniqueid !== null) {
+            $uniqueid = $last_uniqueid + 1;
+        } else {
+            $uniqueid = (int)round(time() / 10000, 0);
+        }
+
         $appeal = $user->appeals()->create([
             'title' => $request->appeal_title,
             'description' => $request->appeal_description,
@@ -51,7 +59,8 @@ class UserAppealsController extends Controller
             'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
             'pdf_name' => request()->file('appeal_pdf') ? basename($pdf_path) : null,
             'pdf_path' => request()->file('appeal_pdf') ? Storage::disk('s3')->url($pdf_path) : null,
-            'uniqueid' => time()
+            'uniqueid' => $uniqueid 
+            
         ]);
 
         if (request('appeal_image')) {

@@ -29,6 +29,7 @@ class FrontController extends Controller
 
     public function home(Request $request)
     {
+       
         if(!$sock = @fsockopen('www.google.com', 80))
         {
             $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
