@@ -7,7 +7,7 @@
   <div class="container all-users-list">
     @foreach($appeals as $appeal)
     <div class="user">
-      <a rel="preconnect" href="{{ route('show-appeal', $appeal->id) }}">
+      <a rel="preconnect" href="{{ route('show-appeal', $appeal->uniqueid) }}">
         @if($appeal->image_path)
         <div class="user-image-wrapper">
           <img src="{{ asset($appeal->image_path) }}" alt="appeal-image" />
@@ -16,7 +16,7 @@
       </a>
       <div class="users-social">
         <span class="appeal-title">
-          <a rel="preconnect" href="{{ route('show-appeal', $appeal->title) }}">
+          <a rel="preconnect" href="{{ route('show-appeal', $appeal->uniqueid) }}">
           {{ $appeal->title }}
           </a>
         </span>

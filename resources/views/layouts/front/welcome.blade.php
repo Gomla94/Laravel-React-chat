@@ -46,7 +46,7 @@
       @foreach($random_appeals as $appeal)
       <div class="swiper-slide">
         <div class="appeal-card">
-            <a rel="preconnect" href="{{ route('show-appeal', $appeal->id) }}">
+            <a rel="preconnect" href="{{ route('show-appeal', $appeal->uniqueid) }}">
             <div class="appeal-card-image-wrapper">
               @if($appeal->image_path)
               <img src="{{ asset($appeal->image_path) }}" alt="appeal-image" class="appeal-card-image" />
@@ -58,7 +58,7 @@
             <div class="appeal-card-description">
               <p>{{str_limit($appeal->description, 50)}}</p>
             </div>
-            <a rel="preconnect" href="{{ route('show-appeal', $appeal->id) }}" class="appeal-card-button">@lang("translations.want_help")</a>
+            <a rel="preconnect" href="{{ route('show-appeal', $appeal->uniqueid) }}" class="appeal-card-button">@lang("translations.want_help")</a>
           </a>
           </div>
       </div>

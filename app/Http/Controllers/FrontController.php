@@ -150,8 +150,9 @@ class FrontController extends Controller
         return view('layouts.front.appeals', ['appeals' => $appeals]);
     }
 
-    public function show_appeal(Appeal $appeal)
+    public function show_appeal($id)
     {
+        $appeal = Appeal::where('uniqueid',$id)->firstOrFail();
         $appeal_images = $appeal->images()->get();
         $current_url = url()->current();
         $share_links = Share::page($current_url)
