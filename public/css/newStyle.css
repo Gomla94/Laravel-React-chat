@@ -795,7 +795,7 @@ a {
     color: white;
     border: none;
     padding: 0px 15px;
-    height: 30px;
+    height: 40px;
     border-radius: 5px;
     box-shadow: 0px 10px 7px 0px rgba(0, 0, 0, 0.3);
 }
@@ -1252,6 +1252,7 @@ a {
     position: absolute;
     height: 55px;
     top: -5px;
+    cursor: pointer;
 }
 
 .appeal-id-btn i {
@@ -1466,14 +1467,14 @@ a {
 
 .count {
     position: absolute;
-    top: -1%;
+    top: 1%;
     right: -1%;
-    background-color: red;
-    height: fit-content;
-    width: fit-content;
+    background-color: #991212;
+    height: 20px;
+    width: 20px;
     border-radius: 70%;
     color: white;
-    padding: 6px;
+    padding: 4px !important;
     padding-top: 5%;
     font-size: 12px;
     text-align: center;
@@ -3118,11 +3119,14 @@ a {
         flex: 1;
     }
 
+    .view-main-video-container {
+        position: fixed;
+        z-index: 100;
+        width: 94%;
+    }
+
     .view-main-video-container video {
-        /* width: 60%; */
         height: 100%;
-        /* margin-left: 20%; */
-        /* margin-right: 15%; */
         margin-top: 1%;
     }
 
@@ -3366,7 +3370,7 @@ a {
     }
 
     .help-section {
-        height: 85%;
+        height: unset;
     }
 
     .appeal-report-wrapper {

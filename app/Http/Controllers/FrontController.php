@@ -209,7 +209,10 @@ class FrontController extends Controller
     public function show_videos_page()
     {
         $posts_with_videos = Post::whereNotNull('video_path')->with('user')->get();
-        return view('layouts.front.videos', ['videos' => $posts_with_videos]);
+        $appeals_with_videos = Appeal::whereNotNull('video_path')->with('user')->get();
+        $merged_videos = $posts_with_videos->merge($appeals_with_videos);
+
+        return view('layouts.front.videos', ['videos' => $merged_videos]);
     }
 
     public function show_video_page($id)

@@ -56,7 +56,11 @@ class UserController extends Controller
 
     public function update_profile()
     {
+        $user = Auth::user();
+
         $attributes = validator(request()->all(), [
+            'name' => ['string'],
+            'email' => ['email', Rule::unique('users', 'email')->ignore($user->id)],
             'image' => ['sometimes','nullable','max:2048', 'mimes:png,jpg,jpeg'],
             'date_of_birth' => ['sometimes','nullable','date'],
             'phone_number' => ['sometimes','nullable','numeric'],
@@ -64,17 +68,20 @@ class UserController extends Controller
             'interesting_type' => ['sometimes', 'nullable', 'array'],
             'interesting_type.*' => ['numeric', Rule::exists('interesting_types', 'id')],
             'country_id' => ['sometimes','nullable','integer', Rule::exists('countries', 'id')],
-            'gender' => ['sometimes','nullable','string', Rule::in('male', 'female')]
+            'gender' => ['sometimes','nullable','string', Rule::in('male', 'female')],
+            'organisation_description' => ['sometimes', 'nullable', 'in:individual,organisation']
         ])->validate();
 
-        $user = Auth::user();
         $user->update([
+            'name' => request('name') ? $attributes['name'] : $user->name,
+            'email' => request('email') ? $attributes['email'] : $user->email,
             'date_of_birth' => $attributes['date_of_birth'],
             'phone_number' => $attributes['phone_number'],
             'gender' => $attributes['gender'] ?? null,
             'country_id' => $attributes['country_id'] ?? null,
             'interesting_type_id' => json_encode(request('interesting_type'))?? null,
-            'additional_type' => request('additional_type') ? $attributes['additional_type'] : null
+            'additional_type' => request('additional_type') ? $attributes['additional_type'] : null,
+            'organisation_description' => request('organisation_description') ? $attributes['organisation_description'] : null
         ]);
 
         return redirect()->route('user.profile');

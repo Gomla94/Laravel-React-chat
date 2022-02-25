@@ -6,7 +6,7 @@
             <div class="card-header">@lang('translations.edit_post'): <strong>{{ $post->title }}</strong></div>
             <div class="card-body">
                <form action="{{ route('user.posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
-                    {{-- @csrf --}}
+                    @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label for="title">@lang('translations.title')</label>

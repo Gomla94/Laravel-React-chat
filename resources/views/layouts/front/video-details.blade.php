@@ -6,7 +6,7 @@
 <div class="container-fluid view-video-wrapper">
     <div class="view-main-video-wrapper">
         <div class="view-main-video-container">
-        <video controls src="{{ asset($video->video_path) }}" class="main-video"></video>
+        <video controls src="{{ asset($video->video_path) }}" autoplay class="main-video"></video>
         </div>
         <div class="main-video-title-wrapper">
             <span class="main-video-title">{{ $video->title }}</span>

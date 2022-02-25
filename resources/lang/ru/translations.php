@@ -29,6 +29,7 @@ return [
     "subscribe" => "Подписаться",
     "interest_type" => "Сфера интересов",
     "add_types" => "Дополнительные интересы",
+    "organisation_description" => "Organisation Description",
 
     "settings" => "Настройки",
     "posts" => "Посты",

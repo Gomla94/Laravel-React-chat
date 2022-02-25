@@ -29,6 +29,7 @@ return [
     "subscribe" => "Բաժանորդագրվել",
     "interest_type" => "Հետաքրքրող ոլորտներ",
     "add_types" => "Լրացուցիչ տվյալներ",
+    "organisation_description" => "Organisation Description",
 
     "settings" => "Կարգավորւոմներ",
     "posts" => "Գրառումներ",

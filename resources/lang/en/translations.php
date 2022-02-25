@@ -29,7 +29,7 @@
         "subscribe" => "Subscribe",
         "interest_type" => "Interested in type",
         "add_types" => "Additional types",
-
+        "organisation_description" => "Organisation Description",
         "settings" => "Settings",
         "posts" => "Posts",
         "appeals" => "Appeals",

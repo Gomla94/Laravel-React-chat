@@ -1,4 +1,23 @@
 const profileListItems = document.querySelectorAll(".profile-item");
+const additionalTypeInput = document.getElementById("additional_type");
+const organisationDescription = document.querySelector(".org-d");
+
+const additionalTypeHandler = () => {
+    if (
+        additionalTypeInput.options[additionalTypeInput.selectedIndex].value ==
+        "organisation"
+    ) {
+        organisationDescription.classList.remove("d-none");
+        organisationDescription.classList.add("d-block");
+    } else {
+        organisationDescription.classList.remove("d-block");
+        organisationDescription.classList.add("d-none");
+    }
+};
+additionalTypeInput.addEventListener("change", (e) => {
+    additionalTypeHandler(e);
+});
+
 profileListItems.forEach((item) => {
     item.addEventListener("click", (e) => {
         removeActiveItem();

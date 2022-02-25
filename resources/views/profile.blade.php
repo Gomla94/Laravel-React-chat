@@ -61,6 +61,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                 @method('PUT')
                 <div class="row profile-row">
                     <div class="col-md-6 mb-5">
+                        <label class="create-post-label" for="name">@lang('translations.name')</label>
+                        <input type="text" class="form-control" value="{{ $user->name }}" name="name">
+                        @error('name')
+                        <span class="profile-error-span">{{$message}}</span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-6 mb-5">
+                        <label class="create-post-label" for="email">@lang('translations.email')</label>
+                        <input type="email" class="form-control" id="email" value="{{ $user->email }}" name="email">
+                        @error('email')
+                        <span class="profile-error-span">{{$message}}</span>
+                        @enderror
+                    </div>
+
+                </div>
+                
+                <div class="row profile-row">
+                    <div class="col-md-6 mb-5">
                         <label class="create-post-label" for="image">@lang('translations.images')</label>
                         <input type="file" accept="image/*" class="form-control profile-image-input" name="image">
                         @error('image')
@@ -85,6 +104,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
 
                     <div class="col-md-6 mb-5">
+                      <label class="create-post-label" for="gender">@lang('translations.gender')</label>
+                      <select class="form-control" name="gender" id="gender">
+                          <option selected disabled>@lang('translations.select_gender')</option>
+                          <option value="male" {{ $user->gender === 'male' ? 'selected' : '' }}>@lang('translations.male')</option>
+                          <option value="female" {{ $user->gender === 'female' ? 'selected' : '' }}>@lang('translations.female')</option>
+                      </select>
+                      @error('gender')
+                      <span class="profile-error-span">{{$message}}</span>
+                      @enderror
+                    </div>
+                </div>
+
+                <div class="row profile-row">
+                    
+                    <div class="col-md-6 mb-5">
                       <label class="create-post-label" for="additional_type">@lang('translations.add_types')</label>
                       <select class="form-control" name="additional_type" id="additional_type">
                           <option selected disabled>@lang('translations.add_types')</option>
@@ -94,20 +128,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                       @error('additional_type')
                       <span class="profile-error-span">{{$message}}</span>
                       @enderror
-                  </div>
-                </div>
-
-                <div class="row profile-row">
-                    <div class="col-md-6 mb-5">
-                        <label class="create-post-label" for="gender">@lang('translations.gender')</label>
-                        <select class="form-control" name="gender" id="gender">
-                            <option selected disabled>@lang('translations.select_gender')</option>
-                            <option value="male" {{ $user->gender === 'male' ? 'selected' : '' }}>@lang('translations.male')</option>
-                            <option value="female" {{ $user->gender === 'female' ? 'selected' : '' }}>@lang('translations.female')</option>
-                        </select>
-                        @error('gender')
-                        <span class="profile-error-span">{{$message}}</span>
-                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-5 org-d {{ $user->additional_type === 'organisation' ? 'd-block' : 'd-none' }}">
+                      <label class="create-post-label" for="organisation_description">@lang('translations.organisation_description')</label>
+                      <textarea name="organisation_description" class="form-control" id="" cols="30" rows="10"></textarea>
+                      @error('organisation_description')
+                      <span class="profile-error-span">{{$message}}</span>
+                      @enderror
                     </div>
 
                     <div class="col-md-6 mb-5">
@@ -124,7 +151,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
                     </div>
                 </div>
 
-                <div class="row profile-row" >
+                <div class="row profile-row mb-5">
                     <label class="create-post-label interesting-types-label" for="area_of_interest">@lang('translations.interest_area')</label>
                     <div class="interesting-types">
                       @foreach($areas_of_interesting as $area)
