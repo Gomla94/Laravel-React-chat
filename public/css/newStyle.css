@@ -718,7 +718,7 @@ a {
     height: auto;
     min-height: 340px;
     background-color: rgb(250, 225, 193);
-    margin-top: 20px;
+    margin-top: 3px;
 }
 
 .posts-wrapper {
@@ -3855,7 +3855,7 @@ a {
     }
 
     .main-posts {
-        margin-top: 100px;
+        margin-top: 5px;
     }
 
     .share-links-container {
