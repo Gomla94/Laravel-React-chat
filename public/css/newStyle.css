@@ -536,7 +536,9 @@ a {
 
 /* appeal card starts here */
 .appeal-card {
-    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
     position: relative;
     border: 1px solid silver;
     border-radius: 10px;
