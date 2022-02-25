@@ -3735,7 +3735,7 @@ a {
     }
 
     .help-section {
-        height: 90%;
+        height: unset;
     }
 
     .count {
