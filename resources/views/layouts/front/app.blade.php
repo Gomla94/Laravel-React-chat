@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('images/dark-logo.jpeg') }}" />
     <title>Magaxat</title>
-    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=42')}}" />
+    <link rel="stylesheet" href="{{asset('css/newStyle.css?version=43')}}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
