@@ -47,7 +47,7 @@ class UserAppealsController extends Controller
         if ($last_uniqueid !== null) {
             $uniqueid = $last_uniqueid + 1;
         } else {
-            $uniqueid = (int)round(time() / 10000, 0);
+            $uniqueid = 100000;
         }
 
         $appeal = $user->appeals()->create([
