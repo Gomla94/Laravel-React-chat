@@ -11,7 +11,7 @@ Magaxat | Appeal
     <div class="main-appeal-container">
       <div class="main-appeal-image-shares-wrapper">
         <div class="main-appeal-image-wrapper">
-          <img src="{{ $appeal->user->image ?? asset('images/avatart.png') }}" alt="user-image" />
+          <img src="{{ $appeal->user->image ?? asset('images/avatar.png') }}" alt="user-image" />
         </div>
         <div class="main-appeal-shares-wrapper">
           <div class="appeal-share-icon">
