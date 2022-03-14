@@ -1,31 +1,8 @@
 @extends('layouts.auth')
-@section('title') @lang('translations.sign_up') @endsection
+@section('title') Magaxat | Register @endsection
 @section('content')
-    <div class="main-page-button-wrapper">
-        <a href="{{ route('welcome') }}" class="containers">
-            <img class="box-logo"
-                 src="{{asset('images/dark-logo.jpeg')}}"
-            />
-            <div class="box-shadow"></div>
-        </a>
-    </div>
-    <div class="r-god-container">
-        <div class="r-super-container1">
-            <h2 class="title-h2">@lang('translations.welcm')</h2>
 
-            <div class="container-p">
-                <p class="r-subtitle-p">
-                    @lang('translations.inf')
-                </p>
-
-                <div class="div-button1">
-                    <a class="custom-btn btn-7 mb-5" style="text-decoration: none"
-                       href="{{ route('login') }}"><span>@lang('translations.login')</span></a>
-                </div>
-            </div>
-        </div>
-
-        <br/>
+    {{-- <div class="r-god-container">
         <div class="r-super-container2">
             <div class="title-container mt-3">
                 <h1>@lang('translations.acc_create')</h1>
@@ -61,7 +38,6 @@
                             id="password"
                             placeholder="@lang('translations.password')"
                         />
-                        {{-- <i class="fas fa-eye show-password-icon"></i> --}}
                     </div>
                     @error('password')
                     <div class="input-error mb-3">
@@ -152,8 +128,122 @@
             </div>
 
         </div>
+    </div> --}}
+
+    <div class="register-container">
+        <div class="register-wrapper">
+          <div class="login-titles">
+            <p class="login-l-heading">Welcome Back</p>
+            <p class="login-m-heading">Login</p>
+          </div>
+    
+          <div class="login-form-wrapper">
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Name</label>
+                            <input
+                              type="text"
+                              class="login-email-input"
+                              name="name"
+                              placeholder="name"
+                            />
+                            @error('name')
+                                <span class="auth-error-message">{{ $message }}</span>
+                            @enderror
+                          </div>
+    
+                          <div class="form-group col-md-6">
+                            <label for="email">Phone Number</label>
+                            <input
+                              type="text"
+                              class="login-email-input"
+                              name="phone_number"
+                              placeholder="phone number"
+                            />
+                            @error('phone_number')
+                                <span class="auth-error-message">{{ $message }}</span>
+                            @enderror
+                          </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input
+                              type="email"
+                              class="login-email-input"
+                              name="email"
+                              placeholder="email"
+                            />
+                            @error('email')
+                                <span class="auth-error-message">{{ $message }}</span>
+                            @enderror
+                          </div>
+    
+                          <div class="form-group col-md-6">
+                            <label for="email">Type</label>
+                            <select name="type" class="form-control login-email-input" id="type">
+                                <option value="user">User</option>
+                                <option value="benefactor">Benefactor</option>
+                            </select>
+                            @error('type')
+                                <span class="auth-error-message">{{ $message }}</span>
+                            @enderror
+                          </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input
+                              type="password"
+                              class="login-email-input"
+                              name="password"
+                            />
+                            @error('password')
+                                <span class="auth-error-message">{{ $message }}</span>
+                            @enderror
+                          </div>
+    
+                          <div class="form-group col-md-6 adds-type-row">
+                            <label for="additional_type">Additional Type</label>
+                            <select name="additional_type" class="form-control login-email-input" id="additional_type">
+                                <option value="individual">Individual</option>
+                                <option value="organisation">Organisation</option>
+                            </select>
+                            @error('additional_type')
+                                <span class="auth-error-message">{{ $message }}</span>
+                            @enderror
+                          </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 desc-row">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="description">description</label>
+                            <textarea name="description" class="form-control" id="description" cols="30" rows="5"></textarea>
+                            @error('description')
+                                <span class="auth-error-message">{{ $message }}</span>
+                            @enderror
+                          </div>
+                    </div>
+                </div>
+                  
+              <a class="forget-password-link" href="{{ route('password.request') }}">Forget your password?</a>
+              <button type="submit">Sign in</button>
+              <p>or</p>
+              <a href="{{ route('login') }}" class="goto-sign-in">Login</a>
+            </form>
+          </div>
+        </div>
     </div>
-  </div>
 @push('js')
 <script src="{{ asset('js/authentication.js?version=1') }}"></script>
 @endpush

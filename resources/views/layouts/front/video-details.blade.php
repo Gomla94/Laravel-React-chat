@@ -2,49 +2,95 @@
 @section('meta-description')
 <meta name="description" content="this is the {{ $video->title }} main page">
 @endsection
+@section('title')
+Magaxat | Video Details
+@endsection
 @section('content')
-<div class="container-fluid view-video-wrapper">
-    <div class="view-main-video-wrapper">
-        <div class="view-main-video-container">
-        <video controls src="{{ asset($video->video_path) }}" autoplay class="main-video"></video>
-        </div>
-        <div class="main-video-title-wrapper">
-            <span class="main-video-title">{{ $video->title }}</span>
-        </div>
-         <div class="view-main-video-details-container">
+  <div class="main-video-wrapper">
+    <div class="main-video-container">
+      <div class="video-container">
+        <video controls src="{{ $video->video_path }}" class="video" alt="video"></video>
+        <p class="main-video-description">
+          {{ $video->videoable->title }}
+        </p>
+        <div class="main-video-user-date-wrapper">
+          <div class="main-video-user-info">
             <div class="main-video-user-image-wrapper">
-                <img src="{{ asset($video->user->image ?? 'images/avatar.png') }}" class="main-video-user-image" />
+              <a href="{{ route('user.page', $video->user->unique_id) }}">
+                <img src="{{ $video->user->image ?? asset('images/avatar.png') }}" alt="person" />
+              </a>
             </div>
-        
-            <div class="main-video-info">
-            <div class="main-video-user-name-wrapper">
-                <span class="main-video-user-name">{{ $video->user->name }}</span>
+            <div class="main-video-user-names-wrapper">
+              <span class="main-video-user-name">
+               <a href="{{ route('user.page', $video->user->unique_id) }}">
+                {{ $video->user->name }}
+              </a>
+              </span>
+              <span class="main-video-user-link">@ 
+                <a href="{{ route('user.page', $video->user->unique_id) }}">
+                  {{ $video->user->name }}</span>
+                </a>
             </div>
-            <div class="main-video-time-wrapper">
-                <span class="main-video-time">{{ $video->created_at->diffForHumans() }}</span>
+          </div>
+          @if(Auth::check())
+            @if(Auth::user()->subscribed($video->user->unique_id))
+            <div class="main-video-date-wrapper">
+              <form action="{{ route('unsubscribe', $video->user->unique_id) }}" method="POST">
+                @csrf
+                <button class="main-video-user-subscribed-link">
+                  <i class="fas fa-check"></i> Subscribed
+                </button>
+              </form>
             </div>
+            @else
+            <div class="main-video-date-wrapper">
+              <form action="{{ route('subscribe', $video->user->unique_id) }}" method="POST">
+                @csrf
+                <button class="main-video-user-subscribed-link">
+                  Subscribe
+                </button>
+              </form>
             </div>
-         </div>
+            @endif
+          @endif
+        </div>
+      </div>
     </div>
-    <div class="view-other-videos-wrapper">
-        @foreach($other_videos as $other_video)
-         <div class="other-video-wrapper">
-             <div class="other-video-container">
-               <a rel="preconnect" href="{{ route('show-video', $other_video->id) }}"><video src="{{ asset($other_video->video_path) }}"></video></a>
-             </div>
-             <div class="other-video-info-wrapper">
-               <div class="other-video-title-wrapper">
-                {{ $other_video->title }}
-               </div>
-               <div class="other-video-user-wrapper">
-                 {{ $other_video->user->name }}
-               </div>
-               <div class="other-video-time-wrapper">
-                 {{ $other_video->created_at->diffForHumans() }}
-               </div>
-             </div>
-         </div>
-        @endforeach
+    <div class="other-videos-container">
+      @foreach($other_videos as $othervideo)
+        <div class="other-video-container">
+          <div class="other-video-image-wrapper">
+            <a href="{{ route('show-video', $othervideo->id) }}">
+              <video src="{{ $othervideo->video_path }}" class="other-video"></video>
+            </a>
+          </div>
+          <div class="other-video-user-date-wrapper">
+            <div class="other-video-user-info">
+              <div class="other-video-user-image-wrapper">
+                <a href="{{ route('user.page', $othervideo->user->unique_id) }}">
+                  <img src="{{ $othervideo->user->image ?? asset('images/avatar.png') }}" alt="person" />
+                </a>
+              </div>
+              <div class="other-video-user-names-wrapper">
+                <span class="other-video-user-name">
+                  <a href="{{ route('user.page', $othervideo->user->unique_id) }}">
+                    {{ $othervideo->user->name }}
+                  </a>
+                </span>
+              <span class="other-video-user-link">@
+                <a href="{{ route('user.page', $othervideo->user->unique_id) }}">
+                  {{ $othervideo->user->name }}
+                </a>
+              </span>
+              </div>
+            </div>
+            <div class="other-video-date-wrapper">
+              <span class="video-date">{{ $othervideo->created_at->format('Y-m-d') }}</span>
+              <span class="video-time">{{ $othervideo->created_at->format('H:ia') }}</span>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </div>
-</div>
+  </div>
 @endsection

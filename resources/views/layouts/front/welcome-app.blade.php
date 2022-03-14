@@ -40,10 +40,9 @@
 
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <title>@yield('title')</title>
+    <title>Magaxat | Home</title>
   </head>
   <body>
-    <div class="navbar-background-wrapper"></div>
     <div class="navbar-wrapper">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
@@ -154,7 +153,44 @@
           </li>
         </ul>
       </div>
-      
+      <div class="swiper myMainSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="{{asset('images/img/slider-1.png')}}" alt="sliderone" />
+            <p class="slider-text">
+              As well as diluted with a fair amount of empathy, rational
+              thinking largely determines the importance of the positions taken
+              by the participants in relation to the tasks assigned. As is
+              commonly believed, interactive prototypes are only a method of
+              political participation and are associatively distributed across
+              industries.
+            </p>
+          </div>
+          <div class="swiper-slide">
+            <img src="{{asset('images/img/slider-2.png')}}" alt="slidertwo" />
+            <p class="slider-text">
+              As well as diluted with a fair amount of empathy, rational
+              thinking largely determines the importance of the positions taken
+              by the participants in relation to the tasks assigned. As is
+              commonly believed, interactive prototypes are only a method of
+              political participation and are associatively distributed across
+              industries.
+            </p>
+          </div>
+          <div class="swiper-slide">
+            <img src="{{asset('images/img/slider-3.png')}}" alt="sliderthree" />
+            <p class="slider-text">
+              As well as diluted with a fair amount of empathy, rational
+              thinking largely determines the importance of the positions taken
+              by the participants in relation to the tasks assigned. As is
+              commonly believed, interactive prototypes are only a method of
+              political participation and are associatively distributed across
+              industries.
+            </p>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
 
    @yield('content')

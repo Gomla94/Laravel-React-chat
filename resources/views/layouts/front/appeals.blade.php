@@ -3,29 +3,45 @@
 <meta name="description" content="this is the appeals page in magaxat.com">
 @endsection
 @section('content')
-<div class="container-fluid all-users-wrapper">
-  <div class="container all-users-list">
-    @foreach($appeals as $appeal)
-    <div class="user">
-      <a rel="preconnect" href="{{ route('show-appeal', $appeal->uniqueid) }}">
-        @if($appeal->image_path)
-        <div class="user-image-wrapper">
-          <img src="{{ asset($appeal->image_path) }}" alt="appeal-image" />
+<div class="navbar-background-wrapper"></div>
+<div class="appeals-wrapper">
+  <div class="search-appeals-wrapper">
+    <div class="search-container">
+      <form action="">
+        <div class="form-group">
+          <input
+            type="text"
+            class="appeals-search-input"
+            placeholder="Search"
+          />
+          <i class="fas fa-search"></i>
         </div>
-        @endif
-      </a>
-      <div class="users-social">
-        <span class="appeal-title">
-          <a rel="preconnect" href="{{ route('show-appeal', $appeal->uniqueid) }}">
-          {{ $appeal->title }}
-          </a>
-        </span>
-        <span class="appeal-description">{{ str_limit($appeal->description, 100) }}</span>
-        
-      </div>
+      </form>
     </div>
+  </div>
+  <div class="appeals-container">
+    @foreach($appeals as $appeal)
+      <div class="single-appeal-wrapper">
+        <div class="single-appeal-image-wrapper">
+          <a href="{{ route('show-appeal', $appeal->uniqueid) }}">
+            <img src="{{ $appeal->image_path }}" alt="appeal-image" />
+          </a>
+        </div>
+        <div class="single-appeal-info-wrapper">
+          <div class="single-appeal-title-desc-container">
+            <p class="single-appeal-title">
+             {{ $appeal->title }}
+            </p>
+            <p class="single-appeal-description">
+              {{ $appeal->description }}
+            </p>
+          </div>
+          <div class="single-appeal-view-button-wrapper">
+            <a href="{{ route('show-appeal', $appeal->uniqueid) }}" class="view-appeal-link">View</a>
+          </div>
+        </div>
+      </div>
     @endforeach
-    {{$appeals->links('vendor.pagination.custom')}}
   </div>
 </div>
 @endsection

@@ -24,10 +24,10 @@ class UserController extends Controller
         $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
         $countries = Country::all();
-        $my_posts = $user->posts()->get();
-        $my_appeals = $user->appeals()->get();
+        $my_posts = $user->posts()->with('video')->get();
+        $my_appeals = $user->appeals()->with('video')->get();
         $my_posts_images = $user->posts()->whereNull('video_path')->whereNotNull('image_path')->get();
-        $my_posts_videos = $user->posts()->whereNull('image_path')->whereNotNull('video_path')->get();
+        $my_videos = $user->videos()->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
         $my_subscribtions_users = User::whereIn('unique_id', $my_subscribtions)->get();
         $my_subscribers = $user->subscribers()->pluck('subscriber_id');
@@ -43,7 +43,7 @@ class UserController extends Controller
             'my_posts' => $my_posts,
             'my_appeals' => $my_appeals,
             'my_posts_images' => $my_posts_images,
-            'my_posts_videos' => $my_posts_videos,
+            'my_videos' => $my_videos,
             'my_subscribtions_users' => $my_subscribtions_users,
             'my_subscribers_users' => $my_subscribers_users,
             'my_subscribers' => $my_subscribers_users,

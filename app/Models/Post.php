@@ -29,4 +29,9 @@ class Post extends BaseModel
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function video()
+    {
+        return $this->morphOne(Video::class, 'videoable');
+    }
 }

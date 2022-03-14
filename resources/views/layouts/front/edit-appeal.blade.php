@@ -43,9 +43,9 @@
 
                     <div class="form-group">
                         <label for="video">@lang('translations.video')</label>
-                        @if($appeal->video_path !== null)
+                        @if($appeal_video !== null)
                         <div>
-                            <video src="{{ $appeal->video_path }}" controls class="mb-3" width="200px" height="100px"></video>
+                            <video src="{{ $appeal_video->video_path }}" controls class="mb-3" width="200px" height="100px"></video>
                         </div>
                         @endif
                         <input type="file" class="form-control" name="appeal_video">

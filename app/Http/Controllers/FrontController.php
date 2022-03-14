@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Events\NewSubscribtionEvent;
 use App\Models\Appeal;
 use App\Models\Country;
+use App\Models\Image;
 use App\Models\InterestingType;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Video;
 use App\Notifications\NewSubscribtion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,9 +42,9 @@ class FrontController extends Controller
             $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip={$user_ip}"));
             $user_country = $geo['geoplugin_countryName'];
 
-            $posts_with_user_country = Post::with(['user', 'comments', 'likes'])->where('country', $user_country)->inRandomOrder()->orderBy('created_at', 'desc')->get();
+            $posts_with_user_country = Post::with(['user', 'comments', 'likes', 'video'])->where('country', $user_country)->inRandomOrder()->orderBy('created_at', 'desc')->get();
 
-            $posts_without_user_country = Post::with(['user', 'comments', 'likes'])->where('country', '!=', $user_country)
+            $posts_without_user_country = Post::with(['user', 'comments', 'likes', 'video'])->where('country', '!=', $user_country)
             ->orWhere('country', null)->inRandomOrder()->limit(2)->orderBy('created_at', 'desc')->get();
             
             $random_posts = $posts_with_user_country->merge($posts_without_user_country);
@@ -57,7 +59,7 @@ class FrontController extends Controller
         
 
         if(request('search-key')) {
-            $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
+            $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes', 'video'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
         }
 
         $random_appeals = Appeal::with('user')->inRandomOrder()->limit(12)->get();
@@ -83,7 +85,7 @@ class FrontController extends Controller
     public function load_more_posts()
     {
         $requested_ids = request('ids');
-        $more_posts = Post::with(['user', 'comments', 'likes'])->whereNotIn('id', $requested_ids)->limit(5)->orderBy('created_at', 'desc')->get();
+        $more_posts = Post::with(['user', 'comments', 'likes', 'video'])->whereNotIn('id', $requested_ids)->limit(5)->orderBy('created_at', 'desc')->get();
         return $more_posts;
     }
 
@@ -177,10 +179,10 @@ class FrontController extends Controller
         $user = $user->load('country');
         $areas_of_interesting = InterestingType::all();
         $countries = Country::all();
-        $my_posts = $user->posts()->get();
-        $my_appeals = $user->appeals()->get();
-        $my_posts_images = $user->posts()->whereNull('video_path')->whereNotNull('image_path')->get();
-        $my_posts_videos = $user->posts()->whereNull('image_path')->whereNotNull('video_path')->get();
+        $my_posts = $user->posts()->with('video')->get();
+        $my_appeals = $user->appeals()->with('video')->get();
+        $my_posts_images = $user->posts()->whereNull('video_path')->get();
+        $my_posts_videos = $user->posts()->whereNull('image_path')->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
         $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
         $my_subscribers = $user->subscribers()->pluck('subscriber_id');
@@ -208,18 +210,17 @@ class FrontController extends Controller
 
     public function show_videos_page()
     {
-        $posts_with_videos = Post::whereNotNull('video_path')->with('user')->get();
-        $appeals_with_videos = Appeal::whereNotNull('video_path')->with('user')->get();
-        $merged_videos = $posts_with_videos->merge($appeals_with_videos);
-
-        return view('layouts.front.videos', ['videos' => $merged_videos]);
+        $videos = Video::with('videoable')->get();
+        return view('layouts.front.videos', ['videos' => $videos]);
     }
 
     public function show_video_page($id)
-    {   $post = Post::whereNotNull('video_path')->whereId($id)->with('user')->firstOrFail();
-        $other_videos = Post::whereNotNull('video_path')->where('id', '!=', $id)->with('user')->get();
+    {   
+        $video = Video::where('id', $id)->with('videoable', 'user')->firstOrFail();
+        $other_videos = Video::where('id', '!=', $id)->with('videoable', 'user')->get();
+
         return view('layouts.front.video-details', [
-            'video' => $post,
+            'video' => $video,
             'other_videos' => $other_videos
         ]);
     }

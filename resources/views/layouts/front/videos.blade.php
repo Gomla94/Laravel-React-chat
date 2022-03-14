@@ -2,36 +2,47 @@
 @section('meta-description')
 <meta name="description" content="this is the videos page of magaxat.com where you can see all the uploaded videos">
 @endsection
+@section('title')
+Magaxat | Videos
+@endsection
 @section('content')
-<div class="container-fluid all-videos-wrapper">
-    <div class="all-videos-container">
+<div class="videos-wrapper">
+  <div class="videos-container">
     @foreach($videos as $video)
       <div class="video-wrapper">
-        <div class="video-container">
-          <a rel="preconnect" href="{{ route('show-video', $video->id) }}">
-            <video class="video-item" src="{{ asset($video->video_path) }}"></video>
+        <div class="video-user-date-wrapper">
+          <div class="video-user-info">
+            <div class="video-user-image-wrapper">
+              <img src="{{ $video->user->image !== null ? $video->user->image : asset('images/avatar.png') }}" alt="person" />
+            </div>
+            <div class="video-user-names-wrapper">
+              <span class="video-user-name">
+              <a href="{{ route('user.page', $video->user->unique_id) }}">
+                {{ $video->user->name }}
+              </a> 
+              </span>
+              <span class="video-user-link">@ 
+                <a href="{{ route('user.page', $video->user->unique_id) }}">
+                  {{ $video->user->name }}
+                </a> 
+              </span>
+            </div>
+          </div>
+          <div class="video-date-wrapper">
+            <span class="video-date">{{ $video->created_at->format('Y-m-d') }}</span>
+            <span class="video-time">{{ $video->created_at->format('H:ia') }}</span>
+          </div>
+        </div>
+        <div class="video-image-wrapper">
+          <a href="{{ route('show-video', $video->id) }}">
+            <video src="{{ $video->video_path }}" class="video-image" alt="{{ $video->video_path }}"></video>
           </a>
         </div>
-        <div class="video-details-container">
-          <div class="video-user-image-container">
-            <a rel="preconnect" href="{{ route('user.page', $video->user->unique_id) }}">
-              <img src="{{ asset($video->user->image ?? 'images/avatar.png')}}" class="video-user-image" alt="" />
-            </a>
-          </div>
-          <div class="video-info">
-            <div class="video-name-container">
-              <span class="video-title">{{ str_limit($video->title, 25) }}</span>
-            </div>
-            <div class="video-user-name-container">
-              <span class="video-user-name">{{ $video->user->name }}</span>
-            </div>
-            <div class="video-time-container">
-              <span class="video-time">{{ $video->created_at->diffForHumans() }}</span>
-            </div>
-          </div>
-        </div>
+        <p class="video-title">
+          {{ $video->title }}
+        </p>
       </div>
     @endforeach
-    </div>
   </div>
+</div>
 @endsection

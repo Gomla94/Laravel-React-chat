@@ -19,4 +19,9 @@ class Appeal extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function video()
+    {
+        return $this->morphOne(Video::class, 'videoable');
+    }
 }

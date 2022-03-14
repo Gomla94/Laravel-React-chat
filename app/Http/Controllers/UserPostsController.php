@@ -35,25 +35,31 @@ class UserPostsController extends Controller
             $file = $request->post_image;
             $extension = $file->getClientOriginalExtension();  
             $image_path = $request->file('post_image')->store('images', 's3');
-          
         }
 
         if (request()->file('post_video')) {
             $file = $request->post_video;
             $extension = $file->getClientOriginalExtension();
             $video_path = $request->file('post_video')->store('videos', 's3');
-
         }
 
-        $user->posts()->create([
+        $post = $user->posts()->create([
             'title' => $request->post_title,
             'description' => $request->post_description,
             'image_name' => request()->file('post_image') ? basename($image_path) : null,
             'image_path' => request()->file('post_image') ? Storage::disk('s3')->url($image_path) : null,
-            'video_name' => request()->file('post_video') ? basename($video_path) : null,
-            'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : null,
             'country' => $request->country
         ]);
+
+        if (request()->file('post_video')) {
+            $video_path = $request->file('post_video')->store('videos', 's3');
+
+            $post->video()->create([
+                'user_id' => Auth::id(),
+                'video_name' => request()->file('post_video') ? basename($video_path) : null,
+                'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : null,
+            ]);
+        }
 
         return redirect()->route('welcome');
     }
@@ -73,11 +79,16 @@ class UserPostsController extends Controller
             $extension = $file->getClientOriginalExtension();
             $image_path = $request->file('post_image')->store('images', 's3');
         }
-        if (request()->file('post_video')) {
+
+         if (request()->file('post_video')) {
             Storage::disk('s3')->delete("videos/{$post->video_name}");
-            $file = $request->post_video;
-            $extension = $file->getClientOriginalExtension();
             $video_path = $request->file('post_video')->store('videos', 's3');
+    
+            $post->video()->create([
+                'user_id' => Auth::id(),
+                'video_name' => request()->file('post_video') ? basename($video_path) : null,
+                'video_path' => request()->file('post_video') ? Storage::disk('s3')->url($video_path) : null,
+            ]);
         }
 
         $post->update([
@@ -97,6 +108,8 @@ class UserPostsController extends Controller
     {
         Storage::disk('s3')->delete("images/{$post->image_name}");
         Storage::disk('s3')->delete("videos/{$post->video_name}");
+
+        $post->video()->delete();
         $post->delete();
         return back();
     }
@@ -155,10 +168,13 @@ class UserPostsController extends Controller
             'description' => $post->description,
             'image_name' => $post->image_name,
             'image_path' => $post->image_path,
-            'video_name' => $post->video_name,
-            'video_path' => $post->video_path,
             'is_shared' => true,
             'shared_by' => auth()->user()->id
+        ]);
+
+        $shared_post->video()->create([
+            'video_name' => $post->video_name,
+            'video_path' => $post->video_path,
         ]);
 
         Alert::success('Post shared successfully');

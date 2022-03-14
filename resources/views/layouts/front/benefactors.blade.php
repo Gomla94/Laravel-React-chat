@@ -3,43 +3,63 @@
 <meta name="description" content="this is the benefactors page in magaxat.com">
 @endsection
 @section('content')
-<div class="container-fluid all-users-wrapper">
-  <div class="container all-users-list">
-    @foreach($benefactors as $benefactor)
-    <div class="user">
-      <a rel="preconnect" href="{{ route('user.page', $benefactor->unique_id) }}">
-        <div class="user-image-wrapper">
-          <img src="{{ asset($benefactor->image ?? 'images/avatar.png') }}" alt="user-image" />
-        </div>
-      </a>
-      <div class="users-social">
-        <span class="user-social-span">{{ $benefactor->name }}</span>
-        <span class="user-social-span">{{ $benefactor->email }}</span>
-        {{-- <span class="user-social-span">@lang('translations.open_all_path')</span> --}}
-      </div>
-      @if(Auth::check())
-        <div class="user-subscription-button">
-          <div class="user-green-message-box" data-nid={{ $benefactor->unique_id }}>
-            <i class="fas fa-envelope user-envelope"></i>
+<div class="navbar-background-wrapper"></div>
+  <div class="benefactors-wrapper">
+    <div class="search-benefactors-wrapper">
+      <div class="search-container">
+        <form action="">
+          <div class="form-group">
+            <input
+              type="text"
+              class="benefactors-search-input"
+              placeholder="Search"
+            />
+            <i class="fas fa-search"></i>
           </div>
-          @if(auth()->user()->subscribed($benefactor->unique_id))
-          <form action="{{ route('unsubscribe', $benefactor->unique_id) }}" method="POST">
-            @csrf
-            <button class="fas fa-check checkmark-icon"></button>
-          </form>
-          @else
-          <form action="{{ route('subscribe', $benefactor->unique_id) }}" method="POST">
-            @csrf
-            <button class="user-subscribe">
-              @lang('translations.subscribe')
-            </button>
-          </form>
-          @endif
-        </div>
-      @endif
+        </form>
+      </div>
     </div>
-    @endforeach
-    {{$benefactors->links('vendor.pagination.custom')}}
+    <div class="benefactors-container">
+      @foreach($benefactors as $benefactor)
+        <div class="single-benefactors-wrapper">
+          <div class="single-benefactors-image-wrapper">
+            <img src="{{ $benefactor->image ?? asset('images/avatar.png') }}" alt="benefactors-image" />
+          </div>
+          <div class="single-benefactors-info-wrapper">
+            <div class="single-benefactors-title-desc-container">
+              <span class="single-benefactors-title">{{ $benefactor->name }}</span>
+              <span class="single-benefactors-description"
+                >@ {{ $benefactor->name }}</span>
+            </div>
+            <div class="single-benefactors-view-button-wrapper">
+            @if(Auth::check())
+              @if(Auth::user()->subscribed($user->unique_id))
+              <div class="main-video-date-wrapper">
+                <form action="{{ route('unsubscribe', $user->unique_id) }}" method="POST">
+                  @csrf
+                  <button class="main-video-user-subscribed-link">
+                    <i class="fas fa-check"></i> Subscribed
+                  </button>
+                </form>
+              </div>
+              @else
+              <div class="main-video-date-wrapper">
+                <form action="{{ route('subscribe', $user->unique_id) }}" method="POST">
+                  @csrf
+                  <button class="main-video-user-subscribed-link">
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+              @endif
+            @endif
+              {{-- <a href="" class="benefactors-message-link"
+                ><i class="fa-regular fa-comment"></i>Message</a
+              > --}}
+            </div>
+          </div>
+        </div>
+      @endforeach
+    </div>
   </div>
-</div>
 @endsection

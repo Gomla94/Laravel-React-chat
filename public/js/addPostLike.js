@@ -8,11 +8,12 @@ export const likePost = async (e) => {
             postId,
         });
         if (response.data) {
-            heartIcon.previousElementSibling.innerText =
-                parseInt(heartIcon.previousElementSibling.innerText) + 1;
+            heartIcon.nextElementSibling.innerText =
+                parseInt(heartIcon.nextElementSibling.innerText) + 1;
             heartIcon.classList.toggle("liked-post-heart-icon");
         }
     } catch (error) {
+        console.log(error);
         return false;
     }
 };
@@ -25,12 +26,13 @@ export const dislikePost = async (e) => {
             postId,
         });
         if (response.data == 1) {
-            heartIcon.previousElementSibling.innerText = parseInt(
-                heartIcon.previousElementSibling.innerText - 1
+            heartIcon.nextElementSibling.innerText = parseInt(
+                heartIcon.nextElementSibling.innerText - 1
             );
             heartIcon.classList.toggle("liked-post-heart-icon");
         }
     } catch (error) {
+        console.log(error);
         return false;
     }
 };
