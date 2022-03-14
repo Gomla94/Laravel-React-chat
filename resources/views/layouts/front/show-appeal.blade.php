@@ -94,7 +94,7 @@ Magaxat | Appeal
               <div class="post-user-date-wrapper">
                 <div class="post-user-info">
                   <div class="post-user-image-wrapper">
-                    <img src="{{ $appeal->user->image ?? asset('images/avatar.png') }}" alt="person" />
+                    <img src="{{ $appeal->user->image !== null ? $appeal->user->image : asset('images/avatar.png') }}" alt="person" />
                   </div>
                   <div class="post-user-names-wrapper">
                     <div class="post-user-names-wrapper">
