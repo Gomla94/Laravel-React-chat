@@ -2698,7 +2698,7 @@ button {
     }
 
     .appeal-slide {
-        height: 450px !important;
+        width: 100% !important;
     }
 
     .posts-modal-content {
