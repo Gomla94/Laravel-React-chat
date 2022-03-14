@@ -9,7 +9,7 @@
     <p class="main-appeals-title">Who need help now</p>
   </div>
   <div class="swiper appealsSwiper">
-    <div class="swiper-wrapper appeals-wrapper">
+    <div class="swiper-wrapper home-appeals-wrapper">
       @foreach($random_appeals as $appeal)
         <div class="swiper-slide appeal-slide">
           <div class="appeal-slide-image-wrapper">
@@ -112,7 +112,7 @@
             ></i>
             @else
             <i
-              class="social-icon fa-solid fa-heart"
+              class="social-icon fa-light fa-heart"
             ></i>
             @endif
 

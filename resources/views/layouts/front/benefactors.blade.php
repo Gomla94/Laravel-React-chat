@@ -33,7 +33,7 @@
             </div>
             <div class="single-benefactors-view-button-wrapper">
             @if(Auth::check())
-              @if(Auth::user()->subscribed($user->unique_id))
+              @if(Auth::user()->subscribed($benefactor->unique_id))
               <div class="main-video-date-wrapper">
                 <form action="{{ route('unsubscribe', $user->unique_id) }}" method="POST">
                   @csrf
@@ -44,7 +44,7 @@
               </div>
               @else
               <div class="main-video-date-wrapper">
-                <form action="{{ route('subscribe', $user->unique_id) }}" method="POST">
+                <form action="{{ route('subscribe', $benefactor->unique_id) }}" method="POST">
                   @csrf
                   <button class="main-video-user-subscribed-link">
                     Subscribe

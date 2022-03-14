@@ -44,7 +44,7 @@
   </head>
   <body>
     <div class="navbar-background-wrapper"></div>
-    <div class="navbar-wrapper">
+    <div class="sec-navbar-wrapper">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
           <div class="bar1"></div>
