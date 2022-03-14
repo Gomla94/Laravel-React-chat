@@ -98,9 +98,9 @@
             /></video>
           </div>
           @endif
-          <p class="post-description">
+          {{-- <p class="post-description">
             {{ $post->description }}
-          </p>
+          </p> --}}
           <div class="main-post-socials-wrapper">
             <div class="likes-count">
               {{-- <i class="fa-solid fa-heart social-icon"></i> --}}

@@ -168,12 +168,16 @@ body {
 
 .navbar-user-section-wrapper {
     height: 100%;
-    width: 400px;
+    width: fit-content;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
+    justify-content: flex-end;
+    padding-right: -10px !important;
+}
+
+.navbar-user-section-wrapper div {
+    margin: 0 0.5rem;
 }
 
 .navbar-chat-icon {
@@ -210,6 +214,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    margin-right: 2rem;
 }
 
 .navbar-user-list i {
@@ -259,6 +264,10 @@ body {
     height: 100%;
     width: 100%;
     object-fit: contain;
+}
+
+.navbar-user-name {
+    color: black;
 }
 
 .navbar-user-name a {
@@ -358,6 +367,7 @@ body {
     height: 100px;
     width: 100%;
     position: relative;
+    margin-top: 2rem;
 }
 
 .main-appeals-title,
@@ -456,7 +466,7 @@ body {
 /* main posts section starts here */
 
 .main-posts-wrapper {
-    background-color: #fff8ef;
+    background-color: #faf8f3;
     height: auto;
     width: 100%;
 }
@@ -466,6 +476,7 @@ body {
     width: 100%;
     position: relative;
     padding-top: 10px;
+    margin-top: 2rem;
 }
 
 .main-posts-title-wrapper::before {
@@ -537,7 +548,7 @@ button {
 }
 
 .main-posts {
-    width: 50%;
+    width: 70%;
     margin: auto;
     height: auto;
     margin-top: 50px;
@@ -660,6 +671,7 @@ button {
 
 .post-title {
     font-size: 1rem;
+    text-align: left;
 }
 
 .post-description {
@@ -677,6 +689,8 @@ button {
 .main-post-image {
     width: 100%;
     height: 100%;
+    border-radius: 30px;
+    /* padding: 0 1rem; */
 }
 
 .main-post-socials-wrapper {
@@ -1174,7 +1188,6 @@ button {
 .home-appeals-wrapper {
     height: 100%;
     width: 100%;
-    background-color: #ffff;
 }
 
 .search-appeals-wrapper,
@@ -2306,22 +2319,21 @@ button {
 }
 
 @media screen and (max-width: 1250px) {
-    .search-users-wrapper {
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 2rem;
-        margin-bottom: 2rem;
-    }
-}
-
-@media screen and (max-width: 1200px) {
     .navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         border-radius: unset;
+    }
+
+    .navbar-user-section-wrapper div {
+        margin: unset;
+    }
+
+    .navbar-logo-wrapper {
+        width: 170px;
+        height: 60px;
     }
 
     .navbar-links-wrapper {
@@ -2340,10 +2352,6 @@ button {
         display: none;
     }
 
-    /* .navbar-user-name {
-        display: none;
-    } */
-
     .navbar-user-list .fa-angle-down {
         display: none;
     }
@@ -2351,6 +2359,7 @@ button {
     .navbar-user-list {
         width: auto;
         background: none;
+        margin-right: -10px !important;
     }
 
     .navbar-user-section-wrapper {
@@ -2360,7 +2369,7 @@ button {
     }
 
     .navbar-user-image-wrapper {
-        padding-right: unset;
+        margin-right: 0.4rem !important;
     }
 
     .navbar-user-image-wrapper img {
@@ -2406,6 +2415,14 @@ button {
 
     .other-video-user-link {
         display: none;
+    }
+
+    .search-users-wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        margin-bottom: 2rem;
     }
 }
 

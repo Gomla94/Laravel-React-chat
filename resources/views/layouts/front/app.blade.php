@@ -25,7 +25,7 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=1')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=2')}}" />
     @yield('styles')
     <script src="{{asset('js/newest-index.js')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
