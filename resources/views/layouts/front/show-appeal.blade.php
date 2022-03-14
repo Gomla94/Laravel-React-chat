@@ -88,7 +88,7 @@ Magaxat | Appeal
           </div>
           @endif
 
-          @if($appeal->video->video_path)
+          @if($appeal->video)
           <div class="appeal-media-video-wrapper">
             <div class="main-post">
               <div class="post-user-date-wrapper">
