@@ -112,7 +112,7 @@
             ></i>
             @else
             <i
-              class="social-icon fa-light fa-heart"
+              class="social-icon fa-solid fa-heart"
             ></i>
             @endif
 
