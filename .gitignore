@@ -2,7 +2,7 @@
 /public/hot
 .idea
 /public/images
-/public/videos
+# /public/videos
 /public/storage
 /storage/*.key
 /vendor
