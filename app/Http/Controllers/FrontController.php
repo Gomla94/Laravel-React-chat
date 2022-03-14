@@ -155,7 +155,9 @@ class FrontController extends Controller
 
     public function show_appeal($id)
     {
+
         $appeal = Appeal::where('uniqueid',$id)->firstOrFail();
+        dd($appeal->video()->get());
         $appeal_images = $appeal->images()->get();
         $current_url = url()->current();
         $share_links = Share::page($current_url)
