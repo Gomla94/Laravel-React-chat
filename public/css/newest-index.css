@@ -548,7 +548,7 @@ button {
 }
 
 .main-posts {
-    width: 70%;
+    width: 80%;
     margin: auto;
     height: auto;
     margin-top: 50px;
@@ -2728,19 +2728,19 @@ button {
     .appeal-media-video-wrapper {
         width: 100% !important;
     }
-}
 
-@media screen and (max-width: 700px) {
     .main-posts-buttons-wrapper {
         flex-direction: column;
     }
 
-    .main-posts-search-icon {
-        top: 25px;
-    }
-
     .main-posts-search-wrapper {
         padding: 10px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .main-posts-search-icon {
+        top: 25px;
     }
 
     button {
@@ -2792,6 +2792,10 @@ button {
 
     .videos-container {
         grid-template-columns: 1fr;
+    }
+
+    .main-posts {
+        width: 100% !important;
     }
 }
 

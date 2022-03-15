@@ -34,133 +34,136 @@
   <div class="main-posts-title-wrapper">
     <p class="main-posts-title">News line</p>
   </div>
-  <div class="main-posts-buttons-wrapper">
-    <div class="main-posts-search-wrapper">
-      <form action="{{ route('welcome', request()->query()) }}" method="GET">
-        {{-- @csrf --}}
-        <i class="fas fa-search main-posts-search-icon"></i>
-        <input
-          type="text"
-          name="search-key"
-          placeholder="Search"
-          class="main-posts-search-input"
-        />
-        <button class="search-button">Search</button>
-      </form>
+  <div class="container">
+    <div class="main-posts-buttons-wrapper">
+      <div class="main-posts-search-wrapper">
+        <form action="{{ route('welcome', request()->query()) }}" method="GET">
+          {{-- @csrf --}}
+          <i class="fas fa-search main-posts-search-icon"></i>
+          <input
+            type="text"
+            name="search-key"
+            placeholder="Search"
+            class="main-posts-search-input"
+          />
+          <button class="search-button">Search</button>
+        </form>
+      </div>
+      <div class="main-posts-add-buttons">
+        <button class="main-posts-add-appeal-button">Request for help</button>
+        <button class="main-posts-add-post-button">
+          <i class="fal fa-plus new-post-icon"></i>
+          New post
+        </button>
+      </div>
     </div>
-    <div class="main-posts-add-buttons">
-      <button class="main-posts-add-appeal-button">Request for help</button>
-      <button class="main-posts-add-post-button">
-        <i class="fal fa-plus new-post-icon"></i>
-        New post
-      </button>
-    </div>
-  </div>
-
-  <div class="main-posts-container">
-    <div class="main-posts">
-      @foreach($random_posts as $post)
-        <div class="main-post">
-          <div class="post-user-date-wrapper">
-            <div class="post-user-info">
-              <div class="post-user-image-wrapper">
-                <img src="{{ $post->user->image ?? asset('images/avatar.png') }}" alt="person" />
+  
+    <div class="main-posts-container">
+        <div class="main-posts">
+          @foreach($random_posts as $post)
+            <div class="main-post">
+              <div class="post-user-date-wrapper">
+                <div class="post-user-info">
+                  <div class="post-user-image-wrapper">
+                    <img src="{{ $post->user->image ?? asset('images/avatar.png') }}" alt="person" />
+                  </div>
+                  <div class="post-user-names-wrapper">
+                    <span class="post-user-name">{{ $post->user->name }}</span>
+                    <span class="post-user-link">@ {{ $post->user->name }}</span>
+                  </div>
+                </div>
+                <div class="post-date-wrapper">
+                  <span class="post-date">{{ $post->created_at->format('Y-m-d') }}</span>
+                  <span class="post-time">{{ $post->created_at->format('H:i:a') }}</span>
+                </div>
               </div>
-              <div class="post-user-names-wrapper">
-                <span class="post-user-name">{{ $post->user->name }}</span>
-                <span class="post-user-link">@ {{ $post->user->name }}</span>
+              <p class="post-title">
+                {{ $post->title }}
+              </p>
+              @if($post->image_path)
+              <div class="post-image-wrapper">
+                <img
+                  class="main-post-image"
+                  src="{{ $post->image_path }}"
+                  alt="post-image"
+                />
               </div>
-            </div>
-            <div class="post-date-wrapper">
-              <span class="post-date">{{ $post->created_at->format('Y-m-d') }}</span>
-              <span class="post-time">{{ $post->created_at->format('H:i:a') }}</span>
-            </div>
-          </div>
-          <p class="post-title">
-            {{ $post->title }}
-          </p>
-          @if($post->image_path)
-          <div class="post-image-wrapper">
-            <img
-              class="main-post-image"
-              src="{{ $post->image_path }}"
-              alt="post-image"
-            />
-          </div>
-          @endif
-
-          @if($post->video_path)
-          <div class="post-image-wrapper">
-            <video controls
-              class="main-post-image"
-              src="{{ $post->video_path }}"
-              alt="post-image"
-            /></video>
-          </div>
-          @endif
-          {{-- <p class="post-description">
-            {{ $post->description }}
-          </p> --}}
-          <div class="main-post-socials-wrapper">
-            <div class="likes-count">
-              {{-- <i class="fa-solid fa-heart social-icon"></i> --}}
-
-            @if(Auth::check())
-            <i
-              id="{{ $post->id }}"
-              class="social-icon post-heart-icon fa-solid {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart ' }}"
-            ></i>
-            @else
-            <i
-              class="social-icon fa-solid fa-heart"
-            ></i>
-            @endif
-
-
-
-              <span>{{ $post->likes->count() }}</span>
-            </div>
-            <div class="comments-count" id="{{ $post->id }}">
-              <i id="{{ $post->id }}"
-                class="fa-regular fa-comment social-icon main-post-comments-icon"
-              ></i>
-              <span>{{ $post->comments->count() }}</span>
-            </div>
-            <div class="shares-count">
-              <i class="fa-solid fa-share social-icon"></i>
-              <span>4</span>
-            </div>
-          </div>
-
-          <div class="main-post-comment-form-wrapper">
-            @if (Auth::check())
-            <form class="main-post-comment-form">
-              <div class="form-group">
-                <textarea
-                  name="title"
-                  class="form-control main-post-form-textarea"
+              @endif
+    
+              @if($post->video_path)
+              <div class="post-image-wrapper">
+                <video controls
+                  class="main-post-image"
+                  src="{{ $post->video_path }}"
+                  alt="post-image"
+                /></video>
+              </div>
+              @endif
+              {{-- <p class="post-description">
+                {{ $post->description }}
+              </p> --}}
+              <div class="main-post-socials-wrapper">
+                <div class="likes-count">
+                  {{-- <i class="fa-solid fa-heart social-icon"></i> --}}
+    
+                @if(Auth::check())
+                <i
                   id="{{ $post->id }}"
-                  cols="10"
-                  rows="2"
-                ></textarea>
+                  class="social-icon post-heart-icon fa-solid {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart ' }}"
+                ></i>
+                @else
+                <i
+                  class="social-icon fa-solid fa-heart"
+                ></i>
+                @endif
+    
+    
+    
+                  <span>{{ $post->likes->count() }}</span>
+                </div>
+                <div class="comments-count" id="{{ $post->id }}">
+                  <i id="{{ $post->id }}"
+                    class="fa-regular fa-comment social-icon main-post-comments-icon"
+                  ></i>
+                  <span>{{ $post->comments->count() }}</span>
+                </div>
+                <div class="shares-count">
+                  <i class="fa-solid fa-share social-icon"></i>
+                  <span>4</span>
+                </div>
               </div>
-              <div class="comment-error-div">
-                <span class="comment-error-span"></span>
+    
+              <div class="main-post-comment-form-wrapper">
+                @if (Auth::check())
+                <form class="main-post-comment-form">
+                  <div class="form-group">
+                    <textarea
+                      name="title"
+                      class="form-control main-post-form-textarea"
+                      id="{{ $post->id }}"
+                      cols="10"
+                      rows="2"
+                    ></textarea>
+                  </div>
+                  <div class="comment-error-div">
+                    <span class="comment-error-span"></span>
+                  </div>
+                  <button type="button" class="main-post-add-comment-btn">
+                    Add comment
+                  </button>
+                </form>
+                @endif
               </div>
-              <button type="button" class="main-post-add-comment-btn">
-                Add comment
-              </button>
-            </form>
-            @endif
-          </div>
-
-          <div class="main-post-comments-section">
-            
-          </div>
+    
+              <div class="main-post-comments-section">
+                
+              </div>
+            </div>
+          @endforeach
         </div>
-      @endforeach
     </div>
   </div>
+  
 </div>
 
 <div class="posts-modal-wrapper">
