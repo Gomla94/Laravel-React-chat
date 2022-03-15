@@ -1009,7 +1009,8 @@ button {
     justify-content: center;
     background-color: #af9065;
     color: white;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
 }
 
 .login-wrapper {
