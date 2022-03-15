@@ -22,7 +22,6 @@
     <title>@yield('title')</title>
   </head>
   <body>
-    <div class="auth-navbar-background-wrapper">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
           <div class="bar1"></div>
@@ -59,9 +58,6 @@
           </div> --}}
         </div>
       </div>
-    </div>
-     
-
       <div class="overlay" id="overlay">
         <ul class="overlay-list">
           <li class="overlay-list-item">
@@ -95,6 +91,6 @@
         </ul>
       </div>
      
-      @yield('content')
+    @yield('content')
   </body>
 </html>
