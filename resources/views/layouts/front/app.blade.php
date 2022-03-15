@@ -38,7 +38,7 @@
       ?>
       </script>
 
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <title>@yield('title')</title>
   </head>

@@ -1,32 +1,38 @@
-$(".profile-image-input").on("change", function () {
-    $(".left-side").css("margin-top", "80px");
+$("#profile-image-input").on("change", function () {
+    $(".left-side").css("margin-top", "50px");
     $(".profile-image").remove();
-    $(".image-demo").croppie("destroy");
-    let image_crop = $(".image-demo").croppie({
+    $(".profile-image-label").remove();
+
+    $uploadCrop = $("#upload-input").croppie({
         enableExif: true,
         viewport: {
-            height: 200,
             width: 200,
+            height: 200,
             type: "circle",
         },
         boundary: {
-            height: 300,
             width: 300,
+            height: 300,
         },
     });
     var reader = new FileReader();
-    reader.onload = function (event) {
-        image_crop.croppie("bind", {
-            url: event.target.result,
-        });
+    reader.onload = function (e) {
+        $uploadCrop
+            .croppie("bind", {
+                url: e.target.result,
+            })
+            .then(function () {
+                console.log("jQuery bind complete");
+            });
     };
     reader.readAsDataURL(this.files[0]);
 });
 
 $(".update-profile-button").on("click", function (event) {
-    if ($(".profile-image-input").val()) {
-        event.preventDefault();
-        $(".image-demo")
+    event.preventDefault();
+    // console.log($(".profile-image-input").get(0));
+    if ($("#profile-image-input").val() !== "") {
+        $("#upload-input")
             .croppie("result", {
                 type: "canvas",
                 size: "viewport",

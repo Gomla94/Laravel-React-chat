@@ -42,7 +42,8 @@ class User extends Authenticatable
         'api_token',
         'gender',
         'country_id',
-        'unique_id'
+        'unique_id',
+        'last_name'
     ];
 
     /**

@@ -60,6 +60,7 @@ class UserController extends Controller
 
         $attributes = validator(request()->all(), [
             'name' => ['string'],
+            'last_name' => ['string', 'sometimes', 'nullable'],
             'email' => ['email', Rule::unique('users', 'email')->ignore($user->id)],
             'image' => ['sometimes','nullable','max:2048', 'mimes:png,jpg,jpeg'],
             'date_of_birth' => ['sometimes','nullable','date'],
@@ -72,17 +73,20 @@ class UserController extends Controller
             'organisation_description' => ['sometimes', 'nullable', 'in:individual,organisation']
         ])->validate();
 
+
         $user->update([
             'name' => request('name') ? $attributes['name'] : $user->name,
+            'last_name' => request('last_name') ? $attributes['last_name'] : $user->last_name,
             'email' => request('email') ? $attributes['email'] : $user->email,
-            'date_of_birth' => $attributes['date_of_birth'],
-            'phone_number' => $attributes['phone_number'],
+            'date_of_birth' => request('date_of_birth') ? $attributes['date_of_birth'] : null,
+            'phone_number' => request('phone_number') ? $attributes['phone_number'] : null,
             'gender' => $attributes['gender'] ?? null,
             'country_id' => $attributes['country_id'] ?? null,
             'interesting_type_id' => json_encode(request('interesting_type'))?? null,
             'additional_type' => request('additional_type') ? $attributes['additional_type'] : null,
             'organisation_description' => request('organisation_description') ? $attributes['organisation_description'] : null
         ]);
+
 
         return redirect()->route('user.profile');
     }

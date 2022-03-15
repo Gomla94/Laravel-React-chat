@@ -261,19 +261,20 @@ body {
 }
 
 .navbar-user-image-wrapper {
-    padding-right: 10px;
-    height: 50px;
-    width: 50px;
+    /* padding-right: 10px; */
+    height: 40px;
+    width: 40px;
 }
 
 .navbar-user-image-wrapper img {
     height: 100%;
     width: 100%;
     object-fit: contain;
+    border-radius: 50%;
 }
 
 .navbar-user-name {
-    color: black;
+    color: white;
 }
 
 .navbar-user-name a {
@@ -609,6 +610,7 @@ button {
 .other-video-user-image-wrapper img {
     height: 100%;
     width: 100%;
+    border-radius: 50%;
 }
 
 .post-user-names-wrapper,
@@ -1489,6 +1491,15 @@ button {
     padding: 20px 30px;
 }
 
+.profile-users-container {
+    width: 100%;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+}
+
 .single-user-wrapper {
     width: 100%;
     height: 200px;
@@ -1513,6 +1524,14 @@ button {
     width: 220px;
     border-radius: 50%;
     object-fit: contain;
+}
+
+.profile-single-user-image-wrapper img {
+    height: 100%;
+    width: 120px;
+    border-radius: 50%;
+    object-fit: contain;
+    padding: 0 1rem;
 }
 
 .single-user-info-wrapper {
@@ -1920,13 +1939,18 @@ button {
 }
 
 .profile-header {
-    background-color: #f9f9f9;
+    background-color: red;
     width: 100%;
     display: flex;
     height: 190px;
     position: relative;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
     position: relative;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: url("../images/img/slider1.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .profile-img img {
@@ -1951,13 +1975,14 @@ button {
     height: 38px;
     color: #fff;
     position: absolute;
-    left: 10%;
+    left: 125px;
     top: 85%;
     z-index: 5;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+    cursor: pointer;
 }
 
 .profile-image-label i {
@@ -1991,6 +2016,91 @@ button {
     margin-left: 20px;
     z-index: 99;
     text-align: center;
+}
+
+.profile-form div {
+    text-align: left;
+    /* padding-left: 1rem; */
+}
+
+.profile-form .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.profile-areas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.profile-areas > div {
+    width: 250px;
+}
+
+.profile-form label {
+    color: #af9065;
+}
+
+.area-check {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.area-check input {
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    border-radius: 50px !important;
+}
+
+.round {
+    position: relative;
+}
+
+.round label {
+    background-color: rgb(231, 231, 231);
+    border: 2px solid rgb(148, 148, 148);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 28px;
+}
+
+.round label:after {
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    left: 7px;
+    opacity: 0;
+    position: absolute;
+    top: 8px;
+    transform: rotate(-45deg);
+    width: 12px;
+}
+
+.round input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+    background-color: #cfcfcf;
+    border-color: #cfcfcf;
+    color: #af9065;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+
+.area-check label {
+    color: black;
 }
 
 .profile-side .profile-user-name {
@@ -2121,7 +2231,7 @@ button {
 
 .profile-create-posts-wrapper,
 .profile-create-appeals-wrapper {
-    border: 1px solid rgb(163, 163, 163);
+    border: 1px solid rgb(230, 230, 230);
     height: 250px;
     width: 100%;
     border-radius: 20px;
@@ -2129,6 +2239,8 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgb(230, 230, 230);
+    margin-bottom: 1rem;
 }
 
 .profile-create-posts-icon-wrapper,
@@ -2171,6 +2283,15 @@ button {
     .profile-image-label {
         left: 12%;
         top: 85%;
+    }
+
+    .profile-form .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .profile-areas {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
@@ -2257,6 +2378,15 @@ button {
 
     .active-nav {
         height: 60px;
+    }
+
+    .profile-form .row {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .profile-areas {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -2427,6 +2557,10 @@ button {
         justify-content: space-between;
         padding: 1rem 2rem;
         margin-bottom: 2rem;
+    }
+
+    .profile-users-container {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -2667,6 +2801,11 @@ button {
 
     .mobile-down-icon {
         display: unset;
+    }
+
+    .nav {
+        width: 100% !important;
+        margin-left: unset;
     }
 }
 

@@ -14,28 +14,29 @@ const additionalTypeHandler = () => {
         organisationDescription.classList.add("d-none");
     }
 };
-additionalTypeInput.addEventListener("change", (e) => {
-    additionalTypeHandler(e);
-});
+
+// additionalTypeInput.addEventListener("change", (e) => {
+//     additionalTypeHandler(e);
+// });
 
 profileListItems.forEach((item) => {
     item.addEventListener("click", (e) => {
         removeActiveItem();
-        e.target.classList.add("active");
+        e.target.classList.add("active-nav");
     });
 });
 
 const removeActiveItem = () => {
-    const activeItems = document.querySelectorAll(".active");
+    const activeItems = document.querySelectorAll(".active-nav");
     activeItems.forEach((item) => {
-        item.classList.remove("active");
+        item.classList.remove("active-nav");
     });
 };
 
 const tabBtn = document.querySelectorAll(".nav ul li");
-const tab = document.querySelectorAll(".tab");
 
 function tabs(panelIndex) {
+    const tab = document.querySelectorAll(".tab");
     tab.forEach(function (node) {
         node.style.display = "none";
     });

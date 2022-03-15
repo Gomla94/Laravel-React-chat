@@ -70,7 +70,9 @@
           </div>
           <div class="navbar-user-list">
             <div class="navbar-user-image-wrapper">
-              <img src="{{ asset(auth()->user()->image ?? 'images/avatar.png') }}" alt="user-image" />
+              <a href="{{ route('user.profile') }}">
+                <img src="{{ asset(auth()->user()->image ?? 'images/avatar.png') }}" alt="user-image" />
+              </a>
             </div>
             <span class="navbar-user-name">{{ auth()->user()->name }}</span>
             <i class="fa-solid fa-angle-down user-navbar-arrow"></i>

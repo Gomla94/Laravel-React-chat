@@ -7,7 +7,9 @@ const userAddsList = document.querySelector(".user-adds-list");
 
 // modal buttons
 const postsBtn = document.querySelector(".main-posts-add-post-button");
+const profilePostsBtn = document.querySelector(".profile-add-post-button");
 const appealsBtn = document.querySelector(".main-posts-add-appeal-button");
+const profileAppealsBtn = document.querySelector(".profile-add-appeal-button");
 const postsModalWrapper = document.querySelector(".posts-modal-wrapper");
 const appealsModalWrapper = document.querySelector(".appeals-modal-wrapper");
 const postsModalContnt = document.querySelector(".posts-modal-content");
@@ -46,6 +48,14 @@ const showAppealsModal = () => {
 
 if (postsBtn) {
     postsBtn.addEventListener("click", showPostsModal);
+}
+
+if (profilePostsBtn) {
+    profilePostsBtn.addEventListener("click", showPostsModal);
+}
+
+if (profileAppealsBtn) {
+    profileAppealsBtn.addEventListener("click", showAppealsModal);
 }
 
 if (appealsBtn) {
