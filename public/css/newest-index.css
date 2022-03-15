@@ -994,7 +994,7 @@ button {
 .auth-page {
     background-color: #af9065;
     color: white;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .login-page {

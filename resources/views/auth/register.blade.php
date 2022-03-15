@@ -134,7 +134,7 @@
         <div class="register-wrapper">
           <div class="login-titles">
             <p class="login-l-heading">Welcome Back</p>
-            <p class="login-m-heading">Login</p>
+            <p class="login-m-heading">Sign in</p>
           </div>
     
           <div class="login-form-wrapper">
