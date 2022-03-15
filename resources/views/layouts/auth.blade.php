@@ -22,7 +22,6 @@
     <title>@yield('title')</title>
   </head>
   <body>
-    <div class="auth-page">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
           <div class="bar1"></div>
@@ -94,6 +93,5 @@
       </div>
      
       @yield('content')
-    </div>
   </body>
 </html>

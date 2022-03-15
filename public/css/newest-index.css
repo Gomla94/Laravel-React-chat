@@ -991,22 +991,19 @@ button {
 
 /* login page starts here */
 
-.auth-page {
+/* .auth-page {
     background-color: #af9065;
     color: white;
-    /* height: 100vh; */
-}
-
-.login-page {
-    background-color: #af9065;
-    color: white;
-    height: 100vh;
-}
+    height: auto;
+} */
 
 .login-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #af9065;
+    color: white;
+    height: 100%;
 }
 
 .login-wrapper {
