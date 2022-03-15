@@ -182,8 +182,8 @@ class FrontController extends Controller
         $countries = Country::all();
         $my_posts = $user->posts()->with('video')->get();
         $my_appeals = $user->appeals()->with('video')->get();
-        $my_posts_images = $user->posts()->whereNull('video_path')->get();
-        $my_posts_videos = $user->posts()->whereNull('image_path')->get();
+        $my_posts_images = $user->posts()->whereNull('video_path')->whereNotNull('image_path')->get();
+        $my_videos = $user->videos()->get();
         $my_subscribtions = $user->subscribtions()->pluck('user_id');
         $my_subscribtions_users = User::whereIn('id', $my_subscribtions)->get();
         $my_subscribers = $user->subscribers()->pluck('subscriber_id');
@@ -198,7 +198,7 @@ class FrontController extends Controller
             'my_posts' => $my_posts,
             'my_appeals' => $my_appeals,
             'my_posts_images' => $my_posts_images,
-            'my_posts_videos' => $my_posts_videos,
+            'my_videos' => $my_videos,
             'my_subscribtions_users' => $my_subscribtions_users,
             'my_subscribers_users' => $my_subscribers_users,
             'my_subscribers' => $my_subscribers_users,

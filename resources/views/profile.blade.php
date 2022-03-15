@@ -50,9 +50,11 @@ Magaxat | Profile
         <div class="right-side">
           <div class="nav">
             <ul>
+              @if(Auth::id() === $user->id)
               <li onclick="tabs(0)" class="profile-item user-settings">
                 Settings
               </li>
+              @endif
               <li onclick="tabs(1)" class="profile-item user-review">
                 Posts
               </li>
@@ -74,135 +76,139 @@ Magaxat | Profile
             </ul>
           </div>
           <div class="profile-body">
-            <div class="profile-settings tab">
-              <h1>Settings</h1>
-              
-              <div class="profile-main-settings">
-               <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form">
-                 @csrf
-                 @method('PUT')
-                <div class="row mb-3">
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="first_name">First Name</label>
-                      </div>
-                      <input class="form-control" type="text" name="name" placeholder="first name" value="{{ $user->name }}">
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="email">Email</label>
-                      </div>
-                      <input class="form-control" id="email" type="text" name="email" placeholder="email" value="{{ $user->email }}">
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="date_of_birth">Date Of Birth</label>
-                      </div>
-                      <input class="form-control" id="date_of_birth" type="date" name="date_of_birth" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}">
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="country">Country</label>  
-                      </div>
-                      <select class="form-control" name="country_id" id="country">
-                        @foreach ($countries as $country)
-                            <option value="{{ $country->id }}">{{ $country->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="last_name">Last Name</label>
-                      </div>
-                      <input class="form-control" id="last_name" type="text" name="last_name" placeholder="last name" value="{{ $user->last_name }}">
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="phone_number">Phone Number</label>
-                      </div>
-                      <input class="form-control" id="phone_number" type="text" name="phone_number" placeholder="phone number" value="{{ $user->phone_number }}">
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="gender">Gender</label>
-                      </div>
-                      <select name="gender" id="gender" class="form-control">
-                        <option value="male" {{ $user->gender === 'male' ? 'selected' : ''}}>Male</option>
-                        <option value="female" {{ $user->gender === 'female' ? 'selected' : ''}}>Female</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="form-group">
-                      <div>
-                        <label for="additional_type">Additional Type</label>
-                      </div>
-                      <select class="form-control" name="additional_type" id="additional_type">
-                          <option value="individual">Individual</option>
-                          <option value="organisation">Organisation</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-md-12">
+            @if(Auth::id() === $user->id)
+              <div class="profile-settings tab">
+                <h1>Settings</h1>
+                
+                <div class="profile-main-settings">
+                <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form">
+                  @csrf
+                  @method('PUT')
+                  <div class="row mb-3">
                     <div class="">
-                      <div>
-                        <label for="area_of_interest">Area Of Interesting</label>
+                      <div class="form-group">
+                        <div>
+                          <label for="first_name">First Name</label>
+                        </div>
+                        <input class="form-control" type="text" name="name" placeholder="first name" value="{{ $user->name }}">
                       </div>
-                      <div class="profile-areas">
-                        @foreach($areas_of_interesting as $area)
-                        <div class="mb-2 mr-2">
-                          <div class="area-check">
-                            <label for="{{ $area->name }}">{{ $area->name }}</label>
-                            @if($user_interesting_types_ids !== null)
+                    </div>
+                    <div class="">
+                      <div class="form-group">
+                        <div>
+                          <label for="email">Email</label>
+                        </div>
+                        <input class="form-control" id="email" type="text" name="email" placeholder="email" value="{{ $user->email }}">
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="form-group">
+                        <div>
+                          <label for="date_of_birth">Date Of Birth</label>
+                        </div>
+                        <input class="form-control" id="date_of_birth" type="date" name="date_of_birth" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}">
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="form-group">
+                        <div>
+                          <label for="country">Country</label>  
+                        </div>
+                        <select class="form-control" name="country_id" id="country">
+                          @foreach ($countries as $country)
+                              <option value="{{ $country->id }}">{{ $country->name }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="">
+                      <div class="form-group">
+                        <div>
+                          <label for="last_name">Last Name</label>
+                        </div>
+                        <input class="form-control" id="last_name" type="text" name="last_name" placeholder="last name" value="{{ $user->last_name }}">
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="form-group">
+                        <div>
+                          <label for="phone_number">Phone Number</label>
+                        </div>
+                        <input class="form-control" id="phone_number" type="text" name="phone_number" placeholder="phone number" value="{{ $user->phone_number }}">
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="form-group">
+                        <div>
+                          <label for="gender">Gender</label>
+                        </div>
+                        <select name="gender" id="gender" class="form-control">
+                          <option value="male" {{ $user->gender === 'male' ? 'selected' : ''}}>Male</option>
+                          <option value="female" {{ $user->gender === 'female' ? 'selected' : ''}}>Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="form-group">
+                        <div>
+                          <label for="additional_type">Additional Type</label>
+                        </div>
+                        <select class="form-control" name="additional_type" id="additional_type">
+                            <option value="individual">Individual</option>
+                            <option value="organisation">Organisation</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="">
+                    <div class="col-md-12">
+                      <div class="">
+                        <div>
+                          <label for="area_of_interest">Area Of Interesting</label>
+                        </div>
+                        <div class="profile-areas">
+                          @foreach($areas_of_interesting as $area)
+                          <div class="mb-2 mr-2">
+                            <div class="area-check">
+                              <label for="{{ $area->name }}">{{ $area->name }}</label>
+                              @if($user_interesting_types_ids !== null)
+                                <div class="round">
+                                  <input name="interesting_type[]" type="checkbox" id="{{ $area->name }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }} value="{{ $area->id }}"> 
+                                  <label for="{{ $area->name }}"></label>
+                                </div>
+                              @else
                               <div class="round">
-                                <input name="interesting_type[]" type="checkbox" id="{{ $area->name }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }} value="{{ $area->id }}"> 
+                                <input name="interesting_type[]" type="checkbox" id="{{ $area->name }}" value="{{ $area->id }}"> 
                                 <label for="{{ $area->name }}"></label>
                               </div>
-                            @else
-                            <div class="round">
-                              <input name="interesting_type[]" type="checkbox" id="{{ $area->name }}" value="{{ $area->id }}"> 
-                              <label for="{{ $area->name }}"></label>
+                              @endif
+                              
                             </div>
-                            @endif
-                            
                           </div>
+                          @endforeach
                         </div>
-                        @endforeach
+                        
                       </div>
-                      
                     </div>
                   </div>
-                </div>
 
-                <button class="update-profile-button" type="submit">Update</button>
-               </form>
+                  <button class="update-profile-button" type="submit">Update</button>
+                </form>
+                </div>
               </div>
-            </div>
+            @endif
             <div class="profile-posts tab">
               <h1>Posts</h1>
-              <div class="profile-create-posts-wrapper">
-                <div class="profile-create-posts-icon-wrapper">
-                  <i class="fa-solid fa-plus profile-add-post-button"></i>
+              @if(Auth::id() === $user->id)
+                <div class="profile-create-posts-wrapper">
+                  <div class="profile-create-posts-icon-wrapper">
+                    <i class="fa-solid fa-plus profile-add-post-button"></i>
+                  </div>
+                  <p>Creat a Post</p>
                 </div>
-                <p>Creat a Post</p>
-              </div>
+              @endif
               @foreach($my_posts as $post)
               <div class="main-post">
                 <div class="post-user-date-wrapper">
@@ -306,12 +312,14 @@ Magaxat | Profile
             </div>
             <div class="profile-appeals tab">
               <h1>Appeals</h1>
-              <div class="profile-create-appeals-wrapper">
-                <div class="profile-create-posts-icon-wrapper">
-                  <i class="fa-solid fa-plus profile-add-appeal-button"></i>
+              @if(Auth::id() === $user->id)
+                <div class="profile-create-appeals-wrapper">
+                  <div class="profile-create-posts-icon-wrapper">
+                    <i class="fa-solid fa-plus profile-add-appeal-button"></i>
+                  </div>
+                  <p>Creat Appeal</p>
                 </div>
-                <p>Creat Appeal</p>
-              </div>
+              @endif
               @foreach($my_appeals as $appeal)
               <div class="main-post">
                 <div class="post-user-date-wrapper">
