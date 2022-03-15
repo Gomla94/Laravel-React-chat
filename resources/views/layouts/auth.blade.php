@@ -17,11 +17,12 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=2')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=3')}}" />
     <script src="{{asset('js/newest-index.js')}}" defer></script>
     <title>@yield('title')</title>
   </head>
   <body>
+    <div class="auth-navbar-background-wrapper">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
           <div class="bar1"></div>
@@ -58,6 +59,8 @@
           </div> --}}
         </div>
       </div>
+    </div>
+     
 
       <div class="overlay" id="overlay">
         <ul class="overlay-list">
