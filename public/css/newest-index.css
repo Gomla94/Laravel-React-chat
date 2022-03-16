@@ -147,7 +147,7 @@ body {
 .navbar-links-wrapper {
     width: 550px;
     height: 100%;
-    margin-right: 10rem;
+    /* margin-right: 10rem; */
 }
 
 .navbar-links-list {
