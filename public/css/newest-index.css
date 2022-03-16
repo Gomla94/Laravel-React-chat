@@ -1326,9 +1326,9 @@ button {
 
 .single-appeal-image-wrapper img {
     height: 100%;
-    width: 220px;
+    width: 200px;
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .single-benefactors-image-wrapper img {
@@ -1355,7 +1355,7 @@ button {
 }
 
 .single-appeal-title-desc-container {
-    text-align: left;
+    text-align: center;
     width: 60%;
 }
 
@@ -1389,6 +1389,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 200px;
 }
 
 .single-benefactors-view-button-wrapper {
@@ -1407,6 +1408,7 @@ button {
     width: auto;
     font-size: 1.3rem;
     text-decoration: none;
+    width: 140px;
 }
 
 .benefactors-subscribe-link,
@@ -3122,6 +3124,15 @@ button {
 
     .single-appeal-description {
         display: none;
+    }
+
+    .single-appeal-title-desc-container {
+        text-align: center;
+        width: unset;
+    }
+
+    .single-appeal-view-button-wrapper {
+        width: unset;
     }
 
     .single-benefactors-image-wrapper img {
