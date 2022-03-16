@@ -2303,7 +2303,7 @@ button {
 
 .profile-create-posts-wrapper,
 .profile-create-appeals-wrapper {
-    border: 1px solid rgb(230, 230, 230);
+    border: 1px solid rgb(207 207 207);
     height: 250px;
     width: 100%;
     border-radius: 20px;
@@ -2317,7 +2317,7 @@ button {
 
 .profile-create-posts-icon-wrapper,
 .profile-create-appeals-icon-wrapper {
-    border: 10px solid rgb(172, 172, 172);
+    border: 5px solid rgb(144, 144, 144);
     height: 180px;
     width: 120px;
     border-radius: 20px;
