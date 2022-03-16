@@ -5,6 +5,11 @@ const languagesList = document.querySelector(".languages-list");
 const userNavbarArrow = document.querySelector(".user-navbar-arrow");
 const userAddsList = document.querySelector(".user-adds-list");
 
+// const mainPostVideos = document.querySelectorAll(".main-post-video");
+// const mainVideos = document.querySelectorAll(".video");
+const videos = document.getElementsByTagName("video");
+const videoPlayIcons = document.querySelectorAll(".play-wrapper");
+
 // modal buttons
 const postsBtn = document.querySelector(".main-posts-add-post-button");
 const profilePostsBtn = document.querySelector(".profile-add-post-button");
@@ -92,4 +97,28 @@ if (userNavbarArrow) {
 
 function showUserAddsList() {
     userAddsList.classList.toggle("show-user-adds-list");
+}
+
+Array.from(videos).forEach((video) => {
+    video.addEventListener("click", () => {
+        const videoPlayIcon = video.nextElementSibling;
+        videoPlayIcon.classList.toggle("rm-play-wrapper");
+    });
+});
+
+// mainVideos.forEach((video) => {
+//     video.addEventListener("click", () => {
+//         const videoPlayIcon = video.nextElementSibling;
+//         videoPlayIcon.classList.toggle("rm-play-wrapper");
+//     });
+// });
+
+if (videoPlayIcons) {
+    videoPlayIcons.forEach((item) => {
+        item.addEventListener("click", () => {
+            item.classList.add("rm-play-wrapper");
+            const targetedVideo = item.previousElementSibling;
+            targetedVideo.play();
+        });
+    });
 }

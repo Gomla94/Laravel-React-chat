@@ -33,9 +33,12 @@ Magaxat | Videos
             <span class="video-time">{{ $video->created_at->format('H:ia') }}</span>
           </div>
         </div>
-        <div class="video-image-wrapper">
+        <div class="video-image-wrapper videos-one-item">
           <a href="{{ route('show-video', $video->id) }}">
             <video src="{{ $video->video_path }}" class="video-image" alt="{{ $video->video_path }}"></video>
+            <div class="play-wrapper">
+              <img src="{{ asset('images/img/play.png') }}" alt="">
+            </div>
           </a>
         </div>
         <p class="video-title">

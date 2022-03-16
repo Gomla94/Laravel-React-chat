@@ -692,13 +692,61 @@ button {
     height: 300px;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .main-post-image {
     width: 100%;
     height: 100%;
     border-radius: 30px;
-    /* padding: 0 1rem; */
+}
+
+.main-post-video {
+    width: 100%;
+    height: 100%;
+}
+
+.play-wrapper {
+    background-color: #af9065;
+    color: white;
+    height: 55px;
+    width: 55px;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 40%;
+    left: 47%;
+    cursor: pointer;
+}
+
+.video-container .play-wrapper {
+    top: 37% !important;
+    left: 30% !important;
+}
+
+.other-video-image-wrapper .play-wrapper {
+    top: 40% !important;
+    left: 42% !important;
+}
+
+.videos-one-item {
+    position: relative;
+}
+
+.videos-one-item .play-wrapper {
+    position: absolute;
+    top: 40% !important;
+    left: 42% !important;
+}
+
+.rm-play-wrapper {
+    display: none;
+}
+
+.fa-play {
+    font-size: 1.5rem;
 }
 
 .main-post-socials-wrapper {
@@ -1672,6 +1720,7 @@ button {
     width: 100%;
     height: 100%;
     padding: 0.5rem 0.5rem;
+    position: relative;
 }
 
 .other-video-image-wrapper video {
@@ -2564,6 +2613,13 @@ button {
     }
 }
 
+@media screen and (max-width: 1200px) {
+    .video-container .play-wrapper {
+        top: 43% !important;
+        left: 30% !important;
+    }
+}
+
 @media screen and (max-width: 1100px) {
     .main-appeals-title-wrapper::after {
         content: "";
@@ -2807,6 +2863,11 @@ button {
         width: 100% !important;
         margin-left: unset;
     }
+
+    .video-container .play-wrapper {
+        top: 55% !important;
+        left: 47% !important;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -2878,6 +2939,11 @@ button {
 
     .main-posts-search-wrapper {
         padding: 10px;
+    }
+
+    .video-container .play-wrapper {
+        top: 45% !important;
+        left: 45% !important;
     }
 }
 
@@ -2970,11 +3036,10 @@ button {
         margin-bottom: 1rem;
     }
 
-    /* .user-subscribe-link,
-  .user-subscribed-link,
-  .user-message-link {
-    padding: 0.5rem 0.5rem;
-  } */
+    .video-container .play-wrapper {
+        top: 40% !important;
+        left: 45% !important;
+    }
 }
 
 @media screen and (max-width: 580px) {
@@ -3053,6 +3118,11 @@ button {
         width: 190px;
         padding: 0.5rem 1rem !important;
     }
+
+    .video-container .play-wrapper {
+        top: 35% !important;
+        left: 45% !important;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -3064,6 +3134,11 @@ button {
 
     .users-search-input {
         width: 250px;
+    }
+
+    .video-container .play-wrapper {
+        top: 30% !important;
+        left: 45% !important;
     }
 }
 

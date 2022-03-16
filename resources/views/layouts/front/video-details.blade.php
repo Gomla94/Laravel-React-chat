@@ -10,6 +10,9 @@ Magaxat | Video Details
     <div class="main-video-container">
       <div class="video-container">
         <video controls src="{{ $video->video_path }}" class="video" alt="video"></video>
+        <div class="play-wrapper">
+          <img src="{{ asset('images/img/play.png') }}" alt="">
+        </div>
         <p class="main-video-description">
           {{ $video->videoable->title }}
         </p>
@@ -62,6 +65,9 @@ Magaxat | Video Details
           <div class="other-video-image-wrapper">
             <a href="{{ route('show-video', $othervideo->id) }}">
               <video src="{{ $othervideo->video_path }}" class="other-video"></video>
+              <div class="play-wrapper">
+                <img src="{{ asset('images/img/play.png') }}" alt="">
+              </div>
             </a>
           </div>
           <div class="other-video-user-date-wrapper">

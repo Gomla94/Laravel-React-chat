@@ -93,10 +93,13 @@
               @if($post->video_path)
               <div class="post-image-wrapper">
                 <video controls
-                  class="main-post-image"
+                  class="main-post-video"
                   src="{{ $post->video_path }}"
                   alt="post-image"
                 /></video>
+                <div class="play-wrapper">
+                  <img src="{{ asset('images/img/play.png') }}" alt="">
+                </div>
               </div>
               @endif
               {{-- <p class="post-description">
