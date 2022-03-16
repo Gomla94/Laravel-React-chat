@@ -143,7 +143,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="email">Name</label>
+                            <label for="name">Name</label>
                             <input
                               type="text"
                               class="login-email-input"
