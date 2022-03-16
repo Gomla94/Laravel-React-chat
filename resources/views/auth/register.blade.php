@@ -138,7 +138,7 @@
           </div>
     
           <div class="login-form-wrapper">
-            <form action="{{ route('login') }}" method="POST">
+            <form action="{{ route('register') }}" method="POST">
                 @csrf
                 <div class="col-md-12">
                     <div class="row">

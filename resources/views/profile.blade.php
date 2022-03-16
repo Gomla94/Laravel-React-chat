@@ -40,13 +40,15 @@ Magaxat | Profile
         <div class="left-side">
           <div class="profile-side">
             <p class="profile-user-name">{{ $user->name }}</p>
-            <p class="profile-icon-wrapper">
-              <i class="fa fa-phone"></i> <span>{{ $user->phone_number }}</span>
-            </p>
-            <p class="profile-icon-wrapper">
-              <i class="fa fa-envelope"></i>
-              <span>{{ $user->email }}</span>
-            </p>
+            <div class="profile-icons">
+              <p class="profile-icon-wrapper">
+                <i class="fa fa-phone"></i> <span>{{ $user->phone_number }}</span>
+              </p>
+              <p class="profile-icon-wrapper">
+                <i class="fa fa-envelope"></i>
+                <span>{{ $user->email }}</span>
+              </p>
+            </div>
           </div>
         </div>
         <div class="right-side">

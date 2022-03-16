@@ -1,6 +1,6 @@
 const menuBars = document.querySelector(".menu-bars");
 const overlay = document.querySelector(".overlay");
-const languagesIcon = document.querySelector(".languages-icon");
+const languagesIcon = document.querySelector(".navbar-languages-list");
 const languagesList = document.querySelector(".languages-list");
 const userNavbarArrow = document.querySelector(".user-navbar-arrow");
 const userAddsList = document.querySelector(".user-adds-list");

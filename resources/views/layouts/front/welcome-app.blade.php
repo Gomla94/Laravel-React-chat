@@ -25,7 +25,7 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=10')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=11')}}" />
     @yield('styles')
     <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -74,7 +74,9 @@
                 <img src="{{ asset(auth()->user()->image ?? 'images/avatar.png') }}" alt="user-image" />
               </a>
             </div>
-            <span class="navbar-user-name">{{ auth()->user()->name }}</span>
+            <a href="{{ route('user.profile') }}">
+              <span class="navbar-user-name">{{ auth()->user()->name }}</span>
+            </a>
             <i class="fa-solid fa-angle-down user-navbar-arrow"></i>
           </div>
           <div class="user-adds-list">

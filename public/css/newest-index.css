@@ -147,6 +147,7 @@ body {
 .navbar-links-wrapper {
     width: 550px;
     height: 100%;
+    margin-right: 15rem;
 }
 
 .navbar-links-list {
@@ -163,6 +164,7 @@ body {
 .navbar-links-list a {
     text-decoration: none;
     color: black;
+    font-weight: 300;
 }
 
 .navbar-active-item {
@@ -196,6 +198,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    height: 3rem;
 }
 
 .navbar-user-list {
@@ -208,6 +211,12 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    height: 3rem;
+}
+
+.navbar-user-list a {
+    color: white;
+    text-decoration: none;
 }
 
 .login-navbar-user {
@@ -221,6 +230,7 @@ body {
     align-items: center;
     justify-content: space-around;
     margin-right: 2rem;
+    height: 3rem;
 }
 
 .navbar-user-list i {
@@ -275,14 +285,10 @@ body {
 
 .navbar-user-name {
     color: white;
-}
-
-.navbar-user-name a {
-    color: white;
     text-decoration: none;
 }
 
-.navbar-languages-list i {
+.navbar-languages-list {
     cursor: pointer;
 }
 
@@ -2010,7 +2016,7 @@ button {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     position: absolute;
     left: 4%;
-    top: 20px;
+    top: 120px;
     z-index: 5;
     background: #fff;
 }
@@ -2025,7 +2031,7 @@ button {
     color: #fff;
     position: absolute;
     left: 125px;
-    top: 85%;
+    top: 140%;
     z-index: 5;
     display: flex !important;
     flex-direction: column !important;
@@ -2065,6 +2071,9 @@ button {
     margin-left: 20px;
     z-index: 99;
     text-align: center;
+    height: 400px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .profile-form div {
@@ -2088,6 +2097,11 @@ button {
 
 .profile-form label {
     color: #af9065;
+}
+
+.profile-form input,
+.profile-form select {
+    color: #ac9c9c;
 }
 
 .area-check {
@@ -2157,6 +2171,7 @@ button {
     color: rgb(29, 29, 29);
     font-size: 1.5rem;
     font-weight: 600;
+    margin-top: 50px;
 }
 
 .profile-side p {
@@ -2176,11 +2191,19 @@ button {
     display: flex;
 }
 
+.profile-icons {
+    padding: 0 1rem;
+}
+
+.profile-icons i {
+    margin: 0 2rem 0 0;
+}
+
 .profile-icon-wrapper {
     display: flex;
     flex: row;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .right-side {
@@ -2230,7 +2253,7 @@ button {
 }
 
 .nav {
-    width: fit-content;
+    width: 80%;
     height: 70px;
     z-index: -1;
     background-color: #af9065;
@@ -2255,7 +2278,7 @@ button {
     color: white;
     /* background-color: red; */
     border-radius: 10px;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
 }
 
 .active-nav {
@@ -2319,12 +2342,20 @@ button {
 }
 
 @media (max-width: 1400px) {
+    .nav {
+        width: 700px;
+    }
+
     .nav ul li {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.7rem;
     }
 }
 
 @media (max-width: 1200px) {
+    .nav {
+        width: 600px;
+    }
+
     .nav ul li {
         padding: 0.5rem 0.5rem;
     }
@@ -2361,6 +2392,29 @@ button {
         padding-bottom: 20px;
     }
 
+    .profile-side {
+        background-color: white;
+        border-radius: unset;
+        margin: 1px 0px;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        height: auto;
+    }
+
+    .profile-side .profile-user-name {
+        margin-top: 100px;
+    }
+
+    .profile-icon-wrapper {
+        justify-content: space-between;
+    }
+
+    .profile-image-label {
+        left: 47%;
+        top: 120%;
+    }
+
     .profile-img {
         float: left;
         width: 100%;
@@ -2389,24 +2443,12 @@ button {
         padding-right: 0;
     }
 
-    .profile-side {
-        width: 100%;
-        text-align: center;
-        padding: 20px;
-        margin: 5px 0;
-    }
-
     .profile-nav-info .address {
         justify-content: center;
     }
 
     .user-rating {
         justify-content: center;
-    }
-
-    .profile-image-label {
-        left: 46%;
-        top: 70%;
     }
 }
 
@@ -2437,6 +2479,17 @@ button {
     .profile-areas {
         grid-template-columns: 1fr;
     }
+
+    .profile-image-label {
+        left: 45%;
+        top: 120%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .profile-header {
+        background-size: 130%;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -2450,12 +2503,16 @@ button {
     }
 
     .profile-image-label {
-        left: 43%;
-        top: 70%;
+        left: 44%;
+        top: 115%;
     }
 
     .profile-post-user-names-wrapper {
         text-align: left;
+    }
+
+    .profile-header {
+        background-size: 140%;
     }
 }
 
@@ -2485,41 +2542,22 @@ button {
     .profile-nav-info .address span {
         font-size: 0.7rem;
     }
+
+    .profile-header {
+        background-size: 130%;
+    }
 }
 
 /* profile page ends here */
 
 /* media queries */
 
-@media screen and (max-width: 1380px) {
-    .single-user-image-wrapper img {
-        width: 160px;
-    }
-
-    .videos-container {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
-@media screen and (max-width: 1250px) {
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        border-radius: unset;
-    }
-
-    .navbar-user-section-wrapper div {
-        margin: unset;
-    }
-
-    .navbar-logo-wrapper {
-        width: 170px;
-        height: 60px;
-    }
-
+@media screen and (max-width: 1500px) {
     .navbar-links-wrapper {
+        display: none;
+    }
+
+    .navbar-user-name {
         display: none;
     }
 
@@ -2537,6 +2575,23 @@ button {
 
     .navbar-user-list .fa-angle-down {
         display: none;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border-radius: unset;
+    }
+
+    .navbar-user-section-wrapper div {
+        margin: unset;
+    }
+
+    .navbar-logo-wrapper {
+        width: 170px;
+        height: 60px;
     }
 
     .navbar-user-list {
@@ -2567,7 +2622,19 @@ button {
         z-index: 10;
         cursor: pointer;
     }
+}
 
+@media screen and (max-width: 1380px) {
+    .single-user-image-wrapper img {
+        width: 160px;
+    }
+
+    .videos-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 1250px) {
     .swiper-slide img {
         display: block;
         object-fit: unset;
