@@ -99,20 +99,6 @@ function showUserAddsList() {
     userAddsList.classList.toggle("show-user-adds-list");
 }
 
-Array.from(videos).forEach((video) => {
-    video.addEventListener("click", () => {
-        const videoPlayIcon = video.nextElementSibling;
-        videoPlayIcon.classList.toggle("rm-play-wrapper");
-    });
-});
-
-// mainVideos.forEach((video) => {
-//     video.addEventListener("click", () => {
-//         const videoPlayIcon = video.nextElementSibling;
-//         videoPlayIcon.classList.toggle("rm-play-wrapper");
-//     });
-// });
-
 if (videoPlayIcons) {
     videoPlayIcons.forEach((item) => {
         item.addEventListener("click", () => {
@@ -122,3 +108,15 @@ if (videoPlayIcons) {
         });
     });
 }
+
+Array.from(videos).forEach((video) => {
+    video.addEventListener("play", () => {
+        const videoPlayIcon = video.nextElementSibling;
+        videoPlayIcon.classList.add("rm-play-wrapper");
+    });
+
+    video.addEventListener("pause", () => {
+        const videoPlayIcon = video.nextElementSibling;
+        videoPlayIcon.classList.remove("rm-play-wrapper");
+    });
+});
