@@ -233,6 +233,7 @@ body {
     justify-content: space-around;
     margin-right: 2rem;
     height: 3rem;
+    margin-left: 10rem !important;
 }
 
 .navbar-user-list i {
@@ -2657,6 +2658,10 @@ button {
         left: 2rem;
         z-index: 10;
         cursor: pointer;
+    }
+
+    .login-navbar-user {
+        margin-left: 0px !important;
     }
 }
 
