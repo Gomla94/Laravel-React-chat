@@ -17,11 +17,12 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=9')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=10')}}" />
     <script src="{{asset('js/newest-index.js')}}" defer></script>
     <title>@yield('title')</title>
   </head>
   <body>
+    <div class="auth-navbar-background-wrapper">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
           <div class="bar1"></div>
@@ -29,33 +30,55 @@
           <div class="bar3"></div>
         </div>
         <div class="navbar-logo-wrapper">
-          <a href="{{ route('welcome') }}">
-            <img src="{{asset('images/img/navbar-logo.png')}}" alt="" class="navbar-logo" />
-          </a>
-        </div>
-        <div class="navbar-links-wrapper">
+          <div class="navbar-logo-container">
+            <a href="{{ route('welcome') }}">
+              <img src="{{asset('images/img/navbar-logo.png')}}" alt="" class="navbar-logo" />
+            </a>
+          </div>
+          
+          <div class="navbar-links-wrapper">
           <ul class="navbar-links-list">
-            <li><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">User Videos</a></li>
-            <li><a href="{{ Route::currentRouteName() == 'all-users' ? 'navbar-active-item' : '' }}" href="{{ route('all-users') }}">Users</a></li>
-            <li><a href="{{ Route::currentRouteName() == 'all-appeals' ? 'navbar-active-item' : '' }}" href="{{ route('all-appeals') }}">Benefactor Fonds</a></li>
-            <li><a href="{{ Route::currentRouteName() == 'all-benefactors' ? 'navbar-active-item' : '' }}" href="{{ route('all-benefactors') }}">Benefactors</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">User Videos</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-users' ? 'navbar-active-item' : '' }}" href="{{ route('all-users') }}">Users</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-appeals' ? 'navbar-active-item' : '' }}" href="{{ route('all-appeals') }}">Benefactor Fonds</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-benefactors' ? 'navbar-active-item' : '' }}" href="{{ route('all-benefactors') }}">Benefactors</a></li>
           </ul>
         </div>
+        </div>
+        
         <div class="navbar-user-section-wrapper">
-          {{-- <div class="navbar-chat-icon">
-            <i class="fa-regular fa-comment"></i><span>Chat</span>
-          </div>
-          <div class="navbar-user-list">
-            <div class="navbar-user-image-wrapper">
-              <img src="./img/person.png" alt="user-image" />
-            </div>
-            <span class="navbar-user-name">Eduard Gabrielyan</span>
-            <i class="fa-solid fa-angle-down"></i>
-          </div>
+          
           <div class="navbar-languages-list">
-            <span>ENG</span>
-            <i class="fa-solid fa-angle-down"></i>
-          </div> --}}
+            
+            @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+              <span>ARM</span>
+              <i class="fa-solid fa-angle-down languages-icon"></i>
+            @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+              <span>ENG</span>
+              <i class="fa-solid fa-angle-down languages-icon"></i>
+            @else
+              <span>RUS</span>
+            <i class="fa-solid fa-angle-down languages-icon"></i>
+            @endif
+  
+          </div>
+          <div class="languages-list">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+              @if($localeCode == 'en')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ENG</a>
+              </div>
+              @elseif($localeCode == 'ru')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">RUS</a>
+              </div>
+              @else
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ARM</a>
+              </div>
+              @endif
+            @endforeach
+          </div>
         </div>
       </div>
       <div class="overlay" id="overlay">
@@ -90,6 +113,9 @@
           </li>
         </ul>
       </div>
+    </div>
+   
+      
      
     @yield('content')
   </body>

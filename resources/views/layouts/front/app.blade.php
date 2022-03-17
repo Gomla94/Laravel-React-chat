@@ -25,7 +25,7 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=21')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=22')}}" />
 
     @yield('styles')
     <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
@@ -54,18 +54,22 @@
           <div class="bar3"></div>
         </div>
         <div class="navbar-logo-wrapper">
-          <a href="{{ route('welcome') }}">
-            <img src="{{asset('images/img/navbar-logo.png')}}" alt="" class="navbar-logo" />
-          </a>
-        </div>
-        <div class="navbar-links-wrapper">
+          <div class="navbar-logo-container">
+            <a href="{{ route('welcome') }}">
+              <img src="{{asset('images/img/navbar-logo.png')}}" alt="" class="navbar-logo" />
+            </a>
+          </div>
+          
+          <div class="navbar-links-wrapper">
           <ul class="navbar-links-list">
-            <li><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">User Videos</a></li>
-            <li><a class="{{ Route::currentRouteName() == 'all-users' ? 'navbar-active-item' : '' }}" href="{{ route('all-users') }}">Users</a></li>
-            <li><a class="{{ Route::currentRouteName() == 'all-appeals' ? 'navbar-active-item' : '' }}" href="{{ route('all-appeals') }}">Benefactor Fonds</a></li>
-            <li><a class="{{ Route::currentRouteName() == 'all-benefactors' ? 'navbar-active-item' : '' }}" href="{{ route('all-benefactors') }}">Benefactors</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">User Videos</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-users' ? 'navbar-active-item' : '' }}" href="{{ route('all-users') }}">Users</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-appeals' ? 'navbar-active-item' : '' }}" href="{{ route('all-appeals') }}">Benefactor Fonds</a></li>
+            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-benefactors' ? 'navbar-active-item' : '' }}" href="{{ route('all-benefactors') }}">Benefactors</a></li>
           </ul>
         </div>
+        </div>
+        
         <div class="navbar-user-section-wrapper">
           @if(Auth::check())
           <div class="navbar-chat-icon">

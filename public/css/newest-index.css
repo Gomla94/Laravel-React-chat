@@ -21,6 +21,10 @@ body {
     background-color: #f9f9f9;
 }
 
+.auth-navbar-logo-wrapper {
+    background-color: #d41717;
+}
+
 .navbar-background-wrapper {
     background-color: #f9f9f9;
     position: absolute;
@@ -54,7 +58,7 @@ body {
 
 .overlay {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: block;
     position: absolute;
     transition: all 0.3s ease-in-out;
@@ -135,10 +139,19 @@ body {
 }
 
 .navbar-logo-wrapper {
-    width: 140px;
-    /* height: 64px; */
+    width: auto;
+    height: 64px;
     padding: 1rem;
     margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 3rem;
+}
+
+.navbar-logo-container {
+    width: 100px;
+    height: 40px;
 }
 
 .navbar-logo-wrapper img {
@@ -147,19 +160,20 @@ body {
 }
 
 .navbar-links-wrapper {
-    width: 600px;
+    width: auto;
     height: 100%;
+    margin: 0 0 0 3rem;
 }
 
 .navbar-links-list {
     list-style: none;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 30px;
-    padding-right: 30px;
-    text-align: center;
+
+    /* padding-top: ; */
+}
+
+.navbar-link {
+    padding: 0 1rem;
 }
 
 .navbar-links-list a {
@@ -173,6 +187,7 @@ body {
     background-color: rgba(224, 221, 221, 0.644);
     padding: 10px;
     border-radius: 10px;
+    font-weight: 400;
 }
 
 .navbar-user-section-wrapper {
@@ -183,7 +198,7 @@ body {
     align-items: center;
     justify-content: flex-end;
     padding-right: -10px !important;
-    padding-left: 15rem;
+    /* padding-left: 15rem; */
 }
 
 .navbar-user-section-wrapper div {
@@ -238,7 +253,7 @@ body {
     justify-content: space-around;
     margin-right: 2rem;
     height: 3rem;
-    margin-left: 10rem !important;
+    /* margin-left: 10rem !important; */
 }
 
 .navbar-user-list i {
@@ -1085,7 +1100,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #af9065;
+    background-color: #d1bb9c !important;
     color: white;
     height: auto;
     min-height: 100%;
@@ -1194,7 +1209,7 @@ button {
 /* register page starts here */
 
 .register-page {
-    background-color: #af9065;
+    background-color: #d1bb9c !important;
     color: white;
     height: 100vh;
 }
@@ -1203,7 +1218,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #af9065;
+    background-color: #d1bb9c !important;
     color: white;
     /* height: 100vh; */
 }
@@ -2597,7 +2612,7 @@ button {
 /* media queries */
 
 @media screen and (max-width: 1480px) {
-    .navbar {
+    /* .navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -2618,10 +2633,6 @@ button {
         display: none;
     }
 
-    /* .navbar-user-name {
-        display: none;
-    } */
-
     .languages-list {
         display: none;
     }
@@ -2638,15 +2649,8 @@ button {
         display: none;
     }
 
-    .navbar-user-list {
-        width: auto;
-        background: none;
-        margin-right: -10px !important;
-    }
+   
 
-    .navbar-user-name {
-        display: none;
-    }
 
     .navbar-user-image-wrapper {
         margin-right: 0.4rem !important;
@@ -2658,16 +2662,11 @@ button {
         padding-right: unset;
     }
 
-    .menu-bars {
-        display: block;
-        left: 2rem;
-        z-index: 10;
-        cursor: pointer;
-    }
+    
 
     .login-navbar-user {
         margin-left: 0px !important;
-    }
+    } */
 }
 
 @media screen and (max-width: 1380px) {
@@ -2691,6 +2690,13 @@ button {
 
     .navbar-user-section-wrapper div {
         margin: unset;
+    }
+
+    .menu-bars {
+        display: block;
+        left: 2rem;
+        z-index: 10;
+        cursor: pointer;
     }
 
     .navbar-logo-wrapper {
@@ -3262,6 +3268,21 @@ button {
 }
 
 @media screen and (max-width: 550px) {
+    .navbar-user-list {
+        width: auto;
+        background: none;
+        margin-right: -10px !important;
+    }
+
+    .navbar-user-name {
+        display: none;
+    }
+
+    .navbar-logo-wrapper {
+        width: uset;
+        margin: unset;
+    }
+
     .main-appeals-title-wrapper::after {
         right: 5%;
     }
