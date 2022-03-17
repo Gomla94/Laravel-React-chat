@@ -670,7 +670,7 @@ Magaxat | Profile
           <label class="create-post-label" for="image"
             >Choose Image</label
           >
-          <label class="media-label">
+          <label class="media-label appeals-modal-image">
             <input
               type="file"
               accept="image/*"
@@ -703,16 +703,6 @@ Magaxat | Profile
             <span style="color: red">{{$message}}</span>
           @enderror
         </div>
-      </div>
-
-      <div class="form-group post-modal-image-container">
-        <label class="create-post-label" for="countries">country</label>
-        <select name="country" class="form-control" id="country">
-          <option value="">country</option>
-        </select>
-        @error('post_country')
-          <span style="color: red">{{$message}}</span>
-        @enderror
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">

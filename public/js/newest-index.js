@@ -4,6 +4,7 @@ const languagesIcon = document.querySelector(".navbar-languages-list");
 const languagesList = document.querySelector(".languages-list");
 const userNavbarArrow = document.querySelector(".user-navbar-arrow");
 const userAddsList = document.querySelector(".user-adds-list");
+const userNavbarImage = document.querySelector(".navbar-user-image-wrapper");
 
 // const mainPostVideos = document.querySelectorAll(".main-post-video");
 // const mainVideos = document.querySelectorAll(".video");

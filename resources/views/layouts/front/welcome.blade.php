@@ -110,28 +110,26 @@
                   {{-- <i class="fa-solid fa-heart social-icon"></i> --}}
     
                 @if(Auth::check())
-                <i
-                  id="{{ $post->id }}"
-                  class="social-icon post-heart-icon fa-solid {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart ' }}"
-                ></i>
-                @else
-                <i
-                  class="social-icon fa-solid fa-heart"
-                ></i>
+                  @if($post->likes->where('user_id', Auth::id())->count() !== 0)
+                  <img id="{{ $post->id }}" class="social-icon post-heart-icon" src="{{ asset('images/img/heart.png') }}" alt="heart">
+                  @else
+                  <img id="{{ $post->id }}" class="social-icon post-heart-icon" src="{{ asset('images/img/heart.png') }}" alt="heart">
+                  @endif
+                  @else
+                  <img class="social-icon" src="{{ asset('images/img/heart.png') }}" alt="heart">
                 @endif
-    
-    
-    
                   <span>{{ $post->likes->count() }}</span>
                 </div>
                 <div class="comments-count" id="{{ $post->id }}">
-                  <i id="{{ $post->id }}"
-                    class="fa-regular fa-comment social-icon main-post-comments-icon"
-                  ></i>
+                  <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/comment.png') }}" alt="comment">
                   <span>{{ $post->comments->count() }}</span>
                 </div>
                 <div class="shares-count">
-                  <i class="fa-solid fa-share social-icon"></i>
+                  <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/share.png') }}" alt="share">
+                  <span>4</span>
+                </div>
+                <div class="shares-count">
+                  <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/social-share.png') }}" alt="social-share">
                   <span>4</span>
                 </div>
               </div>
@@ -304,7 +302,7 @@
           <label class="create-post-label" for="image"
             >Choose Image</label
           >
-          <label class="media-label">
+          <label class="media-label appeals-modal-image">
             <input
               type="file"
               accept="image/*"
@@ -338,17 +336,7 @@
           @enderror
         </div>
       </div>
-
-      <div class="form-group post-modal-image-container">
-        <label class="create-post-label" for="countries">country</label>
-        <select name="country" class="form-control" id="country">
-          <option value="">country</option>
-        </select>
-        @error('post_country')
-          <span style="color: red">{{$message}}</span>
-        @enderror
-      </div>
-
+      
       <button type="submit" class="btn btn-primary create-post-modal-btn">
         create appeal
       </button>

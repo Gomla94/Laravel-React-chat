@@ -41,10 +41,10 @@ body {
     margin: auto;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
     padding: 10px 20px;
 }
 
@@ -135,8 +135,10 @@ body {
 }
 
 .navbar-logo-wrapper {
-    width: 229px;
-    height: 64px;
+    width: 140px;
+    /* height: 64px; */
+    padding: 1rem;
+    margin: 1rem;
 }
 
 .navbar-logo-wrapper img {
@@ -145,9 +147,8 @@ body {
 }
 
 .navbar-links-wrapper {
-    width: 550px;
+    width: 600px;
     height: 100%;
-    /* margin-right: 10rem; */
 }
 
 .navbar-links-list {
@@ -182,6 +183,7 @@ body {
     align-items: center;
     justify-content: flex-end;
     padding-right: -10px !important;
+    padding-left: 15rem;
 }
 
 .navbar-user-section-wrapper div {
@@ -284,6 +286,12 @@ body {
 }
 
 .navbar-user-name {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-user-name a,
+.navbar-user-login a {
     color: white;
     text-decoration: none;
 }
@@ -396,7 +404,7 @@ body {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 20%;
+    width: 22%;
     position: absolute;
     top: 25px;
     right: 20%;
@@ -406,10 +414,14 @@ body {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 20%;
+    width: 22%;
     position: absolute;
     top: 25px;
     left: 20%;
+}
+
+.search-button {
+    display: none;
 }
 
 .appeal-slide {
@@ -496,20 +508,20 @@ body {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 20%;
+    width: 10%;
     position: absolute;
     top: 25px;
-    left: 20%;
+    left: 30%;
 }
 
 .main-posts-title-wrapper::after {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 20%;
+    width: 10%;
     position: absolute;
     top: 25px;
-    right: 20%;
+    right: 30%;
 }
 
 .main-posts-buttons-wrapper {
@@ -517,10 +529,12 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    padding: 0 8rem;
 }
 
 .main-posts-search-wrapper {
-    margin: auto;
+    /* margin: auto; */
     position: relative;
 }
 
@@ -535,7 +549,7 @@ body {
     position: absolute;
     color: #8b7350;
     top: 15px;
-    right: 130px;
+    right: 30px;
 }
 
 button {
@@ -544,10 +558,7 @@ button {
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
-}
-
-.main-posts-add-buttons {
-    margin: auto;
+    width: 200px;
 }
 
 .new-post-icon {
@@ -779,6 +790,11 @@ button {
 .social-icon {
     color: rgb(109, 109, 109);
     font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.post-heart-icon {
+    margin-bottom: 4px;
 }
 
 .main-post-form-textarea {
@@ -2486,6 +2502,16 @@ button {
         left: 45%;
         top: 120%;
     }
+
+    .main-posts-title-wrapper::before {
+        width: 20%;
+        left: 20%;
+    }
+
+    .main-posts-title-wrapper::after {
+        width: 20%;
+        right: 20%;
+    }
 }
 
 @media screen and (max-width: 550px) {
@@ -2515,6 +2541,16 @@ button {
 
     .profile-header {
         background-size: 140%;
+    }
+
+    .main-posts-title-wrapper::before {
+        width: 22%;
+        left: 15%;
+    }
+
+    .main-posts-title-wrapper::after {
+        width: 22%;
+        right: 15%;
     }
 }
 
@@ -2554,6 +2590,76 @@ button {
 
 /* media queries */
 
+@media screen and (max-width: 1480px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border-radius: unset;
+    }
+
+    .navbar-user-section-wrapper div {
+        margin: unset;
+    }
+
+    .navbar-logo-wrapper {
+        width: 170px;
+        height: 60px;
+    }
+
+    .navbar-links-wrapper {
+        display: none;
+    }
+
+    /* .navbar-user-name {
+        display: none;
+    } */
+
+    .languages-list {
+        display: none;
+    }
+
+    .navbar-chat-icon {
+        display: none;
+    }
+
+    .navbar-languages-list {
+        display: none;
+    }
+
+    .navbar-user-list .fa-angle-down {
+        display: none;
+    }
+
+    .navbar-user-list {
+        width: auto;
+        background: none;
+        margin-right: -10px !important;
+    }
+
+    .navbar-user-name {
+        display: none;
+    }
+
+    .navbar-user-image-wrapper {
+        margin-right: 0.4rem !important;
+    }
+
+    .navbar-user-image-wrapper img {
+        height: 50px;
+        width: 50px;
+        padding-right: unset;
+    }
+
+    .menu-bars {
+        display: block;
+        left: 2rem;
+        z-index: 10;
+        cursor: pointer;
+    }
+}
+
 @media screen and (max-width: 1380px) {
     .single-user-image-wrapper img {
         width: 160px;
@@ -2586,10 +2692,6 @@ button {
         display: none;
     }
 
-    .navbar-user-name {
-        display: none;
-    }
-
     .languages-list {
         display: none;
     }
@@ -2606,33 +2708,10 @@ button {
         display: none;
     }
 
-    .navbar-user-list {
-        width: auto;
-        background: none;
-        margin-right: -10px !important;
-    }
-
     .navbar-user-section-wrapper {
         background: none;
         padding: unset;
         width: fit-content;
-    }
-
-    .navbar-user-image-wrapper {
-        margin-right: 0.4rem !important;
-    }
-
-    .navbar-user-image-wrapper img {
-        height: 50px;
-        width: 50px;
-        padding-right: unset;
-    }
-
-    .menu-bars {
-        display: block;
-        left: 2rem;
-        z-index: 10;
-        cursor: pointer;
     }
 
     .swiper-slide img {
@@ -2685,9 +2764,7 @@ button {
         top: 43% !important;
         left: 30% !important;
     }
-}
 
-@media screen and (max-width: 1100px) {
     .main-appeals-title-wrapper::after {
         content: "";
         background-color: #8b7350;
@@ -2707,7 +2784,9 @@ button {
         top: 25px;
         left: 10%;
     }
+}
 
+@media screen and (max-width: 1100px) {
     .single-benefactors-info-wrapper {
         flex-direction: column;
     }
@@ -2935,6 +3014,25 @@ button {
         top: 55% !important;
         left: 47% !important;
     }
+
+    .main-posts-search-wrapper input {
+        margin-bottom: 1rem;
+        width: 80%;
+    }
+
+    .main-posts-search-icon {
+        right: 120px;
+    }
+
+    .main-posts-buttons-wrapper {
+        flex-direction: column;
+        padding: unset;
+    }
+
+    .main-posts-buttons-wrapper button {
+        border-radius: 30px;
+        margin: 0 1rem;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -2972,9 +3070,10 @@ button {
         width: 100% !important;
     }
 
-    .posts-modal-content {
-        width: 80% !important;
-        left: 10%;
+    .posts-modal-content,
+    .appeals-modal-content {
+        width: 95% !important;
+        left: 3%;
     }
 
     .register-wrapper {
@@ -3000,13 +3099,9 @@ button {
         width: 100% !important;
     }
 
-    .main-posts-buttons-wrapper {
-        flex-direction: column;
-    }
-
-    .main-posts-search-wrapper {
+    /* .main-posts-search-wrapper {
         padding: 10px;
-    }
+    } */
 
     .video-container .play-wrapper {
         top: 45% !important;
@@ -3016,7 +3111,8 @@ button {
 
 @media screen and (max-width: 700px) {
     .main-posts-search-icon {
-        top: 25px;
+        top: 15px;
+        right: 80px;
     }
 
     button {
@@ -3199,6 +3295,54 @@ button {
         top: 35% !important;
         left: 45% !important;
     }
+
+    .main-posts-add-buttons {
+        display: flex;
+    }
+
+    .main-posts-add-buttons button {
+        margin-bottom: 0.5rem;
+    }
+
+    .main-posts-buttons-wrapper button {
+        margin: 0 2rem;
+    }
+
+    .post-modal-media-container,
+    .appeal-modal-media-container {
+        display: unset;
+    }
+
+    .create-post-modal-btn {
+        margin: auto;
+    }
+
+    .media-type {
+        width: 105%;
+        margin-bottom: 1rem;
+    }
+
+    .media-label {
+        margin-bottom: 1rem;
+    }
+
+    .appeals-modal-image {
+        width: 105%;
+    }
+}
+
+@media screen and (max-width: 485px) {
+    .main-posts-buttons-wrapper button {
+        margin: 0 1rem;
+    }
+
+    .main-posts-search-input {
+        width: 90% !important;
+    }
+
+    .main-posts-search-icon {
+        right: 40px;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -3215,6 +3359,12 @@ button {
     .video-container .play-wrapper {
         top: 30% !important;
         left: 45% !important;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .main-posts-buttons-wrapper button {
+        margin: 0 0.5rem;
     }
 }
 
