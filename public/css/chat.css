@@ -14,7 +14,7 @@ body {
 
 .chat-wrapper {
     width: 90%;
-    height: 70%;
+    height: 500px;
     background-color: white;
     margin: auto;
     margin-top: 5rem;
@@ -39,7 +39,7 @@ body {
 .active-chat-wrapper {
     flex: 2;
     background-color: rgb(238, 238, 238);
-    height: 500px;
+    height: 95%;
     border-radius: 20px;
     width: 95%;
     margin: 1rem;
@@ -259,7 +259,7 @@ body {
     align-items: center;
     width: 100%;
     padding: 0 1rem;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .chat-attachement-wrapper {
