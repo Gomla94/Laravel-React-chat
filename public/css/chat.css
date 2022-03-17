@@ -356,11 +356,6 @@ body {
     .chat-user-wrapper {
         width: 93%;
     }
-
-    .chat-attachement-wrapper i {
-        margin-top: 44px !important;
-        margin-left: 8px !important;
-    }
 }
 
 @media screen and (max-width: 400px) {
