@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ChatWindow from "./ChatWindow";
 
 const App = () => {
     return (
-        <div>
+        <Fragment>
             <ChatWindow />
-        </div>
+        </Fragment>
     );
 };
 

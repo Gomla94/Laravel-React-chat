@@ -54,7 +54,10 @@ class MessagesController extends Controller
     {
         $user = Auth::user();
         $user_subscriptions_ids = $user->subscribtions()->get()->pluck('user_id');
-        $user_subscriptions = User::whereIn('unique_id', $user_subscriptions_ids)->get();
+        $user_subscriptions = User::whereIn('unique_id', $user_subscriptions_ids)
+                            ->with('messages', function($query) use($user) {
+                                $query->where('to', $user->unique_id)->orderBy('id', 'desc')->limit(1);
+                            })->get();
         return $user_subscriptions;
     }
 

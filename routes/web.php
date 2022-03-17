@@ -82,6 +82,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
         /** profile routes */
         Route::put('profile', [UserController::class,'update_profile'])->name('update-profile');
+        Route::get('chat', [FrontController::class, 'chat'])->name('chat');
 
     });
 

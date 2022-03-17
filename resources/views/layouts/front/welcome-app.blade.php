@@ -66,7 +66,7 @@
         <div class="navbar-user-section-wrapper">
           @if(Auth::check())
           <div class="navbar-chat-icon">
-            <i class="fa-regular fa-comment"></i><span>Chat</span>
+            <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
           </div>
           <div class="navbar-user-list">
             <div class="navbar-user-image-wrapper">
@@ -153,7 +153,7 @@
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
-            <i class="fa-regular fa-comment"></i><span>Chat</span>
+            <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
           </li>
         </ul>
       </div>

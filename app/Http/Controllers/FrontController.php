@@ -242,4 +242,9 @@ class FrontController extends Controller
         $subscribtion->delete();
         return back();
     }
+
+    public function chat()
+    {
+        return view('layouts.front.chat');
+    }
 }

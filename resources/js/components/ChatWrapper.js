@@ -9,6 +9,7 @@ const ChatWrapper = (props) => {
     const [newMessage, setNewMessage] = useState(null);
     const [toUserId, setToUserId] = useState(null);
     const [chattingWithUser, setChattingWithUser] = useState(null);
+    const [chattingUserImage, setchattingUserImage] = useState(null);
     const [blockedUserId, setBlockedUserId] = useState(null);
     const authId = window.atob(window.uuxyz.uuxyzq);
     const [spinner, setSpinner] = useState(null);
@@ -26,14 +27,20 @@ const ChatWrapper = (props) => {
     }, [props.fetchedUsers]);
 
     useEffect(() => {
-        if (props.clicked.value === false) {
-            fetchAllUsers();
-        }
+        window.Echo.leave(`messages.${props.toUserId}.${authId}`);
 
-        if (props.fetchedUsers.length === 0) {
-            return;
-        }
-    }, []);
+        fetchAllMessagesWithUser(props.toUserId);
+    }, [props.toUserId]);
+
+    // useEffect(() => {
+    //     if (props.clicked.value === false) {
+    //         fetchAllUsers();
+    //     }
+
+    //     if (props.fetchedUsers.length === 0) {
+    //         return;
+    //     }
+    // }, []);
 
     const changeToUserId = (e, userId) => {
         const activeUsersClass = document.querySelectorAll(
@@ -54,7 +61,7 @@ const ChatWrapper = (props) => {
             parentElement.classList.toggle("current-active-user");
         }
 
-        window.Echo.leave(`messages.${toUserId}.${authId}`);
+        window.Echo.leave(`messages.${props.toUserId}.${authId}`);
 
         setToUserId(userId);
     };
@@ -66,12 +73,12 @@ const ChatWrapper = (props) => {
     //     setUsers([...users, response.data]);
     // };
 
-    useEffect(() => {
-        const chatInput = document.querySelector(".react-input-emoji--wrapper");
-        chatInput.addEventListener("click", (e) => {
-            e.target.classList.add("react-input-emoji--input2");
-        });
-    }, []);
+    // useEffect(() => {
+    //     const chatInput = document.querySelector(".react-input-emoji--wrapper");
+    //     chatInput.addEventListener("click", (e) => {
+    //         e.target.classList.add("react-input-emoji--input2");
+    //     });
+    // }, []);
 
     useEffect(() => {
         // const bellIcon = document.querySelector(".bell-icon");
@@ -80,7 +87,6 @@ const ChatWrapper = (props) => {
         //         setTimeout(() => {
         //             const acceptNotification =
         //                 document.querySelectorAll(".accept-notify");
-
         //             acceptNotification.forEach((item) => {
         //                 item.addEventListener("click", () => {
         //                     notificationUser(item.dataset.nid);
@@ -89,21 +95,27 @@ const ChatWrapper = (props) => {
         //         }, 500);
         //     });
         // }
-
-        if (users.length !== 0 && props.fetchedUsers.length !== 0) {
-            changeToUserId(null, props.fetchedUsers[0].unique_id);
-        }
+        // if (users.length !== 0 && props.fetchedUsers.length !== 0) {
+        //     changeToUserId(null, props.fetchedUsers[0].unique_id);
+        // }
     }, [users]);
 
-    useEffect(() => {
-        fetchAllMessagesWithUser(toUserId);
-    }, [toUserId]);
+    // useEffect(() => {
+    //     fetchAllMessagesWithUser(toUserId);
+    // }, [toUserId]);
+
+    // useEffect(() => {
+    //     console.log(messages);
+    // }, [messages]);
 
     const onKeyUp = (e) => {
-        if (toUserId === null) {
+        if (props.toUserId === null) {
             return false;
         }
-        sendMessage();
+
+        if (e.keyCode === 13) {
+            sendMessage();
+        }
     };
 
     useEffect(() => {
@@ -131,45 +143,45 @@ const ChatWrapper = (props) => {
     const prevMessages = useRef([]);
 
     useEffect(() => {
-        document.querySelector(".messages-middle-section").scrollTop =
-            document.querySelector(".messages-middle-section").scrollHeight;
+        document.querySelector(".chat-messages-section").scrollTop =
+            document.querySelector(".chat-messages-section").scrollHeight;
     }, [messages]);
 
     useEffect(() => {
         removeAlertMessagesWrapper();
     }, [props.showAlertMessages]);
 
-    useEffect(() => {
-        if (toUserId === null) {
-            return false;
-        }
-        window.Echo.private(`blocked-user-channel.${authId}`).listen(
-            "BlockUserEvent",
-            (event) => {
-                if (
-                    authId === event.blockedUser.user_id &&
-                    toUserId === event.blockedUser.blocker_id
-                ) {
-                    // setUserIsAlreadyBlocked(true);
-                    setBlockMessage(`You have been blocked by this user!`);
-                }
-            }
-        );
+    // useEffect(() => {
+    //     if (toUserId === null) {
+    //         return false;
+    //     }
+    //     window.Echo.private(`blocked-user-channel.${authId}`).listen(
+    //         "BlockUserEvent",
+    //         (event) => {
+    //             if (
+    //                 authId === event.blockedUser.user_id &&
+    //                 toUserId === event.blockedUser.blocker_id
+    //             ) {
+    //                 // setUserIsAlreadyBlocked(true);
+    //                 setBlockMessage(`You have been blocked by this user!`);
+    //             }
+    //         }
+    //     );
 
-        window.Echo.private(`unblocked-user-channel.${authId}`).listen(
-            "UnblockUserEvent",
-            (event) => {
-                if (event.if_i_still_blocked_the_user) {
-                    setBlockMessage(
-                        "You cannot send messages to a user you blocked!"
-                    );
-                } else {
-                    setBlockMessage(null);
-                }
-                setUserIsAlreadyBlocked(null);
-            }
-        );
-    }, [toUserId]);
+    //     window.Echo.private(`unblocked-user-channel.${authId}`).listen(
+    //         "UnblockUserEvent",
+    //         (event) => {
+    //             if (event.if_i_still_blocked_the_user) {
+    //                 setBlockMessage(
+    //                     "You cannot send messages to a user you blocked!"
+    //                 );
+    //             } else {
+    //                 setBlockMessage(null);
+    //             }
+    //             setUserIsAlreadyBlocked(null);
+    //         }
+    //     );
+    // }, [toUserId]);
 
     const createAlertMessage = () => {
         const messagesCount = document.querySelector(".messages-count");
@@ -198,49 +210,49 @@ const ChatWrapper = (props) => {
         }
     };
 
-    useEffect(() => {
-        if (users.length > 0) {
-            window.Echo.leave(`messages.${authId}`);
+    // useEffect(() => {
+    //     if (users.length > 0) {
+    //         window.Echo.leave(`messages.${authId}`);
 
-            window.Echo.private(`messages.${authId}`).listen(
-                "NewMessageEvent",
-                (event) => {
-                    checkChatWrapperStatusBeforeAlertingNewMessageCount(
-                        users,
-                        event.message.user
-                    );
+    //         window.Echo.private(`messages.${authId}`).listen(
+    //             "NewMessageEvent",
+    //             (event) => {
+    //                 checkChatWrapperStatusBeforeAlertingNewMessageCount(
+    //                     users,
+    //                     event.message.user
+    //                 );
 
-                    if (toUserId === event.message.user.unique_id) return false;
+    //                 if (toUserId === event.message.user.unique_id) return false;
 
-                    const targetChatUser = document.getElementById(
-                        event.message.user.unique_id
-                    );
-                    checkForTargetChatUserElement(targetChatUser);
+    //                 const targetChatUser = document.getElementById(
+    //                     event.message.user.unique_id
+    //                 );
+    //                 checkForTargetChatUserElement(targetChatUser);
 
-                    return false;
-                }
-            );
-        }
-    }, [toUserId]);
+    //                 return false;
+    //             }
+    //         );
+    //     }
+    // }, [toUserId]);
 
-    const checkChatWrapperStatusBeforeAlertingNewMessageCount = (
-        subscribers,
-        userToCheck
-    ) => {
-        const targetUser = subscribers.findIndex(
-            (user) => userToCheck.id === user.id
-        );
+    // const checkChatWrapperStatusBeforeAlertingNewMessageCount = (
+    //     subscribers,
+    //     userToCheck
+    // ) => {
+    //     const targetUser = subscribers.findIndex(
+    //         (user) => userToCheck.id === user.id
+    //     );
 
-        if (targetUser === -1) {
-            return false;
-        }
+    //     if (targetUser === -1) {
+    //         return false;
+    //     }
 
-        if (document.querySelector(".chat-wrapper") === null) {
-            createAlertMessage();
-        } else {
-            return false;
-        }
-    };
+    //     if (document.querySelector(".chat-wrapper") === null) {
+    //         createAlertMessage();
+    //     } else {
+    //         return false;
+    //     }
+    // };
 
     const removeAlertMessagesWrapper = () => {
         const alertMessages = document.querySelector(".alert-message-wrapper");
@@ -249,92 +261,92 @@ const ChatWrapper = (props) => {
         }
     };
 
-    const blockUserStyle = async () => {
-        if (!chattingWithUser) {
-            return;
-        }
+    // const blockUserStyle = async () => {
+    //     if (!chattingWithUser) {
+    //         return;
+    //     }
 
-        if (toUserId === blockedUserId) {
-            setBlockedUserId(null);
-            setUserIsAlreadyBlocked(false);
-            setSpinner(true);
+    //     if (toUserId === blockedUserId) {
+    //         setBlockedUserId(null);
+    //         setUserIsAlreadyBlocked(false);
+    //         setSpinner(true);
 
-            const unBlockResponse = await chat.post("/unblock-user/", {
-                unblockedUser: blockedUserId,
-            });
-            setTimeout(() => {
-                setSpinner(null);
-            }, 3000);
+    //         const unBlockResponse = await chat.post("/unblock-user/", {
+    //             unblockedUser: blockedUserId,
+    //         });
+    //         setTimeout(() => {
+    //             setSpinner(null);
+    //         }, 3000);
 
-            if (unBlockResponse.data.stillBlocked) {
-                setBlockMessage(`You were blocked by this user!`);
-            } else {
-                setBlockMessage("");
-            }
-        } else {
-            setBlockedUserId(toUserId);
-            setUserIsAlreadyBlocked(true);
-            setSpinner(true);
-            setBlockMessage(`You cannot send messages to a user you blocked!`);
+    //         if (unBlockResponse.data.stillBlocked) {
+    //             setBlockMessage(`You were blocked by this user!`);
+    //         } else {
+    //             setBlockMessage("");
+    //         }
+    //     } else {
+    //         setBlockedUserId(toUserId);
+    //         setUserIsAlreadyBlocked(true);
+    //         setSpinner(true);
+    //         setBlockMessage(`You cannot send messages to a user you blocked!`);
 
-            await chat.post("/block-user/", {
-                blockedUser: toUserId,
-            });
+    //         await chat.post("/block-user/", {
+    //             blockedUser: toUserId,
+    //         });
 
-            setTimeout(() => {
-                setSpinner(false);
-            }, 5000);
-            // setSpinner(false);
-        }
-    };
+    //         setTimeout(() => {
+    //             setSpinner(false);
+    //         }, 5000);
+    //         // setSpinner(false);
+    //     }
+    // };
 
-    const removeBlockedUserStyle = () => {
-        if (userBlockerBackground && userBlockerBackground) {
-            userBlockerBackground.classList.remove(
-                "change-sound-checker-background"
-            );
-            userBlocker.classList.remove("change-sound-checker");
-        }
-    };
+    // const removeBlockedUserStyle = () => {
+    //     if (userBlockerBackground && userBlockerBackground) {
+    //         userBlockerBackground.classList.remove(
+    //             "change-sound-checker-background"
+    //         );
+    //         userBlocker.classList.remove("change-sound-checker");
+    //     }
+    // };
 
-    const addBlockedUserStyle = () => {
-        userBlockerBackground.classList.add("change-sound-checker-background");
-        userBlocker.classList.add("change-sound-checker");
-    };
+    // const addBlockedUserStyle = () => {
+    //     userBlockerBackground.classList.add("change-sound-checker-background");
+    //     userBlocker.classList.add("change-sound-checker");
+    // };
 
-    const showBlockButtons = () => {
-        if (spinner) {
-            return <div className="loader"></div>;
-        } else if (spinner === null) {
-            return (
-                <Fragment>
-                    <div className="sound-checker-background"></div>
-                    <div
-                        className="sound-checker"
-                        onClick={(e) => {
-                            blockUserStyle(e);
-                        }}
-                    ></div>
+    // const showBlockButtons = () => {
+    //     if (spinner) {
+    //         return <div className="loader"></div>;
+    //     } else if (spinner === null) {
+    //         return (
+    //             <Fragment>
+    //                 <div className="sound-checker-background"></div>
+    //                 <div
+    //                     className="sound-checker"
+    //                     onClick={(e) => {
+    //                         blockUserStyle(e);
+    //                     }}
+    //                 ></div>
 
-                    <span className="check-sound">блок</span>
-                </Fragment>
-            );
-        } else if (spinner === false && blockMessage !== "") {
-            return (
-                <Fragment>
-                    <div className="sound-checker-background change-sound-checker-background"></div>
-                    <div
-                        className="sound-checker change-sound-checker"
-                        onClick={(e) => {
-                            blockUserStyle(e);
-                        }}
-                    ></div>
+    //                 <span className="check-sound">блок</span>
+    //             </Fragment>
+    //         );
+    //     } else if (spinner === false && blockMessage !== "") {
+    //         return (
+    //             <Fragment>
+    //                 <div className="sound-checker-background change-sound-checker-background"></div>
+    //                 <div
+    //                     className="sound-checker change-sound-checker"
+    //                     onClick={(e) => {
+    //                         blockUserStyle(e);
+    //                     }}
+    //                 ></div>
 
-                    <span className="check-sound">Звук</span>
-                </Fragment>
-            );
-        }
-    };
+    //                 <span className="check-sound">Звук</span>
+    //             </Fragment>
+    //         );
+    //     }
+    // };
 
     window.Echo.private(`unblocked-user-channel.${authId}`).listen(
         "UnblockUserEvent",
@@ -357,40 +369,70 @@ const ChatWrapper = (props) => {
         return messages.map((message, index) => {
             if (message.user.unique_id === authId) {
                 return (
+                    // <div className="sent-message-wrapper" key={index}>
+                    //     <div className="sent-message-user-image-wrapper">
+                    //         <img
+                    //             src={
+                    //                 message.user.image !== null
+                    //                     ? `${message.user.image}`
+                    //                     : `../../images/avatar.png`
+                    //             }
+                    //             alt="user-image"
+                    //             className="chat-user-image"
+                    //         />
+                    //     </div>
+                    //     <div className="sent-message-info">
+                    //         {renderMessageType(message)}
+                    //     </div>
+                    // </div>
                     <div className="sent-message-wrapper" key={index}>
-                        <div className="sent-message-user-image-wrapper">
-                            <img
-                                src={
-                                    message.user.image !== null
-                                        ? `${message.user.image}`
-                                        : `../../images/avatar.png`
+                        <p className="sent-message-date">
+                            {new Date(message.created_at).toLocaleString(
+                                "en-US",
+                                {
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                    hour12: true,
                                 }
-                                alt="user-image"
-                                className="chat-user-image"
-                            />
-                        </div>
-                        <div className="sent-message-info">
+                            )}
+                        </p>
+                        <div className="sent-message">
                             {renderMessageType(message)}
                         </div>
                     </div>
                 );
             } else {
                 return (
+                    // <div className="received-message-wrapper" key={index}>
+                    //     <div className="received-message-user-image-wrapper">
+                    //         <a href={`/all-users/${toUserId}`}>
+                    //             <img
+                    //                 src={
+                    //                     message.user.image !== null
+                    //                         ? `${message.user.image}`
+                    //                         : `../../images/avatar.png`
+                    //                 }
+                    //                 alt="user-image"
+                    //                 className="chat-user-image"
+                    //             />
+                    //         </a>
+                    //     </div>
+                    //     <div className="received-message-info">
+                    //         {renderMessageType(message)}
+                    //     </div>
+                    // </div>
                     <div className="received-message-wrapper" key={index}>
-                        <div className="received-message-user-image-wrapper">
-                            <a href={`/all-users/${toUserId}`}>
-                                <img
-                                    src={
-                                        message.user.image !== null
-                                            ? `${message.user.image}`
-                                            : `../../images/avatar.png`
-                                    }
-                                    alt="user-image"
-                                    className="chat-user-image"
-                                />
-                            </a>
-                        </div>
-                        <div className="received-message-info">
+                        <p className="received-message-date">
+                            {new Date(message.created_at).toLocaleString(
+                                "en-US",
+                                {
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                    hour12: true,
+                                }
+                            )}
+                        </p>
+                        <div className="received-message">
                             {renderMessageType(message)}
                         </div>
                     </div>
@@ -469,10 +511,12 @@ const ChatWrapper = (props) => {
             return false;
         }
 
-        document.querySelector(".react-input-emoji--input").textContent = "";
-
+        // console.log("ssss");
+        // document.querySelector(".react-input-emoji--input").textContent = "";
+        const chatInput = document.querySelector(".chat-input");
+        chatInput.value = "";
         chat.post("/messages", {
-            to: toUserId,
+            to: props.toUserId,
             message: newMessage,
         }).then((response) => {
             setNewMessage(null);
@@ -481,13 +525,13 @@ const ChatWrapper = (props) => {
     };
 
     const sendMedia = (e) => {
-        if (toUserId == null || toUserId == "") {
+        if (props.toUserId == null) {
             return false;
         }
         let formdata = new FormData();
         const image = e.target.files[0];
         formdata.append("file", image);
-        formdata.append("to", toUserId);
+        formdata.append("to", props.toUserId);
         const fileSize = e.target.files[0].size / 1024 / 1024;
         if (fileSize > 2) {
             alert("maximum size is 2 MB");
@@ -505,7 +549,7 @@ const ChatWrapper = (props) => {
             return false;
         }
 
-        window.Echo.private(`messages.${toUserId}.${authId}`).listen(
+        window.Echo.private(`messages.${props.toUserId}.${authId}`).listen(
             "NewMessageEvent",
             (event) => {
                 prevMessages.current.push(event.message);
@@ -516,7 +560,6 @@ const ChatWrapper = (props) => {
         chat.get(
             `/messages?from=${window.btoa(authId)}&to=${window.btoa(toUserId)}`
         ).then((response) => {
-            // return;
             if (response.data.messages.length === 0) {
                 setMessages(response.data.messages);
                 prevMessages.current = [];
@@ -526,27 +569,28 @@ const ChatWrapper = (props) => {
             }
 
             setChattingWithUser(response.data.chatting_with_user.name);
+            setchattingUserImage(response.data.chatting_with_user.image);
             if (
                 response.data.blocked_this_user &&
                 response.data.blocked_by_this_user
             ) {
-                setUserIsAlreadyBlocked(true);
-                setBlockedUserId(toUserId);
-                setBlockMessage("You both blocked each other!");
-                addBlockedUserStyle();
+                // setUserIsAlreadyBlocked(true);
+                // setBlockedUserId(toUserId);
+                // setBlockMessage("You both blocked each other!");
+                // addBlockedUserStyle();
             } else if (response.data.blocked_this_user) {
-                setUserIsAlreadyBlocked(true);
-                setBlockedUserId(toUserId);
-                setBlockMessage(
-                    "You cannot send messages to a user you blocked!"
-                );
-                addBlockedUserStyle();
+                // setUserIsAlreadyBlocked(true);
+                // setBlockedUserId(toUserId);
+                // setBlockMessage(
+                //     "You cannot send messages to a user you blocked!"
+                // );
+                // addBlockedUserStyle();
             } else if (response.data.blocked_by_this_user) {
-                setBlockMessage("You were blocked by this user!");
-                removeBlockedUserStyle();
+                // setBlockMessage("You were blocked by this user!");
+                // removeBlockedUserStyle();
             } else {
                 setBlockMessage(null);
-                removeBlockedUserStyle();
+                // removeBlockedUserStyle();
             }
         });
     };
@@ -592,59 +636,133 @@ const ChatWrapper = (props) => {
         );
     };
 
+    const renderChattingWithUserImage = () => {
+        if (chattingWithUser) {
+            if (chattingUserImage) {
+                return <img src={chattingUserImage} alt="person" />;
+            } else {
+                return <img src="../../images/avatar.png" alt="person" />;
+            }
+        }
+    };
+
     return (
-        <div>
-            {" "}
-            <i className="fas fa-caret-up chat-arrow"></i>
-            <div className="chat-wrapper">
-                <div className="active-users-section">
-                    <div className="active-users-top-section">
-                        {showBlockButtons()}
+        // <div>
+        //     {" "}
+        //     <i className="fas fa-caret-up chat-arrow"></i>
+        //     <div className="chat-wrapper">
+        //         <div className="active-users-section">
+        //             <div className="active-users-top-section">
+        //                 {showBlockButtons()}
+        //             </div>
+        //             <div className="active-users">
+        //                 <div className="active-users-search-wrapper">
+        //                     <i className="fas fa-search active-users-search"></i>
+        //                     <i className="fas fa-window-close active-users-close"></i>
+        //                     <input
+        //                         className="active-users-input"
+        //                         placeholder="Поиск"
+        //                         type="text"
+        //                     />
+        //                 </div>
+        //                 <div className="chat-users-list">
+        //                     {renderredUsers(users)}
+        //                 </div>
+        //             </div>
+        //         </div>
+        //         <div className="messages-section">
+        //             <div className="messages-top-section">
+        //                 <div className="chatting-with-user">
+        //                     {" "}
+        //                     <a href={`/all-users/${toUserId}`}>
+        //                         {chattingWithUser}
+        //                     </a>
+        //                 </div>
+        //                 <div className="chatting-user-status">
+        //                     <div className="chatting-user-status-icon"></div>
+        //                     <div className="chat-status-text">online</div>
+        //                 </div>
+        //             </div>
+        //             <div className="messages-middle-section">
+        //                 <div className="scroll" ref={scrollToEndRef}>
+        //                     {renderredMessages(messages)}
+        //                     {renderWelcomeMessage()}
+        //                 </div>
+        //             </div>
+        //             <div className="messages-bottom-section">
+        //                 <div className="chat-inputs-wrapper">
+        //                     {blockMessage
+        //                         ? renderBlockedChatMessage()
+        //                         : renderChatButtons()}
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
+
+        <Fragment>
+            <div className="active-chat-wrapper">
+                <div className="chatting-with-user">
+                    <div className="chatting-with-user-image-wrapper">
+                        <i
+                            className="fa-solid fa-chevron-left chat-back-icon"
+                            onClick={() => {
+                                props.setViewChatWrapper(false);
+                            }}
+                        ></i>
+                        {renderChattingWithUserImage()}
                     </div>
-                    <div className="active-users">
-                        <div className="active-users-search-wrapper">
-                            <i className="fas fa-search active-users-search"></i>
-                            <i className="fas fa-window-close active-users-close"></i>
-                            <input
-                                className="active-users-input"
-                                placeholder="Поиск"
-                                type="text"
-                            />
-                        </div>
-                        <div className="chat-users-list">
-                            {renderredUsers(users)}
-                        </div>
+                    <div className="chatting-with-user-name">
+                        <p>{chattingWithUser}</p>
                     </div>
                 </div>
-                <div className="messages-section">
-                    <div className="messages-top-section">
-                        <div className="chatting-with-user">
-                            {" "}
-                            <a href={`/all-users/${toUserId}`}>
-                                {chattingWithUser}
-                            </a>
-                        </div>
-                        <div className="chatting-user-status">
-                            <div className="chatting-user-status-icon"></div>
-                            <div className="chat-status-text">online</div>
-                        </div>
+                <div className="chat-messages-section">
+                    {/* <div className="sent-message-wrapper">
+                        <p className="sent-message-date">12:23pm</p>
+                        <p className="sent-message">
+                            Hi
+                            gfgkfdhgfkdghfdkljghdfglhdfkgjlfdhgkjldfhgdjkslghdsfkjjohn!
+                        </p>
                     </div>
-                    <div className="messages-middle-section">
-                        <div className="scroll" ref={scrollToEndRef}>
-                            {renderredMessages(messages)}
-                            {renderWelcomeMessage()}
-                        </div>
+                    <div className="received-message-wrapper">
+                        <p className="received-message-date">12:23PM</p>
+                        <p className="received-message">
+                            How arfgfdgfgfdgdfgsdgsdfgfdgsdfgdfe you!
+                        </p>
+                    </div> */}
+                    {renderredMessages(messages)}
+                </div>
+                <div className="chat-input-wrapper">
+                    <div className="chat-attachement-wrapper">
+                        <i className="fa-solid fa-link">
+                            <input
+                                type="file"
+                                className="attachement-input"
+                                accept="image/*,video/*"
+                                onChange={(e) => {
+                                    sendMedia(e);
+                                }}
+                            />
+                        </i>
                     </div>
-                    <div className="messages-bottom-section">
-                        <div className="chat-inputs-wrapper">
-                            {blockMessage
-                                ? renderBlockedChatMessage()
-                                : renderChatButtons()}
-                        </div>
-                    </div>
+                    <input
+                        type="text"
+                        onKeyUp={(e) => {
+                            onKeyUp(e);
+                        }}
+                        className="chat-input"
+                        onChange={(e) => {
+                            setNewMessage(e.target.value);
+                        }}
+                    />
                 </div>
             </div>
-        </div>
+            <div className="chat-send-wrapper">
+                <div className="chat-send-button" onClick={sendMessage}>
+                    <img src={"../../images/img/send.png"} alt="send" />
+                </div>
+            </div>
+        </Fragment>
     );
 };
 

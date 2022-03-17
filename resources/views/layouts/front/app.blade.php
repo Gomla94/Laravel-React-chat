@@ -26,6 +26,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{asset('css/newest-index.css?version=18')}}" />
+    {{-- <link rel="stylesheet" href="{{ asset('css/chat.css') }}"/> --}}
+
     @yield('styles')
     <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -39,11 +41,12 @@
       </script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   
 
     <title>@yield('title')</title>
   </head>
   <body>
-    <div class="navbar-background-wrapper"></div>
+    <div class="navbar-background-wrapper {{ Route::currentRouteName() == 'user.chat' ? 'navbar-chat' : '' }}"></div>
     <div class="sec-navbar-wrapper">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
@@ -67,7 +70,7 @@
         <div class="navbar-user-section-wrapper">
           @if(Auth::check())
           <div class="navbar-chat-icon">
-            <i class="fa-regular fa-comment"></i><span>Chat</span>
+            <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
           </div>
           <div class="navbar-user-list">
             <div class="navbar-user-image-wrapper">
@@ -88,7 +91,7 @@
           </div>
           @else
           <div class="login-navbar-user">
-            <span class="navbar-user-name">
+            <span class="navbar-user-login">
               <a href="{{ route('login') }}">Login</a>
             </span>
           </div>
@@ -154,7 +157,7 @@
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
-            <i class="fa-regular fa-comment"></i><span>Chat</span>
+            <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
           </li>
         </ul>
       </div>
@@ -164,6 +167,7 @@
    @yield('content')
 
    @stack('js')
+   
     <script>
       var swiper = new Swiper(".myMainSwiper", {
         spaceBetween: 30,
@@ -199,5 +203,8 @@
         },
       });
     </script>
+    @if(Auth::check())
+      <script src="{{ asset('js/app.js') }}"></script>
+    @endif
   </body>
 </html>

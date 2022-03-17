@@ -4,7 +4,7 @@ import App from "./App";
 import NewSubscribtionNotification from "./NewSubscribtionNotification";
 
 ReactDOM.render(<App />, document.getElementById("root"));
-ReactDOM.render(
-    <NewSubscribtionNotification />,
-    document.getElementById("root-notifications")
-);
+// ReactDOM.render(
+//     <NewSubscribtionNotification />,
+//     document.getElementById("root-notifications")
+// );
