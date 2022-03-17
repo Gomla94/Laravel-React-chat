@@ -275,6 +275,10 @@ body {
     cursor: pointer;
 }
 
+.chat-media-input {
+    cursor: pointer;
+}
+
 .chat-input {
     width: 95%;
     border-radius: 30px;
@@ -291,6 +295,7 @@ body {
 
 .attachement-input {
     opacity: 0;
+    width: 20px;
 }
 
 .message-image {

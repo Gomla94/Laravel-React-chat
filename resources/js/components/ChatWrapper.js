@@ -734,16 +734,18 @@ const ChatWrapper = (props) => {
                 </div>
                 <div className="chat-input-wrapper">
                     <div className="chat-attachement-wrapper">
-                        <i className="fa-solid fa-link">
-                            <input
-                                type="file"
-                                className="attachement-input"
-                                accept="image/*,video/*"
-                                onChange={(e) => {
-                                    sendMedia(e);
-                                }}
-                            />
-                        </i>
+                        <label className="chat-media-input">
+                            <i className="fa-solid fa-link">
+                                <input
+                                    type="file"
+                                    className="attachement-input"
+                                    accept="image/*,video/*"
+                                    onChange={(e) => {
+                                        sendMedia(e);
+                                    }}
+                                />
+                            </i>
+                        </label>
                     </div>
                     <input
                         type="text"

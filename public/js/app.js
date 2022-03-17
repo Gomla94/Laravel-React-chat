@@ -3331,15 +3331,18 @@ var ChatWrapper = function ChatWrapper(props) {
           className: "chat-input-wrapper",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "chat-attachement-wrapper",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-              className: "fa-solid fa-link",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-                type: "file",
-                className: "attachement-input",
-                accept: "image/*,video/*",
-                onChange: function onChange(e) {
-                  sendMedia(e);
-                }
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+              className: "chat-media-input",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+                className: "fa-solid fa-link",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "file",
+                  className: "attachement-input",
+                  accept: "image/*,video/*",
+                  onChange: function onChange(e) {
+                    sendMedia(e);
+                  }
+                })
               })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
