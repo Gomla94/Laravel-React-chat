@@ -2,7 +2,7 @@
 @section('meta-description')
 @endsection
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/chat.css?version=3') }}"/>
+<link rel="stylesheet" href="{{ asset('css/chat.css?version=10') }}"/>
 @endsection
 @section('content')
 <div id="root"></div>
