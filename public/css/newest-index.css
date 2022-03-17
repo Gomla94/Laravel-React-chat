@@ -22,7 +22,7 @@ body {
 }
 
 .auth-navbar-logo-wrapper {
-    background-color: #d41717;
+    background-color: #e6d5bc !important;
 }
 
 .navbar-background-wrapper {
@@ -35,7 +35,7 @@ body {
 .auth-navbar-background-wrapper {
     position: absolute;
     height: 100px;
-    width: 100vw;
+    width: 100%;
 }
 
 .navbar {
@@ -1100,7 +1100,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #d1bb9c !important;
+    background-color: #e6d5bc !important;
     color: white;
     height: auto;
     min-height: 100%;
@@ -1209,7 +1209,7 @@ button {
 /* register page starts here */
 
 .register-page {
-    background-color: #d1bb9c !important;
+    background-color: #e6d5bc !important;
     color: white;
     height: 100vh;
 }
@@ -1218,7 +1218,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #d1bb9c !important;
+    background-color: #e6d5bc !important;
     color: white;
     /* height: 100vh; */
 }
