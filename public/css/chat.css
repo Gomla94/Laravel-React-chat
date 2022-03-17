@@ -276,7 +276,7 @@ body {
     margin-right: 1rem;
 }
 
-.chat-input-wrapper input {
+.chat-input {
     width: 95%;
     border-radius: 30px;
     border: none;
