@@ -42,8 +42,6 @@ body {
     height: 500px;
     border-radius: 20px;
     width: 95%;
-    overflow-y: scroll;
-
     margin: 1rem;
 }
 
