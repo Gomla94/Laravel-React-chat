@@ -2486,7 +2486,13 @@ var ChatWindow = function ChatWindow() {
 
   var renderLastMessage = function renderLastMessage(user) {
     return user.messages.map(function (message) {
-      return message.type === "image" ? "image file" : message.message;
+      if (message.type === "image") {
+        return "image file";
+      } else if (message.type === "video") {
+        return "video file";
+      } else {
+        return message.message;
+      }
     });
   };
 

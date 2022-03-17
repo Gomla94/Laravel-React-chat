@@ -225,7 +225,13 @@ const ChatWindow = () => {
 
     const renderLastMessage = (user) => {
         return user.messages.map((message) => {
-            return message.type === "image" ? "image file" : message.message;
+            if (message.type === "image") {
+                return "image file";
+            } else if (message.type === "video") {
+                return "video file";
+            } else {
+                return message.message;
+            }
         });
     };
 
