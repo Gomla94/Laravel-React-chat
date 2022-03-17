@@ -270,7 +270,7 @@ body {
     border-radius: 50%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     margin-right: 1rem;
     cursor: pointer;
 }
@@ -285,7 +285,7 @@ body {
 }
 
 .chat-attachement-wrapper i {
-    margin-top: 40px;
+    margin-top: 25px;
     margin-left: 5px;
 }
 
