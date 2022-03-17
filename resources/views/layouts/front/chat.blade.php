@@ -5,7 +5,7 @@
 Magaxat | Chat
 @endsection
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/chat.css?version=17') }}"/>
+<link rel="stylesheet" href="{{ asset('css/chat.css?version=18') }}"/>
 @endsection
 @section('content')
 <div id="root"></div>

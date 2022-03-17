@@ -17,11 +17,10 @@ body {
     height: 500px;
     background-color: white;
     margin: auto;
-    margin-top: 5rem;
+    margin-top: 1rem;
     border-radius: 20px;
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
     position: relative;
 }
 
