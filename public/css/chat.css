@@ -354,8 +354,8 @@ body {
     }
 
     .chat-attachement-wrapper i {
-        margin-top: 44px;
-        margin-left: 8px;
+        margin-top: 44px !important;
+        margin-left: 8px !important;
     }
 }
 
