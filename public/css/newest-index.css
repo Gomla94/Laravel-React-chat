@@ -820,6 +820,8 @@ button {
     color: rgb(109, 109, 109);
     font-size: 2rem;
     margin-bottom: 10px;
+    width: 38px;
+    height: 34px;
 }
 
 .post-heart-icon {
