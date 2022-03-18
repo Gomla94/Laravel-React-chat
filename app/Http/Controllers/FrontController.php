@@ -92,39 +92,71 @@ class FrontController extends Controller
 
     public function all_users()
     {
-        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
         $filter_keys = array_keys(request()->query());
         $filtered_users = [];
+        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
 
         foreach($filter_keys as $key) {
             switch ($key) {
                 case 'interesting-in-type':
                     $interesting_type = InterestingType::where('name', request('interesting-in-type'))->pluck('id')->firstOrFail();
+
                     foreach($users as $user) {
                         $user_interesting_types_ids = json_decode($user->interesting_type_id);
                         if ($user_interesting_types_ids !== null) {
                             if (in_array($interesting_type, $user_interesting_types_ids)) {
+                                $filtered_users = array_unique($filtered_users);
                                 array_push($filtered_users, $user);
-                            }
+                            } 
                         }
                         
+                    }
+                    if ($filtered_users == null) {
+                        break 2;
                     }
                     break;
 
                 case 'country':
+                    // dd($filtered_users);
                     $country = Country::where('name', 'like',request('country'))->firstOrFail();
-                    $users = $users->where('country_id', $country->id);
-                    foreach($users as $user) {
-                        $filtered_users[] = $user;
+                    if (count($filtered_users)) {
+                        foreach($filtered_users as $filtered_user) {
+                            if ($filtered_user->country_id !== $country->id) {
+                                $filtered_users = array_filter($filtered_users, function($user) use($filtered_user) {
+                                    return $user->id !== $filtered_user->id;
+                                });
+                            } 
+                        }
+
+                        break 2;
+                    } else {
+                        $users = $users->where('country_id', $country->id);
+                        foreach($users as $user) {
+                            $filtered_users[] = $user;
+                        }
+                        break;
                     }
-                    break;
+                   
 
                 case 'gender':
-                    $users = $users->where('gender', request('gender'));
-                    foreach($users as $user) {
-                        $filtered_users[] = $user;
+
+                    if (count($filtered_users)) {
+                        foreach($filtered_users as $filtered_user) {
+                            if ($filtered_user->gender !== request('gender')) {
+                                $filtered_users = array_filter($filtered_users, function($user) use($filtered_user) {
+                                    return $user->gender !== $filtered_user->gender;
+                                });
+                            } 
+                        }
+
+                        break 2;
+                    } else {
+                        $users = $users->where('gender', request('gender'));
+                        foreach($users as $user) {
+                            $filtered_users[] = $user;
+                        }
+                        break;
                     }
-                    break;
                 
                 default:
                     return $filtered_users;
@@ -132,6 +164,9 @@ class FrontController extends Controller
             }
         }
         
+        $filtered_users = array_unique($filtered_users);
+        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
+
         $interesting_types = InterestingType::all();
         $countries = Country::all();
         return view('layouts.front.users', [

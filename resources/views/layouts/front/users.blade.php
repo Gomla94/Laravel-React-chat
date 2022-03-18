@@ -17,7 +17,7 @@ Magaxat | Users
             class="users-search-input"
             placeholder="Search"
           />
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search search-users-icon"></i>
         </div>
       </form>
     </div>
@@ -27,24 +27,78 @@ Magaxat | Users
       </div>
     </div>
     <div class="users-filter-selects">
-      <select name="" class="filter-interest-select" id="">
-        <option value="" selected disabled>Interests</option>
-        <option value="">it</option>
-        <option value="">health</option>
-        <option value="">tech</option>
-      </select>
-      <select name="" class="filter-gender-select" id="">
-        <option value="" selected disabled>Gender</option>
-        <option value="">it</option>
-        <option value="">health</option>
-        <option value="">tech</option>
-      </select>
-      <select name="" class="filter-country-select" id="">
-        <option value="" selected disabled>Country</option>
-        <option value="">it</option>
-        <option value="">health</option>
-        <option value="">tech</option>
-      </select>
+      <div class="filter-interest-select select-filter">
+        <div class="select-inside">
+          <span>Interests</span>
+          <i class="fa-solid fa-angle-down"></i>
+        </div>
+        <div class="select-sub rm-select">
+          @foreach($interesting_types as $type)
+          <div class="sub-select-item">
+            <div class="area-check">
+              <label for="{{ $type->name }}"></label>
+                <div class="round">
+                  <input type="checkbox" id="{{ $type->name }}" /> 
+                  <label for="{{ $type->name }}" class="sub-select-check"></label>
+                </div>  
+            </div>
+            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['interesting-in-type' => $type->name])) }}">{{ $type->name }}</a>
+          </div>
+          @endforeach
+        </div>
+      </div>
+      
+      <div class="filter-gender-select select-filter">
+        <div class="select-inside">
+          <span>Gender</span>
+          <i class="fa-solid fa-angle-down"></i>
+        </div>
+        <div class="select-sub rm-select">
+          <div class="sub-select-item">
+            <div class="area-check">
+              <label for="male"></label>
+                <div class="round">
+                  <input name="" type="checkbox" id="male" class="sub-select-check"> 
+                  <label for="male" class="sub-select-check"></label>
+                </div>  
+            </div>
+            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}">Male</a>
+          </div>
+          <div class="sub-select-item">
+            <div class="area-check">
+              <label for="female"></label>
+                <div class="round">
+                  <input name="" type="checkbox" id="female" class="sub-select-check"> 
+                  <label for="female" class="sub-select-check"></label>
+                </div>  
+            </div>
+            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}">Female</a>
+          </div>
+        </div>
+      </div>
+      <div class="filter-interest-select select-filter">
+        <div class="select-inside">
+          <span>Country</span>
+          <i class="fa-solid fa-angle-down"></i>
+        </div>
+        <div class="select-sub rm-select">
+          @foreach($countries as $country)
+          <div class="sub-select-item">
+            <div class="area-check">
+              <label for="{{ $country->name }}"></label>
+                <div class="round">
+                  <input name="" type="checkbox" id="{{ $country->name }}" class="sub-select-check"> 
+                  <label for="{{ $country->name }}" class="sub-select-check"></label>
+                </div>  
+            </div>
+            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['country' => $country->name ])) }}">{{ $country->name }}</a>
+          </div>
+          @endforeach
+        </div>
+      </div>
+
+      
+      
     </div>
   </div>
   <div class="users-container">

@@ -1547,11 +1547,13 @@ button {
     position: relative;
 }
 
-/* .users-filter-selects {
-  background-color: #ebebeb;
-  display: flex;
-  flex-direction: column;
-} */
+.users-filter-selects {
+    /* background-color: #ebebeb; */
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    /* width: 500px; */
+}
 
 .filter-interest-select,
 .filter-gender-select,
@@ -1566,6 +1568,59 @@ button {
     background-color: #af9065;
     color: #fff;
     border: 1px solid rgb(206, 206, 206);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-left: 1.5rem;
+    cursor: pointer;
+}
+
+.filter-interest-select i {
+    cursor: pointer;
+}
+
+.select-inside {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.6rem;
+}
+
+.select-sub {
+    width: 200px;
+    height: 150px;
+    max-height: 150px;
+    padding: 0 1rem;
+    background-color: #fff;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 2px;
+    z-index: 100;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+
+.rm-select {
+    display: none;
+}
+
+.sub-select-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #dedede;
+    padding: 1rem;
+    /* width: 100px; */
+    word-break: break-all;
+}
+
+.sub-select-item a {
+    text-decoration: none;
+    color: black;
 }
 
 .filter-icon-wrapper {
@@ -1579,7 +1634,9 @@ button {
 
 .filter-icon-wrapper i {
     position: absolute;
-    left: 0.7rem;
+    left: 1rem;
+    color: #886227;
+    top: 1rem;
 }
 
 .users-search-input {
@@ -1594,7 +1651,7 @@ button {
     border: 1px solid rgb(206, 206, 206);
 }
 
-.search-users-wrapper i {
+.search-users-icon {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -2185,6 +2242,7 @@ button {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-right: 1rem;
 }
 
 .area-check input {
@@ -3236,10 +3294,6 @@ button {
         opacity: 1;
     }
 
-    .users-filter-selects select {
-        margin: 5px 0;
-    }
-
     .filter-gender-select {
         background-color: white;
         color: #af9065;
@@ -3255,6 +3309,25 @@ button {
 
     .main-posts {
         width: 100% !important;
+    }
+
+    .users-filter-selects {
+        background-color: #ebebeb;
+    }
+
+    .filter-gender-select,
+    .filter-interest-select {
+        margin: 0.4rem 0;
+    }
+
+    .filter-gender-select {
+        background-color: #fff;
+        color: #af9065;
+    }
+
+    .select-sub {
+        top: unset;
+        right: 200px;
     }
 }
 
@@ -3445,6 +3518,19 @@ button {
     .main-posts-search-icon {
         right: 40px;
     }
+
+    .users-filter-selects {
+        width: 45%;
+    }
+
+    .select-filter {
+        width: unset;
+    }
+
+    .select-sub {
+        width: 180px;
+        right: 185px;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -3461,6 +3547,17 @@ button {
     .video-container .play-wrapper {
         top: 30% !important;
         left: 45% !important;
+    }
+
+    .select-sub {
+        width: 120%;
+        right: 110%;
+        height: 200px !important;
+        max-height: unset;
+    }
+
+    .filter-gender-select .select-sub {
+        height: 150px !important;
     }
 }
 

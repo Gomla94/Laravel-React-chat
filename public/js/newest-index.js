@@ -6,10 +6,11 @@ const userNavbarArrow = document.querySelector(".user-navbar-arrow");
 const userAddsList = document.querySelector(".user-adds-list");
 const userNavbarImage = document.querySelector(".navbar-user-image-wrapper");
 
-// const mainPostVideos = document.querySelectorAll(".main-post-video");
-// const mainVideos = document.querySelectorAll(".video");
 const videos = document.getElementsByTagName("video");
 const videoPlayIcons = document.querySelectorAll(".play-wrapper");
+
+const filterSelects = document.querySelectorAll(".select-filter");
+const subSelectsCheckBoxes = document.querySelectorAll(".sub-select-check");
 
 // modal buttons
 const postsBtn = document.querySelector(".main-posts-add-post-button");
@@ -119,5 +120,26 @@ Array.from(videos).forEach((video) => {
     video.addEventListener("pause", () => {
         const videoPlayIcon = video.nextElementSibling;
         videoPlayIcon.classList.remove("rm-play-wrapper");
+    });
+});
+
+const removeAllUsersFilters = () => {
+    const filters = document.querySelectorAll(".select-sub");
+    filters.forEach((filter) => {
+        filter.classList.add("rm-select");
+    });
+};
+
+filterSelects.forEach((item) => {
+    item.addEventListener("click", () => {
+        removeAllUsersFilters();
+        item.querySelector(".select-sub").classList.remove("rm-select");
+    });
+});
+
+subSelectsCheckBoxes.forEach((item) => {
+    item.addEventListener("click", () => {
+        const target = item.closest(".sub-select-item");
+        target.querySelector(".anchor").click();
     });
 });
