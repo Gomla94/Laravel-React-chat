@@ -1107,7 +1107,7 @@ button {
 }
 
 .login-wrapper {
-    width: 500px;
+    width: 450px;
     height: auto;
     background-color: white;
     border-radius: 20px;
@@ -1126,19 +1126,23 @@ button {
 .login-l-heading {
     color: #afafaf;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .login-m-heading {
-    color: black;
+    color: #535353;
     font-size: 1.3rem;
-    font-weight: 400;
+    font-weight: 600;
     text-align: center;
+}
+
+.login-form-wrapper {
+    width: 60%;
 }
 
 .login-form-wrapper label {
     color: black;
-    padding: 1rem 1rem;
+    padding: 0 1rem;
 }
 
 .login-form-wrapper p {
@@ -1181,6 +1185,7 @@ button {
     justify-content: flex-end;
     text-decoration: none;
     color: #3e3e3e;
+    margin-top: -0.6rem;
 }
 
 .login-form-wrapper button {
@@ -1192,7 +1197,16 @@ button {
     margin-top: 1rem;
 }
 
-.goto-sign-in {
+.login-button,
+.register-button {
+    padding: 1rem 1rem;
+}
+
+.register-button {
+    background-color: #7c633e !important;
+}
+
+.login-goto-sign-in {
     display: block;
     background-color: #7c633e;
     color: white !important;
@@ -1224,7 +1238,7 @@ button {
 }
 
 .register-wrapper {
-    width: 800px;
+    width: 920px;
     height: auto;
     background-color: white;
     margin-top: 120px;
@@ -1269,6 +1283,18 @@ button {
     color: red;
     padding: 1rem 1rem;
     font-weight: 500;
+}
+
+.register-goto-login-in {
+    display: block;
+    background-color: #c2b29a !important;
+    color: white !important;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+    width: 100% !important;
+    text-align: center;
+    text-decoration: none;
+    margin: auto !important;
 }
 
 /* register page ends here */
@@ -1635,6 +1661,7 @@ button {
     overflow-y: hidden;
     display: flex;
     flex-direction: row;
+    overflow-x: hidden;
 }
 
 .single-user-title-desc-container {
@@ -3252,7 +3279,7 @@ button {
     }
 
     .single-appeal-image-wrapper img {
-        width: 100%;
+        width: 130%;
         height: 90%;
         margin-top: 1rem;
     }

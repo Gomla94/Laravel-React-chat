@@ -237,9 +237,9 @@
                 </div>
                   
               <a class="forget-password-link" href="{{ route('password.request') }}">Forget your password?</a>
-              <button type="submit">Sign in</button>
+              <button class="register-button" type="submit">Sign in</button>
               <p>or</p>
-              <a href="{{ route('login') }}" class="goto-sign-in">Login</a>
+              <a href="{{ route('login') }}" class="register-goto-login-in">Login</a>
             </form>
           </div>
         </div>
