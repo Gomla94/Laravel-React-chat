@@ -116,7 +116,7 @@
                   <img id="{{ $post->id }}" class="social-icon post-heart-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
                   @endif
                   @else
-                  <img class="social-icon" src="{{ asset('images/img/heart.png') }}" alt="heart">
+                  <img class="social-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
                 @endif
                   <span>{{ $post->likes->count() }}</span>
                 </div>
