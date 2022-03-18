@@ -321,6 +321,14 @@ body {
     cursor: pointer;
 }
 
+.navbar-languages-list span {
+    font-weight: 600;
+}
+
+.languages-icon {
+    color: #4b4b4b;
+}
+
 .languages-list {
     background-color: #333;
     color: white;
@@ -2373,7 +2381,7 @@ button {
 .profile-create-appeals-wrapper {
     border: 1px solid rgb(207 207 207);
     height: 250px;
-    width: 100%;
+    width: 82%;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -2417,6 +2425,11 @@ button {
     .nav ul li {
         padding: 0.5rem 0.7rem;
     }
+
+    .profile-create-posts-wrapper,
+    .profile-create-appeals-wrapper {
+        width: 90%;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -2440,6 +2453,11 @@ button {
 
     .profile-areas {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .profile-create-posts-wrapper,
+    .profile-create-appeals-wrapper {
+        width: 100%;
     }
 }
 
@@ -2604,6 +2622,13 @@ button {
     }
 }
 
+@media screen and (max-width: 480px) {
+    .profile-image-label {
+        left: 44%;
+        top: 120%;
+    }
+}
+
 @media (max-width: 400px) {
     .profile-option {
         width: 30px;
@@ -2633,6 +2658,23 @@ button {
 
     .profile-header {
         background-size: 130%;
+    }
+
+    .nav {
+        height: auto;
+    }
+
+    .nav ul {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .nav ul li {
+        padding: 1rem 0;
+    }
+
+    .profile-image-label {
+        left: 44%;
+        top: 120%;
     }
 }
 
