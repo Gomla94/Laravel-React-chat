@@ -111,9 +111,9 @@
     
                 @if(Auth::check())
                   @if($post->likes->where('user_id', Auth::id())->count() !== 0)
-                  <img id="{{ $post->id }}" class="social-icon post-heart-icon" src="{{ asset('images/img/heart.png') }}" alt="heart">
+                  <img id="{{ $post->id }}" class="social-icon post-heart-icon liked-post-heart-icon" src="{{ asset('images/img/red-heart.png') }}" alt="heart">
                   @else
-                  <img id="{{ $post->id }}" class="social-icon post-heart-icon" src="{{ asset('images/img/heart.png') }}" alt="heart">
+                  <img id="{{ $post->id }}" class="social-icon post-heart-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
                   @endif
                   @else
                   <img class="social-icon" src="{{ asset('images/img/heart.png') }}" alt="heart">

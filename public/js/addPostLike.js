@@ -10,7 +10,10 @@ export const likePost = async (e) => {
         if (response.data) {
             heartIcon.nextElementSibling.innerText =
                 parseInt(heartIcon.nextElementSibling.innerText) + 1;
-            heartIcon.classList.toggle("liked-post-heart-icon");
+            heartIcon.classList.add("liked-post-heart-icon");
+            const currentUrl = window.origin;
+            const imagePath = `${currentUrl}/images/img/red-heart.png`;
+            heartIcon.setAttribute("src", imagePath);
         }
     } catch (error) {
         console.log(error);
@@ -29,7 +32,11 @@ export const dislikePost = async (e) => {
             heartIcon.nextElementSibling.innerText = parseInt(
                 heartIcon.nextElementSibling.innerText - 1
             );
-            heartIcon.classList.toggle("liked-post-heart-icon");
+            heartIcon.classList.remove("liked-post-heart-icon");
+
+            const currentUrl = window.origin;
+            const imagePath = `${currentUrl}/images/img/black-heart.png`;
+            heartIcon.setAttribute("src", imagePath);
         }
     } catch (error) {
         console.log(error);
