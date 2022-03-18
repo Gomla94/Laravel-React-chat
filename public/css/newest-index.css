@@ -1116,7 +1116,8 @@ button {
     justify-content: center;
     flex-direction: column;
     padding: 1rem 2rem;
-    margin-top: 120px;
+    margin-top: 150px;
+    margin-bottom: 50px;
 }
 
 .login-titles {
