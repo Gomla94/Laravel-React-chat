@@ -1242,13 +1242,14 @@ button {
     width: 920px;
     height: auto;
     background-color: white;
-    margin-top: 120px;
+    margin-top: 150px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 1rem 2rem;
+    margin-bottom: 50px;
 }
 
 .register-titles {
