@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -91,20 +92,34 @@ class RegisterController extends Controller
      * @param array $data
      * @return \App\Models\User
      */
+
+    function rand_color() {
+        return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+    }
+
+
     protected function create(array $data)
     {
-        // dd($data);
-        return User::create([
+     
+        $full_name = request('name') . ' ' . request('last_name');
+        $img = \A6digital\Image\Facades\DefaultProfileImage::create($full_name, 256, $this->rand_color(), '#FFF');
+        $default_image = Storage::disk('s3')->put("defaultProfileImages/{$full_name}.png", $img->encode());
+        $image_path = Storage::disk('s3')->url("defaultProfileImages/{$full_name}.png");
+
+        $user = User::create([
             'name' => $data['name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
-            'phone_number' => $data['phone_number'],
+            'image' => $image_path,
             'interesting_type_id' => request('interesting_type') ? json_encode($data['interesting_type']) : null,
             'additional_type' => $data['additional_type'] ?? null,
             'organisation_description' => $data['organisation_description'] ?? null,
             'api_token' => str_random(60),
             'unique_id' => str_random(60)
         ]);
+
+        return $user;
     }
 }

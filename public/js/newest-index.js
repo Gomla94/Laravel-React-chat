@@ -6,6 +6,9 @@ const userNavbarArrow = document.querySelector(".user-navbar-arrow");
 const userAddsList = document.querySelector(".user-adds-list");
 const userNavbarImage = document.querySelector(".navbar-user-image-wrapper");
 
+const mobileLanguageTitle = document.querySelector(".mobile-language-title");
+const mobileLanguagesList = document.querySelector(".mobile-languages-list");
+
 const videos = document.getElementsByTagName("video");
 const videoPlayIcons = document.querySelectorAll(".play-wrapper");
 
@@ -143,3 +146,10 @@ subSelectsCheckBoxes.forEach((item) => {
         target.querySelector(".anchor").click();
     });
 });
+
+if (mobileLanguageTitle) {
+    mobileLanguageTitle.addEventListener("click", () => {
+        console.log("aaa");
+        mobileLanguagesList.classList.toggle("show-mobile-languages-list");
+    });
+}

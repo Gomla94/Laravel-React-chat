@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Jorenvh\Share\Providers\ShareServiceProvider::class,
+        'A6digital\Image\DefaultProfileImageServiceProvider'
 
 
     ],

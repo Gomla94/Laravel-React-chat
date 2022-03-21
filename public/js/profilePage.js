@@ -47,7 +47,7 @@ tabs(0);
 const today = new Date();
 const eighteenYearsAgo = today.setFullYear(today.getFullYear() - 18);
 const maxDate = new Date(eighteenYearsAgo).toISOString().split("T")[0];
-const dateInput = document.getElementById("dt");
+const dateInput = document.getElementById("date_of_birth");
 if (dateInput) {
     dateInput.max = maxDate;
 }

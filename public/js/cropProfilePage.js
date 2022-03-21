@@ -29,9 +29,9 @@ $("#profile-image-input").on("change", function () {
 });
 
 $(".update-profile-button").on("click", function (event) {
-    event.preventDefault();
     // console.log($(".profile-image-input").get(0));
     if ($("#profile-image-input").val() !== "") {
+        event.preventDefault();
         $("#upload-input")
             .croppie("result", {
                 type: "canvas",

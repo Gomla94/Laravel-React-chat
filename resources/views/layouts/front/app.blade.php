@@ -25,10 +25,10 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=28')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=29')}}" />
 
     @yield('styles')
-    <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
+    <script src="{{asset('js/newest-index.js?version=3')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
     window.uuxyz = <?php echo json_encode([
@@ -155,10 +155,33 @@
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
-            <span rel="preconnect" href="">Eng</span>
-            <span rel="preconnect" href="">Language</span>
+            @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+              <span>ARM</span>
+            @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+              <span>ENG</span>
+            @else
+              <span>RUS</span>
+            @endif
+            <span rel="preconnect" class="mobile-language-title" href="">Language</span>
             <i class="fa-solid fa-angle-right"></i>
           </li>
+          <div class="mobile-languages-list">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+              @if($localeCode == 'en')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ENG</a>
+              </div>
+              @elseif($localeCode == 'ru')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">RUS</a>
+              </div>
+              @else
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ARM</a>
+              </div>
+              @endif
+            @endforeach
+          </div>
           <li class="overlay-list-item">
             <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
           </li>

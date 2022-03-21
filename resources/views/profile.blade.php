@@ -12,9 +12,12 @@ Magaxat | Profile
 
 
 <div class="profile-wrapper">
-  <div class="container">
+  <div class="container-fluid">
     <div class="profile-container">
       <div class="profile-header">
+        <div class="wrapper">
+          <img src="{{ asset('images/img/slider1.jpeg') }}" alt="">
+        </div>
         <div class="profile-img">
           <img class="profile-image" src="{{ $user->image ?? asset('images/avatar.png') }}" width="200" alt="Profile Image" />
           <div id="upload-input" style="width:350px; height: 400px;"></div>
@@ -94,7 +97,7 @@ Magaxat | Profile
                         <div>
                           <label for="first_name">First Name</label>
                         </div>
-                        <input class="form-control" type="text" name="name" placeholder="first name" value="{{ $user->name }}">
+                        <input class="form-control profile-input" type="text" name="name" placeholder="first name" value="{{ $user->name }}">
                       </div>
                     </div>
                     <div class="">
@@ -102,7 +105,7 @@ Magaxat | Profile
                         <div>
                           <label for="email">Email</label>
                         </div>
-                        <input class="form-control" id="email" type="text" name="email" placeholder="email" value="{{ $user->email }}">
+                        <input class="form-control profile-input" id="email" type="text" name="email" placeholder="email" value="{{ $user->email }}">
                       </div>
                     </div>
                     <div class="">
@@ -110,7 +113,7 @@ Magaxat | Profile
                         <div>
                           <label for="date_of_birth">Date Of Birth</label>
                         </div>
-                        <input class="form-control" id="date_of_birth" type="date" name="date_of_birth" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}">
+                        <input class="form-control profile-input" id="date_of_birth" type="date" name="date_of_birth" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}">
                       </div>
                     </div>
                     <div class="">
@@ -118,7 +121,7 @@ Magaxat | Profile
                         <div>
                           <label for="country">Country</label>  
                         </div>
-                        <select class="form-control" name="country_id" id="country">
+                        <select class="form-control profile-input" name="country_id" id="country">
                           @foreach ($countries as $country)
                               <option value="{{ $country->id }}">{{ $country->name }}</option>
                           @endforeach
@@ -132,7 +135,7 @@ Magaxat | Profile
                         <div>
                           <label for="last_name">Last Name</label>
                         </div>
-                        <input class="form-control" id="last_name" type="text" name="last_name" placeholder="last name" value="{{ $user->last_name }}">
+                        <input class="form-control profile-input" id="last_name" type="text" name="last_name" placeholder="last name" value="{{ $user->last_name }}">
                       </div>
                     </div>
                     <div class="">
@@ -140,7 +143,7 @@ Magaxat | Profile
                         <div>
                           <label for="phone_number">Phone Number</label>
                         </div>
-                        <input class="form-control" id="phone_number" type="text" name="phone_number" placeholder="phone number" value="{{ $user->phone_number }}">
+                        <input class="form-control profile-input" id="phone_number" type="text" name="phone_number" placeholder="phone number" value="{{ $user->phone_number }}">
                       </div>
                     </div>
                     <div class="">
@@ -148,7 +151,7 @@ Magaxat | Profile
                         <div>
                           <label for="gender">Gender</label>
                         </div>
-                        <select name="gender" id="gender" class="form-control">
+                        <select name="gender profile-input" id="gender" class="form-control">
                           <option value="male" {{ $user->gender === 'male' ? 'selected' : ''}}>Male</option>
                           <option value="female" {{ $user->gender === 'female' ? 'selected' : ''}}>Female</option>
                         </select>
@@ -159,7 +162,7 @@ Magaxat | Profile
                         <div>
                           <label for="additional_type">Additional Type</label>
                         </div>
-                        <select class="form-control" name="additional_type" id="additional_type">
+                        <select class="form-control profile-input" name="additional_type" id="additional_type">
                             <option value="individual">Individual</option>
                             <option value="organisation">Organisation</option>
                         </select>
@@ -179,12 +182,12 @@ Magaxat | Profile
                               <label for="{{ $area->name }}">{{ $area->name }}</label>
                               @if($user_interesting_types_ids !== null)
                                 <div class="round">
-                                  <input name="interesting_type[]" type="checkbox" id="{{ $area->name }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }} value="{{ $area->id }}"> 
+                                  <input name="interesting_type[] " class="profile-input" type="checkbox" id="{{ $area->name }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }} value="{{ $area->id }}"> 
                                   <label for="{{ $area->name }}"></label>
                                 </div>
                               @else
                               <div class="round">
-                                <input name="interesting_type[]" type="checkbox" id="{{ $area->name }}" value="{{ $area->id }}"> 
+                                <input name="interesting_type[]" class="profile-input" type="checkbox" id="{{ $area->name }}" value="{{ $area->id }}"> 
                                 <label for="{{ $area->name }}"></label>
                               </div>
                               @endif

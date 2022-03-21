@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Omnipay\Omnipay;
 use Share;
@@ -27,11 +28,10 @@ class FrontController extends Controller
         //
     }
 
-   
+    
 
     public function home(Request $request)
     {
-       
         if(!$sock = @fsockopen('www.google.com', 80))
         {
             $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();

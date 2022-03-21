@@ -25,9 +25,9 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=28')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=29')}}" />
     @yield('styles')
-    <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
+    <script src="{{asset('js/newest-index.js?version=3')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
     window.uuxyz = <?php echo json_encode([
@@ -38,7 +38,9 @@
       ?>
       </script>
 
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="{{ asset('js/slider.js') }}"></script>
 
     <title>Magaxat | Home</title>
   </head>
@@ -97,7 +99,6 @@
           </div>
           @endif
           <div class="navbar-languages-list">
-            
             @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
               <span>ARM</span>
               <i class="fa-solid fa-angle-down languages-icon"></i>
@@ -108,7 +109,6 @@
               <span>RUS</span>
             <i class="fa-solid fa-angle-down languages-icon"></i>
             @endif
-
           </div>
           <div class="languages-list">
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -152,52 +152,55 @@
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
-            <span rel="preconnect" href="">Eng</span>
-            <span rel="preconnect" href="">Language</span>
+            @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+              <span>ARM</span>
+            @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+              <span>ENG</span>
+            @else
+              <span>RUS</span>
+            @endif
+            <span rel="preconnect" class="mobile-language-title" href="">Language</span>
             <i class="fa-solid fa-angle-right"></i>
           </li>
+          <div class="mobile-languages-list">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+              @if($localeCode == 'en')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ENG</a>
+              </div>
+              @elseif($localeCode == 'ru')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">RUS</a>
+              </div>
+              @else
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ARM</a>
+              </div>
+              @endif
+            @endforeach
+          </div>
           <li class="overlay-list-item">
             <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
           </li>
         </ul>
       </div>
-      <div class="swiper myMainSwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="{{asset('images/img/slider-1.png')}}" alt="sliderone" />
-            <p class="slider-text">
-              As well as diluted with a fair amount of empathy, rational
-              thinking largely determines the importance of the positions taken
-              by the participants in relation to the tasks assigned. As is
-              commonly believed, interactive prototypes are only a method of
-              political participation and are associatively distributed across
-              industries.
-            </p>
-          </div>
-          <div class="swiper-slide">
-            <img src="{{asset('images/img/slider-2.png')}}" alt="slidertwo" />
-            <p class="slider-text">
-              As well as diluted with a fair amount of empathy, rational
-              thinking largely determines the importance of the positions taken
-              by the participants in relation to the tasks assigned. As is
-              commonly believed, interactive prototypes are only a method of
-              political participation and are associatively distributed across
-              industries.
-            </p>
-          </div>
-          <div class="swiper-slide">
-            <img src="{{asset('images/img/slider-3.png')}}" alt="sliderthree" />
-            <p class="slider-text">
-              As well as diluted with a fair amount of empathy, rational
-              thinking largely determines the importance of the positions taken
-              by the participants in relation to the tasks assigned. As is
-              commonly believed, interactive prototypes are only a method of
-              political participation and are associatively distributed across
-              industries.
-            </p>
-          </div>
+      <div class="img-container" data-slideshow>
+        <div>
+          <img src="{{asset('images/img/slider-1.png')}}" />
+          <p class="slider-text">
+            As well as diluted with a fair amount of empathy, rational thinking
+            largely determines the importance of the positions taken by the
+            participants in relation to the tasks assigned. As is commonly
+            believed, interactive prototypes are only a method of political
+            participation and are associatively distributed across industries.
+          </p>
         </div>
-        <div class="swiper-pagination"></div>
+        <div>
+          <img src="{{asset('images/img/slider-2.png')}}" />
+        </div>
+        <div>
+          <img src="{{asset('images/img/slider-3.png')}}" />
+        </div>
       </div>
     </div>
 

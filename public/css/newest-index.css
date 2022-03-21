@@ -79,6 +79,10 @@ body {
     background-color: rgb(243, 243, 243) !important;
 }
 
+.overlay-list-item {
+    position: relative;
+}
+
 .overlay-list-item:nth-child(4) {
     margin-bottom: 100px;
 }
@@ -345,6 +349,36 @@ body {
     transition: all 0.3s ease-in;
 }
 
+.mobile-languages-list {
+    background-color: rgb(92, 92, 92);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    /* position: absolute; */
+    top: 50%;
+    width: 120px;
+    align-items: center;
+    /* z-index: -10; */
+    left: 0;
+    opacity: 0;
+    height: 0px !important;
+    transition: all 0.3s ease-in;
+}
+
+.show-mobile-languages-list {
+    height: 170px !important;
+    opacity: 1;
+    margin-bottom: 10px;
+}
+
+.mobile-languages-list div {
+    padding: 1rem 0;
+}
+
+.mobile-languages-list div:nth-child(3) {
+    margin-bottom: 20px;
+}
 .show-languages-list {
     opacity: 0.6;
     z-index: 10;
@@ -390,6 +424,7 @@ body {
 .slider-text {
     margin: auto;
     width: 50%;
+    margin-top: 380px;
     margin-bottom: 50px !important;
 }
 
@@ -410,6 +445,46 @@ body {
 }
 
 /* navbar slider ends here */
+
+/* new slider starts here */
+
+.img-container {
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.img-container img {
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: -1;
+}
+
+.img-container img.next {
+    opacity: 1;
+    z-index: 1;
+}
+
+.img-container img.prev {
+    opacity: 1;
+    z-index: 2;
+}
+
+.img-container img.fade-out {
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
+    visibility: hidden;
+}
+
+/* new slider ends here */
 
 /* main appeals section starts here */
 
@@ -2122,6 +2197,14 @@ button {
 
 /* profile page starts here */
 
+.container-fluid {
+    width: 90% !important;
+}
+
+.profile-input {
+    color: #ac9c9c !important;
+}
+
 .profile-wrapper {
     width: 100%;
     min-height: 100%;
@@ -2129,7 +2212,6 @@ button {
 }
 
 .profile-header {
-    background-color: red;
     width: 100%;
     display: flex;
     height: 190px;
@@ -2138,9 +2220,19 @@ button {
     position: relative;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background: url("../images/img/slider1.jpeg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+}
+
+.wrapper {
+    width: inherit;
+    height: 190px;
+    position: absolute;
+}
+
+.wrapper img {
+    height: 100%;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .profile-img img {
@@ -2165,7 +2257,7 @@ button {
     height: 38px;
     color: #fff;
     position: absolute;
-    left: 125px;
+    left: 140px;
     top: 140%;
     z-index: 5;
     display: flex !important;
@@ -3205,6 +3297,10 @@ button {
 }
 
 @media screen and (max-width: 800px) {
+    .slider-text {
+        width: 80%;
+    }
+
     .appeal-title {
         margin-bottom: 1rem !important;
     }

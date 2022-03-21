@@ -17,6 +17,8 @@ const closeAppealsModal = document.querySelector(".close-appeals-modal");
 
 const navbarLangIcon = document.querySelector(".navbar-language-item");
 const languagesList = document.querySelector(".language-list");
+const mobileLanguageTitle = document.querySelector(".mobile-language-title");
+const mobileLanguagesList = document.querySelector(".mobile-languages-list");
 
 const filterUsersIcon = document.querySelector(".filter-users-wrapper");
 const filtersList = document.querySelector(".filters-list");
@@ -206,5 +208,12 @@ function toggleMenu() {
 if (userNavbarArrow) {
     userNavbarArrow.addEventListener("click", () => {
         userNavbarList.classList.toggle("show-user-navbar-list");
+    });
+}
+
+if (mobileLanguageTitle) {
+    mobileLanguageTitle.addEventListener("click", () => {
+        console.log("aaa");
+        mobileLanguagesList.classList.toggle("show-mobile-languages-list");
     });
 }

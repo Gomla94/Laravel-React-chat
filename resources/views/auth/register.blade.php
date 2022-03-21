@@ -143,7 +143,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="name">Name</label>
+                            <label for="name">First Name</label>
                             <input
                               type="text"
                               class="login-email-input"
@@ -153,17 +153,18 @@
                             @error('name')
                                 <span class="auth-error-message">{{ $message }}</span>
                             @enderror
+                            
                           </div>
     
                           <div class="form-group col-md-6">
-                            <label for="email">Phone Number</label>
+                            <label for="last_name">Last Name</label>
                             <input
                               type="text"
                               class="login-email-input"
-                              name="phone_number"
-                              placeholder="phone number"
+                              name="last_name"
+                              placeholder="last name"
                             />
-                            @error('phone_number')
+                            @error('last_name')
                                 <span class="auth-error-message">{{ $message }}</span>
                             @enderror
                           </div>

@@ -17,8 +17,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=18')}}" />
-    <script src="{{asset('js/newest-index.js')}}" defer></script>
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=19')}}" />
+    <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
     <title>@yield('title')</title>
   </head>
   <body>
@@ -104,10 +104,33 @@
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
-            <span rel="preconnect" href="">Eng</span>
-            <span rel="preconnect" href="">Language</span>
+            @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+              <span>ARM</span>
+            @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+              <span>ENG</span>
+            @else
+              <span>RUS</span>
+            @endif
+            <span rel="preconnect" class="mobile-language-title" href="">Language</span>
             <i class="fa-solid fa-angle-right"></i>
           </li>
+          <div class="mobile-languages-list">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+              @if($localeCode == 'en')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ENG</a>
+              </div>
+              @elseif($localeCode == 'ru')
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">RUS</a>
+              </div>
+              @else
+              <div class="language-item-wrapper">
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ARM</a>
+              </div>
+              @endif
+            @endforeach
+          </div>
           <li class="overlay-list-item">
             <i class="fa-regular fa-comment"></i><span>Chat</span>
           </li>
