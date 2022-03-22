@@ -512,7 +512,7 @@ body {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 22%;
+    width: 20%;
     position: absolute;
     top: 25px;
     right: 20%;
@@ -522,7 +522,7 @@ body {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 22%;
+    width: 20%;
     position: absolute;
     top: 25px;
     left: 20%;
@@ -3465,6 +3465,14 @@ button {
         top: 40% !important;
         left: 45% !important;
     }
+
+    .main-appeals-title-wrapper::after {
+        right: 6%;
+    }
+
+    .main-appeals-title-wrapper::before {
+        left: 6%;
+    }
 }
 
 @media screen and (max-width: 580px) {
@@ -3633,6 +3641,16 @@ button {
         width: 180px;
         right: 185px;
     }
+
+    .main-appeals-title-wrapper::after {
+        right: 1%;
+        width: 70px;
+    }
+
+    .main-appeals-title-wrapper::before {
+        left: 1%;
+        width: 70px;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -3671,13 +3689,13 @@ button {
 
 @media screen and (max-width: 400px) {
     .main-appeals-title-wrapper::after {
-        right: 3%;
-        width: 20%;
+        right: 1%;
+        width: 50px;
     }
 
     .main-appeals-title-wrapper::before {
-        left: 3%;
-        width: 20%;
+        left: 1%;
+        width: 50px;
     }
 }
 
