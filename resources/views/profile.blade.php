@@ -345,7 +345,7 @@ Magaxat | Profile
                   </div>
                 </div>
                 <p class="post-title">
-                  {{ $post->appeal }}
+                  {{ $appeal->title }}
                 </p>
                 @if($appeal->image_path)
                 <div class="post-image-wrapper">
