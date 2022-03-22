@@ -2510,7 +2510,7 @@ button {
     color: white;
     /* background-color: red; */
     border-radius: 10px;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.7rem;
 }
 
 .active-nav {
@@ -2579,7 +2579,7 @@ button {
     }
 
     .nav ul li {
-        padding: 0.5rem 0.7rem;
+        padding: 0.5rem 1.5rem;
     }
 
     .profile-create-posts-wrapper,
@@ -2594,7 +2594,7 @@ button {
     }
 
     .nav ul li {
-        padding: 0.5rem 0.5rem;
+        padding: 0.5rem 1rem;
     }
 
     .profile-image-label {
