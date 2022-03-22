@@ -72,12 +72,12 @@ class FrontController extends Controller
                         ->linkedin()
                         ->getRawLinks();
 
-        
+        // dd($user_country);
         return view('layouts.front.welcome', [
             'random_appeals' => $random_appeals,
             'random_posts' => $random_posts,
             'countries' => $countries,
-            'user_country' => $user_country,
+            'user_country' => $user_country ?? null,
             'share_links' => $share_links
         ]);
     }

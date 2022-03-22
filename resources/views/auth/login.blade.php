@@ -32,10 +32,10 @@
               placeholder="Password"
             />
           </div>
-          <a class="forget-password-link" href="{{ route('password.request') }}">Forget your password?</a>
-          <button class="login-button" type="submit">Login</button>
+          <a class="forget-password-link" href="{{ route('password.request') }}">{{ __('translations.forgot-password') }}</a>
+          <button class="login-button" type="submit">{{ __('translations.login') }}</button>
           <p>or</p>
-          <a href="{{ route('register') }}" class="login-goto-sign-in">Sign in</a>
+          <a href="{{ route('register') }}" class="login-goto-sign-in">{{ __('translations.signin') }}</a>
         </form>
       </div>
     </div>

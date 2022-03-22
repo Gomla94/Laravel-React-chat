@@ -47,7 +47,7 @@ Magaxat | Appeal
               <div class="appeal-pdf-downloader">
                 <i class="fa-solid fa-cloud-arrow-down"></i>
                 <a href="{{ $appeal->pdf_path }}" download="{{ $appeal->pdf_path }}">
-                  Download Document
+                  {{ __('translations.download_document') }}
                 </a>
               </div>
             </div>
@@ -126,10 +126,9 @@ Magaxat | Appeal
         <div class="main-appeal-help-section">
           <div class="main-appeal-help-section-one">
             <div class="main-appeal-help-text-id">
-              <p class="main-appeal-help-title">How Can I Help?</p>
+              <p class="main-appeal-help-title">{{ __('translations.how_can_i_help') }}</p>
               <p class="main-appeal-help-description">
-                To help Anastasia, you can sendyour desired amount to the
-                Magaxat account, marking the recipient ID
+                {{ __('translations.to_help') }}
               </p>
               <div class="main-appeal-help-id-container">
                 <div class="main-appeal-help-id">
@@ -142,21 +141,21 @@ Magaxat | Appeal
             </div>
           </div>
           <div class="main-appeal-help-section-two">
-            <p class="make">Make</p>
+            <p class="make">{{ __('translations.make') }}</p>
             <div class="main-appeal-want-to-help">
               <div class="main-appeal-help-buttons-wrapper">
                 <a href="" class="online-transfer-btn">
                   <img src="{{asset('images/img/signals.png')}}" alt="online-transfer" />
-                  <span>Online Transfer</span>
+                  <span>{{ __('translations.online_transfer') }}</span>
                 </a>
                 <a href="" class="bank-transfer-btn">
                   <img src="{{asset('images/img/Vector (1).png')}}" alt="bank-transfer" />
-                  <span>Bank Transfer</span>
+                  <span>{{ __('translations.bank_transfer') }}</span>
                 </a>
                 @if($appeal->pdf_path)
                 <a href="{{ $appeal->pdf_path }}" download="{{ $appeal->pdf_path }}" class="mobile-down-icon">
                   <i class="fa-solid fa-cloud-arrow-down"></i>
-                  Download Document
+                  {{ __('translations.download_document') }}
                 </a>
                 @endif
               </div>

@@ -37,6 +37,13 @@
         "videos" => "Videos",
         "subscribtions" => "Subscribtions",
         "subscribers" => "Subscribers",
+        "view" => "View",
+        "change" => "Change",
+        "first_name" => "First Name",
+        "last_name" => "Last Name",
+        "phone_number" => "Phone Number",
+        "change" => "Change",
+        "chat" => "Chat",
 
         "individual" => "Individual",
         "organisation" => "Organisation",

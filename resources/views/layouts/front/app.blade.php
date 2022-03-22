@@ -25,7 +25,7 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=29')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=30')}}" />
 
     @yield('styles')
     <script src="{{asset('js/newest-index.js?version=3')}}" defer></script>
@@ -61,19 +61,19 @@
           </div>
           
           <div class="navbar-links-wrapper">
-          <ul class="navbar-links-list">
-            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">User Videos</a></li>
-            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-users' ? 'navbar-active-item' : '' }}" href="{{ route('all-users') }}">Users</a></li>
-            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-appeals' ? 'navbar-active-item' : '' }}" href="{{ route('all-appeals') }}">Benefactor Fonds</a></li>
-            <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-benefactors' ? 'navbar-active-item' : '' }}" href="{{ route('all-benefactors') }}">Benefactors</a></li>
-          </ul>
+            <ul class="navbar-links-list">
+              <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">{{ __('translations.users_video') }}</a></li>
+              <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-users' ? 'navbar-active-item' : '' }}" href="{{ route('all-users') }}">{{ __('translations.users') }}</a></li>
+              <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-appeals' ? 'navbar-active-item' : '' }}" href="{{ route('all-appeals') }}">{{ __('translations.benefac_fond') }}</a></li>
+              <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-benefactors' ? 'navbar-active-item' : '' }}" href="{{ route('all-benefactors') }}">{{ __('translations.benefac') }}</a></li>
+            </ul>
         </div>
         </div>
         
         <div class="navbar-user-section-wrapper">
           @if(Auth::check())
           <div class="navbar-chat-icon">
-            <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
+            <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">{{ __('translations.chat') }}</a></span>
           </div>
           <div class="navbar-user-list">
             <div class="navbar-user-image-wrapper">
@@ -89,13 +89,13 @@
           <div class="user-adds-list">
             <form action="{{ route('logout') }}" method="POST">
               @csrf  
-              <button type="submit">Logout</button>
+              <button type="submit">{{ __('translations.log_out') }}</button>
             </form>
           </div>
           @else
           <div class="login-navbar-user">
             <span class="navbar-user-login">
-              <a href="{{ route('login') }}">Login</a>
+              <a href="{{ route('login') }}">{{ __('translations.log_in') }}</a>
             </span>
           </div>
           @endif
@@ -136,22 +136,22 @@
         <ul class="overlay-list">
           <li class="overlay-list-item">
             <img src="{{asset('images/img/video-clips.png')}}" alt="" />
-            <a rel="preconnect" href="{{ route('all-videos') }}">User Videos</a>
+            <a rel="preconnect" href="{{ route('all-videos') }}">{{ __('translations.users_video') }}</a>
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
             <img src="{{asset('images/img/users.png')}}" alt="" />
-            <a rel="preconnect" href="{{ route('all-users') }}">Users</a>
+            <a rel="preconnect" href="{{ route('all-users') }}">{{ __('translations.users') }}</a>
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
             <img src="{{asset('images/img/benefactor-fonds.png')}}" alt="" />
-            <a rel="preconnect" href="{{ route('all-appeals') }}">Benefactor Fonds</a>
+            <a rel="preconnect" href="{{ route('all-appeals') }}">{{ __('translations.benefac_fond') }}</a>
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
             <img src="{{asset('images/img/benefactor.png')}}" alt="" />
-            <a rel="preconnect" href="{{ route('all-benefactors') }}">Benefactors</a>
+            <a rel="preconnect" href="{{ route('all-benefactors') }}">{{ __('translations.benefac') }}</a>
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <li class="overlay-list-item">
@@ -162,7 +162,7 @@
             @else
               <span>RUS</span>
             @endif
-            <span rel="preconnect" class="mobile-language-title" href="">Language</span>
+            <span rel="preconnect" class="mobile-language-title" href="">{{ __('translations.language') }}</span>
             <i class="fa-solid fa-angle-right"></i>
           </li>
           <div class="mobile-languages-list">
@@ -182,9 +182,19 @@
               @endif
             @endforeach
           </div>
-          <li class="overlay-list-item">
-            <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">Chat</a></span>
-          </li>
+          @if(Auth::check())
+            <li class="overlay-list-item">
+              <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">{{ __('translations.chat') }}</a></span>
+            </li>
+          @endif
+          @if(Auth::check())
+            <li class="overlay-list-item">
+              <form action="{{ route('logout') }}" method="POST">
+              @csrf  
+              <button type="submit" class="mobile-logut-button">{{ __('translations.log_out') }}</button>
+            </form>
+            </li>
+          @endif
         </ul>
       </div>
       

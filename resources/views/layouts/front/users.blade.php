@@ -15,7 +15,7 @@ Magaxat | Users
           <input
             type="text"
             class="users-search-input"
-            placeholder="Search"
+            placeholder="{{ __('translations.search') }}"
           />
           <i class="fas fa-search search-users-icon"></i>
         </div>
@@ -29,7 +29,7 @@ Magaxat | Users
     <div class="users-filter-selects">
       <div class="filter-interest-select select-filter">
         <div class="select-inside">
-          <span>Interests</span>
+          <span>{{ __('translations.interest') }}</span>
           <i class="fa-solid fa-angle-down"></i>
         </div>
         <div class="select-sub rm-select">
@@ -50,7 +50,7 @@ Magaxat | Users
       
       <div class="filter-gender-select select-filter">
         <div class="select-inside">
-          <span>Gender</span>
+          <span>{{ __('translations.gender') }}</span>
           <i class="fa-solid fa-angle-down"></i>
         </div>
         <div class="select-sub rm-select">
@@ -62,7 +62,7 @@ Magaxat | Users
                   <label for="male" class="sub-select-check"></label>
                 </div>  
             </div>
-            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}">Male</a>
+            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'male'])) }}">{{ __('translations.male') }}</a>
           </div>
           <div class="sub-select-item">
             <div class="area-check">
@@ -72,13 +72,13 @@ Magaxat | Users
                   <label for="female" class="sub-select-check"></label>
                 </div>  
             </div>
-            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}">Female</a>
+            <a class="anchor" href="{{ route('all-users', array_merge(request()->query(), ['gender' => 'female'])) }}">{{ __('translations.female') }}</a>
           </div>
         </div>
       </div>
       <div class="filter-interest-select select-filter">
         <div class="select-inside">
-          <span>Country</span>
+          <span>{{ __('translations.country') }}</span>
           <i class="fa-solid fa-angle-down"></i>
         </div>
         <div class="select-sub rm-select">

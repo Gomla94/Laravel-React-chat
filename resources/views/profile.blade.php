@@ -32,7 +32,7 @@ Magaxat | Profile
                   name=""
                   id="profile-image-input"
                 />
-                <span>Change</span>
+                <span>{{ __('translations.change') }}</span>
               </label>
             </div>
           @endif
@@ -59,33 +59,33 @@ Magaxat | Profile
             <ul>
               @if(Auth::id() === $user->id)
               <li onclick="tabs(0)" class="profile-item user-settings">
-                Settings
+                {{ __('translations.settings') }}
               </li>
               @endif
               <li onclick="tabs(1)" class="profile-item user-review">
-                Posts
+                {{ __('translations.posts') }}
               </li>
               <li onclick="tabs(2)" class="profile-item user-appeals">
-                Appeals
+                {{ __('translations.appeals') }}
               </li>
               <li onclick="tabs(3)" class="profile-item user-images">
-                Images
+                {{ __('translations.images') }}
               </li>
               <li onclick="tabs(4)" class="profile-item user-appeals">
-                Videos
+                {{ __('translations.videos') }}
               </li>
               <li onclick="tabs(5)" class="profile-item user-subscribers">
-                Subscribers
+                {{ __('translations.subscribers') }}
               </li>
               <li onclick="tabs(6)" class="profile-item user-subscribtions">
-                Subscribtions
+                {{ __('translations.subscribtions') }}
               </li>
             </ul>
           </div>
           <div class="profile-body">
             @if(Auth::id() === $user->id)
               <div class="profile-settings tab">
-                <h1>Settings</h1>
+                <h1>{{ __('translations.settings') }}</h1>
                 
                 <div class="profile-main-settings">
                 <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form">
@@ -95,23 +95,23 @@ Magaxat | Profile
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="first_name">First Name</label>
+                          <label for="first_name">{{ __('translations.first_name') }}</label>
                         </div>
-                        <input class="form-control profile-input" type="text" name="name" placeholder="first name" value="{{ $user->name }}">
+                        <input class="form-control profile-input" type="text" name="name" placeholder="{{ __('translations.first_name') }}" value="{{ $user->name }}">
                       </div>
                     </div>
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="email">Email</label>
+                          <label for="email">{{ __('translations.email') }}</label>
                         </div>
-                        <input class="form-control profile-input" id="email" type="text" name="email" placeholder="email" value="{{ $user->email }}">
+                        <input class="form-control profile-input" id="email" type="text" name="email" placeholder="{{ __('translations.email') }}" value="{{ $user->email }}">
                       </div>
                     </div>
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="date_of_birth">Date Of Birth</label>
+                          <label for="date_of_birth">{{ __('translations.date_of_birth') }}</label>
                         </div>
                         <input class="form-control profile-input" id="date_of_birth" type="date" name="date_of_birth" value="{{ optional($user->date_of_birth)->format('Y-m-d') }}">
                       </div>
@@ -119,7 +119,7 @@ Magaxat | Profile
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="country">Country</label>  
+                          <label for="country">{{ __('translations.country') }}</label>  
                         </div>
                         <select class="form-control profile-input" name="country_id" id="country">
                           @foreach ($countries as $country)
@@ -133,7 +133,7 @@ Magaxat | Profile
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="last_name">Last Name</label>
+                          <label for="last_name">{{ __('translations.last_name') }}</label>
                         </div>
                         <input class="form-control profile-input" id="last_name" type="text" name="last_name" placeholder="last name" value="{{ $user->last_name }}">
                       </div>
@@ -141,30 +141,30 @@ Magaxat | Profile
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="phone_number">Phone Number</label>
+                          <label for="phone_number">{{ __('translations.phone_number') }}</label>
                         </div>
-                        <input class="form-control profile-input" id="phone_number" type="text" name="phone_number" placeholder="phone number" value="{{ $user->phone_number }}">
+                        <input class="form-control profile-input" id="phone_number" type="text" name="phone_number" placeholder="{{ __('translations.phone_number') }}" value="{{ $user->phone_number }}">
                       </div>
                     </div>
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="gender">Gender</label>
+                          <label for="gender">{{ __('translations.gender') }}</label>
                         </div>
                         <select name="gender profile-input" id="gender" class="form-control">
-                          <option value="male" {{ $user->gender === 'male' ? 'selected' : ''}}>Male</option>
-                          <option value="female" {{ $user->gender === 'female' ? 'selected' : ''}}>Female</option>
+                          <option value="male" {{ $user->gender === 'male' ? 'selected' : ''}}>{{ __('translations.male') }}</option>
+                          <option value="female" {{ $user->gender === 'female' ? 'selected' : ''}}>{{ __('translations.female') }}</option>
                         </select>
                       </div>
                     </div>
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="additional_type">Additional Type</label>
+                          <label for="additional_type">{{ __('translations.add_types') }}</label>
                         </div>
                         <select class="form-control profile-input" name="additional_type" id="additional_type">
-                            <option value="individual">Individual</option>
-                            <option value="organisation">Organisation</option>
+                            <option value="individual">{{ __('translations.individual') }}</option>
+                            <option value="organisation">{{ __('translations.organisation') }}</option>
                         </select>
                       </div>
                     </div>
@@ -173,7 +173,7 @@ Magaxat | Profile
                     <div class="col-md-12">
                       <div class="">
                         <div>
-                          <label for="area_of_interest">Area Of Interesting</label>
+                          <label for="area_of_interest">{{ __('translations.interest_area') }}</label>
                         </div>
                         <div class="profile-areas">
                           @foreach($areas_of_interesting as $area)
@@ -201,19 +201,19 @@ Magaxat | Profile
                     </div>
                   </div>
 
-                  <button class="update-profile-button" type="submit">Update</button>
+                  <button class="update-profile-button" type="submit">{{ __('translations.update') }}</button>
                 </form>
                 </div>
               </div>
             @endif
             <div class="profile-posts tab">
-              <h1>Posts</h1>
+              <h1>{{ __('translations.posts') }}</h1>
               @if(Auth::id() === $user->id)
                 <div class="profile-create-posts-wrapper">
                   <div class="profile-create-posts-icon-wrapper">
                     <i class="fa-solid fa-plus profile-add-post-button"></i>
                   </div>
-                  <p>Creat a Post</p>
+                  <p>{{ __('translations.create_post') }}</p>
                 </div>
               @endif
               @foreach($my_posts as $post)
@@ -305,7 +305,7 @@ Magaxat | Profile
                       <span class="comment-error-span"></span>
                     </div>
                     <button type="button" class="main-post-add-comment-btn">
-                      Add comment
+                      {{ __('translations.add_comment') }}
                     </button>
                   </form>
                   @endif
@@ -324,7 +324,7 @@ Magaxat | Profile
                   <div class="profile-create-posts-icon-wrapper">
                     <i class="fa-solid fa-plus profile-add-appeal-button"></i>
                   </div>
-                  <p>Creat Appeal</p>
+                  <p>{{ __('translations.create_appeal') }}</p>
                 </div>
               @endif
               @foreach($my_appeals as $appeal)
@@ -438,7 +438,7 @@ Magaxat | Profile
               @endforeach
             </div>
             <div class="profile-subscribers tab">
-              <h1>Subscribers</h1>
+              <h1>{{ __('translations.subscribers') }}</h1>
               <div class="users-wrapper">
                 <div class="profile-users-container">
                   @foreach($my_subscribers_users as $user)
@@ -469,7 +469,7 @@ Magaxat | Profile
                               <form action="{{ route('subscribe', $user->unique_id) }}" method="POST">
                                 @csrf
                                 <button class="main-video-user-subscribed-link">
-                                  Subscribe
+                                  {{ __('translations.subscribe') }}
                                 </button>
                               </form>
                             </div>
@@ -507,7 +507,7 @@ Magaxat | Profile
                             <form action="{{ route('unsubscribe', $user->unique_id) }}" method="POST">
                               @csrf
                               <button class="main-video-user-subscribed-link">
-                                <i class="fas fa-check"></i> Subscribed
+                                <i class="fas fa-check"></i> {{ __('translations.subscribed') }}
                               </button>
                             </form>
                           </div>
@@ -551,12 +551,12 @@ Magaxat | Profile
     >
     @csrf
       <div class="form-group">
-        <label class="create-post-label" for="title">Title</label>
+        <label class="create-post-label" for="title">{{ __('translations.title') }}</label>
         <input
           type="text"
           class="form-control"
           name="post_title"
-          placeholder="Title"
+          placeholder="{{ __('translations.title') }}"
         />
         @error('post_title')
           <span style="color: red">{{$message}}</span>
@@ -565,7 +565,7 @@ Magaxat | Profile
 
       <div class="form-group">
         <label class="create-post-label" for="post_description"
-          >Description</label
+          >{{ __('translations.description') }}</label
         >
         <textarea
           name="post_description"
@@ -581,15 +581,15 @@ Magaxat | Profile
 
       <div class="form-group post-modal-media-container">
         <div class="post-modal-media">
-          <label class="create-post-label image-label">Type of media</label>
+          <label class="create-post-label image-label">{{ __('translations.type_of_media') }}/label>
           <select name="media_type" class="form-control media-type">
-            <option value="image">image</option>
-            <option value="video">video</option>
+            <option value="image">{{ __('translations.image') }}</option>
+            <option value="video">{{ __('translations.video') }}</option>
           </select>
         </div>
         <div class="post-modal-media-type">
           <label class="create-post-label" for="image"
-            >Choose your file</label
+            >{{ __('translations.choose_your_file') }}</label
           >
           <label class="media-label">
             <input
@@ -598,7 +598,7 @@ Magaxat | Profile
               class="media-input"
               name="post_image"
             />
-            <span>Choose File</span>
+            <span>{{ __('translations.choose_your_file') }}</span>
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('post_image')
@@ -611,9 +611,11 @@ Magaxat | Profile
       </div>
 
       <div class="form-group post-modal-image-container">
-        <label class="create-post-label" for="countries">country</label>
+        <label class="create-post-label" for="countries">{{ __('translations.country') }}</label>
         <select name="country" class="form-control" id="country">
-          <option value="">country</option>
+          @foreach($countries as $country)
+            <option value="{{ $country->id }}">{{ $country->name }}</option>
+          @endforeach
         </select>
         @error('post_country')
           <span style="color: red">{{$message}}</span>
@@ -621,7 +623,7 @@ Magaxat | Profile
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">
-        create post
+        {{ __('translations.create_post') }}
       </button>
     </form>
   </div>
@@ -640,12 +642,12 @@ Magaxat | Profile
     >
     @csrf
       <div class="form-group">
-        <label class="create-appeal-label" for="title">Title</label>
+        <label class="create-appeal-label" for="title">{{ __('translations.title') }}</label>
         <input
           type="text"
           class="form-control"
           name="appeal_title"
-          placeholder="Title"
+          placeholder="{{ __('translations.title') }}"
         />
         @error('appeal_title')
           <span style="color: red">{{$message}}</span>
@@ -654,7 +656,7 @@ Magaxat | Profile
 
       <div class="form-group">
         <label class="create-post-label" for="appeal_description"
-          >Description</label
+          >{{ __('translations.description') }}</label
         >
         <textarea
           name="appeal_description"
@@ -671,7 +673,7 @@ Magaxat | Profile
       <div class="form-group post-modal-media-container">
         <div class="post-modal-media-type">
           <label class="create-post-label" for="image"
-            >Choose Image</label
+            >{{ __('translations.image') }}</label
           >
           <label class="media-label appeals-modal-image">
             <input
@@ -681,7 +683,7 @@ Magaxat | Profile
               name="appeal_image[]"
               multiple
             />
-            <span>Choose Image</span>
+            <span>{{ __('translations.image') }}</span>
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('appeal_image')
@@ -690,7 +692,7 @@ Magaxat | Profile
         </div>
         <div class="post-modal-media-type">
           <label class="create-post-label" for="image"
-            >Choose Video</label
+            >{{ __('translations.video') }}</label
           >
           <label class="media-label">
             <input
@@ -699,7 +701,7 @@ Magaxat | Profile
               class="media-input"
               name="appeal_video"
             />
-            <span>Choose File</span>
+            <span>{{ __('translations.video') }}</span>
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('appeal_video')
@@ -709,7 +711,7 @@ Magaxat | Profile
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">
-        create appeal
+        {{ __('translations.create_appeal') }}
       </button>
     </form>
   </div>

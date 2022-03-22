@@ -12,7 +12,7 @@
             <input
               type="text"
               class="benefactors-search-input"
-              placeholder="Search"
+              placeholder="{{ __('translations.search') }}"
             />
             <i class="fas fa-search"></i>
           </div>

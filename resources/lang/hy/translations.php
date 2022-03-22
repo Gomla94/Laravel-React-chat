@@ -38,6 +38,9 @@ return [
     "appeals" => "Դիմումներ",
     "subscribtions" => "Հետևում եմ",
     "subscribers" => "Հետևորդներ",
+    "view" => "View",
+    "change" => "Change",
+
 
     "individual" => "Անձնական",
     "organisation" => "Կազմակերպություն",

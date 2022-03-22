@@ -6,7 +6,7 @@
 
 <div class="appeals-section">
   <div class="main-appeals-title-wrapper">
-    <p class="main-appeals-title">Who need help now</p>
+    <p class="main-appeals-title">{{ __('translations.need_help_now') }}</p>
   </div>
   <div class="swiper appealsSwiper">
     <div class="swiper-wrapper home-appeals-wrapper">
@@ -21,7 +21,7 @@
               {{ str_limit($appeal->description, 100) }}
             </p>
           </div>
-          <a href="{{ route('show-appeal', $appeal->uniqueid) }}" class="appeal-slide-link">See more</a>
+          <a href="{{ route('show-appeal', $appeal->uniqueid) }}" class="appeal-slide-link">{{ __('translations.want_help') }}</a>
         </div>
       @endforeach
     </div>
@@ -32,7 +32,7 @@
 
 <div class="main-posts-wrapper">
   <div class="main-posts-title-wrapper">
-    <p class="main-posts-title">News line</p>
+    <p class="main-posts-title">{{ __('translations.news') }}</p>
   </div>
   <div class="container">
     <div class="main-posts-buttons-wrapper">
@@ -43,17 +43,17 @@
           <input
             type="text"
             name="search-key"
-            placeholder="Search"
+            placeholder="{{ __('translations.search') }}"
             class="main-posts-search-input"
           />
-          <button class="search-button">Search</button>
+          <button class="search-button">{{ __('translations.search') }}</button>
         </form>
       </div>
       <div class="main-posts-add-buttons">
-        <button class="main-posts-add-appeal-button">Request for help</button>
+        <button class="main-posts-add-appeal-button">{{ __('translations.help_request') }}</button>
         <button class="main-posts-add-post-button">
           <i class="fal fa-plus new-post-icon"></i>
-          New post
+          {{ __('translations.new_post') }}
         </button>
       </div>
     </div>
@@ -150,7 +150,7 @@
                     <span class="comment-error-span"></span>
                   </div>
                   <button type="button" class="main-post-add-comment-btn">
-                    Add comment
+                    {{ __('translations.add_comment') }}
                   </button>
                 </form>
                 @endif
@@ -180,12 +180,12 @@
     >
     @csrf
       <div class="form-group">
-        <label class="create-post-label" for="title">Title</label>
+        <label class="create-post-label" for="title">{{ __('translations.title') }}</label>
         <input
           type="text"
           class="form-control"
           name="post_title"
-          placeholder="Title"
+          placeholder="{{ __('translations.title') }}"
         />
         @error('post_title')
           <span style="color: red">{{$message}}</span>
@@ -194,7 +194,7 @@
 
       <div class="form-group">
         <label class="create-post-label" for="post_description"
-          >Description</label
+          >{{ __('translations.description') }}</label
         >
         <textarea
           name="post_description"
@@ -210,15 +210,15 @@
 
       <div class="form-group post-modal-media-container">
         <div class="post-modal-media">
-          <label class="create-post-label image-label">Type of media</label>
+          <label class="create-post-label image-label">{{ __('translations.type_of_media') }}</label>
           <select name="media_type" class="form-control media-type">
-            <option value="image">image</option>
-            <option value="video">video</option>
+            <option value="image">{{ __('translations.image') }}</option>
+            <option value="video">{{ __('translations.video') }}</option>
           </select>
         </div>
         <div class="post-modal-media-type">
           <label class="create-post-label" for="image"
-            >Choose your file</label
+            >{{ __('translations.choose_your_file') }}</label
           >
           <label class="media-label">
             <input
@@ -227,7 +227,7 @@
               class="media-input"
               name="post_image"
             />
-            <span>Choose File</span>
+            <span>{{ __('translations.choose_your_file') }}</span>
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('post_image')
@@ -240,9 +240,11 @@
       </div>
 
       <div class="form-group post-modal-image-container">
-        <label class="create-post-label" for="countries">country</label>
+        <label class="create-post-label" for="countries">{{ __('translations.country') }}</label>
         <select name="country" class="form-control" id="country">
-          <option value="">country</option>
+          @foreach($countries as $country)
+            <option value="{{ $country->id }}">{{ $country }}</option>
+          @endforeach
         </select>
         @error('post_country')
           <span style="color: red">{{$message}}</span>
@@ -250,7 +252,7 @@
       </div>
 
       <button type="submit" class="btn btn-primary create-post-modal-btn">
-        create post
+        {{ __('translations.create_post') }}
       </button>
     </form>
   </div>
@@ -269,7 +271,7 @@
     >
     @csrf
       <div class="form-group">
-        <label class="create-appeal-label" for="title">Title</label>
+        <label class="create-appeal-label" for="title">{{ __('translations.title') }}</label>
         <input
           type="text"
           class="form-control"
@@ -283,7 +285,7 @@
 
       <div class="form-group">
         <label class="create-post-label" for="appeal_description"
-          >Description</label
+          >{{ __('translations.description') }}</label
         >
         <textarea
           name="appeal_description"
@@ -300,7 +302,7 @@
       <div class="form-group post-modal-media-container">
         <div class="post-modal-media-type">
           <label class="create-post-label" for="image"
-            >Choose Image</label
+            >{{ __('translations.image') }}</label
           >
           <label class="media-label appeals-modal-image">
             <input
@@ -310,7 +312,7 @@
               name="appeal_image[]"
               multiple
             />
-            <span>Choose Image</span>
+            <span>{{ __('translations.image') }}</span>
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('appeal_image')
@@ -319,7 +321,7 @@
         </div>
         <div class="post-modal-media-type">
           <label class="create-post-label" for="image"
-            >Choose Video</label
+            >{{ __('translations.video') }}</label
           >
           <label class="media-label">
             <input
@@ -328,7 +330,7 @@
               class="media-input"
               name="appeal_video"
             />
-            <span>Choose File</span>
+            <span>{{ __('translations.choose_your_file') }}</span>
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('appeal_video')
@@ -338,7 +340,7 @@
       </div>
       
       <button type="submit" class="btn btn-primary create-post-modal-btn">
-        create appeal
+        {{ __('translations.create_appeal') }}
       </button>
     </form>
   </div>

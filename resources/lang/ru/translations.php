@@ -38,6 +38,10 @@ return [
     "appeals" => "Обращение",
     "subscribtions" => "Подписки",
     "subscribers" => "Подписчики",
+    "view" => "View",
+    "change" => "Change",
+
+
 
     "individual" => "личное",
     "organisation" => "организация",

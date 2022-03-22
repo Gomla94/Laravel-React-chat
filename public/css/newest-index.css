@@ -372,6 +372,10 @@ body {
     margin-bottom: 10px;
 }
 
+.mobile-logut-button {
+    width: fit-content !important;
+}
+
 .mobile-languages-list div {
     padding: 1rem 0;
 }
@@ -553,7 +557,7 @@ body {
     width: 100%;
     min-height: 100%;
     max-height: 100%;
-    border-radius: 50px !important;
+    border-radius: 25px !important;
 }
 
 .appeal-slider-info-wrapper {
@@ -2702,7 +2706,7 @@ button {
     }
 
     .nav ul li {
-        padding: 1rem 1.5rem;
+        padding: 1rem 1rem;
     }
 
     .active-nav {
@@ -2820,13 +2824,13 @@ button {
         grid-template-columns: 1fr 1fr;
     }
 
-    .nav ul li {
-        padding: 1rem 0;
-    }
-
     .profile-image-label {
         left: 44%;
         top: 120%;
+    }
+
+    .nav ul li {
+        padding: 1rem 1rem;
     }
 }
 
@@ -2923,7 +2927,7 @@ button {
     }
 
     .navbar-logo-wrapper {
-        width: 170px;
+        width: unset !important;
         height: 60px;
     }
 
