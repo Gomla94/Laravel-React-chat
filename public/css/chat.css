@@ -345,7 +345,7 @@ body {
 
     .active-chat-wrapper {
         /* display: none; */
-        flex: unset !important;
+        flex: 2;
     }
 
     .sent-message-wrapper,
