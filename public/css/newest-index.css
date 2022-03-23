@@ -2278,7 +2278,12 @@ button {
 }
 
 .profile-image-label i {
-    color: #fff;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.profile-image-label span {
+    margin-bottom: 40px;
 }
 
 .profile-image-input {
