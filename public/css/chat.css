@@ -22,6 +22,7 @@ body {
     display: flex;
     flex-direction: row;
     position: relative;
+    overflow-x: hidden;
 }
 
 .chat-users-list-wrapper {
