@@ -17,7 +17,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=42')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=43')}}" />
     <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
     <title>@yield('title')</title>
   </head>

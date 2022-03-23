@@ -2770,11 +2770,6 @@ button {
         grid-template-columns: 1fr 1fr 1fr;
     }
 
-    .profile-image-label {
-        left: 44%;
-        top: 115%;
-    }
-
     .profile-post-user-names-wrapper {
         text-align: left;
     }
@@ -2805,7 +2800,7 @@ button {
 
 @media screen and (max-width: 480px) {
     .profile-image-label {
-        left: 44%;
+        left: 42%;
         top: 120%;
     }
 }
@@ -2847,11 +2842,6 @@ button {
 
     .nav ul {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .profile-image-label {
-        left: 44%;
-        top: 120%;
     }
 
     .nav ul li {
