@@ -19,7 +19,16 @@ Magaxat | Profile
           <img src="{{ asset('images/img/slider1.jpeg') }}" alt="">
         </div>
         <div class="profile-img">
-          @if(Auth::id() === $user->id)
+          <img class="profile-image" src="{{ $user->image ?? asset('images/avatar.png') }}" width="200" alt="Profile Image" />
+          <div id="upload-input" style="width:350px; height: 400px;"></div>
+        </div>
+      </div>
+
+      <div class="main-bd">
+        <div class="left-side">
+          <div class="profile-side">
+            @if(Auth::id() === $user->id)
+            <div class="profile-image-change-wrapper">
                 <label for="profile-image-input" class="profile-image-label">
                   <i class="fa-solid fa-camera"></i>
                   <input
@@ -30,16 +39,8 @@ Magaxat | Profile
                   />
                   <span>{{ __('translations.change') }}</span>
                 </label>
+              </div>
             @endif
-          <img class="profile-image" src="{{ $user->image ?? asset('images/avatar.png') }}" width="200" alt="Profile Image" />
-          <div id="upload-input" style="width:350px; height: 400px;"></div>
-        </div>
-      </div>
-
-      <div class="main-bd">
-        <div class="left-side">
-          <div class="profile-side">
-            
             <p class="profile-user-name">{{ $user->name }}</p>
             <div class="profile-icons">
               <p class="profile-icon-wrapper">

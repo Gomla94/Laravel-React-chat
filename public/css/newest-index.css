@@ -2265,18 +2265,16 @@ button {
     color: #fff;
 }
 
+.profile-image-change-wrapper {
+    position: sticky;
+    z-index: 100;
+    margin-right: 20px;
+    margin-top: -25px !important;
+}
+
 .profile-image-label {
     color: #fff;
-    position: absolute;
-    height: 40px;
-    z-index: 100;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-    left: 10px;
-    top: 270px;
+    width: 50px;
 }
 
 .profile-image-label i {
@@ -2411,7 +2409,7 @@ button {
     color: rgb(29, 29, 29);
     font-size: 1.5rem;
     font-weight: 600;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .profile-side p {
@@ -2607,10 +2605,18 @@ button {
         padding: 0.5rem 1rem;
     }
 
-    .profile-image-label {
-        left: 12%;
-        /* top: 85%; */
+    .profile-image-change-wrapper {
+        position: sticky;
+        z-index: 100;
+        margin-right: 70px;
+        margin-top: -25px !important;
     }
+
+    /* .profile-image-label {
+        color: #fff;
+        height: 50px;
+        width: 50px;
+    } */
 
     .profile-form .row {
         display: grid;
@@ -2662,11 +2668,6 @@ button {
         justify-content: space-between;
     }
 
-    .profile-image-label {
-        left: 47%;
-        top: 120%;
-    }
-
     .profile-img {
         float: left;
         width: 100%;
@@ -2706,6 +2707,11 @@ button {
     .wrapper img {
         height: 120%;
     }
+
+    .profile-image-change-wrapper {
+        margin-right: unset;
+        margin-top: 15px !important;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -2739,10 +2745,10 @@ button {
         grid-template-columns: 1fr;
     }
 
-    .profile-image-label {
+    /* .profile-image-label {
         left: 45%;
         top: 120%;
-    }
+    } */
 
     .main-posts-title-wrapper::before {
         width: 20%;
@@ -2799,10 +2805,10 @@ button {
 }
 
 @media screen and (max-width: 480px) {
-    .profile-image-label {
+    /* .profile-image-label {
         left: 42%;
         top: 120%;
-    }
+    } */
 }
 
 @media (max-width: 400px) {
