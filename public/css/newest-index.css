@@ -2954,6 +2954,10 @@ button {
         height: 60px;
     }
 
+    .navbar-logo-wrapper img {
+        object-fit: contain;
+    }
+
     .navbar-links-wrapper {
         display: none;
     }
