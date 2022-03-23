@@ -3619,6 +3619,7 @@ button {
 
     .single-user-image-wrapper img {
         width: 150%;
+        height: auto !important;
     }
 
     .user-subscribe-link,
