@@ -2275,11 +2275,14 @@ button {
 .profile-image-label {
     color: #fff;
     width: 50px;
+    position: relative;
 }
 
 .profile-image-label i {
-    margin-left: 10px;
+    position: absolute;
     margin-top: 10px;
+    right: 15px;
+    top: 5px;
 }
 
 .profile-image-label span {
