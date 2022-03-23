@@ -351,6 +351,10 @@ body {
         flex: 2;
     }
 
+    .chat-input {
+        width: 100%;
+    }
+
     .sent-message-wrapper,
     .received-message-wrapper {
         width: 80%;
