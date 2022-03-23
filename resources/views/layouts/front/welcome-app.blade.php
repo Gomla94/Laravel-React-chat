@@ -25,7 +25,7 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=38')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=39')}}" />
     @yield('styles')
     <script src="{{asset('js/newest-index.js?version=3')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -182,6 +182,14 @@
           @if(Auth::check())
             <li class="overlay-list-item">
               <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">{{ __('translations.chat') }}</a></span>
+            </li>
+          @endif
+          @if(Auth::check())
+            <li class="overlay-list-item">
+              <form action="{{ route('logout') }}" method="POST">
+              @csrf  
+              <button type="submit" class="mobile-logut-button">{{ __('translations.log_out') }}</button>
+            </form>
             </li>
           @endif
         </ul>
