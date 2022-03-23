@@ -1,5 +1,5 @@
 body {
-    background-color: #ffff !important;
+    background-color: #fbfbfb !important;
     height: 100% !important;
     width: 100% !important;
 }
@@ -15,7 +15,7 @@ body {
 .chat-wrapper {
     width: 90%;
     height: 500px;
-    /* background-color: white; */
+    background-color: #fbfbfb !important;
     margin: auto;
     margin-top: 1rem;
     border-radius: 20px;
@@ -286,6 +286,7 @@ body {
     outline: none;
     padding: 0.5rem;
     padding-left: 1rem;
+    background-color: white;
 }
 
 .chat-attachement-wrapper i {
