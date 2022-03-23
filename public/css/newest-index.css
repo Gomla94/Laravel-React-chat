@@ -2607,7 +2607,7 @@ button {
 
     .profile-image-label {
         left: 12%;
-        top: 85%;
+        /* top: 85%; */
     }
 
     .profile-form .row {
@@ -2785,6 +2785,10 @@ button {
     .main-posts-title-wrapper::after {
         width: 22%;
         right: 15%;
+    }
+
+    .wrapper img {
+        height: 120% !important;
     }
 }
 
