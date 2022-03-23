@@ -159,12 +159,14 @@ class FrontController extends Controller
                     }
                 
                 default:
-                    return $filtered_users;
+                    $filtered_users = User::where('name', 'like', '%'.request('user-name').'%')->get();
                     break;
             }
         }
         
-        $filtered_users = array_unique($filtered_users);
+        if (!request('user-name')) {
+            $filtered_users = array_unique($filtered_users);
+        }
         $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
 
         $interesting_types = InterestingType::all();

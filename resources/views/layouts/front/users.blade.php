@@ -10,11 +10,12 @@ Magaxat | Users
 <div class="users-wrapper">
   <div class="search-users-wrapper">
     <div class="search-users-container">
-      <form action="">
+      <form action="{{ route('all-users') }}" method="GET">
         <div class="form-group">
           <input
             type="text"
             class="users-search-input"
+            name="user-name"
             placeholder="{{ __('translations.search') }}"
           />
           <i class="fas fa-search search-users-icon"></i>
