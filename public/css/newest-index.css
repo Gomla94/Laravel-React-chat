@@ -2266,18 +2266,17 @@ button {
 }
 
 .profile-image-label {
-    height: auto;
-    height: 38px;
     color: #fff;
     position: absolute;
-    left: 140px;
-    top: 140%;
-    z-index: 5;
+    height: 40px;
+    z-index: 100;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer;
+    left: 130px;
+    top: 270px;
 }
 
 .profile-image-label i {
@@ -2309,7 +2308,7 @@ button {
     box-shadow: 0px 3px 5px rgba(180, 180, 180, 0.2);
     padding: 90px 30px 20px;
     margin-left: 20px;
-    z-index: 99;
+    z-index: 200;
     text-align: center;
     height: 400px;
     border-bottom-left-radius: 30px;
@@ -3706,6 +3705,10 @@ button {
     .main-appeals-title-wrapper::before {
         left: 1%;
         width: 70px;
+    }
+
+    .profile-image-label {
+        top: 270px;
     }
 }
 

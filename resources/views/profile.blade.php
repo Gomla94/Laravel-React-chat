@@ -19,29 +19,27 @@ Magaxat | Profile
           <img src="{{ asset('images/img/slider1.jpeg') }}" alt="">
         </div>
         <div class="profile-img">
+          @if(Auth::id() === $user->id)
+                <label for="profile-image-input" class="profile-image-label">
+                  <i class="fa-solid fa-camera"></i>
+                  <input
+                    type="file"
+                    class="profile-image-input"
+                    name=""
+                    id="profile-image-input"
+                  />
+                  <span>{{ __('translations.change') }}</span>
+                </label>
+            @endif
           <img class="profile-image" src="{{ $user->image ?? asset('images/avatar.png') }}" width="200" alt="Profile Image" />
           <div id="upload-input" style="width:350px; height: 400px;"></div>
-
-          @if(Auth::id() === $user->id)
-            <div class="change-profile-image-icon">
-              <label for="profile-image-input" class="profile-image-label">
-                <i class="fa-solid fa-camera"></i>
-                <input
-                  type="file"
-                  class="profile-image-input"
-                  name=""
-                  id="profile-image-input"
-                />
-                <span>{{ __('translations.change') }}</span>
-              </label>
-            </div>
-          @endif
         </div>
       </div>
 
       <div class="main-bd">
         <div class="left-side">
           <div class="profile-side">
+            
             <p class="profile-user-name">{{ $user->name }}</p>
             <div class="profile-icons">
               <p class="profile-icon-wrapper">
