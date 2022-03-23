@@ -133,9 +133,9 @@ body {
     height: 50px;
     width: 70px;
     border-radius: 20px;
-    /* margin-top: auto; */
-    bottom: 20px;
+    bottom: 60px;
     position: absolute;
+    right: 5px;
 }
 
 .chatting-with-user {
