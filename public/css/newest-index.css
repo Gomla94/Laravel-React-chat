@@ -2794,6 +2794,11 @@ button {
     .wrapper img {
         height: 120% !important;
     }
+
+    .social-icon {
+        width: 32px;
+        height: 28px;
+    }
 }
 
 @media screen and (max-width: 480px) {
