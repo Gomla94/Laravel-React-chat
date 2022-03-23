@@ -361,7 +361,7 @@ Magaxat | Profile
                 <div class="post-image-wrapper">
                   <video controls
                     class="main-post-image"
-                    src="{{ $post->video_path }}"
+                    src="{{ $appeal->video_path }}"
                     alt="post-image"
                   /></video>
                 </div>

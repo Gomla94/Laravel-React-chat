@@ -137,7 +137,7 @@
             <p class="login-m-heading">Sign in</p>
           </div>
     
-          <div class="login-form-wrapper">
+          <div class="register-form-wrapper">
             <form action="{{ route('register') }}" method="POST">
                 @csrf
                 <div class="col-md-12">

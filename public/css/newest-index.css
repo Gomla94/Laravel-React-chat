@@ -431,8 +431,7 @@ body {
     margin-top: 380px;
     margin-bottom: 50px !important;
 }
-
-.swiper-pagination {
+.swiper .swiper-pagination {
     position: absolute;
     text-align: right;
     transition: 0.3s opacity;
@@ -545,6 +544,7 @@ body {
 .swiper-button-next,
 .swiper-button-prev {
     top: 1100px !important;
+    color: #b3b3b3 !important;
 }
 
 .appeal-slide-image-wrapper {
@@ -1222,30 +1222,36 @@ button {
     text-align: center;
 }
 
-.login-form-wrapper {
+.login-form-wrapper,
+.register-form-wrapper {
     width: 60%;
 }
 
-.login-form-wrapper label {
+.login-form-wrapper label,
+.register-form-wrapper label {
     color: black;
     padding: 0 1rem;
 }
 
-.login-form-wrapper p {
+.login-form-wrapper p,
+.register-form-wrapper p {
     color: black;
     padding: 1rem 1rem;
     text-align: center;
     font-size: 1.6rem;
 }
 
-.login-form-wrapper span {
+.login-form-wrapper span,
+.register-form-wrapper span {
     color: red;
     padding: 1rem 1rem;
     font-weight: 500;
 }
 
 .login-form-wrapper input,
-.login-form-wrapper select {
+.login-form-wrapper select,
+.register-form-wrapper input,
+.register-form-wrapper select {
     background-color: #535353;
     color: #c2b29a;
     border-radius: 10px;
@@ -1253,7 +1259,8 @@ button {
     width: 100%;
 }
 
-.login-form-wrapper textarea {
+.login-form-wrapper textarea,
+.register-form-wrapper textarea {
     background-color: #535353;
     color: #c2b29a;
     border-radius: 10px;
@@ -1266,7 +1273,8 @@ button {
     color: #c2b29a;
 }
 
-.login-form-wrapper .forget-password-link {
+.login-form-wrapper .forget-password-link,
+.register-form-wrapper .forget-password-link {
     display: flex;
     justify-content: flex-end;
     text-decoration: none;
@@ -1289,6 +1297,7 @@ button {
 }
 
 .register-button {
+    width: 100%;
     background-color: #7c633e !important;
 }
 
@@ -2693,16 +2702,19 @@ button {
 @media screen and (max-width: 800px) {
     .nav {
         width: 95%;
-        height: 140px;
+        height: 90px;
+        overflow-x: scroll;
+        overflow-y: hidden;
     }
 
     .nav ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        display: flex;
+        width: unset !important;
+        /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     }
 
     .nav ul li {
-        padding: 1rem 1rem;
+        padding: 1rem 1.5rem;
     }
 
     .active-nav {
@@ -3468,6 +3480,31 @@ button {
 
     .main-appeals-title-wrapper::before {
         left: 6%;
+    }
+
+    .login-container {
+        background-color: #ffff !important;
+    }
+
+    .login-wrapper {
+        width: 100% !important;
+    }
+
+    .register-container {
+        background-color: #fff !important;
+    }
+
+    .login-form-wrapper {
+        width: 80% !important;
+    }
+
+    .register-form-wrapper {
+        width: 100% !important;
+    }
+
+    .login-form-wrapper input,
+    .register-form-wrapper input {
+        width: 100% !important;
     }
 }
 
