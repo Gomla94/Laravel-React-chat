@@ -2755,7 +2755,6 @@ button {
 @media screen and (max-width: 500px) {
     .nav {
         width: 95%;
-        height: 200px;
     }
 
     .nav ul {
