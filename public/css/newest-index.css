@@ -1793,9 +1793,8 @@ button {
 
 .single-user-image-wrapper img {
     height: 100%;
-    width: 220px;
+    width: 180px;
     border-radius: 50%;
-    object-fit: cover;
 }
 
 .profile-single-user-image-wrapper img {
