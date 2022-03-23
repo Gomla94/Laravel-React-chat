@@ -10,7 +10,7 @@ Magaxat | Users
 <div class="users-wrapper">
   <div class="search-users-wrapper">
     <div class="search-users-container">
-      <form action="{{ route('all-users') }}" method="GET">
+      <form class="search-users-form" action="{{ route('all-users') }}" method="GET">
         <div class="form-group">
           <input
             type="text"

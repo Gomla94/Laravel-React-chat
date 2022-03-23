@@ -27,7 +27,7 @@
 
     <link rel="stylesheet" href="{{asset('css/newest-index.css?version=48')}}" />
     @yield('styles')
-    <script src="{{asset('js/newest-index.js?version=3')}}" defer></script>
+    <script src="{{asset('js/newest-index.js?version=4')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
     window.uuxyz = <?php echo json_encode([

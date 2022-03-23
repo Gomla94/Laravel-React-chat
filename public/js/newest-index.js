@@ -15,6 +15,9 @@ const videoPlayIcons = document.querySelectorAll(".play-wrapper");
 const filterSelects = document.querySelectorAll(".select-filter");
 const subSelectsCheckBoxes = document.querySelectorAll(".sub-select-check");
 
+const searchUsersForm = document.querySelector(".search-users-form");
+const searchUsersIcon = document.querySelector(".search-users-icon");
+
 // modal buttons
 const postsBtn = document.querySelector(".main-posts-add-post-button");
 const profilePostsBtn = document.querySelector(".profile-add-post-button");
@@ -151,5 +154,11 @@ if (mobileLanguageTitle) {
     mobileLanguageTitle.addEventListener("click", () => {
         console.log("aaa");
         mobileLanguagesList.classList.toggle("show-mobile-languages-list");
+    });
+}
+
+if (searchUsersIcon) {
+    searchUsersIcon.addEventListener("click", () => {
+        searchUsersForm.submit();
     });
 }

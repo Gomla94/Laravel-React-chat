@@ -8,6 +8,9 @@ body {
     background-color: #f9f9f9;
 }
 
+video::-webkit-media-controls-play-button {
+    color: green !important;
+}
 /* navbar starts here */
 
 .navbar-wrapper {
@@ -1743,6 +1746,7 @@ button {
     right: 20px;
     font-size: 1.5rem;
     color: #af9065;
+    cursor: pointer;
 }
 
 .search-users-container {
