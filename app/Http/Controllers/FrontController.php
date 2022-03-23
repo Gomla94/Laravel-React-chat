@@ -94,24 +94,46 @@ class FrontController extends Controller
     {
         $filter_keys = array_keys(request()->query());
         $filtered_users = [];
+        $filtered_name_users = [];
 
-        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
+        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE);
 
         foreach($filter_keys as $key) {
             switch ($key) {
+                case 'user-name':
+                    $filtered_name_users = $users->where('name', 'like', '%'.request('user-name').'%')->get();
+                    foreach($filtered_name_users as $user) {
+                        $filtered_users[] = $user;
+                    }
+                    break 1;
+
                 case 'interesting-in-type':
                     $interesting_type = InterestingType::where('name', request('interesting-in-type'))->pluck('id')->firstOrFail();
+                    if (count($filtered_users)) {
+                        $users = $filtered_users;
+                    }  else {
+                        $users = $users->get();
+                    }
 
                     foreach($users as $user) {
                         $user_interesting_types_ids = json_decode($user->interesting_type_id);
                         if ($user_interesting_types_ids !== null) {
                             if (in_array($interesting_type, $user_interesting_types_ids)) {
-                                $filtered_users = array_unique($filtered_users);
-                                array_push($filtered_users, $user);
-                            } 
+                                continue;
+                            }  else {
+                                $filtered_users = array_filter($filtered_users, function($filtered_user) use($user) {
+                                    return $filtered_user->id !== $user->id;
+                                });
+                            }
+                        } else {
+                            $filtered_users = array_filter($filtered_users, function($filtered_user) use($user) {
+                                return $filtered_user->id !== $user->id;
+                            });
                         }
                         
                     }
+
+                    $filtered_users = array_unique($filtered_users);
                     if ($filtered_users == null) {
                         break 2;
                     }
@@ -128,7 +150,7 @@ class FrontController extends Controller
                             } 
                         }
 
-                        break 2;
+                        break 1;
                     } else {
                         $users = $users->where('country_id', $country->id);
                         foreach($users as $user) {
@@ -138,8 +160,7 @@ class FrontController extends Controller
                     }
                    
 
-                case 'gender':                        
-
+                case 'gender':
                     if (count($filtered_users)) {
                         foreach($filtered_users as $filtered_user) {
                             if ($filtered_user->gender !== request('gender')) {
@@ -149,7 +170,7 @@ class FrontController extends Controller
                             } 
                         }
 
-                        break 2;
+                        break 1;
                     } else {
                         $users = $users->where('gender', request('gender'));
                         foreach($users as $user) {
@@ -158,38 +179,19 @@ class FrontController extends Controller
                         break;
                     }
 
-                case 'user-name':
-                    if (count($filtered_users)) {
-                        foreach($filtered_users as $filtered_user) {
-                            if ($filtered_user->name == request('user-name')) {
-                                $filtered_users = array_filter($filtered_users, function($user) use($filtered_user) {
-                                    return $user->name !== $filtered_user->name;
-                                });
-                            } 
-                        }
-
-                        break 2;
-                    } else {
-                        $users = $users->where('name', request('user-name'));
-                        foreach($users as $user) {
-                            $filtered_users[] = $user;
-                        }
-                        break;
-                    }
                 
-                default:
-                    // $filtered_users = User::where('name', 'like', '%'.request('user-name').'%')->get();
-                    break;
+                        
+                    default:
+                        break;
             }
         }
         
         
-        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
 
         $interesting_types = InterestingType::all();
         $countries = Country::all();
         return view('layouts.front.users', [
-            'users' => count($filter_keys) !== 0 ? $filtered_users : $users,
+            'users' => count($filter_keys) !== 0 ? $filtered_users : $users->get(),
             'interesting_types' => $interesting_types,
             'countries' => $countries,
         ]);
