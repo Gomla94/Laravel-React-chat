@@ -25,7 +25,7 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=50')}}" />
+    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=51')}}" />
 
     @yield('styles')
     <script src="{{asset('js/newest-index.js?version=4')}}" defer></script>
