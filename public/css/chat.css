@@ -341,6 +341,10 @@ body {
         width: 94%;
     }
 
+    .chat-messages-section {
+        width: 120% !important;
+    }
+
     .chat-wrapper {
         height: 600px;
         width: 85%;
