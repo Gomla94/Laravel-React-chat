@@ -7,14 +7,15 @@
   <div class="benefactors-wrapper">
     <div class="search-benefactors-wrapper">
       <div class="search-container">
-        <form action="">
+        <form class="search-benefactors-form" action="{{ route('all-benefactors') }}" method="GET">
           <div class="form-group">
             <input
               type="text"
+              name="benefactor-name"
               class="benefactors-search-input"
               placeholder="{{ __('translations.search') }}"
             />
-            <i class="fas fa-search"></i>
+            <i class="fas fa-search search-benefactors-icon"></i>
           </div>
         </form>
       </div>
@@ -38,7 +39,7 @@
                 <form action="{{ route('unsubscribe', $user->unique_id) }}" method="POST">
                   @csrf
                   <button class="main-video-user-subscribed-link">
-                    <i class="fas fa-check"></i> Subscribed
+                    <i class="fas fa-check"></i> {{ __('translations.subscribed') }}
                   </button>
                 </form>
               </div>
@@ -47,7 +48,7 @@
                 <form action="{{ route('subscribe', $benefactor->unique_id) }}" method="POST">
                   @csrf
                   <button class="main-video-user-subscribed-link">
-                    Subscribe
+                    {{ __('translations.subscribe') }}
                   </button>
                 </form>
               </div>

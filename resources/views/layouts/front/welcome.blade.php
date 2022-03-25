@@ -16,9 +16,9 @@
             <img class="appeal-slide-image" src="{{ $appeal->image_path }}" alt="" />
           </div>
           <div class="appeal-slider-info-wrapper">
-            <p class="appeal-title">{{ $appeal->title }}</p>
+            <p class="appeal-title"> {{ str_limit($appeal->title, 30) }}</p>
             <p class="appeal-description">
-              {{ str_limit($appeal->description, 100) }}
+              {{ str_limit($appeal->description, 20) }}
             </p>
           </div>
           <a href="{{ route('show-appeal', $appeal->uniqueid) }}" class="appeal-slide-link">{{ __('translations.want_help') }}</a>

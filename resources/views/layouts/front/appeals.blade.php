@@ -30,14 +30,14 @@
         <div class="single-appeal-info-wrapper">
           <div class="single-appeal-title-desc-container">
             <p class="single-appeal-title">
-             {{ $appeal->title }}
+              {{ str_limit($appeal->title, 100) }}
             </p>
             <p class="single-appeal-description">
-              {{ $appeal->description }}
+              {{ str_limit($appeal->description, 30) }}
             </p>
           </div>
           <div class="single-appeal-view-button-wrapper">
-            <a href="{{ route('show-appeal', $appeal->uniqueid) }}" class="view-appeal-link">View</a>
+            <a href="{{ route('show-appeal', $appeal->uniqueid) }}" class="view-appeal-link">{{ __('translations.view') }}</a>
           </div>
         </div>
       </div>

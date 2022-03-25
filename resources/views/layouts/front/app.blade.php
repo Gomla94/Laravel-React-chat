@@ -25,7 +25,13 @@
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=57')}}" />
+    @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+      <link rel="stylesheet" href="{{asset('css/arm.css')}}" />
+    @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+      <link rel="stylesheet" href="{{asset('css/newest-index.css?version=57')}}" />
+    @else
+      <link rel="stylesheet" href="{{asset('css/russ.css')}}" />
+    @endif
 
     @yield('styles')
     <script src="{{asset('js/newest-index.js?version=4')}}" defer></script>

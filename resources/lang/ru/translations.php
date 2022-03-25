@@ -38,8 +38,21 @@ return [
     "appeals" => "Обращение",
     "subscribtions" => "Подписки",
     "subscribers" => "Подписчики",
-    "view" => "View",
-    "change" => "Change",
+    "view" => "Посмотреть",
+    "change" => "Изменить",
+    "make" => "сделать",
+    "first_name" => "имя",
+    "last_name" => "Фамилия",
+    "chat" => "Чат",
+    "language" => "Язык",
+    "how_can_i_help" => "Как я могу помочь",
+    "bank_transfer" => " Банковский перевод",
+    "online_transfer" => "онлайн-перевод",
+    "download_document" => "Скачать документ",
+    "choose_your_file" => "Выберите файл",
+    "subscribed" => "Подписан",
+    "type_of_media" => "Тип медиа файла",
+    "to_help" => "Чтобы помочь, можете отправить желаемую сумму на банковский счет Магахата указав номер помощи.",
 
 
 

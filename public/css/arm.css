@@ -675,7 +675,7 @@ button {
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
-    width: 200px;
+    width: 260px;
 }
 
 .new-post-icon {
@@ -923,6 +923,7 @@ button {
     display: block;
     margin-left: auto;
     margin-right: 0;
+    /* width: 330px; */
 }
 
 .main-post-comment-form-wrapper {
@@ -1543,17 +1544,17 @@ button {
     font-weight: 600;
 }
 
+.single-appeal-title,
+.single-appeal-description {
+    width: 100%;
+    word-break: break-all;
+}
+
 .single-appeal-description,
 .single-benefactors-description,
 .single-user-description {
     color: rgb(175, 168, 168);
     font-size: 1rem;
-}
-
-.single-appeal-title,
-.single-appeal-description {
-    width: 100%;
-    word-break: break-all;
 }
 
 .single-appeal-view-button-wrapper,
@@ -1621,7 +1622,7 @@ button {
 .main-video-user-subscribed-link {
     background-color: #f5f5f5;
     color: #af9065;
-    padding: 10px 30px;
+    padding: 10px 10px;
     border-radius: 10px;
     border: none;
     width: 190px;
@@ -2453,6 +2454,10 @@ button {
     flex-direction: column;
 }
 
+.profile-icons p {
+    font-weight: 600;
+}
+
 .profile-icons i {
     margin: 0 2rem 0 0;
 }
@@ -2461,7 +2466,11 @@ button {
     display: flex;
     flex: row;
     align-items: center;
-    /* justify-content: space-between; */
+}
+
+.profile-icon-wrapper span {
+    max-width: 300px;
+    overflow-wrap: break-word;
 }
 
 .right-side {
@@ -2937,7 +2946,7 @@ button {
 
 @media screen and (max-width: 1380px) {
     .single-user-image-wrapper img {
-        width: 170px;
+        width: 160px;
     }
 
     .videos-container {
@@ -3494,9 +3503,9 @@ button {
     }
 
     .single-user-image-wrapper img {
-        width: 130px;
-        height: 80%;
-        margin-top: 1rem;
+        width: 170px;
+        height: 160px;
+        margin-top: unset;
     }
 
     .single-user-info-wrapper {
@@ -3549,6 +3558,10 @@ button {
     .login-form-wrapper input,
     .register-form-wrapper input {
         width: 100% !important;
+    }
+
+    .single-benefactors-title-desc-container {
+        align-self: center;
     }
 }
 
@@ -3631,15 +3644,21 @@ button {
         width: 400px;
     }
 
-    .single-benefactors-title-desc-container {
-        padding-right: 0.5rem;
-    }
-
     .benefactors-subscribe-link,
     .benefactors-subscribed-link,
     .benefactors-message-link {
         padding: 0.5rem 0.5rem;
         width: 160px;
+    }
+
+    .single-user-info-wrapper {
+        padding: unset;
+    }
+
+    .single-user-image-wrapper img {
+        width: 130%;
+        height: 130px;
+        margin-top: 1rem;
     }
 
     .user-subscribe-link,
@@ -3724,6 +3743,13 @@ button {
         left: 1%;
         width: 70px;
     }
+
+    .single-benefactors-image-wrapper img,
+    .single-appeals-image-wrapper img {
+        width: 110%;
+        height: 70%;
+        margin-top: 1rem;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -3751,12 +3777,6 @@ button {
 
     .filter-gender-select .select-sub {
         height: 150px !important;
-    }
-
-    .single-user-image-wrapper img {
-        width: 130%;
-        height: 70%;
-        margin-top: 1.5rem;
     }
 }
 

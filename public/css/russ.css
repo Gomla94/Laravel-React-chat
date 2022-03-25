@@ -1575,7 +1575,7 @@ button {
 .view-appeal-link {
     background-color: #af9065;
     color: white;
-    padding: 10px 30px;
+    padding: 10px 10px;
     border-radius: 10px;
     border: none;
     width: auto;
@@ -3483,7 +3483,7 @@ button {
 @media screen and (max-width: 650px) {
     .single-benefactors-info-wrapper {
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
     }
 
     .single-benefactors-image-wrapper img,
@@ -3494,9 +3494,9 @@ button {
     }
 
     .single-user-image-wrapper img {
-        width: 130px;
-        height: 80%;
-        margin-top: 1rem;
+        width: 170px;
+        height: 160px;
+        margin-top: unset;
     }
 
     .single-user-info-wrapper {
@@ -3550,6 +3550,10 @@ button {
     .register-form-wrapper input {
         width: 100% !important;
     }
+
+    .single-benefactors-view-button-wrapper {
+        width: unset;
+    }
 }
 
 @media screen and (max-width: 580px) {
@@ -3579,7 +3583,7 @@ button {
     }
 
     .single-benefactors-image-wrapper img {
-        width: 120%;
+        width: 150px;
     }
 
     .single-appeal-image-wrapper img {
@@ -3763,6 +3767,11 @@ button {
 @media screen and (max-width: 420px) {
     .main-posts-buttons-wrapper button {
         margin: 0 0.5rem;
+    }
+
+    .single-benefactors-image-wrapper img {
+        width: 140%;
+        height: 80%;
     }
 }
 

@@ -199,7 +199,14 @@ class FrontController extends Controller
 
     public function all_benefactors()
     {
-        $benefactors = User::where('id', '!=', Auth::id())->whereType(User::BENEFACTOR_TYPE)->paginate(3);
+        if (request('benefactor-name')) {
+            $benefactors = User::where('id', '!=', Auth::id())
+                                ->whereType(User::BENEFACTOR_TYPE)
+                                ->where('name', 'like', request('benefactor-name'))->get();
+        } else {
+            $benefactors = User::where('id', '!=', Auth::id())->whereType(User::BENEFACTOR_TYPE)->get();
+        }
+
         return view('layouts.front.benefactors', ['benefactors' => $benefactors]);
     }
 

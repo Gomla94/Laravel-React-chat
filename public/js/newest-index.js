@@ -18,6 +18,13 @@ const subSelectsCheckBoxes = document.querySelectorAll(".sub-select-check");
 const searchUsersForm = document.querySelector(".search-users-form");
 const searchUsersIcon = document.querySelector(".search-users-icon");
 
+const searchBenefactorsForm = document.querySelector(
+    ".search-benefactors-form"
+);
+const searchBenefactorsIcon = document.querySelector(
+    ".search-benefactors-icon"
+);
+
 // modal buttons
 const postsBtn = document.querySelector(".main-posts-add-post-button");
 const profilePostsBtn = document.querySelector(".profile-add-post-button");
@@ -160,5 +167,12 @@ if (mobileLanguageTitle) {
 if (searchUsersIcon) {
     searchUsersIcon.addEventListener("click", () => {
         searchUsersForm.submit();
+    });
+}
+
+if (searchBenefactorsIcon) {
+    searchBenefactorsIcon.addEventListener("click", () => {
+        console.log("aa");
+        searchBenefactorsForm.submit();
     });
 }

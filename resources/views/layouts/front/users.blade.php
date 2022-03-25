@@ -122,7 +122,7 @@ Magaxat | Users
                 <form action="{{ route('unsubscribe', $user->unique_id) }}" method="POST">
                   @csrf
                   <button class="main-video-user-subscribed-link">
-                    <i class="fas fa-check"></i> Subscribed
+                    <i class="fas fa-check"></i> {{ __('translations.subscribed') }}
                   </button>
                 </form>
               </div>
@@ -131,7 +131,7 @@ Magaxat | Users
                 <form action="{{ route('subscribe', $user->unique_id) }}" method="POST">
                   @csrf
                   <button class="main-video-user-subscribed-link">
-                    Subscribe
+                    {{ __('translations.subscribe') }}
                   </button>
                 </form>
               </div>
