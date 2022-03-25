@@ -243,7 +243,7 @@
         <label class="create-post-label" for="countries">{{ __('translations.country') }}</label>
         <select name="country" class="form-control" id="country">
           @foreach($countries as $country)
-            <option value="{{ $country->id }}">{{ $country }}</option>
+            <option value="{{ $country->id }}">{{ $country->name }}</option>
           @endforeach
         </select>
         @error('post_country')
