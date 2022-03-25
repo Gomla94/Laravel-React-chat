@@ -48,11 +48,7 @@ video::-webkit-media-controls-play-button {
     margin: auto;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    /* display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center; */
-    padding: 10px 20px;
+    padding: 10px 5px;
 }
 
 .menu-bars {
@@ -153,7 +149,7 @@ video::-webkit-media-controls-play-button {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0 3rem;
+    margin: 0 0 0 0.5rem;
 }
 
 .navbar-logo-container {
@@ -166,9 +162,9 @@ video::-webkit-media-controls-play-button {
 }
 
 .navbar-links-wrapper {
-    width: auto;
+    width: 90%;
     height: 100%;
-    margin: 0 0 0 3rem;
+    margin: 0;
 }
 
 .navbar-links-list {
@@ -208,7 +204,7 @@ video::-webkit-media-controls-play-button {
 }
 
 .navbar-user-section-wrapper div {
-    margin: 0 0.5rem;
+    margin: 0 0.2rem;
 }
 
 .navbar-chat-icon {
@@ -234,7 +230,7 @@ video::-webkit-media-controls-play-button {
     background-color: #af9065;
     padding: 10px;
     border-radius: 10px;
-    width: 160px;
+    width: 150px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -513,7 +509,7 @@ video::-webkit-media-controls-play-button {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 20%;
+    width: 15%;
     position: absolute;
     top: 25px;
     right: 20%;
@@ -523,7 +519,7 @@ video::-webkit-media-controls-play-button {
     content: "";
     background-color: #8b7350;
     height: 2px;
-    width: 20%;
+    width: 15%;
     position: absolute;
     top: 25px;
     left: 20%;
@@ -2779,12 +2775,12 @@ button {
 
     .main-posts-title-wrapper::before {
         width: 20%;
-        left: 20%;
+        left: 10%;
     }
 
     .main-posts-title-wrapper::after {
         width: 20%;
-        right: 20%;
+        right: 10%;
     }
 }
 
@@ -2954,7 +2950,7 @@ button {
     }
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1350px) {
     .navbar {
         display: flex;
         justify-content: space-between;
@@ -3008,7 +3004,9 @@ button {
         padding: unset;
         width: fit-content;
     }
+}
 
+@media screen and (max-width: 1250px) {
     .swiper-slide img {
         display: block;
         object-fit: unset;
@@ -3082,6 +3080,10 @@ button {
         position: absolute;
         top: 25px;
         left: 10%;
+    }
+
+    .main-posts-add-appeal-button {
+        margin-bottom: 1rem;
     }
 }
 
@@ -3382,6 +3384,16 @@ button {
     .register-wrapper {
         width: 80%;
     }
+
+    .main-appeals-title-wrapper::after {
+        width: 12%;
+        right: 10%;
+    }
+
+    .main-appeals-title-wrapper::before {
+        width: 12%;
+        left: 10%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -3409,6 +3421,10 @@ button {
     .video-container .play-wrapper {
         top: 45% !important;
         left: 45% !important;
+    }
+
+    .main-posts-add-appeal-button {
+        margin-bottom: 1rem !important;
     }
 }
 
@@ -3673,10 +3689,6 @@ button {
         left: 45% !important;
     }
 
-    .main-posts-add-buttons {
-        display: flex;
-    }
-
     .main-posts-add-buttons button {
         margin-bottom: 0.5rem;
     }
@@ -3706,6 +3718,16 @@ button {
     .appeals-modal-image {
         width: 105%;
     }
+
+    .main-appeals-title-wrapper::after {
+        width: 10%;
+        right: 1%;
+    }
+
+    .main-appeals-title-wrapper::before {
+        width: 10%;
+        left: 1%;
+    }
 }
 
 @media screen and (max-width: 485px) {
@@ -3734,21 +3756,21 @@ button {
         right: 185px;
     }
 
-    .main-appeals-title-wrapper::after {
-        right: 1%;
-        width: 70px;
-    }
-
-    .main-appeals-title-wrapper::before {
-        left: 1%;
-        width: 70px;
-    }
-
     .single-benefactors-image-wrapper img,
     .single-appeals-image-wrapper img {
         width: 110%;
         height: 70%;
         margin-top: 1rem;
+    }
+
+    .main-posts-title-wrapper::before {
+        width: 15%;
+        left: 1;
+    }
+
+    .main-posts-title-wrapper::after {
+        width: 15%;
+        right: 1;
     }
 }
 
@@ -3778,23 +3800,21 @@ button {
     .filter-gender-select .select-sub {
         height: 150px !important;
     }
+
+    .main-appeals-title-wrapper::after {
+        width: 6%;
+        right: 1;
+    }
+
+    .main-appeals-title-wrapper::before {
+        width: 6%;
+        left: 1;
+    }
 }
 
 @media screen and (max-width: 420px) {
     .main-posts-buttons-wrapper button {
         margin: 0 0.5rem;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .main-appeals-title-wrapper::after {
-        right: 1%;
-        width: 50px;
-    }
-
-    .main-appeals-title-wrapper::before {
-        left: 1%;
-        width: 50px;
     }
 }
 

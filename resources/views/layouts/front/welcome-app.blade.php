@@ -23,12 +23,16 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
     />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/favicon.ico')}}">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
-      <link rel="stylesheet" href="{{asset('css/arm.css')}}" />
+      <link rel="stylesheet" href="{{asset('css/arm.css?version=1')}}" />
+    @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+      <link rel="stylesheet" href="{{asset('css/newest-index.css?version=58')}}" />
     @else
-      <link rel="stylesheet" href="{{asset('css/newest-index.css?version=57')}}" />
+      <link rel="stylesheet" href="{{asset('css/russ.css?version=1')}}" />
     @endif
     
     @yield('styles')
