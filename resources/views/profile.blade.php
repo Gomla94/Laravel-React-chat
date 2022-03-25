@@ -728,7 +728,7 @@ Magaxat | Profile
 <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
 <script src="{{asset('js/newest-addPostComments.js')}}" defer type="module"></script>
 <script src="{{ asset('js/addPostLike.js?version=1') }}" defer type="module"></script>
-<script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
+<script src="{{ asset('js/toggleModalInputs.js?version=2') }}" defer></script>
 <script src="{{asset('js/upload.js')}}" defer></script>
 
 <script>
