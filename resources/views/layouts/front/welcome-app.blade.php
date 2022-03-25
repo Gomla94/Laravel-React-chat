@@ -28,11 +28,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
-      <link rel="stylesheet" href="{{asset('css/arm.css?version=1')}}" />
+      <link rel="stylesheet" href="{{asset('css/arm.css?version=2')}}" />
     @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
-      <link rel="stylesheet" href="{{asset('css/newest-index.css?version=58')}}" />
+      <link rel="stylesheet" href="{{asset('css/newest-index.css?version=59')}}" />
     @else
-      <link rel="stylesheet" href="{{asset('css/russ.css?version=1')}}" />
+      <link rel="stylesheet" href="{{asset('css/russ.css?version=2')}}" />
     @endif
     
     @yield('styles')

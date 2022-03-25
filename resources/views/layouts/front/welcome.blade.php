@@ -231,11 +231,12 @@
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('post_image')
-            <span style="color: red">{{$message}}</span>
+            <span style="color: red" class="mi-e">{{$message}}</span>
           @enderror
           @error('post_video')
-            <span style="color: red">{{$message}}</span>
+            <span style="color: red" class="mv-e">{{$message}}</span>
           @enderror
+          <span style="color: red" class="mv-e"></span>
         </div>
       </div>
 
@@ -327,7 +328,7 @@
             <input
               type="file"
               accept="video/mp4"
-              class="media-input"
+              class="media-input app-vi"
               name="appeal_video"
             />
             <span>{{ __('translations.choose_your_file') }}</span>
@@ -336,6 +337,7 @@
           @error('appeal_video')
             <span style="color: red">{{$message}}</span>
           @enderror
+          <span style="color: red" class="app-ve"></span>
         </div>
       </div>
       
@@ -360,6 +362,7 @@
 <script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
 <script src="{{ asset('js/loadPosts.js?version=7') }}" defer type="module"></script>
 <script src="{{asset('js/newest-addPostComments.js')}}" defer type="module"></script>
+<script src="{{asset('js/upload.js')}}" defer></script>
 
 <script>
   const postsModalContent = document.querySelector('.posts-modal-wrapper');

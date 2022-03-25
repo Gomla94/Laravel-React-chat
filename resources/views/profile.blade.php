@@ -10,7 +10,6 @@ Magaxat | Profile
 @endsection
 @section('content')
 
-
 <div class="profile-wrapper">
   <div class="container-fluid">
     <div class="profile-container">
@@ -580,7 +579,7 @@ Magaxat | Profile
 
       <div class="form-group post-modal-media-container">
         <div class="post-modal-media">
-          <label class="create-post-label image-label">{{ __('translations.type_of_media') }}/label>
+          <label class="create-post-label image-label">{{ __('translations.type_of_media') }}</label>
           <select name="media_type" class="form-control media-type">
             <option value="image">{{ __('translations.image') }}</option>
             <option value="video">{{ __('translations.video') }}</option>
@@ -606,6 +605,7 @@ Magaxat | Profile
           @error('post_video')
             <span style="color: red">{{$message}}</span>
           @enderror
+          <span style="color: red" class="mv-e"></span>
         </div>
       </div>
 
@@ -646,7 +646,7 @@ Magaxat | Profile
           type="text"
           class="form-control"
           name="appeal_title"
-          placeholder="{{ __('translations.title') }}"
+          placeholder="Title"
         />
         @error('appeal_title')
           <span style="color: red">{{$message}}</span>
@@ -697,18 +697,19 @@ Magaxat | Profile
             <input
               type="file"
               accept="video/mp4"
-              class="media-input"
+              class="media-input app-vi"
               name="appeal_video"
             />
-            <span>{{ __('translations.video') }}</span>
+            <span>{{ __('translations.choose_your_file') }}</span>
             <i class="fa-solid fa-link post-modal-attachement"></i>
           </label>
           @error('appeal_video')
             <span style="color: red">{{$message}}</span>
           @enderror
+          <span style="color: red" class="app-ve"></span>
         </div>
       </div>
-
+      
       <button type="submit" class="btn btn-primary create-post-modal-btn">
         {{ __('translations.create_appeal') }}
       </button>
@@ -727,6 +728,8 @@ Magaxat | Profile
 <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
 <script src="{{asset('js/newest-addPostComments.js')}}" defer type="module"></script>
 <script src="{{ asset('js/addPostLike.js?version=1') }}" defer type="module"></script>
+<script src="{{ asset('js/toggleModalInputs.js') }}" defer></script>
+<script src="{{asset('js/upload.js')}}" defer></script>
 
 <script>
   const postsModalContent = document.querySelector('.posts-modal-wrapper');

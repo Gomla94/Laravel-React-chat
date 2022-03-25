@@ -238,9 +238,9 @@
                 </div>
                   
               <a class="forget-password-link" href="{{ route('password.request') }}">Forget your password?</a>
-              <button class="register-button" type="submit">Sign in</button>
+              <button class="register-button" type="submit">{{ __('translations.sign') }}</button>
               <p>or</p>
-              <a href="{{ route('login') }}" class="register-goto-login-in">Login</a>
+              <a href="{{ route('login') }}" class="register-goto-login-in">{{ __('translations.login') }}</a>
             </form>
           </div>
         </div>

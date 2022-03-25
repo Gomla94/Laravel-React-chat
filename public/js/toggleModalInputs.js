@@ -68,11 +68,33 @@ postModalMediaTypeInput.addEventListener("change", () => {
             .value;
 
     const mediaInput = document.querySelector(".media-input");
+    const postsModalForm = document.querySelector(".posts-modal-form");
 
     if (mediaType === "video") {
         mediaInput.setAttribute("accept", "video/mp4");
         mediaInput.setAttribute("name", "post_video");
+        mediaInput.classList.add("post_video");
+        if (mediaInput) {
+            mediaInput.addEventListener("change", (e) => {
+                const fileSize = e.target.files[0].size / 1024 / 1024;
+                const mediaErrorSpan = document.querySelector(".mv-e");
+                if (fileSize > 11) {
+                    postsModalForm.addEventListener("submit", preventForm);
+                    mediaErrorSpan.textContent =
+                        "Video size cannot be larger than 10MB";
+                    return false;
+                } else {
+                    mediaErrorSpan.textContent = "";
+                    postsModalForm.removeEventListener("submit", preventForm);
+                }
+            });
+        }
     } else if (mediaType === "image") {
+        mediaInput.classList.remove("post_video");
         mediaInput.setAttribute("accept", "post_image");
     }
 });
+
+function preventForm(e) {
+    e.preventDefault();
+}

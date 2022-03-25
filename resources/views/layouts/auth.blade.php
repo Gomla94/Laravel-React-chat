@@ -19,7 +19,14 @@
     />
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/favicon.ico')}}">
 
-    <link rel="stylesheet" href="{{asset('css/newest-index.css?version=48')}}" />
+    @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
+      <link rel="stylesheet" href="{{asset('css/arm.css?version=2')}}" />
+    @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
+      <link rel="stylesheet" href="{{asset('css/newest-index.css?version=59')}}" />
+    @else
+      <link rel="stylesheet" href="{{asset('css/russ.css?version=2')}}" />
+    @endif
+    
     <script src="{{asset('js/newest-index.js?version=2')}}" defer></script>
     <title>@yield('title')</title>
   </head>

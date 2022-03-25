@@ -9,4 +9,7 @@ Magaxat | Chat
 @endsection
 @section('content')
 <div id="root"></div>
+@if(Auth::check())
+<script src="{{ asset('js/app.js') }}"></script>
+@endif
 @endsection

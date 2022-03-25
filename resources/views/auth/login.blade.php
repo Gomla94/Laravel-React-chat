@@ -35,7 +35,7 @@
           <a class="forget-password-link" href="{{ route('password.request') }}">{{ __('translations.forgot-password') }}</a>
           <button class="login-button" type="submit">{{ __('translations.login') }}</button>
           <p>or</p>
-          <a href="{{ route('register') }}" class="login-goto-sign-in">{{ __('translations.signin') }}</a>
+          <a href="{{ route('register') }}" class="login-goto-sign-in">{{ __('translations.sign') }}</a>
         </form>
       </div>
     </div>
