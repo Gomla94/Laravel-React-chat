@@ -121,7 +121,7 @@ Magaxat | Profile
                         </div>
                         <select class="form-control profile-input" name="country_id" id="country">
                           @foreach ($countries as $country)
-                              <option value="{{ $country->id }}">{{ $country->name }}</option>
+                              <option value="{{ $country->id }}" {{ $user->country_id == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
                           @endforeach
                         </select>
                       </div>
