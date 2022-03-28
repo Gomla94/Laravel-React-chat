@@ -73,9 +73,6 @@ class UserController extends Controller
             'organisation_description' => ['sometimes', 'nullable', 'in:individual,organisation']
         ])->validate();
 
-
-        dd(request('gender'));
-
         $user->update([
             'name' => request('name') ? ucfirst($attributes['name']) : $user->name,
             'last_name' => request('last_name') ? ucfirst($attributes['last_name']) : $user->last_name,
