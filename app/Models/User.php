@@ -43,7 +43,9 @@ class User extends Authenticatable
         'gender',
         'country_id',
         'unique_id',
-        'last_name'
+        'last_name',
+        'cover_image_name',
+        'cover_image_path',
     ];
 
     /**

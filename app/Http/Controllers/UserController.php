@@ -75,8 +75,8 @@ class UserController extends Controller
 
 
         $user->update([
-            'name' => request('name') ? $attributes['name'] : $user->name,
-            'last_name' => request('last_name') ? $attributes['last_name'] : $user->last_name,
+            'name' => request('name') ? ucfirst($attributes['name']) : $user->name,
+            'last_name' => request('last_name') ? ucfirst($attributes['last_name']) : $user->last_name,
             'email' => request('email') ? $attributes['email'] : $user->email,
             'date_of_birth' => request('date_of_birth') ? $attributes['date_of_birth'] : null,
             'phone_number' => request('phone_number') ? $attributes['phone_number'] : null,

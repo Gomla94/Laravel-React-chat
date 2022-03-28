@@ -112,8 +112,12 @@ Magaxat | Users
         </div>
         <div class="single-user-info-wrapper">
           <div class="single-user-title-desc-container">
-            <span class="single-user-title">{{ $user->name }}</span>
-            <span class="single-user-description">@ {{ $user->name }}</span>
+            <span class="single-user-title">
+              <a href="">{{ $user->name }} </a>
+            </span>
+            <span class="single-user-description">
+              <a href="">@ {{ $user->name }}</a>
+            </span>
           </div>
           <div class="single-user-view-button-wrapper">
             @if(Auth::check())

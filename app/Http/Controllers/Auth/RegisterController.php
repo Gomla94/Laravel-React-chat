@@ -108,8 +108,8 @@ class RegisterController extends Controller
         $image_path = Storage::disk('s3')->url("defaultProfileImages/{$full_name}.png");
 
         $user = User::create([
-            'name' => $data['name'],
-            'last_name' => $data['last_name'],
+            'name' => ucfirst($data['name']),
+            'last_name' => ucfirst($data['last_name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type' => $data['type'],

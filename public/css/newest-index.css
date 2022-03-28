@@ -8,9 +8,28 @@ body {
     background-color: #f9f9f9;
 }
 
-video::-webkit-media-controls-play-button {
-    color: green !important;
+::-webkit-scrollbar {
+    height: 5px !important;
 }
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #e6d5bc;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #e6d5bc;
+    width: 5px;
+}
+
 /* navbar starts here */
 
 .navbar-wrapper {
@@ -1521,6 +1540,11 @@ button {
     padding-right: 1rem;
 }
 
+.single-benefactors-title-desc-container a {
+    text-decoration: none;
+    color: unset;
+}
+
 .single-appeal-title-desc-container {
     text-align: center;
     width: 60%;
@@ -1839,6 +1863,11 @@ button {
     justify-content: center;
     text-align: left;
     padding-right: 1rem;
+}
+
+.single-user-title-desc-container a {
+    text-decoration: none;
+    color: unset;
 }
 
 .single-user-view-button-wrapper {
@@ -2286,6 +2315,7 @@ button {
     color: #fff;
     width: 50px;
     position: relative;
+    cursor: pointer;
 }
 
 .profile-image-label i {
@@ -2300,6 +2330,58 @@ button {
 }
 
 .profile-image-input {
+    width: 0px;
+    overflow: hidden;
+    outline: none !important;
+}
+
+.profile-cover-image-change-wrapper {
+    position: absolute;
+    z-index: 100;
+    top: 220px;
+    right: 120px;
+    text-align: center !important;
+    cursor: pointer;
+}
+
+.profile-cover-image-label {
+    color: #fff;
+    width: 50px;
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-cover-message {
+    height: auto;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    opacity: 0;
+    position: absolute;
+    right: -15px;
+    top: -80px;
+    text-align: center !important;
+    padding: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.profile-cover-image-label:hover ~ .profile-cover-message {
+    opacity: 0.8;
+}
+
+.profile-cover-image-label i {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+}
+
+.profile-cover-image-label span {
+    margin-bottom: 40px;
+    color: #fff !important;
+}
+
+.profile-cover-image-input {
     width: 0px;
     overflow: hidden;
     outline: none !important;
@@ -2512,7 +2594,7 @@ button {
 
 .nav {
     width: 80%;
-    height: 70px;
+    height: 80px;
     z-index: -1;
     background-color: #af9065;
     border-bottom-left-radius: 30px;
@@ -2544,6 +2626,7 @@ button {
 .active-nav {
     color: #af9065 !important;
     background-color: #fff;
+    height: 40px;
 }
 
 .profile-body {
@@ -2730,6 +2813,11 @@ button {
         margin-right: unset;
         margin-top: 15px !important;
     }
+
+    .profile-cover-image-change-wrapper {
+        margin-top: 50px !important;
+        right: 90px;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -2820,6 +2908,10 @@ button {
         width: 32px;
         height: 28px;
     }
+
+    .profile-cover-image-change-wrapper {
+        right: 50px !important;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -2836,6 +2928,16 @@ button {
         position: absolute;
         right: 15px;
         top: 83%;
+    }
+
+    .profile-image-change-wrapper {
+        margin-right: unset;
+        margin-top: -10px !important;
+    }
+
+    .profile-img img {
+        width: 180px;
+        height: 180px;
     }
 
     .profile-option .notification .alert-message {

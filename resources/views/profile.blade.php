@@ -127,6 +127,26 @@ Magaxat | Profile
                       </div>
                     </div>
                   </div>
+
+                  @if(Auth::id() === $user->id)
+                    <div class="profile-cover-image-change-wrapper">
+                      <label for="profile-cover-image-input" class="profile-cover-image-label">
+                        <i class="fa-solid fa-camera"></i>
+                        <input
+                          type="file"
+                          class="profile-cover-image-input"
+                          name="cover-image"
+                          id="profile-cover-image-input"
+                        />
+                        <span>{{ __('translations.change') }}</span>
+                      </label>
+                      <div class="profile-cover-message">
+                        <span>preffered dimensions are 400px * 600px</span>
+                      </div>
+                    </div>
+                  @endif
+
+                  
                   <div class="row">
                     <div class="">
                       <div class="form-group">
