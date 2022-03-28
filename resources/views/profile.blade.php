@@ -169,7 +169,7 @@ Magaxat | Profile
                         <div>
                           <label for="gender">{{ __('translations.gender') }}</label>
                         </div>
-                        <select name="gender profile-input" id="gender" class="form-control">
+                        <select name="gender" id="gender" class="form-control profile-input">
                           <option value="male" {{ $user->gender === 'male' ? 'selected' : ''}}>{{ __('translations.male') }}</option>
                           <option value="female" {{ $user->gender === 'female' ? 'selected' : ''}}>{{ __('translations.female') }}</option>
                         </select>
