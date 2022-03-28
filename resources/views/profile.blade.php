@@ -15,7 +15,7 @@ Magaxat | Profile
     <div class="profile-container">
       <div class="profile-header">
         <div class="wrapper">
-          <img src="{{ asset('images/img/slider1.jpeg') }}" alt="">
+          <img src="{{ $user->cover_image_path }}" alt="">
         </div>
         <div class="profile-img">
           <img class="profile-image" src="{{ $user->image ?? asset('images/avatar.png') }}" width="200" alt="Profile Image" />
@@ -86,7 +86,7 @@ Magaxat | Profile
                 <h1>{{ __('translations.settings') }}</h1>
                 
                 <div class="profile-main-settings">
-                <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form">
+                <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
                   <div class="row mb-3">
@@ -141,7 +141,7 @@ Magaxat | Profile
                         <span>{{ __('translations.change') }}</span>
                       </label>
                       <div class="profile-cover-message">
-                        <span>preffered dimensions are 400px * 600px</span>
+                        <span>preffered dimensions are 1280px * 1000px</span>
                       </div>
                     </div>
                   @endif

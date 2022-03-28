@@ -73,6 +73,12 @@ class UserController extends Controller
             'organisation_description' => ['sometimes', 'nullable', 'in:individual,organisation']
         ])->validate();
 
+        if (request()->file('cover-image')) {   
+            Storage::disk('s3')->delete("images/{$user->cover_image_name}");
+            $file = request()->file('cover-image');
+            $image_path = $file->store('images', 's3');
+        }
+
         $user->update([
             'name' => request('name') ? ucfirst($attributes['name']) : $user->name,
             'last_name' => request('last_name') ? ucfirst($attributes['last_name']) : $user->last_name,
@@ -81,6 +87,8 @@ class UserController extends Controller
             'phone_number' => request('phone_number') ? $attributes['phone_number'] : null,
             'gender' => $attributes['gender'] ?? null,
             'country_id' => $attributes['country_id'] ?? null,
+            'cover_image_name' => request()->file('cover-image') ? basename($image_path) : null,
+            'cover_image_path' => request()->file('cover-image') ? Storage::disk('s3')->url($image_path) : null,
             'interesting_type_id' => json_encode(request('interesting_type'))?? null,
             'additional_type' => request('additional_type') ? $attributes['additional_type'] : null,
             'organisation_description' => request('organisation_description') ? $attributes['organisation_description'] : null
