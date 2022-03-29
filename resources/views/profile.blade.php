@@ -15,7 +15,7 @@ Magaxat | Profile
     <div class="profile-container">
       <div class="profile-header">
         <div class="wrapper">
-          <img src="{{ asset('images/img/slider1.jpeg') }}" alt="">
+          <img src="{{ $user->cover_image_path ?? asset('images/img/slider1.jpeg') }}" alt="">
         </div>
         <div class="profile-img">
           <img class="profile-image" src="{{ $user->image ?? asset('images/avatar.png') }}" width="200" alt="Profile Image" />
@@ -86,7 +86,7 @@ Magaxat | Profile
                 <h1>{{ __('translations.settings') }}</h1>
 
                 <div class="profile-main-settings">
-                <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form">
+                <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
                   <div class="row mb-3">
@@ -121,12 +121,32 @@ Magaxat | Profile
                         </div>
                         <select class="form-control profile-input" name="country_id" id="country">
                           @foreach ($countries as $country)
-                              <option value="{{ $country->id }}">{{ $country->name }}</option>
+                              <option value="{{ $country->id }}" {{ $user->country_id == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
                           @endforeach
                         </select>
                       </div>
                     </div>
                   </div>
+
+                  @if(Auth::id() === $user->id)
+                    <div class="profile-cover-image-change-wrapper">
+                      <label for="profile-cover-image-input" class="profile-cover-image-label">
+                        <i class="fa-solid fa-camera"></i>
+                        <input
+                          type="file"
+                          class="profile-cover-image-input"
+                          name="cover-image"
+                          id="profile-cover-image-input"
+                        />
+                        <span>{{ __('translations.change') }}</span>
+                      </label>
+                      <div class="profile-cover-message">
+                        <span>preffered dimensions are 1280px * 1000px</span>
+                      </div>
+                    </div>
+                  @endif
+
+                  
                   <div class="row">
                     <div class="">
                       <div class="form-group">
@@ -149,7 +169,7 @@ Magaxat | Profile
                         <div>
                           <label for="gender">{{ __('translations.gender') }}</label>
                         </div>
-                        <select name="gender profile-input" id="gender" class="form-control">
+                        <select name="gender" id="gender" class="form-control profile-input">
                           <option value="male" {{ $user->gender === 'male' ? 'selected' : ''}}>{{ __('translations.male') }}</option>
                           <option value="female" {{ $user->gender === 'female' ? 'selected' : ''}}>{{ __('translations.female') }}</option>
                         </select>
@@ -610,7 +630,7 @@ Magaxat | Profile
             <option value="{{ $country->id }}">{{ $country->name }}</option>
           @endforeach
         </select>
-        @error('post_country')
+        @error('country')
           <span style="color: red">{{$message}}</span>
         @enderror
       </div>

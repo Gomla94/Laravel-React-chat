@@ -96,91 +96,78 @@ class FrontController extends Controller
         $filtered_users = [];
         $filtered_name_users = [];
 
-        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE);
-
+        $users = User::where('id', '!=', Auth::id())->whereType(User::USER_TYPE)->get();
         foreach($filter_keys as $key) {
             switch ($key) {
                 case 'user-name':
-                    $filtered_name_users = $users->where('name', 'like', '%'.request('user-name').'%')->get();
-                    foreach($filtered_name_users as $user) {
-                        $filtered_users[] = $user;
-                    }
-                    break 1;
+                    $request_name = request('user-name');
+                    $users = $users->filter(function($item, $key) use($request_name) {
+                        return $item->name == ucfirst($request_name);
+                    });
+                    break ;
 
                 case 'interesting-in-type':
                     $interesting_type = InterestingType::where('name', request('interesting-in-type'))->pluck('id')->firstOrFail();
-                    if (count($filtered_users)) {
-                        $users = $filtered_users;
-                    }  else {
-                        $users = $users->get();
-                    }
+                    
 
-                    foreach($users as $user) {
-                        $user_interesting_types_ids = json_decode($user->interesting_type_id);
-                        if ($user_interesting_types_ids !== null) {
-                            if (in_array($interesting_type, $user_interesting_types_ids)) {
-                                continue;
-                            }  else {
-                                $filtered_users = array_filter($filtered_users, function($filtered_user) use($user) {
-                                    return $filtered_user->id !== $user->id;
-                                });
-                            }
+                    $users = $users->filter(function($item, $key) use($interesting_type) {
+                        $user_interesting_types_ids = json_decode($item->interesting_type_id);
+                        if ($user_interesting_types_ids == null) {
+                            $item = null;
+                        } elseif (!in_array($interesting_type, $user_interesting_types_ids)) {
+                            $item = null;
                         } else {
-                            $filtered_users = array_filter($filtered_users, function($filtered_user) use($user) {
-                                return $filtered_user->id !== $user->id;
-                            });
+                            return $item;
                         }
-                        
-                    }
+                    });
 
-                    $filtered_users = array_unique($filtered_users);
-                    if ($filtered_users == null) {
-                        break 2;
-                    }
+                    // dd($users);
+
+                    // $filtered_users = array_unique($filtered_users);
+                    // if ($filtered_users == null) {
+                    //     break 2;
+                    // }
                     break;
 
                 case 'country':
-                    $country = Country::where('name', 'like',request('country'))->firstOrFail();
-                    if (count($filtered_users)) {
-                        foreach($filtered_users as $filtered_user) {
-                            if ($filtered_user->country_id !== $country->id) {
-                                $filtered_users = array_filter($filtered_users, function($user) use($filtered_user) {
-                                    return $user->id !== $filtered_user->id;
-                                });
-                            } 
-                        }
+                    $request_country = request('country');
+                    $country = Country::where('name', $request_country)->pluck('id')->firstOrFail();
 
-                        break 1;
-                    } else {
-                        $users = $users->where('country_id', $country->id);
-                        foreach($users as $user) {
-                            $filtered_users[] = $user;
-                        }
-                        break;
-                    }
+                    $users = $users->filter(function($item, $key) use($country) {
+                        return $item->country_id == $country;
+                    });
+                    break;
+
                    
 
                 case 'gender':
-                    if (count($filtered_users)) {
-                        foreach($filtered_users as $filtered_user) {
-                            if ($filtered_user->gender !== request('gender')) {
-                                $filtered_users = array_filter($filtered_users, function($user) use($filtered_user) {
-                                    return $user->gender !== $filtered_user->gender;
-                                });
-                            } 
-                        }
+                    // if (count($filtered_users)) {
+                    //     foreach($filtered_users as $filtered_user) {
+                    //         if ($filtered_user->gender !== request('gender')) {
+                    //             $filtered_users = array_filter($filtered_users, function($user) use($filtered_user) {
+                    //                 return $user->gender !== $filtered_user->gender;
+                    //             });
+                    //         } 
+                    //     }
 
-                        break 1;
-                    } else {
-                        $users = $users->where('gender', request('gender'));
-                        foreach($users as $user) {
-                            $filtered_users[] = $user;
-                        }
-                        break;
-                    }
+                    //     break 1;
+                    // } else {
+                    //     dd($users);
+                    //     $users = $users->where('gender', request('gender'))->get();
 
-                
-                        
+                    //     foreach($users as $user) {
+                    //         $filtered_users[] = $user;
+                    //     }
+                    //     break;
+                    // }
+
+                    
+                    $gender = request('gender');
+                    $users = $users->filter(function($item, $key) use($gender) {
+                        return $item->gender == $gender;
+                    });
+                    break;
+ 
                     default:
                         break;
             }
@@ -188,10 +175,11 @@ class FrontController extends Controller
         
         
 
+
         $interesting_types = InterestingType::all();
         $countries = Country::all();
         return view('layouts.front.users', [
-            'users' => count($filter_keys) !== 0 ? $filtered_users : $users->get(),
+            'users' => $users,
             'interesting_types' => $interesting_types,
             'countries' => $countries,
         ]);

@@ -24,13 +24,18 @@
       @foreach($benefactors as $benefactor)
         <div class="single-benefactors-wrapper">
           <div class="single-benefactors-image-wrapper">
-            <img src="{{ $benefactor->image ?? asset('images/avatar.png') }}" alt="benefactors-image" />
+            <a href="{{ route('user.page', $benefactor->unique_id) }}">
+              <img src="{{ $benefactor->image ?? asset('images/avatar.png') }}" alt="benefactors-image" />
+            </a>
           </div>
           <div class="single-benefactors-info-wrapper">
             <div class="single-benefactors-title-desc-container">
-              <span class="single-benefactors-title">{{ $benefactor->name }}</span>
-              <span class="single-benefactors-description"
-                >@ {{ $benefactor->name }}</span>
+              <span class="single-benefactors-title">
+                <a href="">{{ $benefactor->name }}</a>
+              </span>
+              <span class="single-benefactors-description">
+                <a href="">@ {{ $benefactor->name }}</a>
+              </span>
             </div>
             <div class="single-benefactors-view-button-wrapper">
             @if(Auth::check())
