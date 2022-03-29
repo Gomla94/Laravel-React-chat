@@ -636,7 +636,7 @@ Magaxat | Profile
             <option value="{{ $country->id }}">{{ $country->name }}</option>
           @endforeach
         </select>
-        @error('post_country')
+        @error('country')
           <span style="color: red">{{$message}}</span>
         @enderror
       </div>

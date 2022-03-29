@@ -30,7 +30,7 @@ class AddPostRequest extends FormRequest
             'post_description' => ['sometimes', 'nullable', 'string'],
             'post_image' => ['max:2048', 'mimes:png,jpg,jpeg'],
             'post_video' => ['max:10500', 'mimes:mp4,mov,ogg,qt'],
-            'country' => ['string', Rule::exists('countries', 'name')]
+            'country' => ['string', Rule::exists('countries', 'id')]
         ];
     }
 
