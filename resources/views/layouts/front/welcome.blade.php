@@ -18,7 +18,7 @@
           <div class="appeal-slider-info-wrapper">
             <p class="appeal-title"> {{ str_limit($appeal->title, 30) }}</p>
             <p class="appeal-description">
-              {{ str_limit($appeal->description, 20) }}
+              {{ str_limit($appeal->description, 80) }}
             </p>
           </div>
           <a href="{{ route('show-appeal', $appeal->uniqueid) }}" class="appeal-slide-link">{{ __('translations.want_help') }}</a>
@@ -30,11 +30,11 @@
   <div class="swiper-button-prev"></div>
 </div>
 
-<div class="main-posts-wrapper">
+<div class="main-posts-wrapper pb-3">
   <div class="main-posts-title-wrapper">
     <p class="main-posts-title">{{ __('translations.news') }}</p>
   </div>
-  <div class="container">
+  <div class="col-md-8 col-10 offset-md-2 offset-1">
     <div class="main-posts-buttons-wrapper">
       <div class="main-posts-search-wrapper">
         <form action="{{ route('welcome', request()->query()) }}" method="GET">
@@ -52,12 +52,14 @@
       <div class="main-posts-add-buttons">
         <button class="main-posts-add-appeal-button">{{ __('translations.help_request') }}</button>
         <button class="main-posts-add-post-button">
-          <i class="fal fa-plus new-post-icon"></i>
+            &nbsp;
+          <img src="{{asset('/images/group.png')}}" width="20px">
+            &nbsp;&nbsp;
           {{ __('translations.new_post') }}
         </button>
       </div>
     </div>
-  
+
     <div class="main-posts-container">
         <div class="main-posts">
           @foreach($random_posts as $post)
@@ -89,7 +91,7 @@
                 />
               </div>
               @endif
-    
+
               @if($post->video_path)
               <div class="post-image-wrapper">
                 <video controls
@@ -108,7 +110,7 @@
               <div class="main-post-socials-wrapper">
                 <div class="likes-count">
                   {{-- <i class="fa-solid fa-heart social-icon"></i> --}}
-    
+
                 @if(Auth::check())
                   @if($post->likes->where('user_id', Auth::id())->count() !== 0)
                   <img id="{{ $post->id }}" class="social-icon post-heart-icon liked-post-heart-icon" src="{{ asset('images/img/red-heart.png') }}" alt="heart">
@@ -133,7 +135,7 @@
                   <span>4</span>
                 </div>
               </div>
-    
+
               <div class="main-post-comment-form-wrapper">
                 @if (Auth::check())
                 <form class="main-post-comment-form">
@@ -155,16 +157,16 @@
                 </form>
                 @endif
               </div>
-    
+
               <div class="main-post-comments-section">
-                
+
               </div>
             </div>
           @endforeach
         </div>
     </div>
   </div>
-  
+
 </div>
 
 <div class="posts-modal-wrapper">
@@ -340,7 +342,7 @@
           <span style="color: red" class="app-ve"></span>
         </div>
       </div>
-      
+
       <button type="submit" class="btn btn-primary create-post-modal-btn">
         {{ __('translations.create_appeal') }}
       </button>

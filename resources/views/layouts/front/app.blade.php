@@ -48,7 +48,7 @@
       </script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-   
+
 
     <title>@yield('title')</title>
   </head>
@@ -67,7 +67,7 @@
               <img src="{{asset('images/img/navbar-logo.png')}}" alt="" class="navbar-logo" />
             </a>
           </div>
-          
+
           <div class="navbar-links-wrapper">
             <ul class="navbar-links-list">
               <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">{{ __('translations.users_video') }}</a></li>
@@ -77,7 +77,7 @@
             </ul>
         </div>
         </div>
-        
+
         <div class="navbar-user-section-wrapper">
           @if(Auth::check())
           <div class="navbar-chat-icon">
@@ -96,19 +96,19 @@
           </div>
           <div class="user-adds-list">
             <form action="{{ route('logout') }}" method="POST">
-              @csrf  
+              @csrf
               <button type="submit">{{ __('translations.log_out') }}</button>
             </form>
           </div>
-          @else
-          <div class="login-navbar-user">
-            <span class="navbar-user-login">
-              <a href="{{ route('login') }}">{{ __('translations.log_in') }}</a>
-            </span>
-          </div>
-          @endif
+            @else
+                <div class="login-navbar-user">
+                    <a href="{{ route('login') }}">
+                        <button class="login-navbar-user-btn">{{ __('translations.log_in') }}</button>
+                    </a>
+                </div>
+            @endif
           <div class="navbar-languages-list">
-            
+
             @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
               <span>ARM</span>
               <i class="fa-solid fa-angle-down languages-icon"></i>
@@ -198,20 +198,20 @@
           @if(Auth::check())
             <li class="overlay-list-item">
               <form action="{{ route('logout') }}" method="POST">
-              @csrf  
+              @csrf
               <button type="submit" class="mobile-logut-button">{{ __('translations.log_out') }}</button>
             </form>
             </li>
           @endif
         </ul>
       </div>
-      
+
     </div>
 
    @yield('content')
 
    @stack('js')
-   
+
     <script>
       var swiper = new Swiper(".myMainSwiper", {
         spaceBetween: 30,
@@ -247,6 +247,6 @@
         },
       });
     </script>
-    
+
   </body>
 </html>

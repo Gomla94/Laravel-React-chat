@@ -136,7 +136,7 @@
             <p class="login-l-heading">Welcome Back</p>
             <p class="login-m-heading">Sign in</p>
           </div>
-    
+
           <div class="register-form-wrapper">
             <form action="{{ route('register') }}" method="POST">
                 @csrf
@@ -148,21 +148,21 @@
                               type="text"
                               class="login-email-input"
                               name="name"
-                              placeholder="name"
+                              placeholder="Name"
                             />
                             @error('name')
                                 <span class="auth-error-message">{{ $message }}</span>
                             @enderror
-                            
+
                           </div>
-    
+
                           <div class="form-group col-md-6">
                             <label for="last_name">Last Name</label>
                             <input
                               type="text"
                               class="login-email-input"
                               name="last_name"
-                              placeholder="last name"
+                              placeholder="Last name"
                             />
                             @error('last_name')
                                 <span class="auth-error-message">{{ $message }}</span>
@@ -178,13 +178,13 @@
                               type="email"
                               class="login-email-input"
                               name="email"
-                              placeholder="email"
+                              placeholder="Email"
                             />
                             @error('email')
                                 <span class="auth-error-message">{{ $message }}</span>
                             @enderror
                           </div>
-    
+
                           <div class="form-group col-md-6">
                             <label for="email">Type</label>
                             <select name="type" class="form-control login-email-input" id="type">
@@ -206,12 +206,13 @@
                               type="password"
                               class="login-email-input"
                               name="password"
+                              placeholder="Password"
                             />
                             @error('password')
                                 <span class="auth-error-message">{{ $message }}</span>
                             @enderror
                           </div>
-    
+
                           <div class="form-group col-md-6 adds-type-row">
                             <label for="additional_type">Additional Type</label>
                             <select name="additional_type" class="form-control login-email-input" id="additional_type">
@@ -228,7 +229,7 @@
                 <div class="col-md-12 desc-row">
                     <div class="row">
                         <div class="form-group">
-                            <label for="description">description</label>
+                            <label for="description">Description</label>
                             <textarea name="description" class="form-control" id="description" cols="30" rows="5"></textarea>
                             @error('description')
                                 <span class="auth-error-message">{{ $message }}</span>
@@ -236,8 +237,8 @@
                           </div>
                     </div>
                 </div>
-                  
-              <a class="forget-password-link" href="{{ route('password.request') }}">Forget your password?</a>
+
+              <a class="forget-password-link mt-1 mb-3" href="{{ route('password.request') }}">Forget your password?</a>
               <button class="register-button" type="submit">{{ __('translations.sign') }}</button>
               <p>or</p>
               <a href="{{ route('login') }}" class="register-goto-login-in">{{ __('translations.login') }}</a>

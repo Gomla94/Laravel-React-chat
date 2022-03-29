@@ -2137,7 +2137,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   // wsPort: 6001,
   // enabledTransports: ["ws", "wss"],
   broadcaster: "pusher",
-  key: "f3410ab18dff50208018",
+  key: "",
   cluster: "mt1",
   encrypted: true // forceTLS: true,
   // disableStats: true,

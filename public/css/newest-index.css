@@ -4,13 +4,35 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     background-color: #f9f9f9;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 video::-webkit-media-controls-play-button {
     color: green !important;
 }
+
 /* navbar starts here */
 
 .navbar-wrapper {
@@ -44,15 +66,14 @@ video::-webkit-media-controls-play-button {
 .navbar {
     width: 95%;
     height: 100px;
-    background-color: white;
     margin: auto;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    background-color: #FFFFFF;
+    border-radius: 0px 0px 30px 30px;
+    box-shadow: 5px 5px 50px 40px rgba(0, 0, 0, 0.03);
     /* display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center; */
-    padding: 10px 20px;
 }
 
 .menu-bars {
@@ -148,16 +169,15 @@ video::-webkit-media-controls-play-button {
 .navbar-logo-wrapper {
     width: auto;
     height: 64px;
-    padding: 1rem;
-    margin: 1rem;
     display: flex;
+    justify-content: space-around;
     flex-direction: row;
     align-items: center;
-    margin: 0 3rem;
+    margin: 0 5rem;
 }
 
 .navbar-logo-container {
-    width: 100px;
+    width: 150px;
 }
 
 .navbar-logo-wrapper img {
@@ -169,17 +189,24 @@ video::-webkit-media-controls-play-button {
     width: auto;
     height: 100%;
     margin: 0 0 0 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-links-list {
     list-style: none;
     display: flex;
-
-    /* padding-top: ; */
+    align-items: center;
+    margin: 0;
 }
 
 .navbar-link {
     padding: 0 1rem;
+}
+
+.navbar-link > a {
+    font-size: 16px;
 }
 
 .navbar-links-list a {
@@ -189,10 +216,11 @@ video::-webkit-media-controls-play-button {
 }
 
 .navbar-active-item {
-    color: #af9065 !important;
-    background-color: rgba(224, 221, 221, 0.644);
-    padding: 10px;
-    border-radius: 10px;
+    color: #AF9065 !important;
+    background-color: #F5F5F5;
+    padding: 15px;
+    border-radius: 15px;
+    line-height: 28px;
     font-weight: 400;
 }
 
@@ -202,9 +230,8 @@ video::-webkit-media-controls-play-button {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 0 5rem 0 0;
     justify-content: flex-end;
-    padding-right: -10px !important;
-    /* padding-left: 15rem; */
 }
 
 .navbar-user-section-wrapper div {
@@ -247,19 +274,21 @@ video::-webkit-media-controls-play-button {
     text-decoration: none;
 }
 
+.p_or {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
 .login-navbar-user {
-    color: white;
-    background-color: #af9065;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
     margin-right: 2rem;
-    height: 3rem;
-    /* margin-left: 10rem !important; */
+}
+
+.login-navbar-user-btn {
+    background: #AF9065;
+    color: white;
+    border-radius: 15px;
+    font-size: 16px;
+    width: auto;
 }
 
 .navbar-user-list i {
@@ -327,8 +356,8 @@ video::-webkit-media-controls-play-button {
     cursor: pointer;
 }
 
-.navbar-languages-list span {
-    font-weight: 600;
+.navbar-languages-list {
+    font-size: 13px;
 }
 
 .languages-icon {
@@ -336,23 +365,28 @@ video::-webkit-media-controls-play-button {
 }
 
 .languages-list {
-    background-color: #333;
+    background: rgba(43, 43, 43, 0.7);
+    box-shadow: 4px 4px 50px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
     color: white;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
     position: absolute;
+    margin: 0;
     top: 80px;
-    width: 120px;
+    width: 90px;
     align-items: center;
     z-index: -10;
-    right: 0;
+    right: 3.5rem;
     opacity: 0;
     transition: all 0.3s ease-in;
 }
 
 .mobile-languages-list {
-    background-color: rgb(92, 92, 92);
+    background: rgba(43, 43, 43, 0.7);
+    box-shadow: 4px 4px 50px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
     color: white;
     display: flex;
     flex-direction: column;
@@ -385,6 +419,7 @@ video::-webkit-media-controls-play-button {
 .mobile-languages-list div:nth-child(3) {
     margin-bottom: 20px;
 }
+
 .show-languages-list {
     opacity: 0.6;
     z-index: 10;
@@ -433,6 +468,7 @@ video::-webkit-media-controls-play-button {
     margin-top: 380px;
     margin-bottom: 50px !important;
 }
+
 .swiper .swiper-pagination {
     position: absolute;
     text-align: right;
@@ -452,6 +488,16 @@ video::-webkit-media-controls-play-button {
 /* navbar slider ends here */
 
 /* new slider starts here */
+
+.login-email-input, .login-password-input {
+    outline: none;
+    border: none;
+}
+
+.login-email-input::placeholder, .login-password-input::placeholder {
+    color: white;
+    opacity: 0.7;
+}
 
 .img-container {
     height: 500px;
@@ -504,15 +550,15 @@ video::-webkit-media-controls-play-button {
 .main-posts-wrapper {
     text-align: center;
     color: black;
-    font-size: 20px;
+    font-size: 16px;
     padding-top: 10px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .main-appeals-title-wrapper::after {
     content: "";
-    background-color: #8b7350;
-    height: 2px;
+    background-color: #AF9065;
+    height: 1px;
     width: 20%;
     position: absolute;
     top: 25px;
@@ -521,8 +567,8 @@ video::-webkit-media-controls-play-button {
 
 .main-appeals-title-wrapper::before {
     content: "";
-    background-color: #8b7350;
-    height: 2px;
+    background-color: #AF9065;
+    height: 1px;
     width: 20%;
     position: absolute;
     top: 25px;
@@ -539,8 +585,9 @@ video::-webkit-media-controls-play-button {
     height: 505px !important;
     border-radius: 20px;
     margin: auto;
-    /* margin: 2rem !important; */
-    box-shadow: 3px 5px 20px 10px rgb(255, 250, 250);
+    margin-left: 30px !important;
+    margin-right: 0!important;
+    box-shadow: 2px 1px 2px 2px rgba(0, 0, 0, 0.03);
 }
 
 .swiper-button-next,
@@ -549,17 +596,22 @@ video::-webkit-media-controls-play-button {
     color: #b3b3b3 !important;
 }
 
+.swiper-button-next{
+    right: 70px;
+}
+.swiper-button-prev{
+    left: 70px;
+}
+
 .appeal-slide-image-wrapper {
     width: 100%;
     height: 200px;
-    padding: 20px;
+    margin-top: 20px;
 }
 
 .appeal-slide-image-wrapper img {
-    width: 100%;
+    width: 90%;
     min-height: 100%;
-    max-height: 100%;
-    border-radius: 25px !important;
 }
 
 .appeal-slider-info-wrapper {
@@ -580,11 +632,10 @@ video::-webkit-media-controls-play-button {
 
 .appeal-description {
     color: #474747;
-    width: 60%;
+    width: 50%;
     margin: auto;
     height: 70px;
     max-height: 70px;
-
     word-break: break-all;
 }
 
@@ -623,8 +674,8 @@ video::-webkit-media-controls-play-button {
 
 .main-posts-title-wrapper::before {
     content: "";
-    background-color: #8b7350;
-    height: 2px;
+    background-color: #AF9065;
+    height: 1px;
     width: 10%;
     position: absolute;
     top: 25px;
@@ -633,8 +684,8 @@ video::-webkit-media-controls-play-button {
 
 .main-posts-title-wrapper::after {
     content: "";
-    background-color: #8b7350;
-    height: 2px;
+    background-color: #AF9065;
+    height: 1px;
     width: 10%;
     position: absolute;
     top: 25px;
@@ -647,7 +698,7 @@ video::-webkit-media-controls-play-button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 8rem;
+    padding: 0 7rem;
 }
 
 .main-posts-search-wrapper {
@@ -678,9 +729,20 @@ button {
     width: 200px;
 }
 
+.main-posts-add-appeal-button, .main-posts-add-post-button {
+    font-size: 16px;
+    height: 100%;
+}
+
+.main-posts-add-post-button {
+    text-align: left !important;
+}
+
 .new-post-icon {
-    border: 1px solid white;
+    border: 1.5px solid white;
     padding: 5px;
+    border-radius: 5px;
+    left: 20px;
 }
 
 .main-posts-container {
@@ -707,8 +769,8 @@ button {
     background-color: #fff;
     height: auto;
     border-radius: 20px;
-    padding: 1rem;
-    margin-bottom: 30px;
+    padding: 1rem 2rem;
+    margin: 30px auto;
 }
 
 .post-user-date-wrapper,
@@ -822,13 +884,13 @@ button {
 
 .post-image-wrapper {
     width: 100%;
-    height: 300px;
-    height: 300px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
+    height: 350px;
     position: relative;
 }
-
+.post-image-wrapper>img{
+    object-fit: cover;
+}
 .main-post-image {
     width: 100%;
     height: 100%;
@@ -908,8 +970,8 @@ button {
     color: rgb(109, 109, 109);
     font-size: 2rem;
     margin-bottom: 10px;
-    width: 38px;
-    height: 34px;
+    width: 26px;
+    height: 23px;
 }
 
 .main-post-form-textarea {
@@ -1082,7 +1144,7 @@ button {
 
 .posts-modal-form {
     width: 80%;
-    margin: auto;
+    margin: 50px auto;
 }
 
 .image-label {
@@ -1209,7 +1271,7 @@ button {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 1rem 2rem;
+    padding: 3rem 1rem;
     margin-top: 150px;
     margin-bottom: 50px;
 }
@@ -1219,21 +1281,26 @@ button {
 }
 
 .login-l-heading {
-    color: #afafaf;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 42px;
+    text-align: center;
+    color: #AFAFAF;
 }
 
 .login-m-heading {
     color: #535353;
     font-size: 1.3rem;
-    font-weight: 600;
     text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 42px;
 }
 
 .login-form-wrapper,
 .register-form-wrapper {
-    width: 60%;
+    width: 70%;
 }
 
 .login-form-wrapper label,
@@ -1245,9 +1312,11 @@ button {
 .login-form-wrapper p,
 .register-form-wrapper p {
     color: black;
-    padding: 1rem 1rem;
+    padding: 2rem 2rem;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    text-transform: uppercase;
 }
 
 .login-form-wrapper span,
@@ -1291,6 +1360,18 @@ button {
     margin-top: -0.6rem;
 }
 
+.forget-password-link {
+    font-size: 14px;
+}
+
+.login-form-wrapper label, .register-form-wrapper label {
+    color: #535353;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
+}
+
 .login-form-wrapper button {
     background-color: #c2b29a;
     color: white;
@@ -1303,6 +1384,11 @@ button {
 .login-button,
 .register-button {
     padding: 1rem 1rem;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
 }
 
 .register-button {
@@ -1319,7 +1405,12 @@ button {
     width: 100% !important;
     text-align: center;
     text-decoration: none;
+    text-transform: uppercase;
     margin: auto !important;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
 }
 
 /* login page ends here */
@@ -1351,7 +1442,8 @@ button {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 1rem 2rem;
+    padding: 4rem 2rem;
+    margin-top: 150px;
     margin-bottom: 50px;
 }
 
@@ -1377,13 +1469,6 @@ button {
     padding: 1rem 1rem;
 }
 
-.register-form-wrapper p {
-    color: black;
-    padding: 1rem 1rem;
-    text-align: center;
-    font-size: 1.6rem;
-}
-
 .register-form-wrapper span {
     color: red;
     padding: 1rem 1rem;
@@ -1400,6 +1485,11 @@ button {
     text-align: center;
     text-decoration: none;
     margin: auto !important;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
 }
 
 /* register page ends here */
@@ -1851,6 +1941,7 @@ button {
 .user-subscribed-link {
     margin-bottom: 1rem;
 }
+
 /* users page ends here  */
 
 /* videos page starts here */
@@ -1977,6 +2068,7 @@ button {
 .other-video-user-date-wrapper {
     padding: 1rem;
 }
+
 /* main video page ends here */
 
 /* main appeal page starts here */
@@ -2518,7 +2610,7 @@ button {
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     margin-left: 1rem;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 }
 
@@ -2531,6 +2623,43 @@ button {
     width: 100%;
 }
 
+.new-nav {
+    height: auto;
+}
+
+.new-nav ul {
+    display: flex;
+    list-style: none;
+    height: 100%;
+    position: relative;
+    padding: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    user-select: none;
+}
+
+@media (max-width: 1400px) {
+    .new-nav ul li {
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .new-nav {
+        width: 95%;
+    }
+}
+.new-nav ul li {
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    color: white;
+    border-radius: 10px;
+    margin-left: 20px;
+    padding: 0.5rem 1.7rem;
+}
+
 .nav ul li {
     cursor: pointer;
     text-align: center;
@@ -2539,6 +2668,13 @@ button {
     /* background-color: red; */
     border-radius: 10px;
     padding: 0.5rem 1.7rem;
+}
+
+.profile-settings>h1, .profile-posts>h1,
+.profile-appeals>h1, .profile-images>h1,
+.profile-videos>h1, .profile-subscribers>h1,
+.profile-subscribtions>h1{
+    margin: 30px 0;
 }
 
 .active-nav {
@@ -2571,15 +2707,15 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 30px auto;
     background-color: rgb(230, 230, 230);
     margin-bottom: 1rem;
 }
 
-.profile-create-posts-icon-wrapper,
-.profile-create-appeals-icon-wrapper {
+.profile-create-posts-icon-wrapper, .profile-create-appeals-icon-wrapper {
     border: 5px solid rgb(144, 144, 144);
-    height: 180px;
-    width: 120px;
+    height: 110px;
+    width: 90px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -2767,7 +2903,6 @@ button {
         left: 45%;
         top: 120%;
     } */
-
     .main-posts-title-wrapper::before {
         width: 20%;
         left: 20%;
@@ -2915,7 +3050,7 @@ button {
         display: none;
     }
 
-   
+
 
 
     .navbar-user-image-wrapper {
@@ -2928,7 +3063,7 @@ button {
         padding-right: unset;
     }
 
-    
+
 
     .login-navbar-user {
         margin-left: 0px !important;
@@ -2948,12 +3083,15 @@ button {
 @media screen and (max-width: 1250px) {
     .navbar {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
         width: 100%;
         border-radius: unset;
     }
-
+    .post-image-wrapper {
+        width: 90%;
+        height: 250px;
+    }
     .navbar-user-section-wrapper div {
         margin: unset;
     }
@@ -3054,11 +3192,18 @@ button {
         top: 43% !important;
         left: 30% !important;
     }
-
+    .navbar-user-section-wrapper {
+        margin: 0;
+    }
+    .swiper-button-next{
+        right: 10px;
+    }
+    .swiper-button-prev{
+        left: 10px;
+    }
     .main-appeals-title-wrapper::after {
-        content: "";
-        background-color: #8b7350;
-        height: 2px;
+        background-color: #AF9065;
+        height: 1px;
         width: 20%;
         position: absolute;
         top: 25px;
@@ -3066,9 +3211,8 @@ button {
     }
 
     .main-appeals-title-wrapper::before {
-        content: "";
-        background-color: #8b7350;
-        height: 2px;
+        background-color: #AF9065;
+        height: 1px;
         width: 20%;
         position: absolute;
         top: 25px;
@@ -3351,7 +3495,10 @@ button {
     .slider-text {
         width: 80%;
     }
-
+    .appeal-slide {
+        margin-left: 0 !important;
+        margin-right: 30px !important;
+    }
     .appeal-title {
         margin-bottom: 1rem !important;
     }
@@ -3381,7 +3528,7 @@ button {
     }
 
     .register-wrapper {
-        margin-top: 20px;
+        margin-top: 150px;
     }
 
     .appeal-media-wrapper {
@@ -3396,7 +3543,6 @@ button {
     /* .main-posts-search-wrapper {
         padding: 10px;
     } */
-
     .video-container .play-wrapper {
         top: 45% !important;
         left: 45% !important;
@@ -3553,6 +3699,10 @@ button {
 }
 
 @media screen and (max-width: 580px) {
+    .post-image-wrapper {
+        width: 90%;
+        height: 200px;
+    }
     .main-posts-title-wrapper::after {
         right: 10%;
     }
