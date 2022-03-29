@@ -21,7 +21,7 @@
     @if (LaravelLocalization::getCurrentLocaleName() == 'Armenian')
         <link rel="stylesheet" href="{{ asset('css/arm.css?version=4') }}" />
     @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
-        <link rel="stylesheet" href="{{ asset('css/newest-index.css?version=61') }}" />
+        <link rel="stylesheet" href="{{ asset('css/newest-index.css?version=62') }}" />
     @else
         <link rel="stylesheet" href="{{ asset('css/russ.css?version=4') }}" />
     @endif

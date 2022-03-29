@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
-$password = "";
-$dbname = "magaghat-one-page";
+$password = "root";
+$dbname = "seriousapp";
 
 
 try {
