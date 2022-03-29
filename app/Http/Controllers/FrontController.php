@@ -28,7 +28,7 @@ class FrontController extends Controller
         //
     }
 
-    
+
 
     public function home(Request $request)
     {
@@ -46,17 +46,17 @@ class FrontController extends Controller
 
             $posts_without_user_country = Post::with(['user', 'comments', 'likes', 'video'])->where('country', '!=', $user_country)
             ->orWhere('country', null)->inRandomOrder()->limit(2)->orderBy('created_at', 'desc')->get();
-            
+
             $random_posts = $posts_with_user_country->merge($posts_without_user_country);
         }
-       
+
         $user = Auth::user();
 
         if ($user) {
             $user->update(['api_token' => str_random(60)]);
         }
 
-        
+
 
         if(request('search-key')) {
             $random_posts = Post::where('title', 'like', '%'.request('search-key').'%')->with(['user', 'comments', 'likes', 'video'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
@@ -108,7 +108,7 @@ class FrontController extends Controller
 
                 case 'interesting-in-type':
                     $interesting_type = InterestingType::where('name', request('interesting-in-type'))->pluck('id')->firstOrFail();
-                    
+
 
                     $users = $users->filter(function($item, $key) use($interesting_type) {
                         $user_interesting_types_ids = json_decode($item->interesting_type_id);
@@ -138,7 +138,7 @@ class FrontController extends Controller
                     });
                     break;
 
-                   
+
 
                 case 'gender':
                     // if (count($filtered_users)) {
@@ -147,7 +147,7 @@ class FrontController extends Controller
                     //             $filtered_users = array_filter($filtered_users, function($user) use($filtered_user) {
                     //                 return $user->gender !== $filtered_user->gender;
                     //             });
-                    //         } 
+                    //         }
                     //     }
 
                     //     break 1;
@@ -161,19 +161,19 @@ class FrontController extends Controller
                     //     break;
                     // }
 
-                    
+
                     $gender = request('gender');
                     $users = $users->filter(function($item, $key) use($gender) {
                         return $item->gender == $gender;
                     });
                     break;
- 
+
                     default:
                         break;
             }
         }
-        
-        
+
+
 
 
         $interesting_types = InterestingType::all();
@@ -241,7 +241,7 @@ class FrontController extends Controller
         $my_subscribers_users = User::whereIn('id', $my_subscribers)->get();
         $user_subscribers_count = $user->subscribers()->count();
         $user_subscribtions_count = $user->subscribtions()->count();
-        
+
         return view('profile', [
             'user' => $user,
             'areas_of_interesting' => $areas_of_interesting,
@@ -267,7 +267,7 @@ class FrontController extends Controller
     }
 
     public function show_video_page($id)
-    {   
+    {
         $video = Video::where('id', $id)->with('videoable', 'user')->firstOrFail();
         $other_videos = Video::where('id', '!=', $id)->with('videoable', 'user')->get();
 

@@ -50,7 +50,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         // profile routes
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::put('update-profile-image', [UserController::class, 'update_profile_image'])->name('user.update-profile-image');
-    
+
         /** user posts routes */
         Route::get('my-posts', [UserPostsController::class, 'my_posts'])->name('my_posts');
         Route::get('my-posts/create', [UserPostsController::class, 'create'])->name('posts.create');
