@@ -15,7 +15,7 @@ Magaxat | Profile
     <div class="profile-container">
       <div class="profile-header">
         <div class="wrapper">
-          <img src="{{ $user->cover_image_path }}" alt="">
+          <img src="{{ $user->cover_image_path ?? asset('images/img/slider1.jpeg') }}" alt="">
         </div>
         <div class="profile-img">
           <img class="profile-image" src="{{ $user->image ?? asset('images/avatar.png') }}" width="200" alt="Profile Image" />
