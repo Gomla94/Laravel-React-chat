@@ -17,7 +17,7 @@
               type="email"
               class="login-email-input"
               name="email"
-              placeholder="email"
+              placeholder="Email"
             />
             @error('email')
                 <span class="auth-error-message">{{ $message }}</span>

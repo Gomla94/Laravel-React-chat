@@ -53,7 +53,7 @@ Magaxat | Profile
           </div>
         </div>
         <div class="right-side">
-          <div class="nav">
+          <div class="nav new-nav">
             <ul>
               @if(Auth::id() === $user->id)
               <li onclick="tabs(0)" class="profile-item user-settings">
@@ -84,7 +84,7 @@ Magaxat | Profile
             @if(Auth::id() === $user->id)
               <div class="profile-settings tab">
                 <h1>{{ __('translations.settings') }}</h1>
-                
+
                 <div class="profile-main-settings">
                 <form action="{{ route('user.update-profile') }}" method="POST" class="profile-form" enctype="multipart/form-data">
                   @csrf
@@ -117,7 +117,7 @@ Magaxat | Profile
                     <div class="">
                       <div class="form-group">
                         <div>
-                          <label for="country">{{ __('translations.country') }}</label>  
+                          <label for="country">{{ __('translations.country') }}</label>
                         </div>
                         <select class="form-control profile-input" name="country_id" id="country">
                           @foreach ($countries as $country)
@@ -200,26 +200,26 @@ Magaxat | Profile
                               <label for="{{ $area->name }}">{{ $area->name }}</label>
                               @if($user_interesting_types_ids !== null)
                                 <div class="round">
-                                  <input name="interesting_type[] " class="profile-input" type="checkbox" id="{{ $area->name }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }} value="{{ $area->id }}"> 
+                                  <input name="interesting_type[] " class="profile-input" type="checkbox" id="{{ $area->name }}" {{ in_array( $area->id, $user_interesting_types_ids ) ? 'checked' : '' }} value="{{ $area->id }}">
                                   <label for="{{ $area->name }}"></label>
                                 </div>
                               @else
                               <div class="round">
-                                <input name="interesting_type[]" class="profile-input" type="checkbox" id="{{ $area->name }}" value="{{ $area->id }}"> 
+                                <input name="interesting_type[]" class="profile-input" type="checkbox" id="{{ $area->name }}" value="{{ $area->id }}">
                                 <label for="{{ $area->name }}"></label>
                               </div>
                               @endif
-                              
+
                             </div>
                           </div>
                           @endforeach
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>
 
-                  <button class="update-profile-button" type="submit">{{ __('translations.update') }}</button>
+                  <button class="update-profile-button mt-5" type="submit">{{ __('translations.update') }}</button>
                 </form>
                 </div>
               </div>
@@ -263,7 +263,7 @@ Magaxat | Profile
                   />
                 </div>
                 @endif
-      
+
                 @if($post->video_path)
                 <div class="post-image-wrapper">
                   <video controls
@@ -276,37 +276,31 @@ Magaxat | Profile
                 {{-- <p class="post-description">
                   {{ $post->description }}
                 </p> --}}
-                <div class="main-post-socials-wrapper">
-                  <div class="likes-count">
-                    {{-- <i class="fa-solid fa-heart social-icon"></i> --}}
-      
-                  @if(Auth::check())
-                  <i
-                    id="{{ $post->id }}"
-                    class="social-icon post-heart-icon fa-solid {{ $post->likes->where('user_id', Auth::id())->count() !== 0 ? 'fa-heart liked-post-heart-icon' : 'fa-heart ' }}"
-                  ></i>
-                  @else
-                  <i
-                    class="social-icon fa-solid fa-heart"
-                  ></i>
-                  @endif
-      
-      
-      
-                    <span>{{ $post->likes->count() }}</span>
+                  <div class="main-post-socials-wrapper">
+                      <div class="likes-count">
+                          {{-- <i class="fa-solid fa-heart social-icon"></i> --}}
+
+                          @if(Auth::check())
+                              @if($post->likes->where('user_id', Auth::id())->count() !== 0)
+                                  <img id="{{ $post->id }}" class="social-icon post-heart-icon liked-post-heart-icon" src="{{ asset('images/img/red-heart.png') }}" alt="heart">
+                              @else
+                                  <img id="{{ $post->id }}" class="social-icon post-heart-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
+                              @endif
+                          @else
+                              <img class="social-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
+                          @endif
+                          <span>{{ $post->likes->count() }}</span>
+                      </div>
+                      <div class="comments-count" id="{{ $post->id }}">
+                          <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/comment.png') }}" alt="comment">
+                          <span>{{ $post->comments->count() }}</span>
+                      </div>
+                      <div class="shares-count">
+                          <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/share.png') }}" alt="share">
+                          <span>4</span>
+                      </div>
                   </div>
-                  <div class="comments-count" id="{{ $post->id }}">
-                    <i id="{{ $post->id }}"
-                      class="fa-regular fa-comment social-icon main-post-comments-icon"
-                    ></i>
-                    <span>{{ $post->comments->count() }}</span>
-                  </div>
-                  <div class="shares-count">
-                    <i class="fa-solid fa-share social-icon"></i>
-                    <span>4</span>
-                  </div>
-                </div>
-      
+
                 <div class="main-post-comment-form-wrapper">
                   @if (Auth::check())
                   <form class="main-post-comment-form">
@@ -328,9 +322,9 @@ Magaxat | Profile
                   </form>
                   @endif
                 </div>
-      
+
                 <div class="main-post-comments-section">
-                  
+
                 </div>
               </div>
               @endforeach
@@ -374,7 +368,7 @@ Magaxat | Profile
                   />
                 </div>
                 @endif
-      
+
                 @if($appeal->video_path)
                 <div class="post-image-wrapper">
                   <video controls
@@ -387,7 +381,7 @@ Magaxat | Profile
                 <p class="post-description">
                   {{ $appeal->description }}
                 </p>
-                
+
               </div>
               @endforeach
             </div>
@@ -410,7 +404,7 @@ Magaxat | Profile
                     <span class="post-time">{{ $image->created_at->format('H:i:a') }}</span>
                   </div>
                 </div>
-                
+
                 @if($image->image_path)
                 <div class="post-image-wrapper">
                   <img
@@ -442,7 +436,7 @@ Magaxat | Profile
                     <span class="post-time">{{ $video->created_at->format('H:i:a') }}</span>
                   </div>
                 </div>
-               
+
                 @if($video->video_path)
                 <div class="post-image-wrapper">
                   <video controls
@@ -729,7 +723,7 @@ Magaxat | Profile
           <span style="color: red" class="app-ve"></span>
         </div>
       </div>
-      
+
       <button type="submit" class="btn btn-primary create-post-modal-btn">
         {{ __('translations.create_appeal') }}
       </button>
@@ -741,7 +735,7 @@ Magaxat | Profile
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.js"></script> --}}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
 
 <script src="{{ asset('js/profilePage.js') }}" defer></script>
