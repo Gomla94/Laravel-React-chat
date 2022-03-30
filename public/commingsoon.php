@@ -19,10 +19,7 @@
             <img src="/assets/images/slider-1.png">
         </div>
         <div class="for_p">
-            <p>As well as diluted with a fair amount of empathy, rational thinking largely determines the importance of the
-                positions taken by the participants in relation to the tasks assigned.</p>
-            <p>As is commonly believed, interactive prototypes are only a method of political participation and are
-                associatively distributed across industries.</p>
+            <p>When you really want something, the whole universe conspires in helping you to achieve it. Your job is to accept this help and not to miss the opportunity. Here it is, don’t miss it! Join us and stay tuned</p>
         </div>
         <form class="for_registration" method="post" action="/send_email.php">
             <input class="input" type="email" name="email" placeholder="E-mail" />
