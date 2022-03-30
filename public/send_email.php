@@ -12,7 +12,7 @@ try {
     $sql = "INSERT INTO emails (email) VALUES ('" . $_POST['email'] . "')";
 
     $conn->exec($sql);
-    header("Location: http://magaghat.loc?success=1");
+    header("Location: http://magaxat.com?success=1");
     die();
 } catch (PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
