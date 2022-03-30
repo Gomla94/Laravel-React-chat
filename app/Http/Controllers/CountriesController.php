@@ -52,4 +52,10 @@ class CountriesController extends Controller
         return back();
     }
 
+    public function add_all()
+    {
+        $countries = request('countries');
+        return response()->json(['message' => 'aaaa']);
+    }
+
 }

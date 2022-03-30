@@ -17,10 +17,10 @@ class admin
      */
     public function handle(Request $request, Closure $next)
     {
-        $authenticatedUser = Auth::user();
-        if ($authenticatedUser->type === 'admin') {
-            return $next($request);
-        }
-        return back();    
+        // $authenticatedUser = Auth::user();
+        // if ($authenticatedUser && $authenticatedUser->type === 'admin') {
+        //     return $next($request);
+        // }
+        // return back();    
     }
 }

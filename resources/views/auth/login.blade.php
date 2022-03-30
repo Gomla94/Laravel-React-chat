@@ -40,4 +40,9 @@
       </div>
     </div>
 </div>
+
+@push('js')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{{ asset('js/getCountries.js') }}"></script>
+@endpush
 @endsection

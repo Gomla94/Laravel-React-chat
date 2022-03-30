@@ -150,5 +150,7 @@
       
      
     @yield('content')
+
+    @stack('js')
   </body>
 </html>
