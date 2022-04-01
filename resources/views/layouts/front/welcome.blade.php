@@ -367,7 +367,7 @@
 <script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
 <script src="{{ asset('js/toggleModalInputs.js?version=3') }}" defer></script>
 <script src="{{ asset('js/loadPosts.js?version=7') }}" defer type="module"></script>
-<script src="{{asset('js/newest-addPostComments.js')}}" defer type="module"></script>
+<script src="{{asset('js/newest-addPostComments.js?version=2')}}" defer type="module"></script>
 <script src="{{asset('js/upload.js')}}" defer></script>
 
 <script>
