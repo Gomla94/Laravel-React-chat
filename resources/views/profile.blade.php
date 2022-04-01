@@ -569,6 +569,7 @@ Magaxat | Profile
           class="form-control"
           name="post_title"
           placeholder="{{ __('translations.title') }}"
+          value="{{ old('post_title') }}"
         />
         @error('post_title')
           <span style="color: red">{{$message}}</span>
@@ -585,7 +586,7 @@ Magaxat | Profile
           id="post-description"
           cols="30"
           rows="10"
-        ></textarea>
+        >{{ old('post_description') }}</textarea>
         @error('post_description')
           <span style="color: red">{{$message}}</span>
         @enderror
@@ -661,6 +662,7 @@ Magaxat | Profile
           class="form-control"
           name="appeal_title"
           placeholder="Title"
+          value="{{ old('appeal_title') }}"
         />
         @error('appeal_title')
           <span style="color: red">{{$message}}</span>
@@ -677,7 +679,7 @@ Magaxat | Profile
           id="appeal-description"
           cols="30"
           rows="10"
-        ></textarea>
+        >{{ old('appeal_description') }}</textarea>
         @error('appeal_description')
           <span style="color: red">{{$message}}</span>
         @enderror
