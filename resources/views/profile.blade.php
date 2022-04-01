@@ -264,11 +264,11 @@ Magaxat | Profile
                 </div>
                 @endif
 
-                @if($post->video_path)
+                @if($post->video)
                 <div class="post-image-wrapper">
                   <video controls
                     class="main-post-image"
-                    src="{{ $post->video_path }}"
+                    src="{{ $post->video->video_path }}"
                     alt="post-image"
                   /></video>
                 </div>
@@ -369,11 +369,11 @@ Magaxat | Profile
                 </div>
                 @endif
 
-                @if($appeal->video_path)
+                @if($appeal->video)
                 <div class="post-image-wrapper">
                   <video controls
                     class="main-post-image"
-                    src="{{ $appeal->video_path }}"
+                    src="{{ $appeal->video->video_path }}"
                     alt="post-image"
                   /></video>
                 </div>
@@ -569,6 +569,7 @@ Magaxat | Profile
           class="form-control"
           name="post_title"
           placeholder="{{ __('translations.title') }}"
+          value="{{ old('post_title') }}"
         />
         @error('post_title')
           <span style="color: red">{{$message}}</span>
@@ -585,7 +586,7 @@ Magaxat | Profile
           id="post-description"
           cols="30"
           rows="10"
-        ></textarea>
+        >{{ old('post_description') }}</textarea>
         @error('post_description')
           <span style="color: red">{{$message}}</span>
         @enderror
@@ -661,6 +662,7 @@ Magaxat | Profile
           class="form-control"
           name="appeal_title"
           placeholder="Title"
+          value="{{ old('appeal_title') }}"
         />
         @error('appeal_title')
           <span style="color: red">{{$message}}</span>
@@ -677,7 +679,7 @@ Magaxat | Profile
           id="appeal-description"
           cols="30"
           rows="10"
-        ></textarea>
+        >{{ old('appeal_description') }}</textarea>
         @error('appeal_description')
           <span style="color: red">{{$message}}</span>
         @enderror
@@ -740,9 +742,9 @@ Magaxat | Profile
 
 <script src="{{ asset('js/profilePage.js') }}" defer></script>
 <script src="{{ asset('js/cropProfilePage.js') }}" defer></script>
-<script src="{{asset('js/newest-addPostComments.js')}}" defer type="module"></script>
+<script src="{{asset('js/newest-addPostComments.js?version=2')}}" defer type="module"></script>
 <script src="{{ asset('js/addPostLike.js?version=1') }}" defer type="module"></script>
-<script src="{{ asset('js/toggleModalInputs.js?version=2') }}" defer></script>
+<script src="{{ asset('js/toggleModalInputs.js?version=3') }}" defer></script>
 <script src="{{asset('js/upload.js')}}" defer></script>
 
 <script>

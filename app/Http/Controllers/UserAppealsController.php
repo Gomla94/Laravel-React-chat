@@ -61,7 +61,7 @@ class UserAppealsController extends Controller
         if (request()->file('appeal_video')) {
             $video_path = $request->file('appeal_video')->store('videos', 's3');
 
-            $appeal->videos()->create([
+            $appeal->video()->create([
                 'user_id' => Auth::id(),
                 'video_name' => request()->file('appeal_video') ? basename($video_path) : null,
                 'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
@@ -109,7 +109,7 @@ class UserAppealsController extends Controller
             Storage::disk('s3')->delete("videos/{$appeal->video_name}");
             $video_path = $request->file('appeal_video')->store('videos', 's3');
     
-            $appeal->videos()->create([
+            $appeal->video()->create([
                 'user_id' => Auth::id(),
                 'video_name' => request()->file('appeal_video') ? basename($video_path) : null,
                 'video_path' => request()->file('appeal_video') ? Storage::disk('s3')->url($video_path) : null,
@@ -153,7 +153,7 @@ class UserAppealsController extends Controller
         Storage::disk('s3')->delete("images/{$appeal->image_name}");
         Storage::disk('s3')->delete("videos/{$appeal->video_name}");
 
-        $appeal->videos()->delete();
+        $appeal->video()->delete();
 
         $appeal->delete();
         return back();

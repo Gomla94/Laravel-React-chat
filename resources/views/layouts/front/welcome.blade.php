@@ -67,7 +67,9 @@
               <div class="post-user-date-wrapper">
                 <div class="post-user-info">
                   <div class="post-user-image-wrapper">
-                    <img src="{{ $post->user->image ?? asset('images/avatar.png') }}" alt="person" />
+                    <a href="{{ route('user.profile', $post->user->unique_id) }}">
+                      <img src="{{ $post->user->image ?? asset('images/avatar.png') }}" alt="person" />
+                    </a>
                   </div>
                   <div class="post-user-names-wrapper">
                     <span class="post-user-name">{{ $post->user->name }}</span>
@@ -92,11 +94,11 @@
               </div>
               @endif
 
-              @if($post->video_path)
+              @if($post->video)
               <div class="post-image-wrapper">
                 <video controls
                   class="main-post-video"
-                  src="{{ $post->video_path }}"
+                  src="{{ $post->video->video_path }}"
                   alt="post-image"
                 /></video>
                 <div class="play-wrapper">
@@ -120,19 +122,19 @@
                   @else
                   <img class="social-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
                 @endif
-                  <span>{{ $post->likes->count() }}</span>
+                  <span class="likes-count-span">{{ $post->likes->count() }}</span>
                 </div>
                 <div class="comments-count" id="{{ $post->id }}">
                   <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/comment.png') }}" alt="comment">
-                  <span>{{ $post->comments->count() }}</span>
+                  <span class="comments-count-span"> {{ $post->comments->count() }}</span>
                 </div>
                 <div class="shares-count">
                   <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/share.png') }}" alt="share">
-                  <span>4</span>
+                  <span class="shares-count-span">4</span>
                 </div>
                 <div class="shares-count">
                   <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/social-share.png') }}" alt="social-share">
-                  <span>4</span>
+                  <span class="social-shares-count-span">4</span>
                 </div>
               </div>
 
@@ -188,6 +190,7 @@
           class="form-control"
           name="post_title"
           placeholder="{{ __('translations.title') }}"
+          value="{{ old('post_title') }}"
         />
         @error('post_title')
           <span style="color: red">{{$message}}</span>
@@ -204,7 +207,7 @@
           id="post-description"
           cols="30"
           rows="10"
-        ></textarea>
+        >{{ old('post_description') }}</textarea>
         @error('post_description')
           <span style="color: red">{{$message}}</span>
         @enderror
@@ -280,6 +283,7 @@
           class="form-control"
           name="appeal_title"
           placeholder="Title"
+          value="{{ old('appeal_title') }}"
         />
         @error('appeal_title')
           <span style="color: red">{{$message}}</span>
@@ -296,7 +300,7 @@
           id="appeal-description"
           cols="30"
           rows="10"
-        ></textarea>
+        >{{ old('appeal_description') }}</textarea>
         @error('appeal_description')
           <span style="color: red">{{$message}}</span>
         @enderror
@@ -361,9 +365,9 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script src="{{ asset('js/addPostLike.js') }}" defer type="module"></script>
-<script src="{{ asset('js/toggleModalInputs.js?version=2') }}" defer></script>
+<script src="{{ asset('js/toggleModalInputs.js?version=3') }}" defer></script>
 <script src="{{ asset('js/loadPosts.js?version=7') }}" defer type="module"></script>
-<script src="{{asset('js/newest-addPostComments.js')}}" defer type="module"></script>
+<script src="{{asset('js/newest-addPostComments.js?version=2')}}" defer type="module"></script>
 <script src="{{asset('js/upload.js')}}" defer></script>
 
 <script>

@@ -149,6 +149,7 @@
                               class="login-email-input"
                               name="name"
                               placeholder="Name"
+                              value="{{ old('name') }}"
                             />
                             @error('name')
                                 <span class="auth-error-message">{{ $message }}</span>
@@ -163,6 +164,7 @@
                               class="login-email-input"
                               name="last_name"
                               placeholder="Last name"
+                              value="{{ old('last_name') }}"
                             />
                             @error('last_name')
                                 <span class="auth-error-message">{{ $message }}</span>
@@ -179,6 +181,7 @@
                               class="login-email-input"
                               name="email"
                               placeholder="Email"
+                              value="{{ old('email') }}"
                             />
                             @error('email')
                                 <span class="auth-error-message">{{ $message }}</span>
@@ -230,7 +233,7 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" class="form-control" id="description" cols="30" rows="5"></textarea>
+                            <textarea name="description" class="form-control" id="description" cols="30" rows="5">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="auth-error-message">{{ $message }}</span>
                             @enderror

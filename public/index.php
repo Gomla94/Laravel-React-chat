@@ -1,8 +1,8 @@
 <?php
-if (!isset($_GET["mode"]) || $_GET["mode"] != "dev") {
-    require_once "commingsoon.php";
-    die;
-}
+// if (!isset($_GET["mode"]) || $_GET["mode"] != "dev") {
+//     require_once "commingsoon.php";
+//     die;
+// }
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;

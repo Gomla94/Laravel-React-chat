@@ -1,7 +1,6 @@
 const addCommentBtn = document.querySelectorAll(".main-post-add-comment-btn");
 const commentIcon = document.querySelectorAll(".main-post-comments-icon");
 export const showCommentSection = async (e) => {
-    // console.log("show comment");
     const clickedCommentIcon = e.target;
     const addCommentSection = clickedCommentIcon.closest(
         ".main-post-socials-wrapper"
@@ -10,7 +9,6 @@ export const showCommentSection = async (e) => {
     addCommentSection.classList.toggle("show-main-post-comment-form-wrapper");
 
     const commentsSection = addCommentSection.nextElementSibling;
-    console.log(commentsSection);
 
     commentsSection.classList.toggle("show-main-post-comments-section");
     commentsSection.scrollTop = commentsSection.scrollHeight;
@@ -27,7 +25,6 @@ export const showCommentSection = async (e) => {
     // }
 
     const comments = await fetchAllComments(clickedCommentIcon.id);
-    console.log(comments);
     if (comments.length === 0) {
         return false;
     }
@@ -85,9 +82,10 @@ export const addComment = async (e) => {
         const commentForm = addCommentBtn.closest(
             ".main-post-comment-form-wrapper"
         );
-        const commentsCount = commentForm.nextElementSibling
-            .querySelector(".main-post-comments")
-            .querySelector(".comments-count-span");
+
+        const commentsCount = commentForm.previousElementSibling.querySelector(
+            ".comments-count-span"
+        );
 
         commentsCount.innerText = parseInt(commentsCount.innerText) + 1;
         errorLabel.classList.remove("show-comment-error-div");
@@ -102,8 +100,7 @@ export const addComment = async (e) => {
         <p class="comment-body">${newComment.title}</p>
       </div>
         `;
-        const commentsSection =
-            commentForm.nextElementSibling.nextElementSibling;
+        const commentsSection = commentForm.nextElementSibling;
         commentsSection.classList.add("show-main-post-comments-section");
         commentsSection.innerHTML += newcommentDiv;
         commentsSection.scrollTop = commentsSection.scrollHeight;

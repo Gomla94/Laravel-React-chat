@@ -91,7 +91,8 @@ postModalMediaTypeInput.addEventListener("change", () => {
         }
     } else if (mediaType === "image") {
         mediaInput.classList.remove("post_video");
-        mediaInput.setAttribute("accept", "post_image");
+        mediaInput.setAttribute("accept", "image/*");
+        mediaInput.setAttribute("name", "post_image");
     }
 });
 

@@ -97,10 +97,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::post('/users', [AdminController::class, 'store_user'])->name('users.store');
         Route::resource('interesting-types', InterestingTypesController::class);
         Route::resource('countries', CountriesController::class);
+        Route::post('countries/add-countries', [CountriesController::class, 'add_all']);
     });
 
     Auth::routes();
-
 
 });
 

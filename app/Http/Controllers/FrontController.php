@@ -34,7 +34,7 @@ class FrontController extends Controller
     {
         if(!$sock = @fsockopen('www.google.com', 80))
         {
-            $random_posts = Post::with(['user', 'comments', 'likes'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
+            $random_posts = Post::with(['user', 'comments', 'likes', 'video'])->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
         }
         else
         {
@@ -45,7 +45,7 @@ class FrontController extends Controller
             $posts_with_user_country = Post::with(['user', 'comments', 'likes', 'video'])->where('country', $user_country)->inRandomOrder()->orderBy('created_at', 'desc')->get();
 
             $posts_without_user_country = Post::with(['user', 'comments', 'likes', 'video'])->where('country', '!=', $user_country)
-            ->orWhere('country', null)->inRandomOrder()->limit(2)->orderBy('created_at', 'desc')->get();
+            ->orWhere('country', null)->inRandomOrder()->limit(5)->orderBy('created_at', 'desc')->get();
 
             $random_posts = $posts_with_user_country->merge($posts_without_user_country);
         }
