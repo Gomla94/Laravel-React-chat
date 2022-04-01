@@ -67,7 +67,9 @@
               <div class="post-user-date-wrapper">
                 <div class="post-user-info">
                   <div class="post-user-image-wrapper">
-                    <img src="{{ $post->user->image ?? asset('images/avatar.png') }}" alt="person" />
+                    <a href="{{ route('user.profile', $post->user->unique_id) }}">
+                      <img src="{{ $post->user->image ?? asset('images/avatar.png') }}" alt="person" />
+                    </a>
                   </div>
                   <div class="post-user-names-wrapper">
                     <span class="post-user-name">{{ $post->user->name }}</span>
@@ -120,19 +122,19 @@
                   @else
                   <img class="social-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
                 @endif
-                  <span>{{ $post->likes->count() }}</span>
+                  <span class="likes-count-span">{{ $post->likes->count() }}</span>
                 </div>
                 <div class="comments-count" id="{{ $post->id }}">
                   <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/comment.png') }}" alt="comment">
-                  <span>{{ $post->comments->count() }}</span>
+                  <span class="comments-count-span"> {{ $post->comments->count() }}</span>
                 </div>
                 <div class="shares-count">
                   <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/share.png') }}" alt="share">
-                  <span>4</span>
+                  <span class="shares-count-span">4</span>
                 </div>
                 <div class="shares-count">
                   <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/social-share.png') }}" alt="social-share">
-                  <span>4</span>
+                  <span class="social-shares-count-span">4</span>
                 </div>
               </div>
 
@@ -205,7 +207,7 @@
           id="post-description"
           cols="30"
           rows="10"
-        >{{ old('post_title') }}"</textarea>
+        >{{ old('post_description') }}</textarea>
         @error('post_description')
           <span style="color: red">{{$message}}</span>
         @enderror
