@@ -94,11 +94,11 @@
               </div>
               @endif
 
-              @if($post->video_path)
+              @if($post->video)
               <div class="post-image-wrapper">
                 <video controls
                   class="main-post-video"
-                  src="{{ $post->video_path }}"
+                  src="{{ $post->video->video_path }}"
                   alt="post-image"
                 /></video>
                 <div class="play-wrapper">

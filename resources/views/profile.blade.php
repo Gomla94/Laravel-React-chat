@@ -264,11 +264,11 @@ Magaxat | Profile
                 </div>
                 @endif
 
-                @if($post->video_path)
+                @if($post->video)
                 <div class="post-image-wrapper">
                   <video controls
                     class="main-post-image"
-                    src="{{ $post->video_path }}"
+                    src="{{ $post->video->video_path }}"
                     alt="post-image"
                   /></video>
                 </div>
@@ -369,11 +369,11 @@ Magaxat | Profile
                 </div>
                 @endif
 
-                @if($appeal->video_path)
+                @if($appeal->video)
                 <div class="post-image-wrapper">
                   <video controls
                     class="main-post-image"
-                    src="{{ $appeal->video_path }}"
+                    src="{{ $appeal->video->video_path }}"
                     alt="post-image"
                   /></video>
                 </div>
