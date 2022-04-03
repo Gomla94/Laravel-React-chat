@@ -289,15 +289,15 @@ Magaxat | Profile
                           @else
                               <img class="social-icon" src="{{ asset('images/img/black-heart.png') }}" alt="heart">
                           @endif
-                          <span>{{ $post->likes->count() }}</span>
+                          <span class="likes-count-span">{{ $post->likes->count() }}</span>
                       </div>
                       <div class="comments-count" id="{{ $post->id }}">
                           <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/comment.png') }}" alt="comment">
-                          <span>{{ $post->comments->count() }}</span>
+                          <span class="comments-count-span">{{ $post->comments->count() }}</span>
                       </div>
                       <div class="shares-count">
                           <img id="{{ $post->id }}" class="social-icon main-post-comments-icon" src="{{ asset('images/img/share.png') }}" alt="share">
-                          <span>4</span>
+                          <span class="shares-count-span">4</span>
                       </div>
                   </div>
 
