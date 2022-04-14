@@ -2963,7 +2963,7 @@ var ChatWrapper = function ChatWrapper(props) {
         className: "chat-send-button",
         onClick: sendMessage,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-          src: "../../images/img/send.png",
+          src: "../../images/send.png",
           alt: "send"
         })
       })
@@ -3011,7 +3011,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   // baseURL: "https://www.magaxat.com/api/",
-  baseURL: "https://laravelreactchat.test/api/",
+  baseURL: "https://laravelreactchat.ahmed-gamal.net/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     authorization: "Bearer ".concat(window.uuxyz ? window.atob(window.uuxyz.uuxyzt) : null // window.Laravel ? window.Laravel.user.api_token : null
