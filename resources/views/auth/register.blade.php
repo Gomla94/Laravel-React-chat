@@ -81,6 +81,5 @@
     </div>
 </div>
 @push('js')
-<script src="{{ asset('js/authentication.js') }}"></script>
 @endpush
 @endsection
