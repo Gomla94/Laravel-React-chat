@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default axios.create({
     // baseURL: "https://www.magaxat.com/api/",
-    baseURL: "https://laravelreactchat.test/api/",
+    baseURL: "https://laravelreactchat.ahmed-gamal.net/api/",
     headers: {
         "Access-Control-Allow-Origin": "*",
         authorization: `Bearer ${
