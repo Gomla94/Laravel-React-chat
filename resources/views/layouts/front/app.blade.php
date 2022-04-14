@@ -96,7 +96,6 @@
         <ul class="overlay-list">
           
           <li class="overlay-list-item">
-            <img src="{{asset('images/img/users.png')}}" alt="" />
             <a rel="preconnect" href="{{ route('all-users') }}">{{ __('translations.users') }}</a>
             <i class="fa-solid fa-angle-right"></i>
           </li>
