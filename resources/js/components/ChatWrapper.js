@@ -313,7 +313,7 @@ const ChatWrapper = (props) => {
             </div>
             <div className="chat-send-wrapper">
                 <div className="chat-send-button" onClick={sendMessage}>
-                    <img src={"../../images/img/send.png"} alt="send" />
+                    <img src={"../../images/send.png"} alt="send" />
                 </div>
             </div>
         </Fragment>
