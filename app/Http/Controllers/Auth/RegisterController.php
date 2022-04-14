@@ -32,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/chat';
 
     /**
      * Create a new controller instance.
@@ -53,8 +53,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $interesting_types = InterestingType::all();
-        return view('auth.register', ['types' => $interesting_types]);
+        return view('auth.register');
     }
 
     protected function validator(array $data)
@@ -64,12 +63,6 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'type' => ['required', 'string', 'in:benefactor,user'],
-            'phone_number' => ['sometimes', 'nullable', 'numeric'],
-            // 'interesting_type' => ['required_if:type,user', 'array'],
-            // 'interesting_type.*' => ['numeric', Rule::exists('interesting_types', 'id')],
-            'additional_type' => ['sometimes', 'nullable', 'string', 'in:individual,organisation'],
-            'organisation_description' => ['sometimes', 'nullable', 'string'],
         ],
             [
                 'name.required' => __('translations.required.error'),
@@ -79,10 +72,6 @@ class RegisterController extends Controller
                 'email.max' => __('translations.max.error'),
                 'password.required' => __('translations.required.error'),
                 'password.min' => __('translations.min.error'),
-                'type.required' => __('translations.required.error'),
-                'phone_number.numeric' => __('translations.numeric.error'),
-                'interesting_type.required_if' => __('translations.required.error'),
-                'interesting_type.*.numeric' => __('translations.numeric.error'),
             ]
         );
     }
@@ -112,11 +101,8 @@ class RegisterController extends Controller
             'last_name' => ucfirst($data['last_name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'type' => $data['type'],
+            'type' => 'user',
             'image' => $image_path,
-            'interesting_type_id' => request('interesting_type') ? json_encode($data['interesting_type']) : null,
-            'additional_type' => $data['additional_type'] ?? null,
-            'organisation_description' => $data['organisation_description'] ?? null,
             'api_token' => str_random(60),
             'unique_id' => str_random(60)
         ]);

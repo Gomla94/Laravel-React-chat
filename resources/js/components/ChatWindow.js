@@ -181,7 +181,7 @@ const ChatWindow = () => {
     };
 
     const fetchAllUsers = () => {
-        if (users.length !== 0) return;
+        // if (users.length !== 0) return;
         chat.get("/chat-users").then((response) => {
             setUsers(response.data);
         });

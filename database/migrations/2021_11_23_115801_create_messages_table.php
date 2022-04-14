@@ -18,6 +18,9 @@ class CreateMessagesTable extends Migration
             $table->string('message')->nullable();
             $table->string('from')->nullable();
             $table->string('to')->nullable();
+            $table->string('type')->nullable();
+            $table->string('media_name')->nullable();
+            $table->text('media_path')->nullable();
             $table->timestamps();
         });
     }

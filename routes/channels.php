@@ -24,15 +24,3 @@ Broadcast::channel('messages.{to}', function ($user, $to) {
 Broadcast::channel('messages.{from}.{to}', function ($user, $from, $to) {
     return true;
 });
-
-Broadcast::channel('user_notifications.{to}', function ($to) {
-    return true;
-});
-
-Broadcast::channel('blocked-user-channel.{blockerId}', function () {
-    return true;
-});
-
-Broadcast::channel('unblocked-user-channel.{blockerId}', function () {
-    return true;
-});

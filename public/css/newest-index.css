@@ -44,17 +44,6 @@ body {
     background-color: #f9f9f9;
 }
 
-.auth-navbar-logo-wrapper {
-    background-color: #e6d5bc !important;
-}
-
-.navbar-background-wrapper {
-    background-color: #f9f9f9;
-    position: absolute;
-    height: 100px;
-    /* width: 100vw; */
-}
-
 .auth-navbar-background-wrapper {
     position: absolute;
     height: 100px;
@@ -1244,257 +1233,6 @@ button {
 }
 
 /* posts modal ends here */
-
-/* login page starts here */
-
-/* .auth-page {
-    background-color: #af9065;
-    color: white;
-    height: auto;
-} */
-
-.login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e6d5bc !important;
-    color: white;
-    height: auto;
-    min-height: 100%;
-}
-
-.login-wrapper {
-    width: 450px;
-    height: auto;
-    background-color: white;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 3rem 1rem;
-    margin-top: 150px;
-    margin-bottom: 50px;
-}
-
-.login-titles {
-    color: black;
-}
-
-.login-l-heading {
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 42px;
-    text-align: center;
-    color: #afafaf;
-}
-
-.login-m-heading {
-    color: #535353;
-    font-size: 1.3rem;
-    text-align: center;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 42px;
-}
-
-.login-form-wrapper,
-.register-form-wrapper {
-    width: 70%;
-}
-
-.login-form-wrapper label,
-.register-form-wrapper label {
-    color: black;
-    padding: 0 1rem;
-}
-
-.login-form-wrapper p,
-.register-form-wrapper p {
-    color: black;
-    padding: 2rem 2rem;
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 0;
-    text-transform: uppercase;
-}
-
-.login-form-wrapper span,
-.register-form-wrapper span {
-    color: red;
-    padding: 1rem 1rem;
-    font-weight: 500;
-}
-
-.login-form-wrapper input,
-.login-form-wrapper select,
-.register-form-wrapper input,
-.register-form-wrapper select {
-    background-color: #535353;
-    color: #c2b29a;
-    border-radius: 10px;
-    padding: 1rem 1rem;
-    width: 100%;
-}
-
-.login-form-wrapper textarea,
-.register-form-wrapper textarea {
-    background-color: #535353;
-    color: #c2b29a;
-    border-radius: 10px;
-    padding: 1rem 1rem;
-    outline: none;
-}
-
-.login-form-wrapper textarea:focus {
-    background-color: #535353;
-    color: #c2b29a;
-}
-
-.login-form-wrapper .forget-password-link,
-.register-form-wrapper .forget-password-link {
-    display: flex;
-    justify-content: flex-end;
-    text-decoration: none;
-    color: #3e3e3e;
-    margin-top: -0.6rem;
-}
-
-.forget-password-link {
-    font-size: 14px;
-}
-
-.login-form-wrapper label,
-.register-form-wrapper label {
-    color: #535353;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 19px;
-}
-
-.login-form-wrapper button {
-    background-color: #c2b29a;
-    color: white;
-    margin: auto;
-    display: block;
-    width: 100%;
-    margin-top: 1rem;
-}
-
-.login-button,
-.register-button {
-    padding: 1rem 1rem;
-    text-transform: uppercase;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 19px;
-}
-
-.register-button {
-    width: 100%;
-    background-color: #7c633e !important;
-}
-
-.login-goto-sign-in {
-    display: block;
-    background-color: #7c633e;
-    color: white !important;
-    border-radius: 10px;
-    padding: 1rem 1rem;
-    width: 100% !important;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    margin: auto !important;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 19px;
-}
-
-/* login page ends here */
-
-/* register page starts here */
-
-.register-page {
-    background-color: #e6d5bc !important;
-    color: white;
-    height: 100vh;
-}
-
-.register-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e6d5bc !important;
-    color: white;
-    /* height: 100vh; */
-}
-
-.register-wrapper {
-    width: 920px;
-    height: auto;
-    background-color: white;
-    margin-top: 150px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 4rem 2rem;
-    margin-top: 150px;
-    margin-bottom: 50px;
-}
-
-.register-titles {
-    color: black;
-}
-
-.register-l-heading {
-    color: #afafaf;
-    font-size: 1.5rem;
-    font-weight: 500;
-}
-
-.register-m-heading {
-    color: black;
-    font-size: 1.3rem;
-    font-weight: 400;
-    text-align: center;
-}
-
-.register-form-wrapper label {
-    color: black;
-    padding: 1rem 1rem;
-}
-
-.register-form-wrapper span {
-    color: red;
-    padding: 1rem 1rem;
-    font-weight: 500;
-}
-
-.register-goto-login-in {
-    display: block;
-    background-color: #c2b29a !important;
-    color: white !important;
-    border-radius: 10px;
-    padding: 1rem 1rem;
-    width: 100% !important;
-    text-align: center;
-    text-decoration: none;
-    margin: auto !important;
-    text-transform: uppercase;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 19px;
-}
-
-/* register page ends here */
 
 /* appeals page starts here */
 .benefactors-wrapper,
@@ -3171,23 +2909,22 @@ button {
 
 @media screen and (max-width: 1250px) {
     .navbar {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
         width: 100%;
         border-radius: unset;
     }
+
     .post-image-wrapper {
         width: 90%;
         height: 250px;
     }
+
     .navbar-user-section-wrapper div {
         margin: unset;
     }
 
     .menu-bars {
         display: block;
-        left: 2rem;
+        margin-left: 0.5rem;
         z-index: 10;
         cursor: pointer;
     }
@@ -3759,31 +3496,6 @@ button {
 
     .main-appeals-title-wrapper::before {
         left: 6%;
-    }
-
-    .login-container {
-        background-color: #ffff !important;
-    }
-
-    .login-wrapper {
-        width: 100% !important;
-    }
-
-    .register-container {
-        background-color: #fff !important;
-    }
-
-    .login-form-wrapper {
-        width: 80% !important;
-    }
-
-    .register-form-wrapper {
-        width: 100% !important;
-    }
-
-    .login-form-wrapper input,
-    .register-form-wrapper input {
-        width: 100% !important;
     }
 }
 

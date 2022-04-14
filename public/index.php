@@ -1,35 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
 
-    <link rel="icon" href="./assets/images/favicon.png">
-    <link rel="stylesheet" href="./assets/css/index.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300;400&display=swap"
-          rel="stylesheet">
+define('LARAVEL_START', microtime(true));
 
-</head>
+/*
+|--------------------------------------------------------------------------
+| Check If The Application Is Under Maintenance
+|--------------------------------------------------------------------------
+|
+| If the application is in maintenance / demo mode via the "down" command
+| we will load this file so that any pre-rendered content can be shown
+| instead of starting the framework, which could cause an exception.
+|
+*/
 
-<body>
-<div class="container">
-    <div class="img">
-        <img src="assets/images/slider-1.png">
-    </div>
-    <div class="for_p">
-        <p>When you really want something, the whole universe conspires in helping you to achieve it. Your job is to accept this help and not to miss the opportunity. Here it is, don’t miss it! Join us and stay tuned</p>
-    </div>
-    <form class="for_registration" method="post" action="./send_email.php">
-        <input class="input" type="email" name="email" placeholder="E-mail"/>
-        <button type="submit" class="reg_btn">Registration</button>
-    </form>
-    <?php if ($_GET['success'] == '1') { ?>
-        <div class="success">
-            <strong class="">Thank You!</strong>
-        </div>
-    <?php } ?>
-</div>
-</body>
-</html>
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| this application. We just need to utilize it! We'll simply require it
+| into the script here so we don't need to manually load our classes.
+|
+*/
+
+require __DIR__.'/../vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request using
+| the application's HTTP kernel. Then, we will send the response back
+| to this client's browser, allowing them to enjoy our application.
+|
+*/
+
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+$kernel = $app->make(Kernel::class);
+
+$response = $kernel->handle(
+    $request = Request::capture()
+)->send();
+
+$kernel->terminate($request, $response);

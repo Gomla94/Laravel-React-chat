@@ -2443,7 +2443,7 @@ var ChatWindow = function ChatWindow() {
   };
 
   var fetchAllUsers = function fetchAllUsers() {
-    if (users.length !== 0) return;
+    // if (users.length !== 0) return;
     _src_chat__WEBPACK_IMPORTED_MODULE_2__["default"].get("/chat-users").then(function (response) {
       setUsers(response.data);
     });
@@ -2657,27 +2657,22 @@ var ChatWrapper = function ChatWrapper(props) {
       chattingUserImage = _useState12[0],
       setchattingUserImage = _useState12[1];
 
+  var authId = window.atob(window.uuxyz.uuxyzq);
+
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
-      blockedUserId = _useState14[0],
-      setBlockedUserId = _useState14[1];
-
-  var authId = window.atob(window.uuxyz.uuxyzq);
+      spinner = _useState14[0],
+      setSpinner = _useState14[1];
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState16 = _slicedToArray(_useState15, 2),
-      spinner = _useState16[0],
-      setSpinner = _useState16[1];
+      userIsAlreadyBlocked = _useState16[0],
+      setUserIsAlreadyBlocked = _useState16[1];
 
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState18 = _slicedToArray(_useState17, 2),
-      userIsAlreadyBlocked = _useState18[0],
-      setUserIsAlreadyBlocked = _useState18[1];
-
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState20 = _slicedToArray(_useState19, 2),
-      blockMessage = _useState20[0],
-      setBlockMessage = _useState20[1];
+      blockMessage = _useState18[0],
+      setBlockMessage = _useState18[1];
 
   var scrollToEndRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var userBlocker = document.querySelector(".sound-checker");
@@ -2688,14 +2683,7 @@ var ChatWrapper = function ChatWrapper(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     window.Echo.leave("messages.".concat(props.toUserId, ".").concat(authId));
     fetchAllMessagesWithUser(props.toUserId);
-  }, [props.toUserId]); // useEffect(() => {
-  //     if (props.clicked.value === false) {
-  //         fetchAllUsers();
-  //     }
-  //     if (props.fetchedUsers.length === 0) {
-  //         return;
-  //     }
-  // }, []);
+  }, [props.toUserId]);
 
   var changeToUserId = function changeToUserId(e, userId) {
     var activeUsersClass = document.querySelectorAll(".current-active-user");
@@ -2714,43 +2702,7 @@ var ChatWrapper = function ChatWrapper(props) {
 
     window.Echo.leave("messages.".concat(props.toUserId, ".").concat(authId));
     setToUserId(userId);
-  }; // const notificationUser = async (nid) => {
-  //     const response = await notify.get("/notification-user", {
-  //         params: { nid: nid },
-  //     });
-  //     setUsers([...users, response.data]);
-  // };
-  // useEffect(() => {
-  //     const chatInput = document.querySelector(".react-input-emoji--wrapper");
-  //     chatInput.addEventListener("click", (e) => {
-  //         e.target.classList.add("react-input-emoji--input2");
-  //     });
-  // }, []);
-
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {// const bellIcon = document.querySelector(".bell-icon");
-    // if (bellIcon) {
-    //     bellIcon.addEventListener("click", () => {
-    //         setTimeout(() => {
-    //             const acceptNotification =
-    //                 document.querySelectorAll(".accept-notify");
-    //             acceptNotification.forEach((item) => {
-    //                 item.addEventListener("click", () => {
-    //                     notificationUser(item.dataset.nid);
-    //                 });
-    //             });
-    //         }, 500);
-    //     });
-    // }
-    // if (users.length !== 0 && props.fetchedUsers.length !== 0) {
-    //     changeToUserId(null, props.fetchedUsers[0].unique_id);
-    // }
-  }, [users]); // useEffect(() => {
-  //     fetchAllMessagesWithUser(toUserId);
-  // }, [toUserId]);
-  // useEffect(() => {
-  //     console.log(messages);
-  // }, [messages]);
+  };
 
   var _onKeyUp = function onKeyUp(e) {
     if (props.toUserId === null) {
@@ -2763,24 +2715,6 @@ var ChatWrapper = function ChatWrapper(props) {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (spinner === null) {
-      return false;
-    }
-
-    showBlockButtons();
-  }, [spinner]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (userIsAlreadyBlocked === null) {
-      return;
-    }
-
-    if (userIsAlreadyBlocked) {
-      addBlockedUserStyle();
-    } else {
-      removeBlockedUserStyle();
-    }
-  }, [userIsAlreadyBlocked]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     prevMessages.current = messages;
   });
   var prevMessages = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]);
@@ -2789,100 +2723,7 @@ var ChatWrapper = function ChatWrapper(props) {
   }, [messages]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     removeAlertMessagesWrapper();
-  }, [props.showAlertMessages]); // useEffect(() => {
-  //     if (toUserId === null) {
-  //         return false;
-  //     }
-  //     window.Echo.private(`blocked-user-channel.${authId}`).listen(
-  //         "BlockUserEvent",
-  //         (event) => {
-  //             if (
-  //                 authId === event.blockedUser.user_id &&
-  //                 toUserId === event.blockedUser.blocker_id
-  //             ) {
-  //                 // setUserIsAlreadyBlocked(true);
-  //                 setBlockMessage(`You have been blocked by this user!`);
-  //             }
-  //         }
-  //     );
-  //     window.Echo.private(`unblocked-user-channel.${authId}`).listen(
-  //         "UnblockUserEvent",
-  //         (event) => {
-  //             if (event.if_i_still_blocked_the_user) {
-  //                 setBlockMessage(
-  //                     "You cannot send messages to a user you blocked!"
-  //                 );
-  //             } else {
-  //                 setBlockMessage(null);
-  //             }
-  //             setUserIsAlreadyBlocked(null);
-  //         }
-  //     );
-  // }, [toUserId]);
-
-  var createAlertMessage = function createAlertMessage() {
-    var messagesCount = document.querySelector(".messages-count");
-
-    if (!messagesCount) {
-      var _chat = document.querySelector(".chat");
-
-      var alertMessageWrapper = document.createElement("div");
-      alertMessageWrapper.classList.add("alert-message-wrapper");
-      var alertMessage = document.createElement("div");
-      alertMessage.classList.add("alert-new-message");
-      var messageCountSpan = document.createElement("span");
-      messageCountSpan.classList.add("messages-count");
-      messageCountSpan.textContent = 1;
-      alertMessageWrapper.appendChild(alertMessage);
-      alertMessageWrapper.appendChild(messageCountSpan);
-
-      _chat.prepend(alertMessageWrapper);
-    } else {
-      messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
-    }
-  };
-
-  var checkForTargetChatUserElement = function checkForTargetChatUserElement(targetChatUser) {
-    if (targetChatUser) {
-      targetChatUser.querySelector(".user-new-message-alert").classList.add("show-user-new-message-alert");
-    }
-  }; // useEffect(() => {
-  //     if (users.length > 0) {
-  //         window.Echo.leave(`messages.${authId}`);
-  //         window.Echo.private(`messages.${authId}`).listen(
-  //             "NewMessageEvent",
-  //             (event) => {
-  //                 checkChatWrapperStatusBeforeAlertingNewMessageCount(
-  //                     users,
-  //                     event.message.user
-  //                 );
-  //                 if (toUserId === event.message.user.unique_id) return false;
-  //                 const targetChatUser = document.getElementById(
-  //                     event.message.user.unique_id
-  //                 );
-  //                 checkForTargetChatUserElement(targetChatUser);
-  //                 return false;
-  //             }
-  //         );
-  //     }
-  // }, [toUserId]);
-  // const checkChatWrapperStatusBeforeAlertingNewMessageCount = (
-  //     subscribers,
-  //     userToCheck
-  // ) => {
-  //     const targetUser = subscribers.findIndex(
-  //         (user) => userToCheck.id === user.id
-  //     );
-  //     if (targetUser === -1) {
-  //         return false;
-  //     }
-  //     if (document.querySelector(".chat-wrapper") === null) {
-  //         createAlertMessage();
-  //     } else {
-  //         return false;
-  //     }
-  // };
-
+  }, [props.showAlertMessages]);
 
   var removeAlertMessagesWrapper = function removeAlertMessagesWrapper() {
     var alertMessages = document.querySelector(".alert-message-wrapper");
@@ -2890,87 +2731,7 @@ var ChatWrapper = function ChatWrapper(props) {
     if (alertMessages) {
       alertMessages.remove();
     }
-  }; // const blockUserStyle = async () => {
-  //     if (!chattingWithUser) {
-  //         return;
-  //     }
-  //     if (toUserId === blockedUserId) {
-  //         setBlockedUserId(null);
-  //         setUserIsAlreadyBlocked(false);
-  //         setSpinner(true);
-  //         const unBlockResponse = await chat.post("/unblock-user/", {
-  //             unblockedUser: blockedUserId,
-  //         });
-  //         setTimeout(() => {
-  //             setSpinner(null);
-  //         }, 3000);
-  //         if (unBlockResponse.data.stillBlocked) {
-  //             setBlockMessage(`You were blocked by this user!`);
-  //         } else {
-  //             setBlockMessage("");
-  //         }
-  //     } else {
-  //         setBlockedUserId(toUserId);
-  //         setUserIsAlreadyBlocked(true);
-  //         setSpinner(true);
-  //         setBlockMessage(`You cannot send messages to a user you blocked!`);
-  //         await chat.post("/block-user/", {
-  //             blockedUser: toUserId,
-  //         });
-  //         setTimeout(() => {
-  //             setSpinner(false);
-  //         }, 5000);
-  //         // setSpinner(false);
-  //     }
-  // };
-  // const removeBlockedUserStyle = () => {
-  //     if (userBlockerBackground && userBlockerBackground) {
-  //         userBlockerBackground.classList.remove(
-  //             "change-sound-checker-background"
-  //         );
-  //         userBlocker.classList.remove("change-sound-checker");
-  //     }
-  // };
-  // const addBlockedUserStyle = () => {
-  //     userBlockerBackground.classList.add("change-sound-checker-background");
-  //     userBlocker.classList.add("change-sound-checker");
-  // };
-  // const showBlockButtons = () => {
-  //     if (spinner) {
-  //         return <div className="loader"></div>;
-  //     } else if (spinner === null) {
-  //         return (
-  //             <Fragment>
-  //                 <div className="sound-checker-background"></div>
-  //                 <div
-  //                     className="sound-checker"
-  //                     onClick={(e) => {
-  //                         blockUserStyle(e);
-  //                     }}
-  //                 ></div>
-  //                 <span className="check-sound">блок</span>
-  //             </Fragment>
-  //         );
-  //     } else if (spinner === false && blockMessage !== "") {
-  //         return (
-  //             <Fragment>
-  //                 <div className="sound-checker-background change-sound-checker-background"></div>
-  //                 <div
-  //                     className="sound-checker change-sound-checker"
-  //                     onClick={(e) => {
-  //                         blockUserStyle(e);
-  //                     }}
-  //                 ></div>
-  //                 <span className="check-sound">Звук</span>
-  //             </Fragment>
-  //         );
-  //     }
-  // };
-
-
-  window.Echo["private"]("unblocked-user-channel.".concat(authId)).listen("UnblockUserEvent", function (event) {
-    setUserIsAlreadyBlocked(null);
-  });
+  };
 
   var fetchAllUsers = function fetchAllUsers() {
     if (users.length !== 0) return;
@@ -2986,75 +2747,35 @@ var ChatWrapper = function ChatWrapper(props) {
 
     return messages.map(function (message, index) {
       if (message.user.unique_id === authId) {
-        return (
-          /*#__PURE__*/
-          // <div className="sent-message-wrapper" key={index}>
-          //     <div className="sent-message-user-image-wrapper">
-          //         <img
-          //             src={
-          //                 message.user.image !== null
-          //                     ? `${message.user.image}`
-          //                     : `../../images/avatar.png`
-          //             }
-          //             alt="user-image"
-          //             className="chat-user-image"
-          //         />
-          //     </div>
-          //     <div className="sent-message-info">
-          //         {renderMessageType(message)}
-          //     </div>
-          // </div>
-          (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "sent-message-wrapper",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-              className: "sent-message-date",
-              children: new Date(message.created_at).toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "sent-message",
-              children: renderMessageType(message)
-            })]
-          }, index)
-        );
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sent-message-wrapper",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            className: "sent-message-date",
+            children: new Date(message.created_at).toLocaleString("en-US", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "sent-message",
+            children: renderMessageType(message)
+          })]
+        }, index);
       } else {
-        return (
-          /*#__PURE__*/
-          // <div className="received-message-wrapper" key={index}>
-          //     <div className="received-message-user-image-wrapper">
-          //         <a href={`/all-users/${toUserId}`}>
-          //             <img
-          //                 src={
-          //                     message.user.image !== null
-          //                         ? `${message.user.image}`
-          //                         : `../../images/avatar.png`
-          //                 }
-          //                 alt="user-image"
-          //                 className="chat-user-image"
-          //             />
-          //         </a>
-          //     </div>
-          //     <div className="received-message-info">
-          //         {renderMessageType(message)}
-          //     </div>
-          // </div>
-          (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "received-message-wrapper",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-              className: "received-message-date",
-              children: new Date(message.created_at).toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "received-message",
-              children: renderMessageType(message)
-            })]
-          }, index)
-        );
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "received-message-wrapper",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            className: "received-message-date",
+            children: new Date(message.created_at).toLocaleString("en-US", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "received-message",
+            children: renderMessageType(message)
+          })]
+        }, index);
       }
     });
   };
@@ -3108,25 +2829,10 @@ var ChatWrapper = function ChatWrapper(props) {
     });
   };
 
-  var renderWelcomeMessage = function renderWelcomeMessage() {
-    if (toUserId === null) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-        className: "welcome-message",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-          children: "Note: "
-        }), " You need to subscribe to a user to be able to chat with him, also if a user is not subscribed to you he will not be able to receive your messages"]
-      });
-    }
-
-    return "";
-  };
-
   var sendMessage = function sendMessage(e) {
     if (newMessage === null || newMessage === "") {
       return false;
-    } // console.log("ssss");
-    // document.querySelector(".react-input-emoji--input").textContent = "";
-
+    }
 
     var chatInput = document.querySelector(".chat-input");
     chatInput.value = "";
@@ -3181,63 +2887,6 @@ var ChatWrapper = function ChatWrapper(props) {
 
       setChattingWithUser(response.data.chatting_with_user.name);
       setchattingUserImage(response.data.chatting_with_user.image);
-
-      if (response.data.blocked_this_user && response.data.blocked_by_this_user) {// setUserIsAlreadyBlocked(true);
-        // setBlockedUserId(toUserId);
-        // setBlockMessage("You both blocked each other!");
-        // addBlockedUserStyle();
-      } else if (response.data.blocked_this_user) {// setUserIsAlreadyBlocked(true);
-        // setBlockedUserId(toUserId);
-        // setBlockMessage(
-        //     "You cannot send messages to a user you blocked!"
-        // );
-        // addBlockedUserStyle();
-      } else if (response.data.blocked_by_this_user) {// setBlockMessage("You were blocked by this user!");
-        // removeBlockedUserStyle();
-      } else {
-        setBlockMessage(null); // removeBlockedUserStyle();
-      }
-    });
-  };
-
-  var renderChatButtons = function renderChatButtons() {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "chat-attachement-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-          className: "fas fa-paperclip chat-paperclip",
-          type: "file",
-          name: "file",
-          accept: "image/*,video/*",
-          onChange: function onChange(e) {
-            sendMedia(e);
-          }
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_input_emoji__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        onChange: setNewMessage,
-        cleanOnEnter: true,
-        onEnter: function onEnter(e) {
-          _onKeyUp(e);
-        },
-        placeholder: "\u041D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 ..."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "chat-send-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-          className: "fas fa-paper-plane chat-paper-plane",
-          onClick: sendMessage
-        })
-      })]
-    });
-  };
-
-  var renderBlockedChatMessage = function renderBlockedChatMessage() {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-        style: {
-          textAlign: "center"
-        },
-        children: blockMessage
-      })
     });
   };
 
@@ -3257,469 +2906,72 @@ var ChatWrapper = function ChatWrapper(props) {
     }
   };
 
-  return (
-    /*#__PURE__*/
-    // <div>
-    //     {" "}
-    //     <i className="fas fa-caret-up chat-arrow"></i>
-    //     <div className="chat-wrapper">
-    //         <div className="active-users-section">
-    //             <div className="active-users-top-section">
-    //                 {showBlockButtons()}
-    //             </div>
-    //             <div className="active-users">
-    //                 <div className="active-users-search-wrapper">
-    //                     <i className="fas fa-search active-users-search"></i>
-    //                     <i className="fas fa-window-close active-users-close"></i>
-    //                     <input
-    //                         className="active-users-input"
-    //                         placeholder="Поиск"
-    //                         type="text"
-    //                     />
-    //                 </div>
-    //                 <div className="chat-users-list">
-    //                     {renderredUsers(users)}
-    //                 </div>
-    //             </div>
-    //         </div>
-    //         <div className="messages-section">
-    //             <div className="messages-top-section">
-    //                 <div className="chatting-with-user">
-    //                     {" "}
-    //                     <a href={`/all-users/${toUserId}`}>
-    //                         {chattingWithUser}
-    //                     </a>
-    //                 </div>
-    //                 <div className="chatting-user-status">
-    //                     <div className="chatting-user-status-icon"></div>
-    //                     <div className="chat-status-text">online</div>
-    //                 </div>
-    //             </div>
-    //             <div className="messages-middle-section">
-    //                 <div className="scroll" ref={scrollToEndRef}>
-    //                     {renderredMessages(messages)}
-    //                     {renderWelcomeMessage()}
-    //                 </div>
-    //             </div>
-    //             <div className="messages-bottom-section">
-    //                 <div className="chat-inputs-wrapper">
-    //                     {blockMessage
-    //                         ? renderBlockedChatMessage()
-    //                         : renderChatButtons()}
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>
-    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "active-chat-wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "active-chat-wrapper",
+        className: "chatting-with-user",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          className: "chatting-with-user",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "chatting-with-user-image-wrapper",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-              className: "fa-solid fa-chevron-left chat-back-icon",
-              onClick: function onClick() {
-                props.setViewChatWrapper(false);
-              }
-            }), renderChattingWithUserImage()]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "chatting-with-user-name",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-              children: chattingWithUser
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "chat-messages-section",
-          children: renderredMessages(messages)
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          className: "chat-input-wrapper",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "chat-attachement-wrapper",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-              className: "chat-media-input",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-                className: "fa-solid fa-link",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-                  type: "file",
-                  className: "attachement-input",
-                  accept: "image/*,video/*",
-                  onChange: function onChange(e) {
-                    sendMedia(e);
-                  }
-                })
-              })
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-            type: "text",
-            onKeyUp: function onKeyUp(e) {
-              _onKeyUp(e);
-            },
-            className: "chat-input",
-            onChange: function onChange(e) {
-              setNewMessage(e.target.value);
+          className: "chatting-with-user-image-wrapper",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+            className: "fa-solid fa-chevron-left chat-back-icon",
+            onClick: function onClick() {
+              props.setViewChatWrapper(false);
             }
-          })]
+          }), renderChattingWithUserImage()]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "chatting-with-user-name",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            children: chattingWithUser
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "chat-send-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "chat-send-button",
-          onClick: sendMessage,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-            src: "../../images/img/send.png",
-            alt: "send"
+        className: "chat-messages-section",
+        children: renderredMessages(messages)
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "chat-input-wrapper",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "chat-attachement-wrapper",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            className: "chat-media-input",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+              className: "fa-solid fa-link",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                type: "file",
+                className: "attachement-input",
+                accept: "image/*,video/*",
+                onChange: function onChange(e) {
+                  sendMedia(e);
+                }
+              })
+            })
           })
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          type: "text",
+          onKeyUp: function onKeyUp(e) {
+            _onKeyUp(e);
+          },
+          className: "chat-input",
+          onChange: function onChange(e) {
+            setNewMessage(e.target.value);
+          }
+        })]
       })]
-    })
-  );
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "chat-send-wrapper",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "chat-send-button",
+        onClick: sendMessage,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          src: "../../images/img/send.png",
+          alt: "send"
+        })
+      })
+    })]
+  });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChatWrapper);
-
-/***/ }),
-
-/***/ "./resources/js/components/NewSubscribtionNotification.js":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/NewSubscribtionNotification.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Notifications__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Notifications */ "./resources/js/components/Notifications.js");
-/* harmony import */ var _src_notify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/notify */ "./resources/js/src/notify.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-var NewSubscribtionNotification = function NewSubscribtionNotification() {
-  var authId = window.atob(window.uuxyz.uuxyzd);
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      showNotifications = _useState2[0],
-      setShowNotifications = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      notifications = _useState4[0],
-      setNotifications = _useState4[1];
-
-  var navbarChatIcon = document.querySelector(".navbar-user-comment");
-
-  var removeChatWrapper = function removeChatWrapper() {
-    var chatWrapper = document.querySelector(".chat-wrapper");
-
-    if (chatWrapper) {
-      var chatArrow = document.querySelector(".chat-arrow");
-      chatWrapper.remove();
-      chatArrow.remove();
-    }
-  };
-
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var mainDiv = document.querySelector(".main");
-    mainDiv.addEventListener("click", function () {
-      setShowNotifications(false);
-    });
-    navbarChatIcon.addEventListener("click", function () {
-      setShowNotifications(false);
-    });
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (notifications !== null) {
-      return false;
-    }
-
-    loadNotifications();
-  }, [showNotifications]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (notifications !== null) {
-      window.Echo.leave("user_notifications.".concat(authId));
-      window.Echo["private"]("user_notifications.".concat(authId)).notification(function (notification) {
-        setNotifications([].concat(_toConsumableArray(notifications), [notification]));
-      });
-    }
-  });
-
-  var renderNotificationsCount = function renderNotificationsCount() {
-    if (notifications === null || notifications.length === 0) {
-      return "";
-    }
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-      className: "count",
-      children: notifications.length
-    });
-  };
-
-  var loadNotifications = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var response, loadedNotifications;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _src_notify__WEBPACK_IMPORTED_MODULE_3__["default"].get("my_notifications");
-
-            case 2:
-              response = _context.sent;
-              loadedNotifications = response.data;
-              setNotifications(loadedNotifications);
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function loadNotifications() {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-      className: "fas fa-bell bell-icon",
-      onClick: function onClick() {
-        removeChatWrapper();
-        setShowNotifications(!showNotifications);
-      },
-      children: renderNotificationsCount()
-    }), showNotifications ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Notifications__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      notifications: notifications,
-      setNotifications: setNotifications,
-      showNotifications: showNotifications
-    }) : ""]
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewSubscribtionNotification);
-
-/***/ }),
-
-/***/ "./resources/js/components/Notifications.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/Notifications.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _src_notify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/notify */ "./resources/js/src/notify.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-
-
-
-
-
-var Notifications = function Notifications(_ref) {
-  var notifications = _ref.notifications,
-      setNotifications = _ref.setNotifications;
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    renderNotifications(notifications);
-  }, [notifications]);
-
-  var checkNotification = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
-      var filteredNotifications, response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              if (!(!e.target.dataset.nid || !e.target.dataset.unid)) {
-                _context.next = 2;
-                break;
-              }
-
-              return _context.abrupt("return");
-
-            case 2:
-              if (!changeSubscribtionForm(e.target, e.target.dataset.unid)) {
-                _context.next = 12;
-                break;
-              }
-
-              filteredNotifications = notifications.filter(function (item) {
-                return item.id !== e.target.dataset.nid;
-              });
-
-              if (!(notifications.length === filteredNotifications.length)) {
-                _context.next = 6;
-                break;
-              }
-
-              return _context.abrupt("return");
-
-            case 6:
-              setNotifications(filteredNotifications);
-              _context.next = 9;
-              return _src_notify__WEBPACK_IMPORTED_MODULE_3__["default"].post("/check-notification", {
-                nid: e.target.dataset.nid,
-                status: e.target.classList.contains("accept-notify") ? "accept" : "decline"
-              });
-
-            case 9:
-              response = _context.sent;
-
-              if (!response.error) {
-                _context.next = 12;
-                break;
-              }
-
-              return _context.abrupt("return", false);
-
-            case 12:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function checkNotification(_x) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  var changeSubscribtionForm = function changeSubscribtionForm(icon, unid) {
-    var targetedGreenButton = document.querySelector("[data-uunid=\"".concat(unid, "\"]"));
-
-    if (targetedGreenButton) {
-      if (icon.classList.contains("deny-notify")) return true;
-      var targetedForm = targetedGreenButton.querySelector(".sub-form");
-      targetedForm.setAttribute("action", "".concat(window.location.origin, "/unsubscribe/").concat(unid));
-      var buttonToChange = targetedForm.querySelector("button");
-      buttonToChange.classList.remove("user-subscribe");
-      buttonToChange.innerText = "";
-      buttonToChange.classList.add("fas", "fa-check", "checkmark-icon");
-    }
-
-    return true;
-  };
-
-  var renderNotifications = function renderNotifications(myNotifications) {
-    if (myNotifications == null) {
-      return;
-    }
-
-    return myNotifications.map(function (item) {
-      var _item$data$user_image;
-
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "notification",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          className: "notification-info",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "notification-user-image",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-              href: "all-users/".concat(item.data.user_uniqueid),
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                src: (_item$data$user_image = item.data.user_image) !== null && _item$data$user_image !== void 0 ? _item$data$user_image : "../../images/avatar.png"
-              })
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-              className: "notification-main",
-              children: item.data.user_name
-            }), " ", "subscribed to you, subscribe back to be able to chat with him."]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          className: "notification-actions-wrapper",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "".concat(item.data.check_if_user_is_subscribed_to_me === true ? "d-none" : "d-block"),
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-              className: "fas fa-check-square accept-notify",
-              "data-nid": item.id,
-              "data-unid": item.data.user_uniqueid,
-              onClick: function onClick(e) {
-                checkNotification(e);
-              }
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-              className: "fas fa-window-close deny-notify",
-              "data-nid": item.id,
-              "data-unid": item.data.user_uniqueid,
-              onClick: function onClick(e) {
-                checkNotification(e);
-              }
-            })
-          })]
-        })]
-      }, item.id);
-    });
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    className: "notifications-wrapper",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "notifications-container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-        className: "notifications-title",
-        children: "Notifications"
-      }), renderNotifications(notifications)]
-    })
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Notifications);
 
 /***/ }),
 
@@ -3734,17 +2986,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./resources/js/components/App.js");
-/* harmony import */ var _NewSubscribtionNotification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NewSubscribtionNotification */ "./resources/js/components/NewSubscribtionNotification.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
-
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_App__WEBPACK_IMPORTED_MODULE_2__["default"], {}), document.getElementById("root")); // ReactDOM.render(
-//     <NewSubscribtionNotification />,
-//     document.getElementById("root-notifications")
-// );
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_App__WEBPACK_IMPORTED_MODULE_2__["default"], {}), document.getElementById("root"));
 
 /***/ }),
 
@@ -3763,8 +3010,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "https://www.magaxat.com/api/",
-  // baseURL: "https://seriousapp.test/api/",
+  // baseURL: "https://www.magaxat.com/api/",
+  baseURL: "https://laravelreactchat.test/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     authorization: "Bearer ".concat(window.uuxyz ? window.atob(window.uuxyz.uuxyzt) : null // window.Laravel ? window.Laravel.user.api_token : null

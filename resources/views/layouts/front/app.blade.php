@@ -26,17 +26,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/favicon.ico')}}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
-      <link rel="stylesheet" href="{{asset('css/arm.css?version=4')}}" />
-    @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
-      <link rel="stylesheet" href="{{asset('css/newest-index.css?version=61')}}" />
-    @else
-      <link rel="stylesheet" href="{{asset('css/russ.css?version=4')}}" />
-    @endif
-
+    <link rel="stylesheet" href="{{asset('css/newest-index.css')}}" />
     @yield('styles')
-    <script src="{{asset('js/newest-index.js?version=4')}}" defer></script>
+    <script src="{{asset('js/newest-index.js')}}" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
     window.uuxyz = <?php echo json_encode([
@@ -53,7 +45,6 @@
     <title>@yield('title')</title>
   </head>
   <body>
-    <div class="navbar-background-wrapper {{ Route::currentRouteName() == 'user.chat' ? 'navbar-chat' : '' }}"></div>
     <div class="sec-navbar-wrapper">
       <div class="navbar">
         <div class="menu-bars" id="menu-bars">
@@ -62,18 +53,9 @@
           <div class="bar3"></div>
         </div>
         <div class="navbar-logo-wrapper">
-          <div class="navbar-logo-container">
-            <a href="{{ route('welcome') }}">
-              <img src="{{asset('images/img/navbar-logo.png')}}" alt="" class="navbar-logo" />
-            </a>
-          </div>
-
           <div class="navbar-links-wrapper">
             <ul class="navbar-links-list">
-              <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-videos' ? 'navbar-active-item' : '' }}" href="{{ route('all-videos') }}">{{ __('translations.users_video') }}</a></li>
               <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-users' ? 'navbar-active-item' : '' }}" href="{{ route('all-users') }}">{{ __('translations.users') }}</a></li>
-              <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-appeals' ? 'navbar-active-item' : '' }}" href="{{ route('all-appeals') }}">{{ __('translations.benefac_fond') }}</a></li>
-              <li class="navbar-link"><a class="{{ Route::currentRouteName() == 'all-benefactors' ? 'navbar-active-item' : '' }}" href="{{ route('all-benefactors') }}">{{ __('translations.benefac') }}</a></li>
             </ul>
         </div>
         </div>
@@ -85,11 +67,11 @@
           </div>
           <div class="navbar-user-list">
             <div class="navbar-user-image-wrapper">
-              <a href="{{ route('user.profile') }}">
+              <a href="#">
                 <img src="{{ asset(auth()->user()->image ?? 'images/avatar.png') }}" alt="user-image" />
               </a>
             </div>
-            <a href="{{ route('user.profile') }}">
+            <a href="#">
               <span class="navbar-user-name">{{ auth()->user()->name }}</span>
             </a>
             <i class="fa-solid fa-angle-down user-navbar-arrow"></i>
@@ -107,89 +89,17 @@
                     </a>
                 </div>
             @endif
-          <div class="navbar-languages-list">
-
-            @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
-              <span>ARM</span>
-              <i class="fa-solid fa-angle-down languages-icon"></i>
-            @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
-              <span>ENG</span>
-              <i class="fa-solid fa-angle-down languages-icon"></i>
-            @else
-              <span>RUS</span>
-            <i class="fa-solid fa-angle-down languages-icon"></i>
-            @endif
-
-          </div>
-          <div class="languages-list">
-            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-              @if($localeCode == 'en')
-              <div class="language-item-wrapper">
-                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ENG</a>
-              </div>
-              @elseif($localeCode == 'ru')
-              <div class="language-item-wrapper">
-                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">RUS</a>
-              </div>
-              @else
-              <div class="language-item-wrapper">
-                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ARM</a>
-              </div>
-              @endif
-            @endforeach
-          </div>
+        
         </div>
       </div>
       <div class="overlay" id="overlay">
         <ul class="overlay-list">
-          <li class="overlay-list-item">
-            <img src="{{asset('images/img/video-clips.png')}}" alt="" />
-            <a rel="preconnect" href="{{ route('all-videos') }}">{{ __('translations.users_video') }}</a>
-            <i class="fa-solid fa-angle-right"></i>
-          </li>
+          
           <li class="overlay-list-item">
             <img src="{{asset('images/img/users.png')}}" alt="" />
             <a rel="preconnect" href="{{ route('all-users') }}">{{ __('translations.users') }}</a>
             <i class="fa-solid fa-angle-right"></i>
           </li>
-          <li class="overlay-list-item">
-            <img src="{{asset('images/img/benefactor-fonds.png')}}" alt="" />
-            <a rel="preconnect" href="{{ route('all-appeals') }}">{{ __('translations.benefac_fond') }}</a>
-            <i class="fa-solid fa-angle-right"></i>
-          </li>
-          <li class="overlay-list-item">
-            <img src="{{asset('images/img/benefactor.png')}}" alt="" />
-            <a rel="preconnect" href="{{ route('all-benefactors') }}">{{ __('translations.benefac') }}</a>
-            <i class="fa-solid fa-angle-right"></i>
-          </li>
-          <li class="overlay-list-item">
-            @if(LaravelLocalization::getCurrentLocaleName() == 'Armenian')
-              <span>ARM</span>
-            @elseif(LaravelLocalization::getCurrentLocaleName() == 'English')
-              <span>ENG</span>
-            @else
-              <span>RUS</span>
-            @endif
-            <span rel="preconnect" class="mobile-language-title" href="">{{ __('translations.language') }}</span>
-            <i class="fa-solid fa-angle-right"></i>
-          </li>
-          <div class="mobile-languages-list">
-            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-              @if($localeCode == 'en')
-              <div class="language-item-wrapper">
-                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ENG</a>
-              </div>
-              @elseif($localeCode == 'ru')
-              <div class="language-item-wrapper">
-                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">RUS</a>
-              </div>
-              @else
-              <div class="language-item-wrapper">
-                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">ARM</a>
-              </div>
-              @endif
-            @endforeach
-          </div>
           @if(Auth::check())
             <li class="overlay-list-item">
               <a href="{{ route('user.chat') }}"><i class="fa-regular fa-comment"></i></a><span><a href="{{ route('user.chat') }}">{{ __('translations.chat') }}</a></span>
@@ -211,42 +121,6 @@
    @yield('content')
 
    @stack('js')
-
-    <script>
-      var swiper = new Swiper(".myMainSwiper", {
-        spaceBetween: 30,
-        autoplay: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
-      var swiper2 = new Swiper(".appealsSwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-          1100: {
-            slidesPerView: 3,
-          },
-
-          768: {
-            slidesPerView: 2,
-          },
-
-          500: {
-            slidesPerView: 1,
-          },
-
-          300: {
-            slidesPerView: 1,
-          },
-        },
-      });
-    </script>
 
   </body>
 </html>
